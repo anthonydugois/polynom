@@ -1,0 +1,105 @@
+---
+parser: babel-eslint
+
+ecmaFeatures:
+    modules: true,
+    jsx: true
+
+env:
+    es6: true,
+    browser: true,
+    node: true
+
+plugins:
+    - react
+
+rules:
+    # force === and !==
+    eqeqeq:
+        - 2
+        - "smart"
+
+    # lines
+    max-len:
+        - 2
+        - 80
+        - 4
+
+    no-multiple-empty-lines:
+        - 2
+        - max: 1
+
+    operator-linebreak:
+        - 2
+        - "before"
+
+    # statements
+    brace-style:
+        - 2
+        - "1tbs"
+        - allowSingleLine: true
+
+    no-inline-comments: 2
+    no-nested-ternary: 2
+    no-continue: 2
+    no-lonely-if: 2
+
+    # commas
+    comma-dangle:
+        - 2
+        - "always-multiline"
+
+    comma-spacing:
+        - 2
+        - before: false
+          after: true
+
+    comma-style:
+        - 2
+        - "last"
+
+    # quotes
+    quotes:
+        - 2
+        - "double"
+
+    # semicolons
+    semi:
+        - 2
+        - "never"
+
+    # spaces
+    space-after-keywords:
+        - 2
+        - "always"
+
+    space-before-blocks:
+        - 2
+        - "always"
+
+    no-mixed-spaces-and-tabs:
+        - 2
+        - "smart-tabs"
+
+    no-spaced-func: 2
+    indent:
+        - 2
+        - 4
+        - indentSwitchCase: true
+
+    # vars
+    no-unused-vars: 0
+    no-underscore-dangle: 0
+    no-shadow: 0
+
+    no-script-url: 2
+
+    # React
+    react/no-multi-comp: 2
+    react/jsx-uses-react: 2
+    react/jsx-uses-vars: 2
+    react/prop-types: 2
+    react/wrap-multilines: 2
+    react/self-closing-comp: 2
+    react/no-did-mount-set-state: 2
+    react/no-did-update-set-state: 2
