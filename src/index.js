@@ -6,6 +6,6 @@ import routes from "./routes"
 Router.run(routes, Router.HistoryLocation, (Handler) => {
     React.render(
         <Handler RouteHandler={RouteHandler} />,
-        document.getElementById("app")
+        document.querySelector(__APP__)
     )
 })

@@ -1,5 +1,10 @@
 import path from "path"
 import webpack from "webpack"
+import ExtractTextPlugin from "extract-text-webpack-plugin"
+
+import variables, {defineVariables} from "./variables"
+
+defineVariables()
 
 export default {
     entry: {
@@ -8,23 +13,45 @@ export default {
         ],
     },
     output: {
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, __OUTPUT_DIR__),
         filename: "bundle.js",
+    },
+    resolve: {
+        extensions: [
+            "",
+            ".js",
+            ".css",
+        ],
     },
     module: {
         loaders: [
+            // js files
             {
                 test: /\.js$/,
-                loaders: [
-                    "babel?stage=0",
-                    "eslint"
-                ],
                 exclude: /node_modules/,
+                loader: "babel?stage=0",
             },
+            // css files
             {
                 test: /\.css$/,
-                loader: "style!css!cssnext",
+                loader: ExtractTextPlugin.extract(
+                    "style",
+                    "css"
+                ),
             },
         ],
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin(variables),
+        new ExtractTextPlugin("styles.css", {
+            disable: __DEV__,
+        }),
+        ...(__PROD__ ? [
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                },
+            }),
+        ] : [])
+    ],
 }

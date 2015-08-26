@@ -1,20 +1,34 @@
 import webpack from "webpack"
 import config from "../webpack.config"
 
-import server from "./webpack.server"
-
 import colors from "chalk"
+import server from "./server"
+import {defineVariables} from "../variables"
 
-const DEV = process.argv.includes("--dev")
+defineVariables()
 
-if (DEV) {
-    server()
-} else {
+if (__PROD__) {
     webpack(config, (err) => {
         if (err) {
             throw err
         }
 
-        console.log(colors.green(`\n✓ Build successfully completed`))
+        console.log(colors.green(
+            `\n✓ Build successfully completed`
+        ))
+    })
+} else {
+    server({
+        __OUTPUT_DIR__,
+        __SERVER_PORT__,
+        __SERVER_HOST__,
+    }, (err) => {
+        if (err) {
+            throw err
+        }
+
+        console.log(colors.green(
+            `\n✓ Server started at ${__SERVER_URL__}`
+        ))
     })
 }
