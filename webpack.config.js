@@ -29,7 +29,10 @@ export default {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel?stage=0",
+                loaders: [
+                    "babel?stage=0",
+                    "eslint",
+                ],
             },
             // css files
             {
@@ -54,4 +57,7 @@ export default {
             }),
         ] : [])
     ],
+    eslint: {
+        configFile: "./.eslintrc",
+    },
 }

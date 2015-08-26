@@ -24,6 +24,7 @@ export default (options, callback) => {
 
     const server = new webpackDevServer(compiler, {
         publicPath: `/${options.__OUTPUT_DIR__}/`,
+        historyApiFallback: __APP_HISTORY__,
         hot: true,
         noInfo: true,
         stats: {

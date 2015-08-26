@@ -1,8 +1,13 @@
 import React from "react"
-import {Route, DefaultRoute} from "react-router"
+import {
+    Route,
+    DefaultRoute,
+    NotFoundRoute,
+    Redirect,
+} from "react-router"
 
 const routes = (
-    <Route path="/" handler={} />
+    <Route handler={} path="/" />
 )
 
 export default routes

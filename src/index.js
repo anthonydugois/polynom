@@ -1,11 +1,10 @@
 import React from "react"
-import Router, {RouteHandler} from "react-router"
+import Router from "react-router"
 
 import routes from "./routes"
 
-Router.run(routes, Router.HistoryLocation, (Handler) => {
-    React.render(
-        <Handler RouteHandler={RouteHandler} />,
-        document.querySelector(__APP__)
-    )
-})
+Router.run(
+    routes,
+    __APP_HISTORY__ ? Router.HistoryLocation : Router.HashLocation,
+    (Root) => React.render(<Root />, document.querySelector(__APP__))
+)

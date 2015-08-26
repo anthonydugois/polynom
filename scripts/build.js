@@ -2,6 +2,7 @@ import webpack from "webpack"
 import config from "../webpack.config"
 
 import colors from "chalk"
+import opn from "opn"
 import server from "./server"
 import {defineVariables} from "../variables"
 
@@ -26,6 +27,8 @@ if (__PROD__) {
         if (err) {
             throw err
         }
+
+        opn(__SERVER_URL__)
 
         console.log(colors.green(
             `\n✓ Server started at ${__SERVER_URL__}`
