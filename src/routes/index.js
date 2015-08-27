@@ -9,7 +9,7 @@ import {
 import App from "App"
 
 const routes = (
-    <Route handler={App} />
+    <Route handler={ App } />
 )
 
 export default routes
