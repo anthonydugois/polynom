@@ -8,7 +8,7 @@ const variables = {
     __SERVER_PROTOCOL__: "http://",
     __SERVER_HOST__: "localhost",
     __SERVER_PORT__: "1337",
-    __APP__: "#app",
+    __APP_CONTAINER__: "#app",
     __APP_HISTORY__: true,
 }
 

@@ -8,7 +8,8 @@ export default (options, callback) => {
         entry: {
             index: [
                 ...(config.entry.index || []),
-                "webpack/hot/dev-server",
+                `webpack-dev-server/client?${__SERVER_URL__}`,
+                `webpack/hot/only-dev-server`,
             ],
         },
         plugins: [

@@ -6,8 +6,10 @@ import {
     Redirect,
 } from "react-router"
 
+import App from "App"
+
 const routes = (
-    <Route handler={} path="/" />
+    <Route handler={App} />
 )
 
 export default routes

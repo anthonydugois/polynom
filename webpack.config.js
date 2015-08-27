@@ -14,7 +14,8 @@ export default {
     },
     output: {
         path: path.join(__dirname, __OUTPUT_DIR__),
-        filename: "bundle.js",
+        publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
+        filename: `bundle.js`,
     },
     resolve: {
         extensions: [
@@ -30,6 +31,7 @@ export default {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
+                    "react-hot",
                     "babel?stage=0",
                     "eslint",
                 ],
