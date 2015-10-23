@@ -2,7 +2,7 @@ import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
-import variables, {defineVariables} from "./variables"
+import variables, { defineVariables } from "./variables"
 
 defineVariables()
 
@@ -31,7 +31,6 @@ export default {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
-                    "react-hot",
                     "babel?stage=0",
                     "eslint",
                 ],

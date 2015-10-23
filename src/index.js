@@ -6,5 +6,5 @@ import routes from "./routes"
 Router.run(
     routes,
     __APP_HISTORY__ ? Router.HistoryLocation : Router.HashLocation,
-    (Root) => React.render(<Root />, document.querySelector(__APP_CONTAINER__))
+    (Root) => React.render(<Root />, document.querySelector("#app"))
 )

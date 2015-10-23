@@ -5,8 +5,6 @@ this boilerplate includes:
 
 - React
 - react-router
-- react-hot-loader
-- Flux
 - webpack
 - webpack-dev-server
 - Babel

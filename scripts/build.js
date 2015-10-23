@@ -4,7 +4,7 @@ import config from "../webpack.config"
 import colors from "chalk"
 import opn from "opn"
 import server from "./server"
-import {defineVariables} from "../variables"
+import { defineVariables } from "../variables"
 
 defineVariables()
 
@@ -14,9 +14,7 @@ if (__PROD__) {
             throw err
         }
 
-        console.log(colors.green(
-            `\n✓ Build successfully completed`
-        ))
+        console.log(colors.green("\nBuild successfully completed"))
     })
 } else {
     server({
@@ -30,8 +28,6 @@ if (__PROD__) {
 
         opn(__SERVER_URL__)
 
-        console.log(colors.green(
-            `\n✓ Server started at ${__SERVER_URL__}`
-        ))
+        console.log(colors.green(`\nServer started at ${__SERVER_URL__}`))
     })
 }
