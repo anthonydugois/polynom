@@ -9,7 +9,7 @@ export default (options, callback) => {
             index: [
                 ...(config.entry.index || []),
                 `webpack-dev-server/client?${__SERVER_URL__}`,
-                `webpack/hot/only-dev-server`,
+                "webpack/hot/only-dev-server",
             ],
         },
         plugins: [
