@@ -3,12 +3,16 @@ react project boilerplate using webpack
 
 this boilerplate includes:
 
-- React
+- react
+- react-dom
 - react-router
+- react-transform-hmr
 - webpack
 - webpack-dev-server
-- Babel
-- ESLint
+- babel
+- postcss
+- eslint
+- stylelint
 
 ## start the dev server
 
