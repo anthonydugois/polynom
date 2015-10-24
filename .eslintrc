@@ -96,7 +96,10 @@
             2,
             "prefer-double"
         ],
-        "react/jsx-boolean-value": 2,
+        "react/jsx-boolean-value": [
+            2,
+            "always"
+        ],
         "react/jsx-closing-bracket-location": [
             2,
             {
@@ -111,11 +114,18 @@
             2,
             4
         ],
+        "react/jsx-max-props-per-line": [
+            2,
+            {
+                "maximum": 1
+            }
+        ],
         "react/jsx-no-duplicate-props": 2,
         "react/jsx-no-undef": 2,
         "react/no-danger": 2,
         "react/no-did-mount-set-state": 2,
         "react/no-did-update-set-state": 2,
+        "react/no-direct-mutation-state": 2,
         "react/no-multi-comp": 2,
         "react/no-unknown-property": 2,
         "react/prop-types": 2,
