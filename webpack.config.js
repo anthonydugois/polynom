@@ -18,7 +18,7 @@ export default {
     output: {
         path: path.join(__dirname, __OUTPUT_DIR__),
         publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
-        filename: `bundle.js`,
+        filename: "bundle.js",
     },
     resolve: {
         extensions: [
@@ -34,7 +34,7 @@ export default {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
-                    "babel?stage=0",
+                    "babel",
                     "eslint",
                 ],
             },
@@ -66,10 +66,10 @@ export default {
     },
     postcss: (webpack) => {
         return [
-            stylelint,
             postcssImport({
                 addDependencyTo: webpack,
             }),
+            stylelint,
         ]
     }
 }
