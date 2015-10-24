@@ -26,6 +26,7 @@
     "opn": "^3.0.2",
     "path": "^0.12.7",
     "style-loader": "^0.13.0",
+    "stylelint": "^2.0.0",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1"
   },
