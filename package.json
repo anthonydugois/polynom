@@ -25,6 +25,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "opn": "^3.0.2",
     "path": "^0.12.7",
+    "postcss-import": "^7.1.0",
     "postcss-loader": "^0.7.0",
     "style-loader": "^0.13.0",
     "stylelint": "^2.0.0",
@@ -35,5 +36,9 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthonydugois/react-webpack-boiler"
   }
 }

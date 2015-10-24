@@ -1,7 +1,9 @@
 import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+
 import stylelint from "stylelint"
+import postcssImport from "postcss-import"
 
 import variables, { defineVariables } from "./variables"
 
@@ -41,8 +43,7 @@ export default {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract(
                     "style",
-                    "css",
-                    "postcss"
+                    "css!postcss"
                 ),
             },
         ],
@@ -63,7 +64,12 @@ export default {
     eslint: {
         configFile: "./.eslintrc",
     },
-    postcss: () => {
-        return [stylelint]
+    postcss: (webpack) => {
+        return [
+            stylelint,
+            postcssImport({
+                addDependencyTo: webpack,
+            }),
+        ]
     }
 }
