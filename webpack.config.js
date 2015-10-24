@@ -2,8 +2,16 @@ import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
+import autoprefixer from "autoprefixer"
 import stylelint from "stylelint"
+import postcssBrandColors from "postcss-brand-colors"
+import postcssColorFunction from "postcss-color-function"
+import postcssCustomMedia from "postcss-custom-media"
+import postcssCustomProperties from "postcss-custom-properties"
+import postcssCustomSelectors from "postcss-custom-selectors"
 import postcssImport from "postcss-import"
+import postcssMediaMinmax from "postcss-media-minmax"
+import postcssUrl from "postcss-url"
 
 import variables, { defineVariables } from "./variables"
 
@@ -55,9 +63,7 @@ export default {
         }),
         ...(__PROD__ ? [
             new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false,
-                },
+                compress: { warnings: false },
             }),
         ] : [])
     ],
@@ -66,9 +72,14 @@ export default {
     },
     postcss: (webpack) => {
         return [
-            postcssImport({
-                addDependencyTo: webpack,
-            }),
+            postcssBrandColors,
+            postcssColorFunction,
+            postcssCustomMedia,
+            postcssCustomProperties,
+            postcssCustomSelectors,
+            postcssImport({ addDependencyTo: webpack }),
+            postcssMediaMinmax,
+            postcssUrl,
             stylelint,
         ]
     }
