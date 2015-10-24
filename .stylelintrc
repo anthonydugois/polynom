@@ -1,0 +1,78 @@
+{
+    "string-quotes": "double",
+
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "color-no-invalid-hex": true,
+    "color-no-named": true,
+
+    "number-leading-zero": "never",
+    "number-max-precision": 5,
+    "number-no-trailing-zeros": true,
+    "number-zero-length-no-unit": true,
+
+    "function-calc-no-unspaced-operator": true,
+    "function-comma-space-after": "always-single-line",
+    "function-comma-space-before": "never-single-line",
+    "function-linear-gradient-no-nonstandard-direction": true,
+    "function-parentheses-space-inside": "never",
+    "function-space-after": "always",
+    "function-url-quotes": "none",
+
+    "value-no-vendor-prefix": true,
+
+    "value-list-comma-newline-after": "always-multi-line",
+    "value-list-comma-newline-before": "never-multi-line",
+    "value-list-comma-space-after": "always",
+    "value-list-comma-space-before": "never",
+
+    "property-no-vendor-prefix": true,
+
+    "custom-property-no-outside-root": true,
+
+    "declaration-bang-space-after": "never",
+    "declaration-bang-space-before": "always",
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-no-important": true,
+    "declaration-block-semicolon-newline-after": "always",
+    "declaration-block-semicolon-newline-before": "never",
+
+    "block-closing-brace-newline-after": "always",
+    "block-closing-brace-newline-before": "always",
+    "block-no-empty": true,
+    "block-opening-brace-newline-after": "always",
+    "block-opening-brace-space-before": "always",
+
+    "selector-combinator-space-after": "always",
+    "selector-combinator-space-before": "always",
+    "selector-no-id": true,
+    "selector-pseudo-element-colon-notation": "double",
+
+    "selector-list-comma-newline-after": "always",
+    "selector-list-comma-newline-before": "never-multi-line",
+    "selector-list-comma-space-before": "never",
+
+    "rule-nested-empty-line-before": "never",
+    "rule-no-duplicate-properties": true,
+    "rule-no-shorthand-property-overrides": true,
+    "rule-no-single-line": true,
+    "rule-single-line-max-declarations": 1,
+    "rule-trailing-semicolon": "always",
+
+    "root-no-standard-properties": true,
+
+    "media-feature-colon-space-after": "always",
+    "media-feature-colon-space-before": "never",
+    "media-feature-range-operator-space-after": "always",
+    "media-feature-range-operator-space-before": "always",
+
+    "at-rule-no-vendor-prefix": true,
+
+    "comment-space-inside": "always",
+
+    "indentation": 4,
+    "no-eol-whitespace": true,
+    "no-missing-eof-newline": true,
+    "no-multiple-empty-lines": true
+}
