@@ -74,6 +74,7 @@ export default {
     postcss: (webpack) => {
         return [
             postcssImport({ addDependencyTo: webpack }),
+            stylelint,
             postcssCustomMedia,
             postcssCustomProperties,
             postcssCustomSelectors,
@@ -82,7 +83,6 @@ export default {
             postcssColorFunction,
             postcssInputStyle,
             postcssUrl,
-            stylelint,
         ]
     }
 }

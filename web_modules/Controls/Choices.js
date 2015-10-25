@@ -7,9 +7,11 @@ function Choices(props) {
         onChange,
     } = props
 
-    let _choices = choices.map((choice) => {
+    let _choices = choices.map((choice, index) => {
         return (
-            <label className="ad-Choice">
+            <label
+                key={ index }
+                className="ad-Choice">
                 <input
                     className="ad-Choice-input"
                     type="radio"

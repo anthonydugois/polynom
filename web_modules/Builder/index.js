@@ -28,6 +28,7 @@ class Builder extends Component {
         draggedQuadratic: false,
         draggedCubic: false,
         closePath: false,
+        fillPath: false,
     }
 
     componentWillMount() {
@@ -109,6 +110,10 @@ class Builder extends Component {
 
     setClosePath = (e) => {
         this.setState({ closePath: e.target.checked })
+    }
+
+    setFillPath = (e) => {
+        this.setState({ fillPath: e.target.checked })
     }
 
     getMouseCoords = (e) => {
@@ -385,7 +390,7 @@ class Builder extends Component {
         }
     }
 
-    generatePath() {
+    getPath() {
         let { points, closePath } = this.state,
             d = ""
 
@@ -440,7 +445,7 @@ class Builder extends Component {
                     <div className="ad-Builder-svg">
                         <SVG
                             ref="svg"
-                            path={ this.generatePath() }
+                            path={ this.getPath() }
                             { ...this.state }
                             addPoint={ this.addPoint }
                             setDraggedPoint={ this.setDraggedPoint }
@@ -465,9 +470,8 @@ class Builder extends Component {
                         setGridSize={ this.setGridSize }
                         setGridSnap={ this.setGridSnap }
                         setGridShow={ this.setGridShow }
-                        setClosePath={ this.setClosePath } />
-
-                    <Result path={ this.generatePath() } />
+                        setClosePath={ this.setClosePath }
+                        setFillPath={ this.setFillPath } />
                 </div>
             </div>
         )

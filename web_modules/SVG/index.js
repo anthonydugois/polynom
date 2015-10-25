@@ -16,6 +16,7 @@ class SVG extends Component {
         grid: React.PropTypes.object.isRequired,
         points: React.PropTypes.array.isRequired,
         activePoint: React.PropTypes.number.isRequired,
+        fillPath: React.PropTypes.bool.isRequired,
         addPoint: React.PropTypes.func.isRequired,
         handleMouseMove: React.PropTypes.func.isRequired,
         setDraggedPoint: React.PropTypes.func.isRequired,
@@ -31,6 +32,7 @@ class SVG extends Component {
             grid,
             points,
             activePoint,
+            fillPath,
             addPoint,
             handleMouseMove,
             setDraggedPoint,
@@ -100,7 +102,7 @@ class SVG extends Component {
                     grid={ grid } />
 
                 <path
-                    className="ad-Path"
+                    className={ cx("ad-Path", { "ad-Path--filled": fillPath }) }
                     d={ path } />
 
                 <g className="ad-Points">

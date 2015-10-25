@@ -7,7 +7,7 @@
 }
     .ad-Grid {
         fill: none;
-        stroke: #eee;
+        stroke: #e3e3e3;
         stroke-width: 1px;
     }
     .ad-Grid.is-hidden {
@@ -15,14 +15,17 @@
     }
     .ad-Path {
         fill: none;
-        stroke: #555;
+        stroke: color(var(--ad-Color-prim) l(+15%));
         stroke-width: 4px;
         stroke-linecap: round;
+    }
+    .ad-Path--filled {
+        fill: color(var(--ad-Color-prim) l(+15%));
     }
     .ad-Point {
         cursor: pointer;
         fill: #fff;
-        stroke: #555;
+        stroke: color(var(--ad-Color-prim) l(+15%));
         stroke-width: 5px;
         transition: fill .2s;
     }
@@ -42,11 +45,11 @@
         .ad-Anchor-point {
             cursor: pointer;
             fill: #fff;
-            stroke: #888;
-            stroke-width: 5px;
+            stroke: color(var(--ad-Color-prim) l(+35%));
+            stroke-width: 4px;
         }
         .ad-Anchor-line {
-            stroke: #888;
+            stroke: color(var(--ad-Color-prim) l(+35%));
             stroke-width: 1px;
-            stroke-dasharray: 5 5;
+            stroke-dasharray: 10 10;
         }
