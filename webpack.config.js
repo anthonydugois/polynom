@@ -10,6 +10,7 @@ import postcssCustomMedia from "postcss-custom-media"
 import postcssCustomProperties from "postcss-custom-properties"
 import postcssCustomSelectors from "postcss-custom-selectors"
 import postcssImport from "postcss-import"
+import postcssInputStyle from "postcss-input-style"
 import postcssMediaMinmax from "postcss-media-minmax"
 import postcssUrl from "postcss-url"
 
@@ -79,6 +80,7 @@ export default {
             postcssMediaMinmax,
             postcssBrandColors,
             postcssColorFunction,
+            postcssInputStyle,
             postcssUrl,
             stylelint,
         ]

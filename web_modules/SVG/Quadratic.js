@@ -30,7 +30,7 @@ function Quadratic(props) {
 
             <circle
                 className="ad-Anchor-point"
-                onMouseDown={ (e) => setDraggedQuadratic(index) }
+                onMouseDown={ (e) => setDraggedQuadratic(e, index) }
                 cx={ x }
                 cy={ y }
                 r={ 6 } />

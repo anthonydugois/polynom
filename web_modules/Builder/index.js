@@ -287,7 +287,9 @@ class Builder extends Component {
         this.setState({ points })
     }
 
-    setDraggedPoint = (index) => {
+    setDraggedPoint = (e, index) => {
+        e.preventDefault()
+
         if ( ! this.state.ctrl) {
             this.setState({
                 activePoint: index,
@@ -296,7 +298,9 @@ class Builder extends Component {
         }
     }
 
-    setDraggedQuadratic = (index) => {
+    setDraggedQuadratic = (e, index) => {
+        e.preventDefault()
+
         if ( ! this.state.ctrl) {
             this.setState({
                 activePoint: index,
@@ -305,7 +309,9 @@ class Builder extends Component {
         }
     }
 
-    setDraggedCubic = (index, anchor) => {
+    setDraggedCubic = (e, index, anchor) => {
+        e.preventDefault()
+
         if ( ! this.state.ctrl) {
             this.setState({
                 activePoint: index,
@@ -351,6 +357,8 @@ class Builder extends Component {
     }
 
     handleMouseMove = (e) => {
+        e.preventDefault()
+
         if ( ! this.state.ctrl) {
             if (this.state.draggedPoint) {
                 this.setPointCoords(this.getMouseCoords(e))

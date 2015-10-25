@@ -11,7 +11,7 @@ function Point(props) {
     return (
         <circle
             className="ad-Point"
-            onMouseDown={ (e) => setDraggedPoint(index) }
+            onMouseDown={ (e) => setDraggedPoint(e, index) }
             cx={ x }
             cy={ y }
             r={ 8 } />

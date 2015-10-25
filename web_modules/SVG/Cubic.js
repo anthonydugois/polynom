@@ -32,14 +32,14 @@ function Cubic(props) {
 
             <circle
                 className="ad-Anchor-point"
-                onMouseDown={ (e) => setDraggedCubic(index, 0) }
+                onMouseDown={ (e) => setDraggedCubic(e, index, 0) }
                 cx={ x1 }
                 cy={ y1 }
                 r={ 6 } />
 
             <circle
                 className="ad-Anchor-point"
-                onMouseDown={ (e) => setDraggedCubic(index, 1) }
+                onMouseDown={ (e) => setDraggedCubic(e, index, 1) }
                 cx={ x2 }
                 cy={ y2 }
                 r={ 6 } />
