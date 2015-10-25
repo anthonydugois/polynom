@@ -70,21 +70,54 @@ class Controls extends Component {
         return (
             <div className="ad-Controls">
                 <h3 className="ad-Controls-title">
-                    Parameters
+                    General parameters
                 </h3>
 
                 <div className="ad-Controls-container">
                     <Control
                         name="Width"
-                        type="text"
+                        type="range"
+                        min={ 0 }
+                        max={ 1500 }
+                        step={ 50 }
                         value={ w }
                         onChange={ setWidth } />
+                </div>
 
+                <div className="ad-Controls-container">
                     <Control
                         name="Height"
-                        type="text"
+                        type="range"
+                        min={ 0 }
+                        max={ 850 }
+                        step={ 50 }
                         value={ h }
                         onChange={ setHeight } />
+                </div>
+
+                <div className="ad-Controls-container">
+                    <Control
+                        name="Grid size"
+                        type="range"
+                        min={ 1 }
+                        max={ Math.min(w, h) / 2 }
+                        step={ 1 }
+                        value={ grid.size }
+                        onChange={ setGridSize } />
+                </div>
+
+                <div className="ad-Controls-container">
+                    <Control
+                        name="Snap grid"
+                        type="checkbox"
+                        checked={ grid.snap }
+                        onChange={ setGridSnap } />
+
+                    <Control
+                        name="Show grid"
+                        type="checkbox"
+                        checked={ grid.show }
+                        onChange={ setGridShow } />
                 </div>
 
                 <div className="ad-Controls-container">
@@ -99,26 +132,6 @@ class Controls extends Component {
                         type="checkbox"
                         checked={ fillPath }
                         onChange={ setFillPath } />
-                </div>
-
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Grid size"
-                        type="text"
-                        value={ grid.size }
-                        onChange={ setGridSize } />
-
-                    <Control
-                        name="Snap grid"
-                        type="checkbox"
-                        checked={ grid.snap }
-                        onChange={ setGridSnap } />
-
-                    <Control
-                        name="Show grid"
-                        type="checkbox"
-                        checked={ grid.show }
-                        onChange={ setGridShow } />
                 </div>
 
                 <div className="ad-Controls-container">
@@ -173,32 +186,36 @@ class Controls extends Component {
 
                 { active.quadratic && (
                     <div>
-                        <div className="ad-Controls-container">
-                            <Control
-                                name="Control point X position"
-                                type="range"
-                                min={ 0 }
-                                max={ w }
-                                step={ step }
-                                value={ active.quadratic.x }
-                                onChange={ (e) => setQuadraticPosition("x", e) } />
-                        </div>
+                        { ! (previous.quadratic && active.quadratic.t) && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="Anchor X position"
+                                    type="range"
+                                    min={ 0 }
+                                    max={ w }
+                                    step={ step }
+                                    value={ active.quadratic.x }
+                                    onChange={ (e) => setQuadraticPosition("x", e) } />
+                            </div>
+                        ) }
 
-                        <div className="ad-Controls-container">
-                            <Control
-                                name="Control point Y position"
-                                type="range"
-                                min={ 0 }
-                                max={ h }
-                                step={ step }
-                                value={ active.quadratic.y }
-                                onChange={ (e) => setQuadraticPosition("y", e) } />
-                        </div>
+                        { ! (previous.quadratic && active.quadratic.t) && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="Anchor Y position"
+                                    type="range"
+                                    min={ 0 }
+                                    max={ h }
+                                    step={ step }
+                                    value={ active.quadratic.y }
+                                    onChange={ (e) => setQuadraticPosition("y", e) } />
+                            </div>
+                        ) }
 
                         { previous && previous.quadratic && (
                             <div className="ad-Controls-container">
                                 <Control
-                                    name="String with previous curve"
+                                    name="String to previous curve"
                                     type="checkbox"
                                     checked={ active.quadratic.t }
                                     onChange={ setQuadraticT } />
@@ -209,31 +226,35 @@ class Controls extends Component {
 
                 { active.cubic && (
                     <div>
-                        <div className="ad-Controls-container">
-                            <Control
-                                name="First control point X position"
-                                type="range"
-                                min={ 0 }
-                                max={ w }
-                                step={ step }
-                                value={ active.cubic.x1 }
-                                onChange={ (e) => setCubicPosition("x1", e) } />
-                        </div>
+                        { ! (previous.cubic && active.cubic.s) && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="First anchor X position"
+                                    type="range"
+                                    min={ 0 }
+                                    max={ w }
+                                    step={ step }
+                                    value={ active.cubic.x1 }
+                                    onChange={ (e) => setCubicPosition("x1", e) } />
+                            </div>
+                        ) }
+
+                        { ! (previous.cubic && active.cubic.s) && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="First anchor Y position"
+                                    type="range"
+                                    min={ 0 }
+                                    max={ h }
+                                    step={ step }
+                                    value={ active.cubic.y1 }
+                                    onChange={ (e) => setCubicPosition("y1", e) } />
+                            </div>
+                        ) }
 
                         <div className="ad-Controls-container">
                             <Control
-                                name="First control point Y position"
-                                type="range"
-                                min={ 0 }
-                                max={ h }
-                                step={ step }
-                                value={ active.cubic.y1 }
-                                onChange={ (e) => setCubicPosition("y1", e) } />
-                        </div>
-
-                        <div className="ad-Controls-container">
-                            <Control
-                                name="Second control point X position"
+                                name="Second anchor X position"
                                 type="range"
                                 min={ 0 }
                                 max={ w }
@@ -244,7 +265,7 @@ class Controls extends Component {
 
                         <div className="ad-Controls-container">
                             <Control
-                                name="Second control point Y position"
+                                name="Second anchor Y position"
                                 type="range"
                                 min={ 0 }
                                 max={ h }
@@ -256,7 +277,7 @@ class Controls extends Component {
                         { previous && previous.cubic && (
                             <div className="ad-Controls-container">
                                 <Control
-                                    name="String with previous curve"
+                                    name="String to previous curve"
                                     type="checkbox"
                                     checked={ active.cubic.s }
                                     onChange={ setCubicS } />

@@ -9,8 +9,8 @@ import "./styles"
 
 class Builder extends Component {
     state = {
-        w: 800,
-        h: 600,
+        w: 1000,
+        h: 800,
         ctrl: false,
         activePoint: 0,
         isDragging: false,
@@ -23,8 +23,8 @@ class Builder extends Component {
         },
         points: [
             {
-                x: 100,
-                y: 300,
+                x: 500,
+                y: 400,
             },
         ],
     }
@@ -159,6 +159,17 @@ class Builder extends Component {
         // not the first point
         if (active !== 0) {
             let v = e.target.value
+
+            // reset string with next curve
+            if (active !== points.length - 1) {
+                if (points[active + 1].quadratic) {
+                    points[active + 1].quadratic.t = false
+                }
+
+                if (points[active + 1].cubic) {
+                    points[active + 1].cubic.s = false
+                }
+            }
 
             switch (v) {
                 case "l":

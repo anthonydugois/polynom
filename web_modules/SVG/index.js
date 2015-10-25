@@ -55,7 +55,7 @@ class SVG extends Component {
                         p2y={ point.y }
                         x={ point.quadratic.x }
                         y={ point.quadratic.y }
-                        t={ point.quadratic.t }
+                        t={ previous.quadratic && point.quadratic.t }
                         drag={ drag } />
                 )
             } else if (point.cubic) {
@@ -71,7 +71,7 @@ class SVG extends Component {
                         y1={ point.cubic.y1 }
                         x2={ point.cubic.x2 }
                         y2={ point.cubic.y2 }
-                        s={ point.cubic.s }
+                        s={ previous.cubic && point.cubic.s }
                         drag={ drag } />
                 )
             }
