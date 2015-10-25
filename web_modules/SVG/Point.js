@@ -4,14 +4,14 @@ function Point(props) {
     const {
         x,
         y,
-        setDraggedPoint,
+        drag,
         index,
     } = props
 
     return (
         <circle
             className="ad-Point"
-            onMouseDown={ (e) => setDraggedPoint(e, index) }
+            onMouseDown={ (e) => drag(e, index) }
             cx={ x }
             cy={ y }
             r={ 8 } />

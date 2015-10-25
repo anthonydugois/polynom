@@ -11,24 +11,22 @@ class Builder extends Component {
     state = {
         w: 800,
         h: 600,
+        ctrl: false,
+        activePoint: 0,
+        isDragging: false,
+        closePath: false,
+        fillPath: false,
         grid: {
             show: true,
             snap: true,
             size: 50,
         },
-        ctrl: false,
         points: [
             {
                 x: 100,
                 y: 300,
             },
         ],
-        activePoint: 0,
-        draggedPoint: false,
-        draggedQuadratic: false,
-        draggedCubic: false,
-        closePath: false,
-        fillPath: false,
     }
 
     componentWillMount() {
@@ -39,6 +37,18 @@ class Builder extends Component {
     componentWillUnmount() {
         document.removeEventListener("keydown")
         document.removeEventListener("keyup")
+    }
+
+    handleKeyDown = (e) => {
+        if (e.ctrlKey) {
+            this.setState({ ctrl: true })
+        }
+    }
+
+    handleKeyUp = (e) => {
+        if ( ! e.ctrlKey) {
+            this.setState({ ctrl: false })
+        }
     }
 
     positiveNumber(n) {
@@ -197,13 +207,6 @@ class Builder extends Component {
                         },
                     }
                 break
-
-                default:
-                    points[active] = {
-                        x: 0,
-                        y: 0,
-                    }
-                break
             }
 
             this.setState({ points })
@@ -271,27 +274,51 @@ class Builder extends Component {
 
     setCubicPosition = (coord, e) => {
         let coords = this.state.points[this.state.activePoint].cubic,
-            v = this.positiveNumber(e.target.value)
+            v = this.positiveNumber(e.target.value),
+            n = 0
 
-        if (coord === "x" && v > this.state.w) {
-            v = this.state.w
-        } else if (coord === "y" && v > this.state.h) {
-            v = this.state.h
+        if (coord === "x1") {
+            this.setCubicCoords({
+                x: v,
+                y: coords.y1,
+            }, 1)
         }
 
-        coords[coord] = v
+        if (coord === "y1") {
+            this.setCubicCoords({
+                x: coords.x1,
+                y: v,
+            }, 1)
+        }
 
-        this.setCubicCoords(coords)
+        if (coord === "x2") {
+            this.setCubicCoords({
+                x: v,
+                y: coords.y2,
+            }, 2)
+        }
+
+        if (coord === "y2") {
+            this.setCubicCoords({
+                x: coords.x2,
+                y: v,
+            }, 2)
+        }
     }
 
-    setCubicCoords = (coords, anchor) => {
+    setCubicCoords = (coords, n) => {
         const points = this.state.points,
             active = this.state.activePoint
 
-        points[active].cubic.x1 = coords.x1
-        points[active].cubic.y1 = coords.y1
-        points[active].cubic.x2 = coords.x2
-        points[active].cubic.y2 = coords.y2
+        if (n === 1) {
+            points[active].cubic.x1 = coords.x
+            points[active].cubic.y1 = coords.y
+        }
+
+        if (n === 2) {
+            points[active].cubic.x2 = coords.x
+            points[active].cubic.y2 = coords.y
+        }
 
         this.setState({ points })
     }
@@ -322,45 +349,19 @@ class Builder extends Component {
         this.setState({ points })
     }
 
-    setDraggedPoint = (e, index) => {
+    drag = (e, index, object = "point", n = false) => {
         e.preventDefault()
 
         if ( ! this.state.ctrl) {
             this.setState({
                 activePoint: index,
-                draggedPoint: true,
-            })
-        }
-    }
-
-    setDraggedQuadratic = (e, index) => {
-        e.preventDefault()
-
-        if ( ! this.state.ctrl) {
-            this.setState({
-                activePoint: index,
-                draggedQuadratic: true,
-            })
-        }
-    }
-
-    setDraggedCubic = (e, index, anchor) => {
-        e.preventDefault()
-
-        if ( ! this.state.ctrl) {
-            this.setState({
-                activePoint: index,
-                draggedCubic: anchor,
+                isDragging: { object, n },
             })
         }
     }
 
     cancelDragging = (e) => {
-        this.setState({
-            draggedPoint: false,
-            draggedQuadratic: false,
-            draggedCubic: false,
-        })
+        this.setState({ isDragging: false })
     }
 
     addPoint = (e) => {
@@ -395,25 +396,21 @@ class Builder extends Component {
         e.preventDefault()
 
         if ( ! this.state.ctrl) {
-            if (this.state.draggedPoint) {
-                this.setPointCoords(this.getMouseCoords(e))
-            } else if (this.state.draggedQuadratic) {
-                this.setQuadraticCoords(this.getMouseCoords(e))
-            } else if (this.state.draggedCubic !== false) {
-                this.setCubicCoords(this.getMouseCoords(e), this.state.draggedCubic)
+            let { object, n } = this.state.isDragging
+
+            switch (object) {
+                case "point":
+                    this.setPointCoords(this.getMouseCoords(e))
+                break
+
+                case "quadratic":
+                    this.setQuadraticCoords(this.getMouseCoords(e))
+                break
+
+                case "cubic":
+                    this.setCubicCoords(this.getMouseCoords(e), n)
+                break
             }
-        }
-    }
-
-    handleKeyDown = (e) => {
-        if (e.ctrlKey) {
-            this.setState({ ctrl: true })
-        }
-    }
-
-    handleKeyUp = (e) => {
-        if ( ! e.ctrlKey) {
-            this.setState({ ctrl: false })
         }
     }
 
@@ -435,9 +432,9 @@ class Builder extends Component {
                 d += point.cubic.s ?
                     `S ${ point.cubic.x2 } ${ point.cubic.y2 } ` :
                     `C ${ point.cubic.x1 } ${ point.cubic.y1 } ${ point.cubic.x2 } ${ point.cubic.y2 } `
-            } else if (point.a) {
+            } else if (point.arc) {
                 // arc
-                d += `A ${ point.a.rx } ${ point.a.ry } ${ point.a.rot } ${ point.a.laf } ${ point.a.sf } `
+                d += `A ${ point.arc.rx } ${ point.arc.ry } ${ point.arc.rot } ${ point.arc.laf } ${ point.arc.sf } `
             } else {
                 // line
                 d += "L "
@@ -480,9 +477,7 @@ class Builder extends Component {
                             path={ this.getPath() }
                             { ...this.state }
                             addPoint={ this.addPoint }
-                            setDraggedPoint={ this.setDraggedPoint }
-                            setDraggedQuadratic={ this.setDraggedQuadratic }
-                            setDraggedCubic={ this.setDraggedCubic }
+                            drag={ this.drag }
                             handleMouseMove={ this.handleMouseMove } />
                     </div>
                 </div>

@@ -18,10 +18,8 @@ class SVG extends Component {
         activePoint: React.PropTypes.number.isRequired,
         fillPath: React.PropTypes.bool.isRequired,
         addPoint: React.PropTypes.func.isRequired,
+        drag: React.PropTypes.func.isRequired,
         handleMouseMove: React.PropTypes.func.isRequired,
-        setDraggedPoint: React.PropTypes.func.isRequired,
-        setDraggedQuadratic: React.PropTypes.func.isRequired,
-        setDraggedCubic: React.PropTypes.func.isRequired,
     }
 
     render() {
@@ -34,10 +32,8 @@ class SVG extends Component {
             activePoint,
             fillPath,
             addPoint,
+            drag,
             handleMouseMove,
-            setDraggedPoint,
-            setDraggedQuadratic,
-            setDraggedCubic,
         } = this.props
 
         let circles = points.map((point, index, _points) => {
@@ -48,7 +44,7 @@ class SVG extends Component {
                 previous = _points[index - 1]
             }
 
-            if (point.quadratic && ! point.quadratic.t) {
+            if (point.quadratic) {
                 anchors.push(
                     <Quadratic
                         key={ `q_${ index }` }
@@ -59,9 +55,10 @@ class SVG extends Component {
                         p2y={ point.y }
                         x={ point.quadratic.x }
                         y={ point.quadratic.y }
-                        setDraggedQuadratic={ setDraggedQuadratic } />
+                        t={ point.quadratic.t }
+                        drag={ drag } />
                 )
-            } else if (point.cubic && ! point.cubic.s) {
+            } else if (point.cubic) {
                 anchors.push(
                     <Cubic
                         key={ `c_${ index }` }
@@ -74,7 +71,8 @@ class SVG extends Component {
                         y1={ point.cubic.y1 }
                         x2={ point.cubic.x2 }
                         y2={ point.cubic.y2 }
-                        setDraggedCubic={ setDraggedCubic } />
+                        s={ point.cubic.s }
+                        drag={ drag } />
                 )
             }
 
@@ -89,7 +87,7 @@ class SVG extends Component {
                         index={ index }
                         x={ point.x }
                         y={ point.y }
-                        setDraggedPoint={ setDraggedPoint } />
+                        drag={ drag } />
 
                     { anchors }
                 </g>
