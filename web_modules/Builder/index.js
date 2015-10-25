@@ -149,6 +149,18 @@ class Builder extends Component {
         return { x, y }
     }
 
+    resetNextCurve = (points, active) => {
+        if (active !== points.length - 1) {
+            if (points[active + 1].quadratic) {
+                points[active + 1].quadratic.t = false
+            }
+
+            if (points[active + 1].cubic) {
+                points[active + 1].cubic.s = false
+            }
+        }
+    }
+
     /**
      * Default point values
      */
@@ -160,16 +172,7 @@ class Builder extends Component {
         if (active !== 0) {
             let v = e.target.value
 
-            // reset string with next curve
-            if (active !== points.length - 1) {
-                if (points[active + 1].quadratic) {
-                    points[active + 1].quadratic.t = false
-                }
-
-                if (points[active + 1].cubic) {
-                    points[active + 1].cubic.s = false
-                }
-            }
+            this.resetNextCurve(points, active)
 
             switch (v) {
                 case "l":
@@ -394,6 +397,8 @@ class Builder extends Component {
             active = this.state.activePoint
 
         if (points.length > 1 && active !== 0) {
+            this.resetNextCurve(points, active)
+
             points.splice(active, 1)
 
             this.setState({
