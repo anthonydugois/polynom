@@ -14,7 +14,9 @@ class Controls extends Component {
         closePath: React.PropTypes.bool.isRequired,
         fillPath: React.PropTypes.bool.isRequired,
         setQuadraticPosition: React.PropTypes.func.isRequired,
+        setQuadraticT: React.PropTypes.func.isRequired,
         setCubicPosition: React.PropTypes.func.isRequired,
+        setCubicS: React.PropTypes.func.isRequired,
         setArcParam: React.PropTypes.func.isRequired,
         setWidth: React.PropTypes.func.isRequired,
         setHeight: React.PropTypes.func.isRequired,
@@ -39,7 +41,9 @@ class Controls extends Component {
             closePath,
             fillPath,
             setQuadraticPosition,
+            setQuadraticT,
             setCubicPosition,
+            setCubicS,
             setArcParam,
             setWidth,
             setHeight,
@@ -57,141 +61,10 @@ class Controls extends Component {
         const active = points[activePoint],
             step = grid.snap ? grid.size : 1
 
-        let params = []
+        let previous = false
 
-        if (active.q) {
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Control point X position"
-                        type="range"
-                        min={ 0 }
-                        max={ w }
-                        step={ step }
-                        value={ active.q.x }
-                        onChange={ (e) => setQuadraticPosition("x", e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Control point Y position"
-                        type="range"
-                        min={ 0 }
-                        max={ h }
-                        step={ step }
-                        value={ active.q.y }
-                        onChange={ (e) => setQuadraticPosition("y", e) } />
-                </div>
-            )
-        } else if (active.c) {
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="First control point X position"
-                        type="range"
-                        min={ 0 }
-                        max={ w }
-                        step={ step }
-                        value={ active.c[0].x }
-                        onChange={ (e) => setCubicPosition("x", 0, e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="First control point Y position"
-                        type="range"
-                        min={ 0 }
-                        max={ h }
-                        step={ step }
-                        value={ active.c[0].y }
-                        onChange={ (e) => setCubicPosition("y", 0, e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Second control point X position"
-                        type="range"
-                        min={ 0 }
-                        max={ w }
-                        step={ step }
-                        value={ active.c[1].x }
-                        onChange={ (e) => setCubicPosition("x", 1, e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Second control point Y position"
-                        type="range"
-                        min={ 0 }
-                        max={ h }
-                        step={ step }
-                        value={ active.c[1].y }
-                        onChange={ (e) => setCubicPosition("y", 1, e) } />
-                </div>
-            )
-        } else if (active.a) {
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="X Radius"
-                        type="range"
-                        min={ 0 }
-                        max={ w }
-                        step={ step }
-                        value={ active.a.rx }
-                        onChange={ (e) => setArcParam("rx", e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Y Radius"
-                        type="range"
-                        min={ 0 }
-                        max={ h }
-                        step={ step }
-                        value={ active.a.ry }
-                        onChange={ (e) => setArcParam("ry", e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Rotation"
-                        type="range"
-                        min={ 0 }
-                        max={ 360 }
-                        step={ 1 }
-                        value={ active.a.rot }
-                        onChange={ (e) => setArcParam("rot", e) } />
-                </div>
-            )
-
-            params.push(
-                <div className="ad-Controls-container">
-                    <Control
-                        name="Large arc"
-                        type="checkbox"
-                        checked={ active.a.laf }
-                        onChange={ (e) => setArcParam("laf", e) } />
-
-                    <Control
-                        name="Sweep flag"
-                        type="checkbox"
-                        checked={ active.a.sf }
-                        onChange={ (e) => setArcParam("sf", e) } />
-                </div>
-            )
+        if (active !== 0) {
+            previous = points[activePoint - 1]
         }
 
         return (
@@ -218,13 +91,13 @@ class Controls extends Component {
                     <Control
                         name="Close path"
                         type="checkbox"
-                        value={ closePath }
+                        checked={ closePath }
                         onChange={ setClosePath } />
 
                     <Control
                         name="Fill path"
                         type="checkbox"
-                        value={ fillPath }
+                        checked={ fillPath }
                         onChange={ setFillPath } />
                 </div>
 
@@ -267,10 +140,10 @@ class Controls extends Component {
                             type="choices"
                             id="pointType"
                             choices={ [
-                                { name: "L", value: "l", checked: (!active.q && !active.c && !active.a) },
-                                { name: "Q", value: "q", checked: !!active.q },
-                                { name: "C", value: "c", checked: !!active.c },
-                                { name: "A", value: "a", checked: !!active.a },
+                                { name: "Line", value: "l", checked: (! active.quadratic && ! active.cubic && ! active.arc) },
+                                { name: "Quad", value: "q", checked: !! active.quadratic },
+                                { name: "Cub", value: "c", checked: !! active.cubic },
+                                { name: "Arc", value: "a", checked: !! active.arc },
                             ] }
                             onChange={ setPointType } />
                     </div>
@@ -298,7 +171,150 @@ class Controls extends Component {
                         onChange={ (e) => setPointPosition("y", e) } />
                 </div>
 
-                { params }
+                { active.quadratic && (
+                    <div>
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Control point X position"
+                                type="range"
+                                min={ 0 }
+                                max={ w }
+                                step={ step }
+                                value={ active.quadratic.x }
+                                onChange={ (e) => setQuadraticPosition("x", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Control point Y position"
+                                type="range"
+                                min={ 0 }
+                                max={ h }
+                                step={ step }
+                                value={ active.quadratic.y }
+                                onChange={ (e) => setQuadraticPosition("y", e) } />
+                        </div>
+
+                        { previous && previous.quadratic && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="String with previous curve"
+                                    type="checkbox"
+                                    checked={ active.quadratic.t }
+                                    onChange={ setQuadraticT } />
+                            </div>
+                        ) }
+                    </div>
+                ) }
+
+                { active.cubic && (
+                    <div>
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="First control point X position"
+                                type="range"
+                                min={ 0 }
+                                max={ w }
+                                step={ step }
+                                value={ active.cubic.x1 }
+                                onChange={ (e) => setCubicPosition("x1", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="First control point Y position"
+                                type="range"
+                                min={ 0 }
+                                max={ h }
+                                step={ step }
+                                value={ active.cubic.y1 }
+                                onChange={ (e) => setCubicPosition("y1", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Second control point X position"
+                                type="range"
+                                min={ 0 }
+                                max={ w }
+                                step={ step }
+                                value={ active.cubic.x2 }
+                                onChange={ (e) => setCubicPosition("x2", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Second control point Y position"
+                                type="range"
+                                min={ 0 }
+                                max={ h }
+                                step={ step }
+                                value={ active.cubic.y2 }
+                                onChange={ (e) => setCubicPosition("y2", e) } />
+                        </div>
+
+                        { previous && previous.cubic && (
+                            <div className="ad-Controls-container">
+                                <Control
+                                    name="String with previous curve"
+                                    type="checkbox"
+                                    checked={ active.cubic.s }
+                                    onChange={ setCubicS } />
+                            </div>
+                        ) }
+                    </div>
+                ) }
+
+                { active.arc && (
+                    <div>
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="X Radius"
+                                type="range"
+                                min={ 0 }
+                                max={ w }
+                                step={ step }
+                                value={ active.arc.rx }
+                                onChange={ (e) => setArcParam("rx", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Y Radius"
+                                type="range"
+                                min={ 0 }
+                                max={ h }
+                                step={ step }
+                                value={ active.arc.ry }
+                                onChange={ (e) => setArcParam("ry", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Rotation"
+                                type="range"
+                                min={ 0 }
+                                max={ 360 }
+                                step={ 1 }
+                                value={ active.arc.rot }
+                                onChange={ (e) => setArcParam("rot", e) } />
+                        </div>
+
+                        <div className="ad-Controls-container">
+                            <Control
+                                name="Large arc"
+                                type="checkbox"
+                                checked={ active.arc.laf }
+                                onChange={ (e) => setArcParam("laf", e) } />
+
+                            <Control
+                                name="Sweep flag"
+                                type="checkbox"
+                                checked={ active.arc.sf }
+                                onChange={ (e) => setArcParam("sf", e) } />
+                        </div>
+                    </div>
+                ) }
 
                 { activePoint !== 0 && (
                     <div className="ad-Controls-container">

@@ -40,48 +40,55 @@ class SVG extends Component {
             setDraggedCubic,
         } = this.props
 
-        let circles = points.map((p, i, a) => {
-            let anchors = []
+        let circles = points.map((point, index, _points) => {
+            let anchors = [],
+                previous = false
 
-            if (p.q) {
+            if (index !== 0) {
+                previous = _points[index - 1]
+            }
+
+            if (point.quadratic && ! point.quadratic.t) {
                 anchors.push(
                     <Quadratic
-                        index={ i }
-                        p1x={ a[i - 1].x }
-                        p1y={ a[i - 1].y }
-                        p2x={ p.x }
-                        p2y={ p.y }
-                        x={ p.q.x }
-                        y={ p.q.y }
+                        key={ `q_${ index }` }
+                        index={ index }
+                        p1x={ previous.x }
+                        p1y={ previous.y }
+                        p2x={ point.x }
+                        p2y={ point.y }
+                        x={ point.quadratic.x }
+                        y={ point.quadratic.y }
                         setDraggedQuadratic={ setDraggedQuadratic } />
                 )
-            } else if (p.c) {
+            } else if (point.cubic && ! point.cubic.s) {
                 anchors.push(
                     <Cubic
-                        index={ i }
-                        p1x={ a[i - 1].x }
-                        p1y={ a[i - 1].y }
-                        p2x={ p.x }
-                        p2y={ p.y }
-                        x1={ p.c[0].x }
-                        y1={ p.c[0].y }
-                        x2={ p.c[1].x }
-                        y2={ p.c[1].y }
+                        key={ `c_${ index }` }
+                        index={ index }
+                        p1x={ previous.x }
+                        p1y={ previous.y }
+                        p2x={ point.x }
+                        p2y={ point.y }
+                        x1={ point.cubic.x1 }
+                        y1={ point.cubic.y1 }
+                        x2={ point.cubic.x2 }
+                        y2={ point.cubic.y2 }
                         setDraggedCubic={ setDraggedCubic } />
                 )
             }
 
             return (
                 <g
-                    key={ i }
+                    key={ index }
                     className={ cx("ad-PointGroup", {
-                        "ad-PointGroup--first": (i === 0),
-                        "is-active": (activePoint === i),
+                        "ad-PointGroup--first": (index === 0),
+                        "is-active": (activePoint === index),
                     }) }>
                     <Point
-                        index={ i }
-                        x={ p.x }
-                        y={ p.y }
+                        index={ index }
+                        x={ point.x }
+                        y={ point.y }
                         setDraggedPoint={ setDraggedPoint } />
 
                     { anchors }

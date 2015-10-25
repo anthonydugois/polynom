@@ -19,10 +19,8 @@
         border-top: none;
     }
         .ad-Controls-container {
-            display: flex;
-        }
-        .ad-Controls-container + .ad-Controls-container {
             margin-top: 1.5rem;
+            display: flex;
         }
 
 .ad-Control {
@@ -121,7 +119,6 @@
 
 .ad-Choices {
     display: flex;
-    width: 10rem;
 }
     .ad-Choice {
         flex: 1;
