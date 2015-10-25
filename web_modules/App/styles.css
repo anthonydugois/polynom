@@ -1,1 +1,29 @@
-/* webapp styles */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(./config.css);
+
+html {
+    font-family: "Open Sans", sans-serif;
+    font-size: var(--ad-FontSize);
+}
+
+html,
+body,
+.ad-AppContainer {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+.ad-App {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

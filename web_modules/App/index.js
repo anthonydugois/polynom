@@ -1,11 +1,15 @@
 import React, { Component } from "react"
+import Builder from "Builder"
 
 import "./styles"
 
 class App extends Component {
     render() {
-        // render your webapp
-        return (<div />)
+        return (
+            <div className="ad-App">
+                <Builder />
+            </div>
+        )
     }
 }
 

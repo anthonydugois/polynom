@@ -1,0 +1,218 @@
+@import url(App/config.css);
+
+.ad-Controls {
+    overflow: auto;
+    flex: 1;
+    padding: 2rem;
+}
+    .ad-Controls :first-child {
+        margin-top: 0;
+    }
+    .ad-Controls-title {
+        margin: 3rem 0 1.5rem;
+        font-size: .8rem;
+        font-weight: bold;
+        color: #fff;
+    }
+        .ad-Controls-container {
+            display: flex;
+        }
+        .ad-Controls-container + .ad-Controls-container {
+            margin-top: 1.5rem;
+        }
+
+.ad-Control {
+    flex: 1;
+}
+    .ad-Control-label {
+        display: block;
+        margin-bottom: .5rem;
+        text-transform: uppercase;
+        font-size: .6rem;
+        font-weight: bold;
+        color: color(var(--ad-Color-prim) l(+75%));
+    }
+
+.ad-Result {
+    height: 5rem;
+    padding: 1.4rem 1.6rem;
+    background: var(--ad-Color-prim);
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, .4);
+}
+    .ad-Result-textarea {
+        height: 100%;
+        width: 100%;
+        resize: none;
+        border: none;
+        background: none;
+        text-transform: uppercase;
+        font-family: "Open Sans", sans-serif;
+        font-size: .7rem;
+        font-weight: bold;
+        line-height: 1.8;
+        color: #fff;
+    }
+    .ad-Result-textarea:focus {
+        outline: 0;
+    }
+
+.ad-Button {
+    padding: .8rem 1.4rem;
+    background: var(--ad-Color-sec);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background .2s;
+    text-transform: uppercase;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: .6rem;
+    letter-spacing: .08rem;
+    color: #fff;
+}
+.ad-Button:focus,
+.ad-Button:hover {
+    outline: 0;
+    background: color(var(--ad-Color-sec) l(+5%));
+}
+.ad-Button--delete {
+    background: var(--ad-Color-del);
+}
+.ad-Button--delete:focus,
+.ad-Button--delete:hover {
+    background: color(var(--ad-Color-del) l(+5%));
+}
+.ad-Button--reset {
+    background: color(var(--ad-Color-prim) l(+10%));
+}
+.ad-Button--reset:focus,
+.ad-Button--reset:hover {
+    background: color(var(--ad-Color-prim) l(+15%));
+}
+
+.ad-Text {
+    height: 18px;
+    width: 2rem;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-size: .6rem;
+    color: #fff;
+}
+.ad-Text:focus {
+    outline: 0;
+    background: color(var(--ad-Color-prim) l(+20%));
+}
+
+.ad-Checkbox-input {
+    display: none;
+}
+.ad-Checkbox-fake {
+    position: relative;
+    height: 14px;
+    width: 2rem;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 30px;
+}
+.ad-Checkbox-fake::after {
+    content: "";
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+}
+.ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
+    left: auto;
+    right: 0;
+    border-color: var(--ad-Color-sec);
+}
+
+.ad-Choices {
+    display: flex;
+    width: 12rem;
+}
+    .ad-Choice {
+        flex: 1;
+    }
+        .ad-Choice-input {
+            display: none;
+        }
+        .ad-Choice-fake {
+            padding: .6rem;
+            background: color(var(--ad-Color-prim) l(+10%));
+            border: 4px solid transparent;
+            transition: border .2s;
+            cursor: pointer;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: "Open Sans", sans-serif;
+            font-size: .8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        .ad-Choice:first-child .ad-Choice-fake {
+            border-radius: 4px 0 0 4px;
+        }
+        .ad-Choice:last-child .ad-Choice-fake {
+            border-radius: 0 4px 4px 0;
+        }
+        .ad-Choice-input:checked + .ad-Choice-fake {
+            border-color: var(--ad-Color-sec);
+        }
+
+.ad-Range {
+    display: flex;
+    align-items: center;
+}
+    .ad-Range-text {
+        margin-left: .5rem;
+    }
+    .ad-Range-input {
+        width: 100%;
+        height: 14px;
+        appearance: none;
+        border-radius: 30px;
+        background: color(var(--ad-Color-prim) l(+10%));
+    }
+    .ad-Range-input:focus {
+        outline: 0;
+        background: color(var(--ad-Color-prim) l(+20%));
+    }
+    .ad-Range-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 4px solid #fff;
+        background: color(var(--ad-Color-prim) l(+10%));
+        border-radius: 50%;
+        cursor: pointer;
+        transition: border .2s;
+    }
+    .ad-Range-input::-moz-range-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 4px solid #fff;
+        background: color(var(--ad-Color-prim) l(+10%));
+        border-radius: 50%;
+        cursor: pointer;
+        transition: border .2s;
+    }
+
+    .ad-Range-input:hover::-webkit-slider-thumb,
+    .ad-Range-input:focus::-webkit-slider-thumb {
+        border-color: var(--ad-Color-sec);
+    }
+    .ad-Range-input:hover::-moz-range-thumb,
+    .ad-Range-input:focus::-moz-range-thumb {
+        border-color: var(--ad-Color-sec);
+    }

@@ -1,0 +1,52 @@
+@import url(App/config.css);
+
+.ad-SVG {
+    display: block;
+    background: #fff;
+    border-radius: 4px;
+}
+    .ad-Grid {
+        fill: none;
+        stroke: #eee;
+        stroke-width: 1px;
+    }
+    .ad-Grid.is-hidden {
+        opacity: 0;
+    }
+    .ad-Path {
+        fill: none;
+        stroke: #555;
+        stroke-width: 4px;
+        stroke-linecap: round;
+    }
+    .ad-Point {
+        cursor: pointer;
+        fill: #fff;
+        stroke: #555;
+        stroke-width: 5px;
+        transition: fill .2s;
+    }
+    .ad-Point:hover,
+    .ad-PointGroup.is-active .ad-Point {
+        fill: var(--ad-Color-sec);
+    }
+    .ad-PointGroup--first .ad-Point {
+        stroke: var(--ad-Color-sec);
+    }
+    .ad-Anchor {
+        opacity: .5;
+    }
+    .ad-PointGroup.is-active .ad-Anchor {
+        opacity: 1;
+    }
+        .ad-Anchor-point {
+            cursor: pointer;
+            fill: #fff;
+            stroke: #888;
+            stroke-width: 5px;
+        }
+        .ad-Anchor-line {
+            stroke: #888;
+            stroke-width: 1px;
+            stroke-dasharray: 5 5;
+        }

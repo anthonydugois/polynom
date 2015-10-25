@@ -72,13 +72,13 @@ export default {
     },
     postcss: (webpack) => {
         return [
-            postcssBrandColors,
-            postcssColorFunction,
+            postcssImport({ addDependencyTo: webpack }),
             postcssCustomMedia,
             postcssCustomProperties,
             postcssCustomSelectors,
-            postcssImport({ addDependencyTo: webpack }),
             postcssMediaMinmax,
+            postcssBrandColors,
+            postcssColorFunction,
             postcssUrl,
             stylelint,
         ]

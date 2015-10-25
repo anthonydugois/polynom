@@ -26,8 +26,6 @@
         "value-list-comma-space-after": [2, "always"],
         "value-list-comma-space-before": [2, "never"],
 
-        "property-no-vendor-prefix": 2,
-
         "custom-property-no-outside-root": 2,
 
         "declaration-bang-space-after": [2, "never"],
@@ -69,7 +67,6 @@
 
         "comment-space-inside": [2, "always"],
 
-        "indentation": [2, 4],
         "no-eol-whitespace": 2,
         "no-missing-eof-newline": 2,
         "no-multiple-empty-lines": 2
