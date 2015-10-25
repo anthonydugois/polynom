@@ -9,6 +9,7 @@ class Controls extends Component {
         w: React.PropTypes.number.isRequired,
         h: React.PropTypes.number.isRequired,
         grid: React.PropTypes.object.isRequired,
+        path: React.PropTypes.string.isRequired,
         points: React.PropTypes.array.isRequired,
         activePoint: React.PropTypes.number.isRequired,
         closePath: React.PropTypes.bool.isRequired,
@@ -36,6 +37,7 @@ class Controls extends Component {
             w,
             h,
             grid,
+            path,
             points,
             activePoint,
             closePath,
@@ -70,7 +72,7 @@ class Controls extends Component {
         return (
             <div className="ad-Controls">
                 <h3 className="ad-Controls-title">
-                    General parameters
+                    General
                 </h3>
 
                 <div className="ad-Controls-container">
@@ -118,6 +120,18 @@ class Controls extends Component {
                         type="checkbox"
                         checked={ grid.show }
                         onChange={ setGridShow } />
+                </div>
+
+                <h3 className="ad-Controls-title">
+                    Path
+                </h3>
+
+                <div className="ad-Controls-container">
+                    <Control
+                        name="Path code"
+                        type="textarea"
+                        readOnly={ true }
+                        value={ path } />
                 </div>
 
                 <div className="ad-Controls-container">

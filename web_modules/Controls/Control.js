@@ -2,6 +2,7 @@ import React from "react"
 
 import Range from "./Range"
 import Text from "./Text"
+import Textarea from "./Textarea"
 import Checkbox from "./Checkbox"
 import Button from "./Button"
 import Choices from "./Choices"
@@ -22,6 +23,10 @@ function Control(props) {
 
         case "text":
             control = <Text { ..._props } />
+        break
+
+        case "textarea":
+            control = <Textarea { ..._props } />
         break
 
         case "checkbox":
