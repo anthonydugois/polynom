@@ -9,6 +9,8 @@ import { defineVariables } from "../variables"
 defineVariables()
 
 if (__PROD__) {
+    process.env.NODE_ENV = "production"
+
     webpack(config, (err) => {
         if (err) {
             throw err
@@ -17,6 +19,8 @@ if (__PROD__) {
         console.log(colors.green("\nBuild successfully completed"))
     })
 } else {
+    process.env.NODE_ENV = "development"
+
     server({
         __OUTPUT_DIR__,
         __SERVER_PORT__,
