@@ -70,19 +70,32 @@
     background: color(var(--ad-Color-prim) l(+15%));
 }
 
-.ad-Text {
-    height: 22px;
-    width: 2rem;
+.ad-Text,
+.ad-Textarea {
     background: color(var(--ad-Color-prim) l(+10%));
     border: none;
     border-radius: 4px;
     transition: background .2s;
-    text-align: center;
     font-family: "Open Sans", sans-serif;
     font-size: .6rem;
     color: #fff;
 }
-.ad-Text:focus {
+.ad-Text {
+    height: 1.25rem;
+    width: 2rem;
+    text-align: center;
+}
+.ad-Textarea {
+    height: 5rem;
+    width: 100%;
+    padding: .8rem 1rem;
+    resize: none;
+    border: 2px solid var(--ad-Color-sec);
+    font-weight: bold;
+    line-height: 1.6;
+}
+.ad-Text:focus,
+.ad-Textarea:focus {
     outline: 0;
     background: color(var(--ad-Color-prim) l(+15%));
 }

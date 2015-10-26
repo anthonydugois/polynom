@@ -1,3 +1,51 @@
+/**
+ * Point objects
+ */
+export function M(x, y) {
+    return { x, y }
+}
+
+export function L(x, y) {
+    return M(x, y)
+}
+
+export function Q(x, y, qx, qy) {
+    return {
+        ...L(x, y),
+        quadratic: { t: false, x: qx, y: qy },
+    }
+}
+
+export function T(x, y, qx, qy) {
+    const q = Q(x, y, qx, qy)
+
+    q.quadratic.t = true
+
+    return q
+}
+
+export function C(x, y, x1, y1, x2, y2) {
+    return {
+        ...L(x, y),
+        cubic: { s: false, x1, y1, x2, y2 },
+    }
+}
+
+export function S(x, y, x1, y1, x2, y2) {
+    const c = C(x, y, x1, y1, x2, y2)
+
+    c.cubic.s = true
+
+    return c
+}
+
+export function A(x, y, rx, ry, rot, laf, sf) {
+    return {
+        ...L(x, y),
+        arc: { rx, ry, rot, laf, sf },
+    }
+}
+
 export function getPath(points, closePath) {
     let d = ""
 
@@ -23,6 +71,7 @@ export function getPath(points, closePath) {
             d += "L "
         }
 
+        // point position
         d += `${ point.x } ${ point.y } `
     })
 
@@ -46,76 +95,24 @@ export function getPoints(path) {
         })
     }
 
-    points.forEach(({ type, values }, index, _points) => {
-        let point = false,
-            previous = false,
-            _type = type.toLowerCase()
+    points.forEach(({ type, values }) => {
+        let point = false
 
-        if (index !== 0) {
-            previous = _points[index - 1]
-        }
-
-        if (["m", "l"].indexOf(_type) > -1 && values.length === 2) {
-            point = {
-                x: values[0],
-                y: values[1],
-            }
-        } else if (_type === "q" && values.length === 4) {
-            point = {
-                x: values[2],
-                y: values[3],
-                quadratic: {
-                    t: false,
-                    x: values[0],
-                    y: values[1],
-                },
-            }
-        } else if (_type === "t" && values.length === 2) {
-            point = {
-                x: values[0],
-                y: values[1],
-                quadratic: {
-                    t: true,
-                    x: (values[0] + previous.values[0]) / 2,
-                    y: (values[1] + previous.values[1]) / 2,
-                },
-            }
-        } else if (_type === "c" && values.length === 6) {
-            point = {
-                x: values[4],
-                y: values[5],
-                cubic: {
-                    s: false,
-                    x1: values[0],
-                    y1: values[1],
-                    x2: values[2],
-                    y2: values[3],
-                },
-            }
-        } else if (_type === "s" && values.length === 4) {
-            point = {
-                x: values[2],
-                y: values[3],
-                cubic: {
-                    s: true,
-                    x1: (values[2] + previous.values[2] - 50) / 2,
-                    y1: (values[3] + previous.values[3]) / 2,
-                    x2: values[0],
-                    y2: values[1],
-                },
-            }
-        } else if (_type === "a" && values.length === 7) {
-            point = {
-                x: values[5],
-                y: values[6],
-                arc: {
-                    rx: values[0],
-                    ry: values[1],
-                    rot: values[2],
-                    laf: values[3],
-                    sf: values[4],
-                },
-            }
+        switch (type.toLowerCase()) {
+            case "m": point = M(...values)
+            break
+            case "l": point = L(...values)
+            break
+            case "q": point = Q(...values)
+            break
+            case "t": point = T(...values)
+            break
+            case "c": point = C(...values)
+            break
+            case "s": point = S(...values)
+            break
+            case "a": point = A(...values)
+            break
         }
 
         if (point) {

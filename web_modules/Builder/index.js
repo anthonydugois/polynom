@@ -5,11 +5,12 @@ import SVG from "SVG"
 import Controls from "Controls"
 
 import {
-    positive,
-    rangeGrid,
+    M, L, Q, T, C, S, A,
     getPath,
     getPoints,
     getClosePath,
+    positive,
+    rangeGrid,
 } from "./utils"
 
 import "./styles"
@@ -169,52 +170,24 @@ class Builder extends Component {
 
             points = this.resetNextCurve(points, activePoint)
 
+            let p = points[activePoint],
+                _p = points[activePoint - 1]
+
             switch (v) {
                 case "l":
-                    points[activePoint] = {
-                        x: points[activePoint].x,
-                        y: points[activePoint].y,
-                    }
+                    points[activePoint] = L(p.x, p.y)
                 break
 
                 case "q":
-                    points[activePoint] = {
-                        x: points[activePoint].x,
-                        y: points[activePoint].y,
-                        quadratic: {
-                            t: false,
-                            x: (points[activePoint].x + points[activePoint - 1].x) / 2,
-                            y: (points[activePoint].y + points[activePoint - 1].y) / 2,
-                        },
-                    }
+                    points[activePoint] = Q(p.x, p.y, (p.x + _p.x) / 2, (p.y + _p.y) / 2)
                 break
 
                 case "c":
-                    points[activePoint] = {
-                        x: points[activePoint].x,
-                        y: points[activePoint].y,
-                        cubic: {
-                            s: false,
-                            x1: (points[activePoint].x + points[activePoint - 1].x - 50) / 2,
-                            y1: (points[activePoint].y + points[activePoint - 1].y) / 2,
-                            x2: (points[activePoint].x + points[activePoint - 1].x + 50) / 2,
-                            y2: (points[activePoint].y + points[activePoint - 1].y) / 2,
-                        },
-                    }
+                    points[activePoint] = C(p.x, p.y, (p.x + _p.x - 50) / 2, (p.y + _p.y) / 2, (p.x + _p.x + 50) / 2, (p.y + _p.y) / 2)
                 break
 
                 case "a":
-                    points[activePoint] = {
-                        x: points[activePoint].x,
-                        y: points[activePoint].y,
-                        arc: {
-                            rx: 50,
-                            ry: 50,
-                            rot: 0,
-                            laf: 1,
-                            sf: 1,
-                        },
-                    }
+                    points[activePoint] = A(p.x, p.y, 50, 50, 0, 1, 1)
                 break
             }
 

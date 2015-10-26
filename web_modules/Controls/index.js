@@ -131,7 +131,8 @@ class Controls extends Component {
                         name="Path code"
                         type="textarea"
                         readOnly={ true }
-                        value={ path } />
+                        value={ path }
+                        onFocus={ (e) => e.target.select() } />
                 </div>
 
                 <div className="ad-Controls-container">
