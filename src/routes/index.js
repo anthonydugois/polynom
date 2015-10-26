@@ -1,15 +1,17 @@
 import React from "react"
 import { Router, Route } from "react-router"
-import createBrowserHistory from "history/lib/createBrowserHistory"
+import { createHistory, useBasename } from "history"
 
 import App from "App"
 
-const base = "/svg-path-builder/"
+const history = useBasename(createHistory)({
+    basename: "/svg-path-builder",
+})
 
 const routes = (
-    <Router history={ createBrowserHistory() }>
+    <Router history={ history }>
         <Route
-            path={ base }
+            path="/"
             component={ App } />
     </Router>
 )
