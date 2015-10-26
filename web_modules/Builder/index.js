@@ -4,14 +4,9 @@ import ReactDOM from "react-dom"
 import SVG from "SVG"
 import Controls from "Controls"
 
-import {
-    M, L, Q, T, C, S, A,
-    getPath,
-    getPoints,
-    getClosePath,
-    positive,
-    rangeGrid,
-} from "./utils"
+import { positive, rangeGrid } from "../../src/utils/maths"
+import { M, L, Q, T, C, S, A, getPoints } from "../../src/utils/points"
+import { getPath, getClosePath } from "../../src/utils/path"
 
 import "./styles"
 
