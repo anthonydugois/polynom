@@ -4,10 +4,12 @@ import createBrowserHistory from "history/lib/createBrowserHistory"
 
 import App from "App"
 
+const base = "/svg-path-builder/"
+
 const routes = (
     <Router history={ createBrowserHistory() }>
         <Route
-            path="/"
+            path={ base }
             component={ App } />
     </Router>
 )
