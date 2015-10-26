@@ -19,6 +19,7 @@ function Choices(props) {
                     checked={ choice.checked }
                     name={ id }
                     onChange={ onChange } />
+
                 <div className="ad-Choice-fake">
                     { choice.name }
                 </div>
