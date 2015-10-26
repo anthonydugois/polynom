@@ -5,19 +5,21 @@
     flex: 1;
     padding: 2rem;
 }
-    .ad-Controls-title {
-        margin: 1.5rem 0;
-        padding-top: 1.5rem;
+    .ad-Controls-block {
+        padding: 1.5rem 0 2rem;
         border-top: 2px solid color(var(--ad-Color-prim) l(+5%));
-        font-size: .8rem;
-        font-weight: bold;
-        color: #fff;
     }
-    .ad-Controls-title:first-of-type {
-        margin-top: 0;
+    .ad-Controls-block:first-of-type {
         padding-top: 0;
         border-top: none;
     }
+        .ad-Controls-title {
+            margin: 0;
+            padding: 0;
+            font-size: .8rem;
+            font-weight: bold;
+            color: #fff;
+        }
         .ad-Controls-container {
             margin-top: 1.5rem;
             display: flex;
