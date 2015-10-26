@@ -8,7 +8,7 @@
 }
     .ad-Grid {
         fill: none;
-        stroke: #e3e3e3;
+        stroke: color(var(--ad-Color-prim) l(+75%));
         stroke-width: 1px;
     }
     .ad-Grid.is-hidden {
