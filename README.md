@@ -4,18 +4,18 @@ Build a SVG path quickly using a GUI. The demo is available at http://anthonydug
 
 ## Start the dev server
 
-Basically, the server start at http://localhost:1337. You can change that by editing the `variables.js` file.
+Basically, the dev server starts at http://localhost:1337. You can change that by editing the `variables.js` file.
 
 ```
-npm install
+$ npm install
 ```
 
 ```
-npm start
+$ npm start
 ```
 
 ## Build all files
 
 ```
-npm run prod
+$ npm run prod
 ```
