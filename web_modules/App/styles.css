@@ -38,6 +38,7 @@ body,
         flex: 1;
     }
     .ad-Foot-credits {
+        text-align: right;
         font-size: .8rem;
         color: color(var(--ad-Color-prim) l(+50%));
     }
