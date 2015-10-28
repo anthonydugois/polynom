@@ -80,7 +80,6 @@ export default {
             postcssMediaMinmax,
             postcssBrandColors,
             postcssColorFunction,
-            postcssInputStyle,
             postcssUrl,
         ]
     }
