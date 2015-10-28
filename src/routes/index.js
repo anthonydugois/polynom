@@ -1,12 +1,18 @@
 import React from "react"
 import { Router, Route } from "react-router"
-import createBrowserHistory from "history/lib/createBrowserHistory"
+import { createHistory, useBasename } from "history"
 
 import App from "App"
 
+const history = useBasename(createHistory)({
+    basename: "/",
+})
+
 const routes = (
-    <Router history={ createBrowserHistory() }>
-        <Route path="/" component={ App } />
+    <Router history={ history }>
+        <Route
+            path="/"
+            component={ App } />
     </Router>
 )
 
