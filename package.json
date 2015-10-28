@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-boiler",
+  "name": "svg-path-builder",
   "version": "1.0.0",
-  "description": "react project boilerplate using webpack",
+  "description": "Build an SVG path quickly using a GUI.",
   "author": {
     "name": "Anthony Dugois",
     "email": "dev.anthonydugois@gmail.com"
@@ -51,6 +51,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anthonydugois/react-webpack-boiler"
+    "url": "https://github.com/anthonydugois/svg-path-builder"
   }
 }
