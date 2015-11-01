@@ -9,7 +9,7 @@ function Foot(props) {
                 </div>
 
                 <div className="ad-Help">
-                    <strong>Ctrl + Click</strong> to add a point
+                    <strong>Ctrl + Click</strong> or <strong>Command + Click</strong> (on Mac) to add a point
                 </div>
             </div>
 
