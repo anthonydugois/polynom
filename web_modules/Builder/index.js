@@ -45,13 +45,13 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (e.ctrlKey) {
+        if (e.ctrlKey || e.metaKey) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if ( ! e.ctrlKey) {
+        if ( ! e.ctrlKey && ! e.metaKey) {
             this.setState({ ctrl: false })
         }
     }
