@@ -359,17 +359,21 @@ class Builder extends Component {
 
     addPoint = (e) => {
         if (this.state.ctrl) {
-            const coords = this.getMouseCoords(e),
-                { points, closePath } = this.state
+            let { points, activePoint, closePath } = this.state,
+                coords = this.getMouseCoords(e)
 
-            points.push(coords)
-
-            const path = getPath(points, closePath)
+            points = [
+                ...points.slice(0, activePoint + 1),
+                coords,
+                ...(activePoint === points.length - 1 ?
+                    [] :
+                    points.slice(activePoint + 1, points.length)),
+            ]
 
             this.setState({
                 points,
-                path,
-                activePoint: points.length - 1,
+                path: getPath(points, closePath),
+                activePoint: activePoint + 1,
             })
         }
     }
