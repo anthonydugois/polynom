@@ -16,6 +16,7 @@ class Controls extends Component {
         activePoint: React.PropTypes.number.isRequired,
         closePath: React.PropTypes.bool.isRequired,
         fillPath: React.PropTypes.bool.isRequired,
+        relativePoints: React.PropTypes.bool.isRequired,
         setQuadraticPosition: React.PropTypes.func.isRequired,
         setQuadraticT: React.PropTypes.func.isRequired,
         setCubicPosition: React.PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ class Controls extends Component {
         setHeight: React.PropTypes.func.isRequired,
         setClosePath: React.PropTypes.func.isRequired,
         setFillPath: React.PropTypes.func.isRequired,
+        setRelativePoints: React.PropTypes.func.isRequired,
         setGridSize: React.PropTypes.func.isRequired,
         setGridSnap: React.PropTypes.func.isRequired,
         setGridShow: React.PropTypes.func.isRequired,
@@ -42,6 +44,7 @@ class Controls extends Component {
             path,
             closePath,
             fillPath,
+            relativePoints,
             points,
             activePoint,
             setWidth,
@@ -51,6 +54,7 @@ class Controls extends Component {
             setGridShow,
             setClosePath,
             setFillPath,
+            setRelativePoints,
             reset,
             setPointType,
             setPointPosition,
@@ -78,8 +82,10 @@ class Controls extends Component {
                     path={ path }
                     closePath={ closePath }
                     fillPath={ fillPath }
+                    relativePoints={ relativePoints }
                     setClosePath={ setClosePath }
                     setFillPath={ setFillPath }
+                    setRelativePoints={ setRelativePoints }
                     reset={ reset } />
 
                 <Point

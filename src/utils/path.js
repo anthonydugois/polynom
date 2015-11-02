@@ -1,34 +1,58 @@
-export function getPath(points, closePath) {
+export function getPath(points, closePath, relativePoints) {
     let d = ""
 
-    points.forEach((point, index) => {
+    points.forEach((point, index, _points) => {
         if (index === 0) {
-            // first point
-            d += "M "
-        } else if (point.quadratic) {
-            // quadratic
-            d += point.quadratic.t ?
-                "T " :
-                `Q ${ point.quadratic.x } ${ point.quadratic.y } `
-        } else if (point.cubic) {
-            // cubic
-            d += point.cubic.s ?
-                `S ${ point.cubic.x2 } ${ point.cubic.y2 } ` :
-                `C ${ point.cubic.x1 } ${ point.cubic.y1 } ${ point.cubic.x2 } ${ point.cubic.y2 } `
-        } else if (point.arc) {
-            // arc
-            d += `A ${ point.arc.rx } ${ point.arc.ry } ${ point.arc.rot } ${ point.arc.laf } ${ point.arc.sf } `
+            d += `M ${ point.x } ${ point.y } `
         } else {
-            // line
-            d += "L "
-        }
+            const prev = _points[index - 1]
 
-        // point position
-        d += `${ point.x } ${ point.y } `
+            if (point.quadratic) {
+                if (relativePoints) {
+                    d += point.quadratic.t ?
+                        "t " :
+                        `q ${ point.quadratic.x - prev.x } ${ point.quadratic.y - prev.y } `
+                } else {
+                    d += point.quadratic.t ?
+                        "T " :
+                        `Q ${ point.quadratic.x } ${ point.quadratic.y } `
+                }
+            } else if (point.cubic) {
+                if (relativePoints) {
+                    d += point.cubic.s ?
+                        `s ${ point.cubic.x2 - prev.x } ${ point.cubic.y2 - prev.y } ` :
+                        `c ${ point.cubic.x1 - prev.x } ${ point.cubic.y1 - prev.y } ${ point.cubic.x2 - prev.x } ${ point.cubic.y2 - prev.y } `
+                } else {
+                    d += point.cubic.s ?
+                        `S ${ point.cubic.x2 } ${ point.cubic.y2 } ` :
+                        `C ${ point.cubic.x1 } ${ point.cubic.y1 } ${ point.cubic.x2 } ${ point.cubic.y2 } `
+                }
+            } else if (point.arc) {
+                if (relativePoints) {
+                    d += "a "
+                } else {
+                    d += "A "
+                }
+
+                d += `${ point.arc.rx } ${ point.arc.ry } ${ point.arc.rot } ${ point.arc.laf } ${ point.arc.sf } `
+            } else {
+                if (relativePoints) {
+                    d += "l "
+                } else {
+                    d += "L "
+                }
+            }
+
+            if (relativePoints) {
+                d += `${ point.x - prev.x } ${ point.y - prev.y } `
+            } else {
+                d += `${ point.x } ${ point.y } `
+            }
+        }
     })
 
     if (closePath) {
-        d += "Z"
+        d += "z"
     }
 
     return d

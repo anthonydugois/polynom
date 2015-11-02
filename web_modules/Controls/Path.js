@@ -7,8 +7,10 @@ function Path(props) {
         path,
         closePath,
         fillPath,
+        relativePoints,
         setClosePath,
         setFillPath,
+        setRelativePoints,
         reset,
     } = props
 
@@ -29,13 +31,19 @@ function Path(props) {
 
             <div className="ad-Controls-container">
                 <Control
-                    name="Close path"
+                    name="Relative"
+                    type="checkbox"
+                    checked={ relativePoints }
+                    onChange={ setRelativePoints } />
+
+                <Control
+                    name="Close"
                     type="checkbox"
                     checked={ closePath }
                     onChange={ setClosePath } />
 
                 <Control
-                    name="Fill path"
+                    name="Fill"
                     type="checkbox"
                     checked={ fillPath }
                     onChange={ setFillPath } />

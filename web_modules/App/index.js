@@ -10,6 +10,7 @@ class App extends Component {
             <div className="ad-App">
                 <Builder
                     initialClosePath={ false }
+                    initialRelativePoints={ true }
                     initialPoints={ [
                         {
                             x: 200,

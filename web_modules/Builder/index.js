@@ -15,6 +15,7 @@ class Builder extends Component {
     static propTypes = {
         initialPoints: React.PropTypes.array.isRequired,
         initialClosePath: React.PropTypes.bool.isRequired,
+        initialRelativePoints: React.PropTypes.bool.isRequired,
     }
 
     state = {
@@ -31,7 +32,8 @@ class Builder extends Component {
         },
         points: this.props.initialPoints,
         closePath: this.props.initialClosePath,
-        path: getPath(this.props.initialPoints, this.props.initialClosePath),
+        relativePoints: this.props.initialRelativePoints,
+        path: getPath(this.props.initialPoints, this.props.initialClosePath, this.props.initialRelativePoints),
     }
 
     componentWillMount() {
@@ -85,12 +87,22 @@ class Builder extends Component {
      * Path parameters
      */
     setClosePath = (e) => {
-        const { points } = this.state,
+        const { points, relativePoints } = this.state,
             closePath = e.target.checked
 
         this.setState({
             closePath,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
+        })
+    }
+
+    setRelativePoints = (e) => {
+        const { points, closePath } = this.state,
+            relativePoints = e.target.checked
+
+        this.setState({
+            relativePoints,
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
@@ -158,7 +170,12 @@ class Builder extends Component {
      * Default point values
      */
     setPointType = (e) => {
-        let { points, activePoint, closePath } = this.state
+        let {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         // not the first point
         if (activePoint !== 0) {
@@ -189,7 +206,7 @@ class Builder extends Component {
 
             this.setState({
                 points,
-                path: getPath(points, closePath),
+                path: getPath(points, closePath, relativePoints),
             })
         }
     }
@@ -210,14 +227,19 @@ class Builder extends Component {
     }
 
     setPointCoords = (coords) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         points[activePoint].x = coords.x
         points[activePoint].y = coords.y
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
@@ -237,25 +259,35 @@ class Builder extends Component {
     }
 
     setQuadraticCoords = (coords) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         points[activePoint].quadratic.x = coords.x
         points[activePoint].quadratic.y = coords.y
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
     setQuadraticT = (e) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         points[activePoint].quadratic.t = e.target.checked
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
@@ -294,7 +326,12 @@ class Builder extends Component {
     }
 
     setCubicCoords = (coords, n) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         if (n === 1) {
             points[activePoint].cubic.x1 = coords.x
@@ -308,23 +345,33 @@ class Builder extends Component {
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
     setCubicS = (e) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         points[activePoint].cubic.s = e.target.checked
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
     setArcParam = (param, e) => {
-        const { points, activePoint, closePath } = this.state
+        const {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         let v
 
@@ -338,7 +385,7 @@ class Builder extends Component {
 
         this.setState({
             points,
-            path: getPath(points, closePath),
+            path: getPath(points, closePath, relativePoints),
         })
     }
 
@@ -359,27 +406,36 @@ class Builder extends Component {
 
     addPoint = (e) => {
         if (this.state.ctrl) {
-            let { points, activePoint, closePath } = this.state,
-                coords = this.getMouseCoords(e)
+            let {
+                points,
+                activePoint,
+                closePath,
+                relativePoints,
+            } = this.state,
+            coords = this.getMouseCoords(e)
 
+            points = this.resetNextCurve(points, activePoint)
             points = [
                 ...points.slice(0, activePoint + 1),
                 coords,
-                ...(activePoint === points.length - 1 ?
-                    [] :
-                    points.slice(activePoint + 1, points.length)),
+                ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
             ]
 
             this.setState({
                 points,
-                path: getPath(points, closePath),
                 activePoint: activePoint + 1,
+                path: getPath(points, closePath, relativePoints),
             })
         }
     }
 
     removeActivePoint = (e) => {
-        let { points, activePoint, closePath } = this.state
+        let {
+            points,
+            activePoint,
+            closePath,
+            relativePoints,
+        } = this.state
 
         if (points.length > 1 && activePoint !== 0) {
             points = this.resetNextCurve(points, activePoint)
@@ -387,8 +443,8 @@ class Builder extends Component {
 
             this.setState({
                 points,
-                path: getPath(points, closePath),
                 activePoint: points.length - 1,
+                path: getPath(points, closePath, relativePoints),
             })
         }
     }
@@ -418,14 +474,17 @@ class Builder extends Component {
     reset = (e) => {
         const { w, h } = this.state,
             points = [{ x: w / 2, y: h / 2 }],
+            activePoint = 0,
             closePath = false,
-            path = getPath(points, closePath)
+            relativePoints = false,
+            path = getPath(points, closePath, relativePoints)
 
         this.setState({
             points,
             path,
             closePath,
-            activePoint: 0,
+            relativePoints,
+            activePoint,
         })
     }
 
@@ -465,7 +524,8 @@ class Builder extends Component {
                         setGridSnap={ this.setGridSnap }
                         setGridShow={ this.setGridShow }
                         setClosePath={ this.setClosePath }
-                        setFillPath={ this.setFillPath } />
+                        setFillPath={ this.setFillPath }
+                        setRelativePoints={ this.setRelativePoints } />
                 </div>
             </div>
         )
