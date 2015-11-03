@@ -3,5 +3,32 @@
 .ad-Sidebar {
     overflow: auto;
     flex: 1;
+}
+
+.ad-Expand-head {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: color(var(--ad-Color-prim) l(-2%));
+}
+    .ad-Expand-button {
+        padding: 0;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        color: #fff;
+    }
+    .ad-Expand-title {
+        flex: 1;
+        margin-left: .5rem;
+        font-size: .8rem;
+        color: #fff;
+    }
+
+.ad-Expand-content {
+    display: none;
     padding: 2rem;
+}
+.ad-Expand.is-expanded .ad-Expand-content {
+    display: block;
 }

@@ -83,30 +83,38 @@ class Sidebar extends Component {
                         setGridShow={ setGridShow } />
                 </Expand>
 
-                <Path
-                    path={ path }
-                    closePath={ closePath }
-                    fillPath={ fillPath }
-                    relativePoints={ relativePoints }
-                    setClosePath={ setClosePath }
-                    setFillPath={ setFillPath }
-                    setRelativePoints={ setRelativePoints }
-                    reset={ reset } />
+                <Expand
+                    initialExpanded={ true }
+                    title="Path">
+                    <Path
+                        path={ path }
+                        closePath={ closePath }
+                        fillPath={ fillPath }
+                        relativePoints={ relativePoints }
+                        setClosePath={ setClosePath }
+                        setFillPath={ setFillPath }
+                        setRelativePoints={ setRelativePoints }
+                        reset={ reset } />
+                </Expand>
 
-                <Point
-                    w={ w }
-                    h={ h }
-                    grid={ grid }
-                    points={ points }
-                    activePoint={ activePoint }
-                    setPointType={ setPointType }
-                    setPointPosition={ setPointPosition }
-                    setQuadraticPosition={ setQuadraticPosition }
-                    setQuadraticT={ setQuadraticT }
-                    setCubicPosition={ setCubicPosition }
-                    setCubicS={ setCubicS }
-                    setArcParam={ setArcParam }
-                    removeActivePoint={ removeActivePoint } />
+                <Expand
+                    initialExpanded={ true }
+                    title="Selected point">
+                    <Point
+                        w={ w }
+                        h={ h }
+                        grid={ grid }
+                        points={ points }
+                        activePoint={ activePoint }
+                        setPointType={ setPointType }
+                        setPointPosition={ setPointPosition }
+                        setQuadraticPosition={ setQuadraticPosition }
+                        setQuadraticT={ setQuadraticT }
+                        setCubicPosition={ setCubicPosition }
+                        setCubicS={ setCubicS }
+                        setArcParam={ setArcParam }
+                        removeActivePoint={ removeActivePoint } />
+                </Expand>
             </div>
         )
     }

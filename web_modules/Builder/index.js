@@ -443,7 +443,7 @@ class Builder extends Component {
 
             this.setState({
                 points,
-                activePoint: points.length - 1,
+                activePoint: activePoint - 1,
                 path: getPath(points, closePath, relativePoints),
             })
         }

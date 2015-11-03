@@ -1,5 +1,7 @@
 import React from "react"
 
+import "./styles"
+
 function Icon(props) {
     const { name } = props
 
