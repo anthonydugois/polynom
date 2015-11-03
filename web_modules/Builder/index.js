@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import ReactDOM from "react-dom"
 
 import SVG from "SVG"
-import Controls from "Controls"
+import Sidebar from "Sidebar"
 import Foot from "App/Foot"
 
 import { positive, rangeGrid } from "../../src/utils/maths"
@@ -507,7 +507,7 @@ class Builder extends Component {
                 </div>
 
                 <div className="ad-Builder-controls">
-                    <Controls
+                    <Sidebar
                         { ...this.state }
                         reset={ this.reset }
                         removeActivePoint={ this.removeActivePoint }

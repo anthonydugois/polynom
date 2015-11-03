@@ -1,6 +1,8 @@
 import React from "react"
 
-import Control from "./Control"
+import Control from "Control"
+
+import "./styles"
 
 function Path(props) {
     const {
@@ -15,12 +17,8 @@ function Path(props) {
     } = props
 
     return (
-        <div className="ad-Controls-block">
-            <h3 className="ad-Controls-title">
-                Path
-            </h3>
-
-            <div className="ad-Controls-container">
+        <div className="ad-Settings">
+            <div className="ad-Setting">
                 <Control
                     name="Path code"
                     type="textarea"
@@ -29,7 +27,7 @@ function Path(props) {
                     onFocus={ (e) => e.target.select() } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Relative"
                     type="checkbox"
@@ -49,7 +47,7 @@ function Path(props) {
                     onChange={ setFillPath } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     type="button"
                     action="reset"

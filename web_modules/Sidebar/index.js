@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 
-import General from "./General"
-import Path from "./Path"
-import Point from "./Point"
+import Expand from "./Expand"
+import General from "Settings/General"
+import Path from "Settings/Path"
+import Point from "Settings/Point"
 
 import "./styles"
 
-class Controls extends Component {
+class Sidebar extends Component {
     static propTypes = {
         w: React.PropTypes.number.isRequired,
         h: React.PropTypes.number.isRequired,
@@ -67,16 +68,20 @@ class Controls extends Component {
         } = this.props
 
         return (
-            <div className="ad-Controls">
-                <General
-                    w={ w }
-                    h={ h }
-                    grid={ grid }
-                    setWidth={ setWidth }
-                    setHeight={ setHeight }
-                    setGridSize={ setGridSize }
-                    setGridSnap={ setGridSnap }
-                    setGridShow={ setGridShow } />
+            <div className="ad-Sidebar">
+                <Expand
+                    initialExpanded={ false }
+                    title="General settings">
+                    <General
+                        w={ w }
+                        h={ h }
+                        grid={ grid }
+                        setWidth={ setWidth }
+                        setHeight={ setHeight }
+                        setGridSize={ setGridSize }
+                        setGridSnap={ setGridSnap }
+                        setGridShow={ setGridShow } />
+                </Expand>
 
                 <Path
                     path={ path }
@@ -107,4 +112,4 @@ class Controls extends Component {
     }
 }
 
-export default Controls
+export default Sidebar

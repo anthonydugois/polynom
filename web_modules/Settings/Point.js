@@ -1,6 +1,8 @@
 import React from "react"
 
-import Control from "./Control"
+import Control from "Control"
+
+import "./styles"
 
 function Point(props) {
     const {
@@ -36,13 +38,9 @@ function Point(props) {
     ]
 
     return (
-        <div className="ad-Controls-block">
-            <h3 className="ad-Controls-title">
-                Selected point
-            </h3>
-
+        <div className="ad-Settings">
             { activePoint !== 0 && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Point type"
                         type="choices"
@@ -52,7 +50,7 @@ function Point(props) {
                 </div>
             ) }
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Point X position"
                     type="range"
@@ -63,7 +61,7 @@ function Point(props) {
                     onChange={ (e) => setPointPosition("x", e) } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Point Y position"
                     type="range"
@@ -75,7 +73,7 @@ function Point(props) {
             </div>
 
             { active.quadratic && ! (previous.quadratic && active.quadratic.t) && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Anchor X position"
                         type="range"
@@ -88,7 +86,7 @@ function Point(props) {
             ) }
 
             { active.quadratic && ! (previous.quadratic && active.quadratic.t) && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Anchor Y position"
                         type="range"
@@ -101,7 +99,7 @@ function Point(props) {
             ) }
 
             { active.quadratic && previous && previous.quadratic && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="String to previous curve"
                         type="checkbox"
@@ -111,7 +109,7 @@ function Point(props) {
             ) }
 
             { active.cubic && ! (previous.cubic && active.cubic.s) && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="First anchor X position"
                         type="range"
@@ -124,7 +122,7 @@ function Point(props) {
             ) }
 
             { active.cubic && ! (previous.cubic && active.cubic.s) && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="First anchor Y position"
                         type="range"
@@ -137,7 +135,7 @@ function Point(props) {
             ) }
 
             { active.cubic && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Second anchor X position"
                         type="range"
@@ -150,7 +148,7 @@ function Point(props) {
             ) }
 
             { active.cubic && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Second anchor Y position"
                         type="range"
@@ -163,7 +161,7 @@ function Point(props) {
             ) }
 
             { active.cubic && previous && previous.cubic && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="String to previous curve"
                         type="checkbox"
@@ -173,7 +171,7 @@ function Point(props) {
             ) }
 
             { active.arc && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="X Radius"
                         type="range"
@@ -186,7 +184,7 @@ function Point(props) {
             ) }
 
             { active.arc && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Y Radius"
                         type="range"
@@ -199,7 +197,7 @@ function Point(props) {
             ) }
 
             { active.arc && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Rotation"
                         type="range"
@@ -212,7 +210,7 @@ function Point(props) {
             ) }
 
             { active.arc && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         name="Large arc"
                         type="checkbox"
@@ -228,7 +226,7 @@ function Point(props) {
             ) }
 
             { activePoint !== 0 && (
-                <div className="ad-Controls-container">
+                <div className="ad-Setting">
                     <Control
                         type="button"
                         action="delete"

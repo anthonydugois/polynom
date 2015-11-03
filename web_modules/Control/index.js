@@ -7,6 +7,8 @@ import Checkbox from "./Checkbox"
 import Button from "./Button"
 import Choices from "./Choices"
 
+import "./styles"
+
 function Control(props) {
     const {
         name,

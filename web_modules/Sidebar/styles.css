@@ -1,0 +1,7 @@
+@import url(App/config.css);
+
+.ad-Sidebar {
+    overflow: auto;
+    flex: 1;
+    padding: 2rem;
+}

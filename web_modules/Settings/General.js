@@ -1,6 +1,8 @@
 import React from "react"
 
-import Control from "./Control"
+import Control from "Control"
+
+import "./styles"
 
 function General(props) {
     const {
@@ -15,12 +17,8 @@ function General(props) {
     } = props
 
     return (
-        <div className="ad-Controls-block">
-            <h3 className="ad-Controls-title">
-                General
-            </h3>
-
-            <div className="ad-Controls-container">
+        <div className="ad-Settings">
+            <div className="ad-Setting">
                 <Control
                     name="Width"
                     type="range"
@@ -31,7 +29,7 @@ function General(props) {
                     onChange={ setWidth } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Height"
                     type="range"
@@ -42,7 +40,7 @@ function General(props) {
                     onChange={ setHeight } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Grid size"
                     type="range"
@@ -53,7 +51,7 @@ function General(props) {
                     onChange={ setGridSize } />
             </div>
 
-            <div className="ad-Controls-container">
+            <div className="ad-Setting">
                 <Control
                     name="Snap grid"
                     type="checkbox"
