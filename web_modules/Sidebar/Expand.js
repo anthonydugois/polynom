@@ -23,22 +23,25 @@ class Expand extends Component {
     }
 
     render() {
+        const { expanded } = this.state,
+            { title, children } = this.props
+
         return (
-            <div className={ cx("ad-Expand", { "is-expanded": this.state.expanded }) }>
+            <div className={ cx("ad-Expand", { "is-expanded": expanded }) }>
                 <div className="ad-Expand-head">
                     <button
                         className="ad-Expand-button"
                         onClick={ this.handleClick }>
-                        <Icon name="" />
+                        <Icon name={ expanded ? "down" : "right" } />
                     </button>
 
                     <h4 className="ad-Expand-title">
-                        { this.props.title }
+                        { title }
                     </h4>
                 </div>
 
                 <div className="ad-Expand-content">
-                    { this.props.children }
+                    { children }
                 </div>
             </div>
         )

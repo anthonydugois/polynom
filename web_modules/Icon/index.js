@@ -16,7 +16,16 @@ function getIcon(name) {
     let icon
 
     switch (name) {
+        case "right":
+            icon = "M366 698l196-196-196-196 60-60 256 256-256 256z"
+        break
+
+        case "down":
+            icon = "M316 334l196 196 196-196 60 60-256 256-256-256z"
+        break
+
         default:
+            icon = ""
         break
     }
 
