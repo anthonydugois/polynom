@@ -7,6 +7,7 @@ class Expand extends Component {
     static propTypes = {
         initialExpanded: React.PropTypes.bool.isRequired,
         title: React.PropTypes.string.isRequired,
+        active: React.PropTypes.bool,
         children: React.PropTypes.element,
     }
 
@@ -23,11 +24,14 @@ class Expand extends Component {
     }
 
     render() {
-        const { expanded } = this.state,
-            { title, children } = this.props
+        const { expanded } = this.state
+        const { active, title, children } = this.props
 
         return (
-            <div className={ cx("ad-Expand", { "is-expanded": expanded }) }>
+            <div className={ cx("ad-Expand", {
+                "is-active": active,
+                "is-expanded": expanded,
+            }) }>
                 <div className="ad-Expand-head">
                     <button
                         className="ad-Expand-button"

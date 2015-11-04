@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import cx from "classnames"
 
 import Grid from "./Grid"
-import Point from "./Point"
+import Shape from "./Shape"
 import Cubic from "./Cubic"
 import Quadratic from "./Quadratic"
 
@@ -12,31 +12,36 @@ class SVG extends Component {
     static propTypes = {
         w: React.PropTypes.number.isRequired,
         h: React.PropTypes.number.isRequired,
-        path: React.PropTypes.string.isRequired,
         grid: React.PropTypes.object.isRequired,
-        points: React.PropTypes.array.isRequired,
-        activePoint: React.PropTypes.number.isRequired,
-        fillPath: React.PropTypes.bool.isRequired,
-        addPoint: React.PropTypes.func.isRequired,
+        activePath: React.PropTypes.number.isRequired,
+        paths: React.PropTypes.array.isRequired,
+        /*addPoint: React.PropTypes.func.isRequired,
         drag: React.PropTypes.func.isRequired,
-        handleMouseMove: React.PropTypes.func.isRequired,
+        handleMouseMove: React.PropTypes.func.isRequired,*/
     }
 
     render() {
         const {
             w,
             h,
-            path,
             grid,
-            points,
-            activePoint,
-            fillPath,
-            addPoint,
+            activePath,
+            paths,
+            /*addPoint,
             drag,
-            handleMouseMove,
+            handleMouseMove,*/
         } = this.props
 
-        let circles = points.map((point, index, _points) => {
+        const shapes = paths.map((path, index) => {
+            return (
+                <Shape
+                    key={ index }
+                    active={ index === activePath }
+                    path={ path } />
+            )
+        })
+
+        /*let circles = points.map((point, index, _points) => {
             let anchors = [],
                 previous = false
 
@@ -112,6 +117,22 @@ class SVG extends Component {
 
                 <g className="ad-Points">
                     { circles }
+                </g>
+            </svg>
+        )*/
+
+        return (
+            <svg
+                className="ad-SVG"
+                width={ w }
+                height={ h }>
+                <Grid
+                    w={ w }
+                    h={ h }
+                    grid={ grid } />
+
+                <g className="ad-Shapes">
+                    { shapes }
                 </g>
             </svg>
         )

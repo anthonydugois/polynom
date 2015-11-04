@@ -8,15 +8,7 @@ class App extends Component {
     render() {
         return (
             <div className="ad-App">
-                <Builder
-                    initialClosePath={ false }
-                    initialRelativePoints={ true }
-                    initialPoints={ [
-                        {
-                            x: 500,
-                            y: 400,
-                        },
-                    ] } />
+                <Builder />
             </div>
         )
     }

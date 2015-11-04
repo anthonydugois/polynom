@@ -9,12 +9,17 @@
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
+    cursor: pointer;
     background: color(var(--ad-Color-prim) l(-2%));
+}
+.ad-Expand.is-active .ad-Expand-head {
+    background: var(--ad-Color-sec);
 }
     .ad-Expand-button {
         padding: 0;
         background: none;
         border: none;
+        cursor: inherit;
         font-size: 1rem;
         color: #fff;
     }

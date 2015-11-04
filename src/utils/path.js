@@ -1,4 +1,4 @@
-export function getPath(points, closePath, relativePoints) {
+export function getPath(points, closed, relative) {
     let d = ""
 
     points.forEach((point, index, _points) => {
@@ -8,7 +8,7 @@ export function getPath(points, closePath, relativePoints) {
             const prev = _points[index - 1]
 
             if (point.quadratic) {
-                if (relativePoints) {
+                if (relative) {
                     d += point.quadratic.t ?
                         "t " :
                         `q ${ point.quadratic.x - prev.x } ${ point.quadratic.y - prev.y } `
@@ -18,7 +18,7 @@ export function getPath(points, closePath, relativePoints) {
                         `Q ${ point.quadratic.x } ${ point.quadratic.y } `
                 }
             } else if (point.cubic) {
-                if (relativePoints) {
+                if (relative) {
                     d += point.cubic.s ?
                         `s ${ point.cubic.x2 - prev.x } ${ point.cubic.y2 - prev.y } ` :
                         `c ${ point.cubic.x1 - prev.x } ${ point.cubic.y1 - prev.y } ${ point.cubic.x2 - prev.x } ${ point.cubic.y2 - prev.y } `
@@ -28,7 +28,7 @@ export function getPath(points, closePath, relativePoints) {
                         `C ${ point.cubic.x1 } ${ point.cubic.y1 } ${ point.cubic.x2 } ${ point.cubic.y2 } `
                 }
             } else if (point.arc) {
-                if (relativePoints) {
+                if (relative) {
                     d += "a "
                 } else {
                     d += "A "
@@ -36,14 +36,14 @@ export function getPath(points, closePath, relativePoints) {
 
                 d += `${ point.arc.rx } ${ point.arc.ry } ${ point.arc.rot } ${ point.arc.laf } ${ point.arc.sf } `
             } else {
-                if (relativePoints) {
+                if (relative) {
                     d += "l "
                 } else {
                     d += "L "
                 }
             }
 
-            if (relativePoints) {
+            if (relative) {
                 d += `${ point.x - prev.x } ${ point.y - prev.y } `
             } else {
                 d += `${ point.x } ${ point.y } `
@@ -51,7 +51,7 @@ export function getPath(points, closePath, relativePoints) {
         }
     })
 
-    if (closePath) {
+    if (closed) {
         d += "z"
     }
 

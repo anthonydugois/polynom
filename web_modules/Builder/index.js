@@ -5,35 +5,40 @@ import SVG from "SVG"
 import Sidebar from "Sidebar"
 import Foot from "App/Foot"
 
-import { positive, rangeGrid } from "../../src/utils/maths"
+import { positive } from "../../src/utils/maths"
 import { M, L, Q, T, C, S, A, getPoints } from "../../src/utils/points"
 import { getPath, getClosePath } from "../../src/utils/path"
 
 import "./styles"
 
 class Builder extends Component {
-    static propTypes = {
-        initialPoints: React.PropTypes.array.isRequired,
-        initialClosePath: React.PropTypes.bool.isRequired,
-        initialRelativePoints: React.PropTypes.bool.isRequired,
-    }
-
     state = {
+        ctrl: false,
+        drag: false,
         w: 1000,
         h: 800,
-        ctrl: false,
-        activePoint: 0,
-        isDragging: false,
-        fillPath: false,
         grid: {
             show: true,
             snap: true,
             size: 50,
         },
-        points: this.props.initialPoints,
-        closePath: this.props.initialClosePath,
-        relativePoints: this.props.initialRelativePoints,
-        path: getPath(this.props.initialPoints, this.props.initialClosePath, this.props.initialRelativePoints),
+        activePath: 0,
+        paths: [
+            {
+                closed: false,
+                relative: false,
+                filled: false,
+                activePoint: 0,
+                points: [{ x: 200, y: 200 }],
+            },
+            {
+                closed: false,
+                relative: false,
+                filled: false,
+                activePoint: 0,
+                points: [{ x: 500, y: 400 }],
+            },
+        ],
     }
 
     componentWillMount() {
@@ -47,13 +52,13 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (e.ctrlKey || e.metaKey) {
+        if (e.ctrlKey) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if ( ! e.ctrlKey && ! e.metaKey) {
+        if ( ! e.ctrlKey) {
             this.setState({ ctrl: false })
         }
     }
@@ -62,31 +67,17 @@ class Builder extends Component {
      * SVG document parameters
      */
     setWidth = (e) => {
-        let v = positive(e.target.value),
-            min = 1
-
-        if (v < min) {
-            v = min
-        }
-
-        this.setState({ w: v })
+        this.setState({ w: positive(e.target.value, 1) })
     }
 
     setHeight = (e) => {
-        let v = positive(e.target.value),
-            min = 1
-
-        if (v < min) {
-            v = min
-        }
-
-        this.setState({ h: v })
+        this.setState({ h: positive(e.target.value, 1) })
     }
 
     /**
      * Path parameters
      */
-    setClosePath = (e) => {
+    /*setClosePath = (e) => {
         const { points, relativePoints } = this.state,
             closePath = e.target.checked
 
@@ -108,21 +99,21 @@ class Builder extends Component {
 
     setFillPath = (e) => {
         this.setState({ fillPath: e.target.checked })
-    }
+    }*/
 
     /**
      * Grid parameters
      */
     setGridSize = (e) => {
-        let grid = this.state.grid
+        const { grid } = this.state
 
-        grid.size = rangeGrid(positive(e.target.value), 1, Math.min(this.state.w, this.state.h))
+        grid.size = positive(e.target.value, 1, Math.min(this.state.w, this.state.h))
 
         this.setState({ grid })
     }
 
     setGridSnap = (e) => {
-        let grid = this.state.grid
+        const { grid } = this.state
 
         grid.snap = e.target.checked
 
@@ -130,7 +121,7 @@ class Builder extends Component {
     }
 
     setGridShow = (e) => {
-        let grid = this.state.grid
+        const { grid } = this.state
 
         grid.show = e.target.checked
 
@@ -169,7 +160,7 @@ class Builder extends Component {
     /**
      * Default point values
      */
-    setPointType = (e) => {
+    /*setPointType = (e) => {
         let {
             points,
             activePoint,
@@ -526,6 +517,33 @@ class Builder extends Component {
                         setClosePath={ this.setClosePath }
                         setFillPath={ this.setFillPath }
                         setRelativePoints={ this.setRelativePoints } />
+                </div>
+            </div>
+        )
+    }*/
+
+    render() {
+        return (
+            <div
+                className="ad-Builder">
+                <div className="ad-Builder-main">
+                    <div className="ad-Builder-svg">
+                        <SVG
+                            ref="svg"
+                            { ...this.state } />
+                    </div>
+
+                    <Foot />
+                </div>
+
+                <div className="ad-Builder-controls">
+                    <Sidebar
+                        { ...this.state }
+                        setWidth={ this.setWidth }
+                        setHeight={ this.setHeight }
+                        setGridSize={ this.setGridSize }
+                        setGridSnap={ this.setGridSnap }
+                        setGridShow={ this.setGridShow } />
                 </div>
             </div>
         )

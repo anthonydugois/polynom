@@ -1,20 +1,16 @@
-export function positive(n) {
+export function positive(n, min = false, max = false) {
     n = parseInt(n)
 
     if (isNaN(n) || n < 0) {
         n = 0
     }
 
-    return n
-}
-
-export function rangeGrid(n, min, max) {
-    if (n < min) {
+    if (min && n < min) {
         n = min
     }
 
-    if (n >= max) {
-        n = max / 2
+    if (max && n > max) {
+        n = max
     }
 
     return n
