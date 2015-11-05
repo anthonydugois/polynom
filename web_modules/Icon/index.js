@@ -38,6 +38,10 @@ function getIcon(name) {
             icon = "M810 170v86h-596v-86h148l44-42h212l44 42h148zM256 810v-512h512v512q0 34-26 60t-60 26h-340q-34 0-60-26t-26-60z"
         break
 
+        case "edit":
+            icon = "M884 300l-78 78-160-160 78-78q12-12 30-12t30 12l100 100q12 12 12 30t-12 30zM128 736l472-472 160 160-472 472h-160v-160z"
+        break
+
         default:
             icon = ""
         break

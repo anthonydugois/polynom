@@ -231,7 +231,6 @@ function Point(props) {
                     <Control
                         type="button"
                         action="delete"
-                        icon="delete"
                         value="Remove"
                         onClick={ removeActivePoint } />
                 </div>

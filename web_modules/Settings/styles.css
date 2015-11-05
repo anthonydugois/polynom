@@ -1,8 +1,1 @@
 @import url(App/config.css);
-
-.ad-Setting {
-    display: flex;
-}
-.ad-Setting + .ad-Setting {
-    margin-top: 1.5rem;
-}

@@ -7,7 +7,6 @@ import Foot from "App/Foot"
 
 import { positive } from "../../src/utils/maths"
 import { M, L, Q, T, C, S, A, getPoints } from "../../src/utils/points"
-import { getPath } from "../../src/utils/path"
 
 import "./styles"
 
@@ -85,6 +84,45 @@ class Builder extends Component {
         this.setState({ paths })
     }
 
+    setActivePath = (e, activePath) => {
+        e.preventDefault()
+
+        this.setState({ activePath })
+    }
+
+    addPath = (e) => {
+        e.preventDefault()
+
+        const { w, h, paths } = this.state
+
+        paths.push({
+            closed: false,
+            relative: false,
+            filled: false,
+            activePoint: 0,
+            points: [{ x: w / 2, y: h / 2 }],
+        })
+
+        this.setState({
+            activePath: paths.length - 1,
+            paths,
+        })
+    }
+
+    removePath = (e, path) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const { activePath, paths } = this.state
+
+        paths.splice(path, 1)
+
+        this.setState({
+            activePath: activePath - 1,
+            paths,
+        })
+    }
+
     setGridSize = (e) => {
         const { grid } = this.state
 
@@ -122,31 +160,6 @@ class Builder extends Component {
         }
 
         return { x, y }
-    }
-
-    addPath = (e) => {
-        e.preventDefault()
-
-        const { w, h, paths } = this.state
-
-        paths.push({
-            closed: false,
-            relative: false,
-            filled: false,
-            activePoint: 0,
-            points: [{ x: w / 2, y: h / 2 }],
-        })
-
-        this.setState({
-            activePath: paths.length - 1,
-            paths,
-        })
-    }
-
-    setActivePath = (e, activePath) => {
-        e.preventDefault()
-
-        this.setState({ activePath })
     }
 
     resetNextCurve = (activePoint, points) => {
@@ -429,6 +442,7 @@ class Builder extends Component {
                         setGridSnap={ this.setGridSnap }
                         setGridShow={ this.setGridShow }
                         addPath={ this.addPath }
+                        removePath={ this.removePath }
                         setActivePath={ this.setActivePath }
                         setRelative={ this.setRelative }
                         setClosed={ this.setClosed }

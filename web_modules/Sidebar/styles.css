@@ -18,31 +18,48 @@
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
-    cursor: pointer;
     background: color(var(--ad-Color-prim) l(-2%));
+    color: #fff;
 }
 .ad-Expand.is-active .ad-Expand-head {
     background: var(--ad-Color-sec);
 }
     .ad-Expand-button {
-        padding: 0;
-        background: none;
+        display: block;
+        padding: .2rem;
+        background: rgba(0, 0, 0, .1);
         border: none;
-        cursor: inherit;
-        font-size: 1rem;
+        border-radius: 2px;
+        cursor: pointer;
+        font-size: .8rem;
         color: #fff;
+    }
+    .ad-Expand-button:focus,
+    .ad-Expand-button:hover {
+        outline: 0;
+        background: rgba(0, 0, 0, .2);
     }
     .ad-Expand-title {
         flex: 1;
         margin-left: .5rem;
         font-size: .8rem;
-        color: #fff;
+        color: currentColor;
     }
 
 .ad-Expand-content {
     display: none;
-    padding: 2rem;
 }
 .ad-Expand.is-expanded .ad-Expand-content {
     display: block;
+}
+
+.ad-Settings {
+    padding: 2rem;
+}
+
+.ad-Setting {
+    display: flex;
+}
+.ad-Setting + .ad-Setting {
+    margin-top: 1.5rem;
 }

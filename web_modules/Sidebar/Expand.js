@@ -7,10 +7,11 @@ class Expand extends Component {
     static propTypes = {
         initialExpanded: React.PropTypes.bool.isRequired,
         title: React.PropTypes.string.isRequired,
-        index: React.PropTypes.number,
-        activePath: React.PropTypes.number,
-        setActivePath: React.PropTypes.func,
-        children: React.PropTypes.element,
+        index: React.PropTypes.number.isRequired,
+        activePath: React.PropTypes.number.isRequired,
+        setActivePath: React.PropTypes.func.isRequired,
+        removePath: React.PropTypes.func.isRequired,
+        children: React.PropTypes.element.isRequired,
     }
 
     state = {
@@ -31,19 +32,18 @@ class Expand extends Component {
             index,
             activePath,
             setActivePath,
+            removePath,
             children,
         } = this.props
 
-        const isPath = typeof index !== "undefined" && typeof activePath !== "undefined"
-
         return (
             <div className={ cx("ad-Expand", {
-                "is-active": isPath && index === activePath,
+                "is-active": index === activePath,
                 "is-expanded": this.state.expanded,
             }) }>
                 <div
                     className="ad-Expand-head"
-                    onClick={ (e) => isPath && setActivePath(e, index) }>
+                    onClick={ (e) => setActivePath(e, index) }>
                     <button
                         className="ad-Expand-button"
                         onClick={ this.handleClick }>
@@ -53,6 +53,16 @@ class Expand extends Component {
                     <h4 className="ad-Expand-title">
                         { title }
                     </h4>
+
+                    <div className="ad-Expand-actions">
+                        { index !== 0 && (
+                            <button
+                                className="ad-Expand-button"
+                                onClick={ (e) => removePath(e, index) }>
+                                <Icon name="close" />
+                            </button>
+                        ) }
+                    </div>
                 </div>
 
                 <div className="ad-Expand-content">

@@ -1,4 +1,4 @@
-export function getPath(points, closed, relative) {
+export default function getPath(points, closed, relative) {
     let d = ""
 
     points.forEach((point, index, _points) => {

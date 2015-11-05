@@ -1,9 +1,8 @@
 import React from "react"
 
 import Expand from "./Expand"
-import General from "Settings/General"
-import Path from "Settings/Path"
-import Point from "Settings/Point"
+import Path from "./Path"
+import Point from "./Point"
 import Button from "Control/Button"
 
 import "./styles"
@@ -21,6 +20,7 @@ function Sidebar(props) {
         setGridSnap,
         setGridShow,
         addPath,
+        removePath,
         setActivePath,
         setRelative,
         setClosed,
@@ -39,11 +39,12 @@ function Sidebar(props) {
         return (
             <Expand
                 key={ index }
-                initialExpanded={ false }
+                initialExpanded={ index === 0 }
                 title={ `Path ${ index + 1 }` }
                 index={ index }
                 activePath={ activePath }
-                setActivePath={ setActivePath }>
+                setActivePath={ setActivePath }
+                removePath={ removePath }>
                 <Path
                     index={ index }
                     path={ path }
@@ -57,9 +58,7 @@ function Sidebar(props) {
     return (
         <div className="ad-Sidebar">
             <div className="ad-Sidebar-content">
-                <Expand
-                    initialExpanded={ true }
-                    title="Active point">
+                <div className="ad-Sidebar-settings">
                     <Point
                         w={ w }
                         h={ h }
@@ -74,9 +73,11 @@ function Sidebar(props) {
                         setCubicS={ setCubicS }
                         setArcParam={ setArcParam }
                         removeActivePoint={ removeActivePoint } />
-                </Expand>
+                </div>
 
-                { shapes }
+                <div className="ad-Sidebar-settings">
+                    { shapes }
+                </div>
             </div>
 
             <div className="ad-Sidebar-actions">

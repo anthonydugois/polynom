@@ -5,7 +5,7 @@ import Point from "./Point"
 import Quadratic from "./Quadratic"
 import Cubic from "./Cubic"
 
-import { getPath } from "../../src/utils/path"
+import getPath from "../../src/utils/path"
 
 function Shape(props) {
     const {
