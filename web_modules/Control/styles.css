@@ -13,6 +13,9 @@
     }
 
 .ad-Button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: .8rem 1.5rem;
     background: var(--ad-Color-sec);
@@ -20,11 +23,7 @@
     border-radius: 50px;
     cursor: pointer;
     transition: background .2s;
-    text-transform: uppercase;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
-    font-size: .6rem;
-    letter-spacing: .08rem;
+    font-size: 1rem;
     color: #fff;
 }
 .ad-Button:focus,
@@ -46,6 +45,16 @@
 .ad-Button--reset:hover {
     background: color(var(--ad-Color-prim) l(+15%));
 }
+    .ad-Button-text {
+        text-transform: uppercase;
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+        font-size: .65em;
+        letter-spacing: .05rem;
+    }
+    .ad-Icon + .ad-Button-text {
+        margin-left: .4rem;
+    }
 
 .ad-Text,
 .ad-Textarea {
@@ -117,7 +126,7 @@
             display: none;
         }
         .ad-Choice-fake {
-            padding: .6rem;
+            padding: .6rem 0;
             background: color(var(--ad-Color-prim) l(+10%));
             transition: background .2s;
             cursor: pointer;

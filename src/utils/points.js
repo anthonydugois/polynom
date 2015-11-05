@@ -1,14 +1,14 @@
 export function M(x, y) {
-    return { x, y }
+    return { type: "M", x, y }
 }
 
 export function L(x, y) {
-    return M(x, y)
+    return { type: "L", x, y }
 }
 
 export function Q(x, y, qx, qy) {
     return {
-        ...L(x, y),
+        type: "Q", x, y,
         quadratic: { t: false, x: qx, y: qy },
     }
 }
@@ -23,7 +23,7 @@ export function T(x, y, qx, qy) {
 
 export function C(x, y, x1, y1, x2, y2) {
     return {
-        ...L(x, y),
+        type: "C", x, y,
         cubic: { s: false, x1, y1, x2, y2 },
     }
 }
@@ -38,7 +38,7 @@ export function S(x, y, x1, y1, x2, y2) {
 
 export function A(x, y, rx, ry, rot, laf, sf) {
     return {
-        ...L(x, y),
+        type: "A", x, y,
         arc: { rx, ry, rot, laf, sf },
     }
 }

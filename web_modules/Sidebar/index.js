@@ -81,6 +81,7 @@ function Sidebar(props) {
 
             <div className="ad-Sidebar-actions">
                 <Button
+                    icon="add"
                     value="New path"
                     onClick={ addPath } />
             </div>

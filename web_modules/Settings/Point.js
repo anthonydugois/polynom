@@ -32,10 +32,11 @@ function Point(props) {
     }
 
     const choices = [
-        { name: "Line", value: "l", checked: ! active.quadratic && ! active.cubic && ! active.arc },
-        { name: "Quad", value: "q", checked: !! active.quadratic },
-        { name: "Cub", value: "c", checked: !! active.cubic },
-        { name: "Arc", value: "a", checked: !! active.arc },
+        { name: "Move", value: "m", checked: active.type === "M" },
+        { name: "Line", value: "l", checked: active.type === "L" },
+        { name: "Quad", value: "q", checked: active.type === "Q" },
+        { name: "Cub", value: "c", checked: active.type === "C" },
+        { name: "Arc", value: "a", checked: active.type === "A" },
     ]
 
     return (
@@ -230,7 +231,8 @@ function Point(props) {
                     <Control
                         type="button"
                         action="delete"
-                        value="Remove this point"
+                        icon="delete"
+                        value="Remove"
                         onClick={ removeActivePoint } />
                 </div>
             ) }

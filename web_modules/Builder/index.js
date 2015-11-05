@@ -174,6 +174,10 @@ class Builder extends Component {
             const p = points[activePoint], _p = points[activePoint - 1]
 
             switch (e.target.value) {
+                case "m":
+                    points[activePoint] = M(p.x, p.y)
+                break
+
                 case "l":
                     points[activePoint] = L(p.x, p.y)
                 break
@@ -372,7 +376,7 @@ class Builder extends Component {
             points = this.resetNextCurve(activePoint, points)
             points = [
                 ...points.slice(0, activePoint + 1),
-                coords,
+                L(coords.x, coords.y),
                 ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
             ]
 
