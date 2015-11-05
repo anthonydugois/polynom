@@ -2,10 +2,11 @@ import React from "react"
 
 function Point(props) {
     const {
+        activePath,
+        activePoint,
         x,
         y,
         drag,
-        index,
     } = props
 
     return (
@@ -14,7 +15,7 @@ function Point(props) {
             cx={ x }
             cy={ y }
             r={ 8 }
-            onMouseDown={ (e) => drag(e, index) } />
+            onMouseDown={ (e) => drag(e, activePath, activePoint) } />
     )
 }
 

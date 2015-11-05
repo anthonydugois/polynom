@@ -7,8 +7,10 @@ import { getPath } from "../../src/utils/path"
 
 function Shape(props) {
     const {
-        active,
+        index,
+        activePath,
         path,
+        drag,
     } = props
 
     const {
@@ -19,7 +21,7 @@ function Shape(props) {
         points,
     } = path
 
-    const circles = points.map((point, index, _points) => {
+    const circles = points.map((point, i, _points) => {
         const anchors = []
 
         /*if (index !== 0) {
@@ -60,28 +62,30 @@ function Shape(props) {
 
         return (
             <g
-                key={ index }
+                key={ i }
                 className={ cx("ad-PointGroup", {
-                    "ad-PointGroup--first": (index === 0),
-                    "is-active": (index === activePoint),
+                    "ad-PointGroup--first": i === 0,
+                    "is-active": i === activePoint,
                 }) }>
                 <Point
-                    index={ index }
+                    activePath={ index }
+                    activePoint={ i }
                     x={ point.x }
-                    y={ point.y } />
+                    y={ point.y }
+                    drag={ drag } />
             </g>
         )
     })
 
     return (
-        <g className={ cx("ad-Shape", { "is-active": active }) }>
-            <g className="ad-Points">
-                { circles }
-            </g>
-
+        <g className={ cx("ad-Shape", { "is-active": index === activePath }) }>
             <path
                 className={ cx("ad-Path", { "ad-Path--filled": filled }) }
                 d={ getPath(points, closed, relative) } />
+
+            <g className="ad-Points">
+                { circles }
+            </g>
         </g>
     )
 }

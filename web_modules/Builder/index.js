@@ -29,7 +29,7 @@ class Builder extends Component {
                 relative: false,
                 filled: false,
                 activePoint: 0,
-                points: [{ x: 200, y: 200 }],
+                points: [{ x: 200, y: 200 }, { x: 300, y: 200 }],
             },
             {
                 closed: false,
@@ -63,9 +63,6 @@ class Builder extends Component {
         }
     }
 
-    /**
-     * SVG document parameters
-     */
     setWidth = (e) => {
         this.setState({ w: positive(e.target.value, 1) })
     }
@@ -74,36 +71,27 @@ class Builder extends Component {
         this.setState({ h: positive(e.target.value, 1) })
     }
 
-    /**
-     * Path parameters
-     */
-    /*setClosePath = (e) => {
-        const { points, relativePoints } = this.state,
-            closePath = e.target.checked
+    setRelative = (e, path) => {
+        const { paths } = this.state
+        paths[path].relative = e.target.checked
 
-        this.setState({
-            closePath,
-            path: getPath(points, closePath, relativePoints),
-        })
+        this.setState({ paths })
     }
 
-    setRelativePoints = (e) => {
-        const { points, closePath } = this.state,
-            relativePoints = e.target.checked
+    setClosed = (e, path) => {
+        const { paths } = this.state
+        paths[path].closed = e.target.checked
 
-        this.setState({
-            relativePoints,
-            path: getPath(points, closePath, relativePoints),
-        })
+        this.setState({ paths })
     }
 
-    setFillPath = (e) => {
-        this.setState({ fillPath: e.target.checked })
-    }*/
+    setFilled = (e, path) => {
+        const { paths } = this.state
+        paths[path].filled = e.target.checked
 
-    /**
-     * Grid parameters
-     */
+        this.setState({ paths })
+    }
+
     setGridSize = (e) => {
         const { grid } = this.state
 
@@ -157,9 +145,12 @@ class Builder extends Component {
         return points
     }
 
-    /**
-     * Default point values
-     */
+    setActivePath = (e, activePath) => {
+        e.preventDefault()
+
+        this.setState({ activePath })
+    }
+
     /*setPointType = (e) => {
         let {
             points,
@@ -200,41 +191,38 @@ class Builder extends Component {
                 path: getPath(points, closePath, relativePoints),
             })
         }
-    }
+    }*/
 
     setPointPosition = (coord, e) => {
-        let coords = this.state.points[this.state.activePoint],
-            v = positive(e.target.value)
-
-        if (coord === "x" && v > this.state.w) {
-            v = this.state.w
-        } else if (coord === "y" && v > this.state.h) {
-            v = this.state.h
-        }
-
-        coords[coord] = v
-
-        this.setPointCoords(coords)
-    }
-
-    setPointCoords = (coords) => {
         const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+            w,
+            h,
+            activePath,
+            paths,
+        } = this.state,
+        path = paths[activePath],
+        v = e.target.value
 
-        points[activePoint].x = coords.x
-        points[activePoint].y = coords.y
+        let point = path.points[path.activePoint]
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
+        point[coord] = coord === "x" ?
+            positive(v, false, w) :
+            positive(v, false, h)
+
+        this.setPointCoords(point)
     }
 
-    setQuadraticPosition = (coord, e) => {
+    setPointCoords = (point) => {
+        const { activePath, paths } = this.state,
+            { activePoint } = paths[activePath]
+
+        paths[activePath].points[activePoint].x = point.x
+        paths[activePath].points[activePoint].y = point.y
+
+        this.setState({ paths })
+    }
+
+    /*setQuadraticPosition = (coord, e) => {
         let coords = this.state.points[this.state.activePoint].quadratic,
             v = positive(e.target.value)
 
@@ -378,49 +366,48 @@ class Builder extends Component {
             points,
             path: getPath(points, closePath, relativePoints),
         })
-    }
+    }*/
 
-    drag = (e, index, object = "point", n = false) => {
+    drag = (e, activePath, activePoint, object = "point") => {
         e.preventDefault()
+
+        const { paths } = this.state
+
+        paths[activePath].activePoint = activePoint
 
         if ( ! this.state.ctrl) {
             this.setState({
-                activePoint: index,
-                isDragging: { object, n },
+                paths,
+                activePath,
+                drag: { object },
             })
         }
     }
 
     cancelDragging = (e) => {
-        this.setState({ isDragging: false })
+        this.setState({ drag: false })
     }
 
     addPoint = (e) => {
         if (this.state.ctrl) {
-            let {
-                points,
-                activePoint,
-                closePath,
-                relativePoints,
-            } = this.state,
-            coords = this.getMouseCoords(e)
+            const { activePath, paths } = this.state,
+                { activePoint, points } = paths[activePath],
+                coords = this.getMouseCoords(e)
 
-            points = this.resetNextCurve(points, activePoint)
-            points = [
+            // paths[activePath].points = this.resetNextCurve(points, activePoint)
+            paths[activePath].points = [
                 ...points.slice(0, activePoint + 1),
                 coords,
                 ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
             ]
 
-            this.setState({
-                points,
-                activePoint: activePoint + 1,
-                path: getPath(points, closePath, relativePoints),
-            })
+            paths[activePath].activePoint++
+
+            this.setState({ paths })
         }
     }
 
-    removeActivePoint = (e) => {
+    /*removeActivePoint = (e) => {
         let {
             points,
             activePoint,
@@ -438,31 +425,31 @@ class Builder extends Component {
                 path: getPath(points, closePath, relativePoints),
             })
         }
-    }
+    }*/
 
     handleMouseMove = (e) => {
         e.preventDefault()
 
         if ( ! this.state.ctrl) {
-            let { object, n } = this.state.isDragging
+            const { object } = this.state.drag
 
             switch (object) {
                 case "point":
                     this.setPointCoords(this.getMouseCoords(e))
                 break
+            }
 
-                case "quadratic":
+                /*case "quadratic":
                     this.setQuadraticCoords(this.getMouseCoords(e))
                 break
 
                 case "cubic":
                     this.setCubicCoords(this.getMouseCoords(e), n)
-                break
-            }
+                break*/
         }
     }
 
-    reset = (e) => {
+    /*reset = (e) => {
         const { w, h } = this.state,
             points = [{ x: w / 2, y: h / 2 }],
             activePoint = 0,
@@ -525,12 +512,16 @@ class Builder extends Component {
     render() {
         return (
             <div
-                className="ad-Builder">
+                className="ad-Builder"
+                onMouseUp={ this.cancelDragging }>
                 <div className="ad-Builder-main">
                     <div className="ad-Builder-svg">
                         <SVG
                             ref="svg"
-                            { ...this.state } />
+                            { ...this.state }
+                            addPoint={ this.addPoint }
+                            handleMouseMove={ this.handleMouseMove }
+                            drag={ this.drag } />
                     </div>
 
                     <Foot />
@@ -543,7 +534,11 @@ class Builder extends Component {
                         setHeight={ this.setHeight }
                         setGridSize={ this.setGridSize }
                         setGridSnap={ this.setGridSnap }
-                        setGridShow={ this.setGridShow } />
+                        setGridShow={ this.setGridShow }
+                        setActivePath={ this.setActivePath }
+                        setRelative={ this.setRelative }
+                        setClosed={ this.setClosed }
+                        setFilled={ this.setFilled } />
                 </div>
             </div>
         )

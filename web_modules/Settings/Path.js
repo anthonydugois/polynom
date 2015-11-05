@@ -5,17 +5,24 @@ import "./styles"
 
 function Path(props) {
     const {
+        index,
+        path,
+        setRelative,
+        setClosed,
+        setFilled,
+    } = props
+
+    const {
         closed,
         filled,
         relative,
         points,
-    } = props.path
+    } = path
 
     return (
         <div className="ad-Settings">
             <div className="ad-Setting">
                 <Control
-                    name="Path code"
                     type="textarea"
                     readOnly={ true }
                     value={ getPath(points, closed, relative) }
@@ -26,15 +33,18 @@ function Path(props) {
                 <Control
                     name="Relative"
                     type="checkbox"
-                    checked={ relative } />
+                    checked={ relative }
+                    onChange={ (e) => setRelative(e, index) } />
                 <Control
                     name="Closed"
                     type="checkbox"
-                    checked={ closed } />
+                    checked={ closed }
+                    onChange={ (e) => setClosed(e, index) } />
                 <Control
                     name="Filled"
                     type="checkbox"
-                    checked={ filled } />
+                    checked={ filled }
+                    onChange={ (e) => setFilled(e, index) } />
             </div>
         </div>
     )

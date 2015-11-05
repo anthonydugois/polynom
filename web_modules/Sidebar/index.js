@@ -19,6 +19,10 @@ function Sidebar(props) {
         setGridSize,
         setGridSnap,
         setGridShow,
+        setActivePath,
+        setRelative,
+        setClosed,
+        setFilled,
         /*setClosePath,
         setFillPath,
         setRelativePoints,
@@ -33,15 +37,21 @@ function Sidebar(props) {
         removeActivePoint,*/
     } = props
 
-    const shapes = paths.map((path, index, _paths) => {
+    const shapes = paths.map((path, index) => {
         return (
             <Expand
                 key={ index }
                 initialExpanded={ false }
-                active={ index === activePath }
-                title={ `Path ${_paths.length - index}` }>
+                title={ `Path ${ index + 1 }` }
+                index={ index }
+                activePath={ activePath }
+                setActivePath={ setActivePath }>
                 <Path
-                    path={ path } />
+                    index={ index }
+                    path={ path }
+                    setRelative={ setRelative }
+                    setClosed={ setClosed }
+                    setFilled={ setFilled } />
             </Expand>
         )
     })

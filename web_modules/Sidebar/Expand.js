@@ -7,7 +7,9 @@ class Expand extends Component {
     static propTypes = {
         initialExpanded: React.PropTypes.bool.isRequired,
         title: React.PropTypes.string.isRequired,
-        active: React.PropTypes.bool,
+        index: React.PropTypes.number,
+        activePath: React.PropTypes.number,
+        setActivePath: React.PropTypes.func,
         children: React.PropTypes.element,
     }
 
@@ -24,19 +26,28 @@ class Expand extends Component {
     }
 
     render() {
-        const { expanded } = this.state
-        const { active, title, children } = this.props
+        const {
+            title,
+            index,
+            activePath,
+            setActivePath,
+            children,
+        } = this.props
+
+        const isPath = typeof index !== "undefined" && typeof activePath !== "undefined"
 
         return (
             <div className={ cx("ad-Expand", {
-                "is-active": active,
-                "is-expanded": expanded,
+                "is-active": isPath && index === activePath,
+                "is-expanded": this.state.expanded,
             }) }>
-                <div className="ad-Expand-head">
+                <div
+                    className="ad-Expand-head"
+                    onClick={ (e) => isPath && setActivePath(e, index) }>
                     <button
                         className="ad-Expand-button"
                         onClick={ this.handleClick }>
-                        <Icon name={ expanded ? "down" : "right" } />
+                        <Icon name={ this.state.expanded ? "down" : "right" } />
                     </button>
 
                     <h4 className="ad-Expand-title">

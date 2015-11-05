@@ -15,9 +15,9 @@ class SVG extends Component {
         grid: React.PropTypes.object.isRequired,
         activePath: React.PropTypes.number.isRequired,
         paths: React.PropTypes.array.isRequired,
-        /*addPoint: React.PropTypes.func.isRequired,
+        addPoint: React.PropTypes.func.isRequired,
+        handleMouseMove: React.PropTypes.func.isRequired,
         drag: React.PropTypes.func.isRequired,
-        handleMouseMove: React.PropTypes.func.isRequired,*/
     }
 
     render() {
@@ -27,17 +27,19 @@ class SVG extends Component {
             grid,
             activePath,
             paths,
-            /*addPoint,
-            drag,
-            handleMouseMove,*/
+            addPoint,
+            handleMouseMove,
+            ...props,
         } = this.props
 
         const shapes = paths.map((path, index) => {
             return (
                 <Shape
                     key={ index }
-                    active={ index === activePath }
-                    path={ path } />
+                    index={ index }
+                    activePath={ activePath }
+                    path={ path }
+                    { ...props } />
             )
         })
 
@@ -125,7 +127,9 @@ class SVG extends Component {
             <svg
                 className="ad-SVG"
                 width={ w }
-                height={ h }>
+                height={ h }
+                onClick={ addPoint }
+                onMouseMove={ handleMouseMove }>
                 <Grid
                     w={ w }
                     h={ h }
