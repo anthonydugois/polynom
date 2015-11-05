@@ -4,6 +4,7 @@ import Expand from "./Expand"
 import General from "Settings/General"
 import Path from "Settings/Path"
 import Point from "Settings/Point"
+import Button from "Control/Button"
 
 import "./styles"
 
@@ -19,6 +20,7 @@ function Sidebar(props) {
         setGridSize,
         setGridSnap,
         setGridShow,
+        addPath,
         setActivePath,
         setRelative,
         setClosed,
@@ -54,26 +56,34 @@ function Sidebar(props) {
 
     return (
         <div className="ad-Sidebar">
-            <Expand
-                initialExpanded={ true }
-                title="Active point">
-                <Point
-                    w={ w }
-                    h={ h }
-                    grid={ grid }
-                    activePath={ activePath }
-                    paths={ paths }
-                    setPointType={ setPointType }
-                    setPointPosition={ setPointPosition }
-                    setQuadraticPosition={ setQuadraticPosition }
-                    setQuadraticT={ setQuadraticT }
-                    setCubicPosition={ setCubicPosition }
-                    setCubicS={ setCubicS }
-                    setArcParam={ setArcParam }
-                    removeActivePoint={ removeActivePoint } />
-            </Expand>
+            <div className="ad-Sidebar-content">
+                <Expand
+                    initialExpanded={ true }
+                    title="Active point">
+                    <Point
+                        w={ w }
+                        h={ h }
+                        grid={ grid }
+                        activePath={ activePath }
+                        paths={ paths }
+                        setPointType={ setPointType }
+                        setPointPosition={ setPointPosition }
+                        setQuadraticPosition={ setQuadraticPosition }
+                        setQuadraticT={ setQuadraticT }
+                        setCubicPosition={ setCubicPosition }
+                        setCubicS={ setCubicS }
+                        setArcParam={ setArcParam }
+                        removeActivePoint={ removeActivePoint } />
+                </Expand>
 
-            { shapes }
+                { shapes }
+            </div>
+
+            <div className="ad-Sidebar-actions">
+                <Button
+                    value="New path"
+                    onClick={ addPath } />
+            </div>
         </div>
     )
 }

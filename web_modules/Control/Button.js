@@ -8,12 +8,10 @@ function Button(props) {
         value,
     } = props
 
-    let _action = action ? action : "default";
-
     return (
         <button
             type="button"
-            className={ cx("ad-Button", `ad-Button--${_action}`) }
+            className={ cx("ad-Button", `ad-Button--${ action ? action : "default" }`) }
             onClick={ onClick }>
             { value }
         </button>

@@ -7,7 +7,7 @@ import Foot from "App/Foot"
 
 import { positive } from "../../src/utils/maths"
 import { M, L, Q, T, C, S, A, getPoints } from "../../src/utils/points"
-import { getPath, getClosePath } from "../../src/utils/path"
+import { getPath } from "../../src/utils/path"
 
 import "./styles"
 
@@ -24,13 +24,6 @@ class Builder extends Component {
         },
         activePath: 0,
         paths: [
-            {
-                closed: false,
-                relative: false,
-                filled: false,
-                activePoint: 0,
-                points: [{ x: 200, y: 200 }, { x: 300, y: 200 }],
-            },
             {
                 closed: false,
                 relative: false,
@@ -131,6 +124,31 @@ class Builder extends Component {
         return { x, y }
     }
 
+    addPath = (e) => {
+        e.preventDefault()
+
+        const { w, h, paths } = this.state
+
+        paths.push({
+            closed: false,
+            relative: false,
+            filled: false,
+            activePoint: 0,
+            points: [{ x: w / 2, y: h / 2 }],
+        })
+
+        this.setState({
+            activePath: paths.length - 1,
+            paths,
+        })
+    }
+
+    setActivePath = (e, activePath) => {
+        e.preventDefault()
+
+        this.setState({ activePath })
+    }
+
     resetNextCurve = (activePoint, points) => {
         if (activePoint !== points.length - 1) {
             if (points[activePoint + 1].quadratic) {
@@ -143,12 +161,6 @@ class Builder extends Component {
         }
 
         return points
-    }
-
-    setActivePath = (e, activePath) => {
-        e.preventDefault()
-
-        this.setState({ activePath })
     }
 
     setPointType = (e) => {
@@ -412,6 +424,7 @@ class Builder extends Component {
                         setGridSize={ this.setGridSize }
                         setGridSnap={ this.setGridSnap }
                         setGridShow={ this.setGridShow }
+                        addPath={ this.addPath }
                         setActivePath={ this.setActivePath }
                         setRelative={ this.setRelative }
                         setClosed={ this.setClosed }
