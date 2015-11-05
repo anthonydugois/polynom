@@ -23,10 +23,6 @@ function Sidebar(props) {
         setRelative,
         setClosed,
         setFilled,
-        /*setClosePath,
-        setFillPath,
-        setRelativePoints,
-        reset,
         setPointType,
         setPointPosition,
         setQuadraticPosition,
@@ -34,7 +30,7 @@ function Sidebar(props) {
         setCubicPosition,
         setCubicS,
         setArcParam,
-        removeActivePoint,*/
+        removeActivePoint,
     } = props
 
     const shapes = paths.map((path, index) => {
@@ -59,62 +55,14 @@ function Sidebar(props) {
     return (
         <div className="ad-Sidebar">
             <Expand
-                initialExpanded={ false }
-                title="General settings">
-                <General
-                    w={ w }
-                    h={ h }
-                    grid={ grid }
-                    setWidth={ setWidth }
-                    setHeight={ setHeight }
-                    setGridSize={ setGridSize }
-                    setGridSnap={ setGridSnap }
-                    setGridShow={ setGridShow } />
-            </Expand>
-
-            { shapes }
-        </div>
-    )
-
-    /*return (
-        <div className="ad-Sidebar">
-            <Expand
-                initialExpanded={ false }
-                title="General settings">
-                <General
-                    w={ w }
-                    h={ h }
-                    grid={ grid }
-                    setWidth={ setWidth }
-                    setHeight={ setHeight }
-                    setGridSize={ setGridSize }
-                    setGridSnap={ setGridSnap }
-                    setGridShow={ setGridShow } />
-            </Expand>
-
-            <Expand
                 initialExpanded={ true }
-                title="Path">
-                <Path
-                    path={ path }
-                    closePath={ closePath }
-                    fillPath={ fillPath }
-                    relativePoints={ relativePoints }
-                    setClosePath={ setClosePath }
-                    setFillPath={ setFillPath }
-                    setRelativePoints={ setRelativePoints }
-                    reset={ reset } />
-            </Expand>
-
-            <Expand
-                initialExpanded={ true }
-                title="Selected point">
+                title="Active point">
                 <Point
                     w={ w }
                     h={ h }
                     grid={ grid }
-                    points={ points }
-                    activePoint={ activePoint }
+                    activePath={ activePath }
+                    paths={ paths }
                     setPointType={ setPointType }
                     setPointPosition={ setPointPosition }
                     setQuadraticPosition={ setQuadraticPosition }
@@ -124,8 +72,10 @@ function Sidebar(props) {
                     setArcParam={ setArcParam }
                     removeActivePoint={ removeActivePoint } />
             </Expand>
+
+            { shapes }
         </div>
-    )*/
+    )
 }
 
 export default Sidebar

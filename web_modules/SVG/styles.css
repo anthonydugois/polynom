@@ -41,7 +41,7 @@
     transition: fill .2s;
 }
 .ad-Point:hover,
-.ad-PointGroup.is-active .ad-Point {
+.ad-Shape.is-active .ad-PointGroup.is-active .ad-Point {
     fill: var(--ad-Color-sec);
 }
 .ad-PointGroup--first .ad-Point {

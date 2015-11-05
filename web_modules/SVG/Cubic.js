@@ -2,6 +2,8 @@ import React from "react"
 
 function Cubic(props) {
     const {
+        activePath,
+        activePoint,
         x1,
         y1,
         x2,
@@ -11,7 +13,6 @@ function Cubic(props) {
         p2x,
         p2y,
         s,
-        index,
         drag,
     } = props
 
@@ -36,18 +37,18 @@ function Cubic(props) {
             { ! s && (
                 <circle
                     className="ad-Anchor-point"
-                    onMouseDown={ (e) => drag(e, index, "cubic", 1) }
                     cx={ x1 }
                     cy={ y1 }
-                    r={ 6 } />
+                    r={ 6 }
+                    onMouseDown={ (e) => drag(e, activePath, activePoint, "cubic", 1) } />
             ) }
 
             <circle
                 className="ad-Anchor-point"
-                onMouseDown={ (e) => drag(e, index, "cubic", 2) }
                 cx={ x2 }
                 cy={ y2 }
-                r={ 6 } />
+                r={ 6 }
+                onMouseDown={ (e) => drag(e, activePath, activePoint, "cubic", 2) } />
         </g>
     )
 }

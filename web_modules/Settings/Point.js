@@ -9,8 +9,8 @@ function Point(props) {
         w,
         h,
         grid,
-        points,
-        activePoint,
+        activePath,
+        paths,
         setPointType,
         setPointPosition,
         setQuadraticPosition,
@@ -21,17 +21,18 @@ function Point(props) {
         removeActivePoint,
     } = props
 
-    const active = points[activePoint],
+    const { activePoint, points } = paths[activePath],
+        active = points[activePoint],
         step = grid.snap ? grid.size : 1
 
-    let previous = false
+    let prev = false
 
     if (activePoint !== 0) {
-        previous = points[activePoint - 1]
+        prev = points[activePoint - 1]
     }
 
     const choices = [
-        { name: "Line", value: "l", checked: (! active.quadratic && ! active.cubic && ! active.arc) },
+        { name: "Line", value: "l", checked: ! active.quadratic && ! active.cubic && ! active.arc },
         { name: "Quad", value: "q", checked: !! active.quadratic },
         { name: "Cub", value: "c", checked: !! active.cubic },
         { name: "Arc", value: "a", checked: !! active.arc },
@@ -42,7 +43,6 @@ function Point(props) {
             { activePoint !== 0 && (
                 <div className="ad-Setting">
                     <Control
-                        name="Point type"
                         type="choices"
                         id="pointType"
                         choices={ choices }
@@ -58,7 +58,7 @@ function Point(props) {
                     max={ w }
                     step={ step }
                     value={ active.x }
-                    onChange={ (e) => setPointPosition("x", e) } />
+                    onChange={ (e) => setPointPosition(e, "x") } />
             </div>
 
             <div className="ad-Setting">
@@ -69,10 +69,10 @@ function Point(props) {
                     max={ h }
                     step={ step }
                     value={ active.y }
-                    onChange={ (e) => setPointPosition("y", e) } />
+                    onChange={ (e) => setPointPosition(e, "y") } />
             </div>
 
-            { active.quadratic && ! (previous.quadratic && active.quadratic.t) && (
+            { active.quadratic && ! (prev.quadratic && active.quadratic.t) && (
                 <div className="ad-Setting">
                     <Control
                         name="Anchor X position"
@@ -81,11 +81,11 @@ function Point(props) {
                         max={ w }
                         step={ step }
                         value={ active.quadratic.x }
-                        onChange={ (e) => setQuadraticPosition("x", e) } />
+                        onChange={ (e) => setQuadraticPosition(e, "x") } />
                 </div>
             ) }
 
-            { active.quadratic && ! (previous.quadratic && active.quadratic.t) && (
+            { active.quadratic && ! (prev.quadratic && active.quadratic.t) && (
                 <div className="ad-Setting">
                     <Control
                         name="Anchor Y position"
@@ -94,11 +94,11 @@ function Point(props) {
                         max={ h }
                         step={ step }
                         value={ active.quadratic.y }
-                        onChange={ (e) => setQuadraticPosition("y", e) } />
+                        onChange={ (e) => setQuadraticPosition(e, "y") } />
                 </div>
             ) }
 
-            { active.quadratic && previous && previous.quadratic && (
+            { active.quadratic && prev && prev.quadratic && (
                 <div className="ad-Setting">
                     <Control
                         name="String to previous curve"
@@ -108,7 +108,7 @@ function Point(props) {
                 </div>
             ) }
 
-            { active.cubic && ! (previous.cubic && active.cubic.s) && (
+            { active.cubic && ! (prev.cubic && active.cubic.s) && (
                 <div className="ad-Setting">
                     <Control
                         name="First anchor X position"
@@ -117,11 +117,11 @@ function Point(props) {
                         max={ w }
                         step={ step }
                         value={ active.cubic.x1 }
-                        onChange={ (e) => setCubicPosition("x1", e) } />
+                        onChange={ (e) => setCubicPosition(e, "x1") } />
                 </div>
             ) }
 
-            { active.cubic && ! (previous.cubic && active.cubic.s) && (
+            { active.cubic && ! (prev.cubic && active.cubic.s) && (
                 <div className="ad-Setting">
                     <Control
                         name="First anchor Y position"
@@ -130,7 +130,7 @@ function Point(props) {
                         max={ h }
                         step={ step }
                         value={ active.cubic.y1 }
-                        onChange={ (e) => setCubicPosition("y1", e) } />
+                        onChange={ (e) => setCubicPosition(e, "y1") } />
                 </div>
             ) }
 
@@ -143,7 +143,7 @@ function Point(props) {
                         max={ w }
                         step={ step }
                         value={ active.cubic.x2 }
-                        onChange={ (e) => setCubicPosition("x2", e) } />
+                        onChange={ (e) => setCubicPosition(e, "x2") } />
                 </div>
             ) }
 
@@ -156,11 +156,11 @@ function Point(props) {
                         max={ h }
                         step={ step }
                         value={ active.cubic.y2 }
-                        onChange={ (e) => setCubicPosition("y2", e) } />
+                        onChange={ (e) => setCubicPosition(e, "y2") } />
                 </div>
             ) }
 
-            { active.cubic && previous && previous.cubic && (
+            { active.cubic && prev && prev.cubic && (
                 <div className="ad-Setting">
                     <Control
                         name="String to previous curve"
@@ -179,7 +179,7 @@ function Point(props) {
                         max={ w }
                         step={ step }
                         value={ active.arc.rx }
-                        onChange={ (e) => setArcParam("rx", e) } />
+                        onChange={ (e) => setArcParam(e, "rx") } />
                 </div>
             ) }
 
@@ -192,7 +192,7 @@ function Point(props) {
                         max={ h }
                         step={ step }
                         value={ active.arc.ry }
-                        onChange={ (e) => setArcParam("ry", e) } />
+                        onChange={ (e) => setArcParam(e, "ry") } />
                 </div>
             ) }
 
@@ -205,7 +205,7 @@ function Point(props) {
                         max={ 360 }
                         step={ 1 }
                         value={ active.arc.rot }
-                        onChange={ (e) => setArcParam("rot", e) } />
+                        onChange={ (e) => setArcParam(e, "rot") } />
                 </div>
             ) }
 
@@ -215,13 +215,13 @@ function Point(props) {
                         name="Large arc"
                         type="checkbox"
                         checked={ active.arc.laf }
-                        onChange={ (e) => setArcParam("laf", e) } />
+                        onChange={ (e) => setArcParam(e, "laf") } />
 
                     <Control
                         name="Sweep flag"
                         type="checkbox"
                         checked={ active.arc.sf }
-                        onChange={ (e) => setArcParam("sf", e) } />
+                        onChange={ (e) => setArcParam(e, "sf") } />
                 </div>
             ) }
 

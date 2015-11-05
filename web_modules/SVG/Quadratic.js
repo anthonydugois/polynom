@@ -2,6 +2,8 @@ import React from "react"
 
 function Quadratic(props) {
     const {
+        activePath,
+        activePoint,
         x,
         y,
         p1x,
@@ -9,7 +11,6 @@ function Quadratic(props) {
         p2x,
         p2y,
         t,
-        index,
         drag,
     } = props
 
@@ -34,10 +35,10 @@ function Quadratic(props) {
 
                 <circle
                     className="ad-Anchor-point"
-                    onMouseDown={ (e) => drag(e, index, "quadratic") }
                     cx={ x }
                     cy={ y }
-                    r={ 6 } />
+                    r={ 6 }
+                    onMouseDown={ (e) => drag(e, activePath, activePoint, "quadratic") } />
             </g>
         )
     }

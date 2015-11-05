@@ -131,14 +131,14 @@ class Builder extends Component {
         return { x, y }
     }
 
-    resetNextCurve = (points, active) => {
-        if (active !== points.length - 1) {
-            if (points[active + 1].quadratic) {
-                points[active + 1].quadratic.t = false
+    resetNextCurve = (activePoint, points) => {
+        if (activePoint !== points.length - 1) {
+            if (points[activePoint + 1].quadratic) {
+                points[activePoint + 1].quadratic.t = false
             }
 
-            if (points[active + 1].cubic) {
-                points[active + 1].cubic.s = false
+            if (points[activePoint + 1].cubic) {
+                points[activePoint + 1].cubic.s = false
             }
         }
 
@@ -151,24 +151,17 @@ class Builder extends Component {
         this.setState({ activePath })
     }
 
-    /*setPointType = (e) => {
-        let {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+    setPointType = (e) => {
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         // not the first point
         if (activePoint !== 0) {
-            let v = e.target.value
+            points = this.resetNextCurve(activePoint, points)
 
-            points = this.resetNextCurve(points, activePoint)
+            const p = points[activePoint], _p = points[activePoint - 1]
 
-            let p = points[activePoint],
-                _p = points[activePoint - 1]
-
-            switch (v) {
+            switch (e.target.value) {
                 case "l":
                     points[activePoint] = L(p.x, p.y)
                 break
@@ -186,131 +179,94 @@ class Builder extends Component {
                 break
             }
 
-            this.setState({
-                points,
-                path: getPath(points, closePath, relativePoints),
-            })
+            paths[activePath].points = points
+
+            this.setState({ paths })
         }
-    }*/
+    }
 
-    setPointPosition = (coord, e) => {
-        const {
-            w,
-            h,
-            activePath,
-            paths,
-        } = this.state,
-        path = paths[activePath],
-        v = e.target.value
+    setPointPosition = (e, coord) => {
+        const { w, h, activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath],
+            point = points[activePoint]
 
-        let point = path.points[path.activePoint]
-
-        point[coord] = coord === "x" ?
-            positive(v, false, w) :
-            positive(v, false, h)
+        point[coord] = positive(e.target.value, false, coord === "x" ? w : h)
 
         this.setPointCoords(point)
     }
 
-    setPointCoords = (point) => {
-        const { activePath, paths } = this.state,
-            { activePoint } = paths[activePath]
+    setPointCoords = (coords) => {
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
-        paths[activePath].points[activePoint].x = point.x
-        paths[activePath].points[activePoint].y = point.y
+        points[activePoint].x = coords.x
+        points[activePoint].y = coords.y
+
+        paths[activePath].points = points
 
         this.setState({ paths })
     }
 
-    /*setQuadraticPosition = (coord, e) => {
-        let coords = this.state.points[this.state.activePoint].quadratic,
-            v = positive(e.target.value)
+    setQuadraticPosition = (e, coord) => {
+        const { w, h, activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath],
+            anchor = points[activePoint].quadratic
 
-        if (coord === "x" && v > this.state.w) {
-            v = this.state.w
-        } else if (coord === "y" && v > this.state.h) {
-            v = this.state.h
-        }
+        anchor[coord] = positive(e.target.value, false, coord === "x" ? w : h)
 
-        coords[coord] = v
-
-        this.setQuadraticCoords(coords)
+        this.setQuadraticCoords(anchor)
     }
 
     setQuadraticCoords = (coords) => {
-        const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         points[activePoint].quadratic.x = coords.x
         points[activePoint].quadratic.y = coords.y
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
+        paths[activePath].points = points
+
+        this.setState({ paths })
     }
 
     setQuadraticT = (e) => {
-        const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         points[activePoint].quadratic.t = e.target.checked
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
+        paths[activePath].points = points
+
+        this.setState({ paths })
     }
 
-    setCubicPosition = (coord, e) => {
-        let coords = this.state.points[this.state.activePoint].cubic,
-            v = positive(e.target.value),
-            n = 0
+    setCubicPosition = (e, coord) => {
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath],
+            { x1, y1, x2, y2 } = points[activePoint].cubic
 
-        if (coord === "x1") {
-            this.setCubicCoords({
-                x: v,
-                y: coords.y1,
-            }, 1)
-        }
+        switch (coord) {
+            case "x1":
+                this.setCubicCoords({ x: v, y: y1 }, 1)
+            break
 
-        if (coord === "y1") {
-            this.setCubicCoords({
-                x: coords.x1,
-                y: v,
-            }, 1)
-        }
+            case "y1":
+                this.setCubicCoords({ x: x1, y: v }, 1)
+            break
 
-        if (coord === "x2") {
-            this.setCubicCoords({
-                x: v,
-                y: coords.y2,
-            }, 2)
-        }
+            case "x2":
+                this.setCubicCoords({ x: v, y: y2 }, 2)
+            break
 
-        if (coord === "y2") {
-            this.setCubicCoords({
-                x: coords.x2,
-                y: v,
-            }, 2)
+            case "y2":
+                this.setCubicCoords({ x: x2, y: v }, 2)
+            break
         }
     }
 
     setCubicCoords = (coords, n) => {
-        const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         if (n === 1) {
             points[activePoint].cubic.x1 = coords.x
@@ -322,53 +278,60 @@ class Builder extends Component {
             points[activePoint].cubic.y2 = coords.y
         }
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
+        paths[activePath].points = points
+
+        this.setState({ paths })
     }
 
     setCubicS = (e) => {
-        const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         points[activePoint].cubic.s = e.target.checked
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
+        paths[activePath].points = points
+
+        this.setState({ paths })
     }
 
-    setArcParam = (param, e) => {
-        const {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
-
-        let v
+    setArcParam = (e, param) => {
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath],
+            v = positive(e.target.value)
 
         if (["laf", "sf"].indexOf(param) > -1) {
             v = e.target.checked ? 1 : 0
-        } else {
-            v = positive(e.target.value)
         }
 
         points[activePoint].arc[param] = v
+        paths[activePath].points = points
 
-        this.setState({
-            points,
-            path: getPath(points, closePath, relativePoints),
-        })
-    }*/
+        this.setState({ paths })
+    }
 
-    drag = (e, activePath, activePoint, object = "point") => {
+    handleMouseMove = (e) => {
+        e.preventDefault()
+
+        if ( ! this.state.ctrl) {
+            const { object, anchor } = this.state.drag
+
+            switch (object) {
+                case "point":
+                    this.setPointCoords(this.getMouseCoords(e))
+                break
+
+                case "quadratic":
+                    this.setQuadraticCoords(this.getMouseCoords(e))
+                break
+
+                case "cubic":
+                    this.setCubicCoords(this.getMouseCoords(e), anchor)
+                break
+            }
+        }
+    }
+
+    drag = (e, activePath, activePoint, object = "point", anchor = false) => {
         e.preventDefault()
 
         const { paths } = this.state
@@ -379,7 +342,7 @@ class Builder extends Component {
             this.setState({
                 paths,
                 activePath,
-                drag: { object },
+                drag: { object, anchor },
             })
         }
     }
@@ -390,124 +353,38 @@ class Builder extends Component {
 
     addPoint = (e) => {
         if (this.state.ctrl) {
-            const { activePath, paths } = this.state,
-                { activePoint, points } = paths[activePath],
-                coords = this.getMouseCoords(e)
+            const coords = this.getMouseCoords(e)
+            const { activePath, paths } = this.state
+            let { activePoint, points } = paths[activePath]
 
-            // paths[activePath].points = this.resetNextCurve(points, activePoint)
-            paths[activePath].points = [
+            points = this.resetNextCurve(activePoint, points)
+            points = [
                 ...points.slice(0, activePoint + 1),
                 coords,
                 ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
             ]
 
+            paths[activePath].points = points
             paths[activePath].activePoint++
 
             this.setState({ paths })
         }
     }
 
-    /*removeActivePoint = (e) => {
-        let {
-            points,
-            activePoint,
-            closePath,
-            relativePoints,
-        } = this.state
+    removeActivePoint = (e) => {
+        const { activePath, paths } = this.state
+        let { activePoint, points } = paths[activePath]
 
         if (points.length > 1 && activePoint !== 0) {
-            points = this.resetNextCurve(points, activePoint)
+            points = this.resetNextCurve(activePoint, points)
             points.splice(activePoint, 1)
 
-            this.setState({
-                points,
-                activePoint: activePoint - 1,
-                path: getPath(points, closePath, relativePoints),
-            })
-        }
-    }*/
+            paths[activePath].points = points
+            paths[activePath].activePoint--
 
-    handleMouseMove = (e) => {
-        e.preventDefault()
-
-        if ( ! this.state.ctrl) {
-            const { object } = this.state.drag
-
-            switch (object) {
-                case "point":
-                    this.setPointCoords(this.getMouseCoords(e))
-                break
-            }
-
-                /*case "quadratic":
-                    this.setQuadraticCoords(this.getMouseCoords(e))
-                break
-
-                case "cubic":
-                    this.setCubicCoords(this.getMouseCoords(e), n)
-                break*/
+            this.setState({ paths })
         }
     }
-
-    /*reset = (e) => {
-        const { w, h } = this.state,
-            points = [{ x: w / 2, y: h / 2 }],
-            activePoint = 0,
-            closePath = false,
-            relativePoints = false,
-            path = getPath(points, closePath, relativePoints)
-
-        this.setState({
-            points,
-            path,
-            closePath,
-            relativePoints,
-            activePoint,
-        })
-    }
-
-    render() {
-        return (
-            <div
-                className="ad-Builder"
-                onMouseUp={ this.cancelDragging }>
-                <div className="ad-Builder-main">
-                    <div className="ad-Builder-svg">
-                        <SVG
-                            ref="svg"
-                            { ...this.state }
-                            drag={ this.drag }
-                            addPoint={ this.addPoint }
-                            handleMouseMove={ this.handleMouseMove } />
-                    </div>
-
-                    <Foot />
-                </div>
-
-                <div className="ad-Builder-controls">
-                    <Sidebar
-                        { ...this.state }
-                        reset={ this.reset }
-                        removeActivePoint={ this.removeActivePoint }
-                        setPointPosition={ this.setPointPosition }
-                        setQuadraticPosition={ this.setQuadraticPosition }
-                        setQuadraticT={ this.setQuadraticT }
-                        setCubicPosition={ this.setCubicPosition }
-                        setCubicS={ this.setCubicS }
-                        setArcParam={ this.setArcParam }
-                        setPointType={ this.setPointType }
-                        setWidth={ this.setWidth }
-                        setHeight={ this.setHeight }
-                        setGridSize={ this.setGridSize }
-                        setGridSnap={ this.setGridSnap }
-                        setGridShow={ this.setGridShow }
-                        setClosePath={ this.setClosePath }
-                        setFillPath={ this.setFillPath }
-                        setRelativePoints={ this.setRelativePoints } />
-                </div>
-            </div>
-        )
-    }*/
 
     render() {
         return (
@@ -538,7 +415,15 @@ class Builder extends Component {
                         setActivePath={ this.setActivePath }
                         setRelative={ this.setRelative }
                         setClosed={ this.setClosed }
-                        setFilled={ this.setFilled } />
+                        setFilled={ this.setFilled }
+                        setPointType={ this.setPointType }
+                        setPointPosition={ this.setPointPosition }
+                        setQuadraticPosition={ this.setQuadraticPosition }
+                        setQuadraticT={ this.setQuadraticT }
+                        setCubicPosition={ this.setCubicPosition }
+                        setCubicS={ this.setCubicS }
+                        setArcParam={ this.setArcParam }
+                        removeActivePoint={ this.removeActivePoint } />
                 </div>
             </div>
         )
