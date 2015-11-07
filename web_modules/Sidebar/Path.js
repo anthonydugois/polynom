@@ -13,6 +13,7 @@ class Path extends Component {
         path: React.PropTypes.object.isRequired,
         activePath: React.PropTypes.number.isRequired,
         setActivePath: React.PropTypes.func.isRequired,
+        setPath: React.PropTypes.func.isRequired,
         removePath: React.PropTypes.func.isRequired,
         setRelative: React.PropTypes.func.isRequired,
         setClosed: React.PropTypes.func.isRequired,
@@ -21,14 +22,40 @@ class Path extends Component {
 
     state = {
         expanded: this.props.initialExpanded,
+        shouldEditPath: false,
+        customPath: false,
     }
 
     handleClick = (e) => {
         e.preventDefault()
+        e.stopPropagation()
 
         const expanded = ! this.state.expanded
 
         this.setState({ expanded })
+    }
+
+    handleFocus = (e) => {
+        const {
+            points,
+            relative,
+            closed,
+        } = this.props.path
+
+        this.setState({
+            shouldEditPath: true,
+            customPath: getPath(points, closed, relative),
+        })
+    }
+
+    handleChange = (e) => {
+        this.setState({ customPath: e.target.value })
+    }
+
+    handleBlur = (e) => {
+        this.props.setPath(this.props.index, this.state.customPath)
+
+        this.setState({ shouldEditPath: false })
     }
 
     render() {
@@ -49,10 +76,16 @@ class Path extends Component {
             filled,
         } = this.props.path
 
+        const {
+            expanded,
+            shouldEditPath,
+            customPath,
+        } = this.state
+
         return (
             <div className={ cx("ad-Expand", {
                 "is-active": index === activePath,
-                "is-expanded": this.state.expanded,
+                "is-expanded": expanded,
             }) }>
                 <div
                     className="ad-Expand-head"
@@ -60,7 +93,7 @@ class Path extends Component {
                     <button
                         className="ad-Expand-button"
                         onClick={ this.handleClick }>
-                        <Icon name={ this.state.expanded ? "down" : "right" } />
+                        <Icon name={ expanded ? "down" : "right" } />
                     </button>
 
                     <h4 className="ad-Expand-title">
@@ -83,9 +116,10 @@ class Path extends Component {
                         <div className="ad-Setting">
                             <Control
                                 type="textarea"
-                                readOnly={ true }
-                                value={ getPath(points, closed, relative) }
-                                onFocus={ (e) => e.target.select() } />
+                                value={ shouldEditPath ? customPath : getPath(points, closed, relative) }
+                                onChange={ this.handleChange }
+                                onFocus={ this.handleFocus }
+                                onBlur={ this.handleBlur } />
                         </div>
 
                         <div className="ad-Setting">

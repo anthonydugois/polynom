@@ -12,6 +12,7 @@ function Shape(props) {
         index,
         activePath,
         path,
+        setActivePath,
         drag,
     } = props
 
@@ -78,7 +79,8 @@ function Shape(props) {
         <g className={ cx("ad-Shape", { "is-active": index === activePath }) }>
             <path
                 className={ cx("ad-Path", { "ad-Path--filled": filled }) }
-                d={ getPath(points, closed, relative) } />
+                d={ getPath(points, closed, relative) }
+                onClick={ (e) => setActivePath(e, index) }/>
 
             <g className="ad-Points">
                 { circles }

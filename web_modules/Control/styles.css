@@ -76,7 +76,6 @@
     width: 100%;
     padding: .8rem 1rem;
     resize: none;
-    border: 2px solid var(--ad-Color-sec);
     font-weight: bold;
     line-height: 1.6;
 }
@@ -126,7 +125,7 @@
             display: none;
         }
         .ad-Choice-fake {
-            padding: .6rem 0;
+            padding: .75rem 0;
             background: color(var(--ad-Color-prim) l(+10%));
             transition: background .2s;
             cursor: pointer;

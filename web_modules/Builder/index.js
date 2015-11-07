@@ -6,7 +6,7 @@ import Sidebar from "Sidebar"
 import Foot from "App/Foot"
 
 import { positive } from "../../src/utils/maths"
-import { M, L, Q, T, C, S, A, getPoints } from "../../src/utils/points"
+import { M, L, Q, T, C, S, A, getPathFromPoints } from "../../src/utils/points"
 
 import "./styles"
 
@@ -44,13 +44,13 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (e.ctrlKey) {
+        if (e.keyCode === 16) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if ( ! e.ctrlKey) {
+        if (e.keyCode === 16) {
             this.setState({ ctrl: false })
         }
     }
@@ -90,6 +90,19 @@ class Builder extends Component {
         this.setState({ activePath })
     }
 
+    setPath = (index, path) => {
+        const { paths } = this.state
+        const { relative, closed, points } = getPathFromPoints(path)
+
+        if (points.length > 0) {
+            paths[index].relative = relative
+            paths[index].closed = closed
+            paths[index].points = points
+
+            this.setState({ paths })
+        }
+    }
+
     addPath = (e) => {
         e.preventDefault()
 
@@ -115,7 +128,7 @@ class Builder extends Component {
 
         let { activePath, paths } = this.state
 
-        if (activePath === paths.length - 1) {
+        if (path <= activePath) {
             activePath--
         }
 
@@ -200,15 +213,15 @@ class Builder extends Component {
                 break
 
                 case "q":
-                    points[activePoint] = Q(p.x, p.y, (p.x + _p.x) / 2, (p.y + _p.y) / 2)
+                    points[activePoint] = Q((p.x + _p.x) / 2, (p.y + _p.y) / 2, p.x, p.y)
                 break
 
                 case "c":
-                    points[activePoint] = C(p.x, p.y, (p.x + _p.x - 50) / 2, (p.y + _p.y) / 2, (p.x + _p.x + 50) / 2, (p.y + _p.y) / 2)
+                    points[activePoint] = C((p.x + _p.x - 50) / 2, (p.y + _p.y) / 2, (p.x + _p.x + 50) / 2, (p.y + _p.y) / 2, p.x, p.y)
                 break
 
                 case "a":
-                    points[activePoint] = A(p.x, p.y, 50, 50, 0, 1, 1)
+                    points[activePoint] = A(50, 50, 0, 1, 1, p.x, p.y)
                 break
             }
 
@@ -424,41 +437,39 @@ class Builder extends Component {
             <div
                 className="ad-Builder"
                 onMouseUp={ this.cancelDragging }>
-                <div className="ad-Builder-main">
+                <Sidebar
+                    { ...this.state }
+                    setWidth={ this.setWidth }
+                    setHeight={ this.setHeight }
+                    setGridSize={ this.setGridSize }
+                    setGridSnap={ this.setGridSnap }
+                    setGridShow={ this.setGridShow }
+                    addPath={ this.addPath }
+                    removePath={ this.removePath }
+                    setPath={ this.setPath }
+                    setActivePath={ this.setActivePath }
+                    setRelative={ this.setRelative }
+                    setClosed={ this.setClosed }
+                    setFilled={ this.setFilled }
+                    setPointType={ this.setPointType }
+                    setPointPosition={ this.setPointPosition }
+                    setQuadraticPosition={ this.setQuadraticPosition }
+                    setQuadraticT={ this.setQuadraticT }
+                    setCubicPosition={ this.setCubicPosition }
+                    setCubicS={ this.setCubicS }
+                    setArcParam={ this.setArcParam }
+                    removeActivePoint={ this.removeActivePoint } />
+
+                <div className="ad-Builder-rendering">
                     <div className="ad-Builder-svg">
                         <SVG
                             ref="svg"
                             { ...this.state }
                             addPoint={ this.addPoint }
                             handleMouseMove={ this.handleMouseMove }
+                            setActivePath={ this.setActivePath }
                             drag={ this.drag } />
                     </div>
-
-                    <Foot />
-                </div>
-
-                <div className="ad-Builder-controls">
-                    <Sidebar
-                        { ...this.state }
-                        setWidth={ this.setWidth }
-                        setHeight={ this.setHeight }
-                        setGridSize={ this.setGridSize }
-                        setGridSnap={ this.setGridSnap }
-                        setGridShow={ this.setGridShow }
-                        addPath={ this.addPath }
-                        removePath={ this.removePath }
-                        setActivePath={ this.setActivePath }
-                        setRelative={ this.setRelative }
-                        setClosed={ this.setClosed }
-                        setFilled={ this.setFilled }
-                        setPointType={ this.setPointType }
-                        setPointPosition={ this.setPointPosition }
-                        setQuadraticPosition={ this.setQuadraticPosition }
-                        setQuadraticT={ this.setQuadraticT }
-                        setCubicPosition={ this.setCubicPosition }
-                        setCubicS={ this.setCubicS }
-                        setArcParam={ this.setArcParam }
-                        removeActivePoint={ this.removeActivePoint } />
                 </div>
             </div>
         )

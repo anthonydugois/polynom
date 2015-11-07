@@ -18,7 +18,6 @@ function Point(props) {
         setCubicPosition,
         setCubicS,
         setArcParam,
-        removeActivePoint,
     } = props
 
     const { activePoint, points } = paths[activePath],
@@ -73,6 +72,16 @@ function Point(props) {
                     onChange={ (e) => setPointPosition(e, "y") } />
             </div>
 
+            { active.quadratic && prev && prev.quadratic && (
+                <div className="ad-Setting">
+                    <Control
+                        name="String to previous curve"
+                        type="checkbox"
+                        checked={ active.quadratic.t }
+                        onChange={ setQuadraticT } />
+                </div>
+            ) }
+
             { active.quadratic && ! (prev.quadratic && active.quadratic.t) && (
                 <div className="ad-Setting">
                     <Control
@@ -99,13 +108,13 @@ function Point(props) {
                 </div>
             ) }
 
-            { active.quadratic && prev && prev.quadratic && (
+            { active.cubic && prev && prev.cubic && (
                 <div className="ad-Setting">
                     <Control
                         name="String to previous curve"
                         type="checkbox"
-                        checked={ active.quadratic.t }
-                        onChange={ setQuadraticT } />
+                        checked={ active.cubic.s }
+                        onChange={ setCubicS } />
                 </div>
             ) }
 
@@ -161,16 +170,6 @@ function Point(props) {
                 </div>
             ) }
 
-            { active.cubic && prev && prev.cubic && (
-                <div className="ad-Setting">
-                    <Control
-                        name="String to previous curve"
-                        type="checkbox"
-                        checked={ active.cubic.s }
-                        onChange={ setCubicS } />
-                </div>
-            ) }
-
             { active.arc && (
                 <div className="ad-Setting">
                     <Control
@@ -223,16 +222,6 @@ function Point(props) {
                         type="checkbox"
                         checked={ active.arc.sf }
                         onChange={ (e) => setArcParam(e, "sf") } />
-                </div>
-            ) }
-
-            { activePoint !== 0 && (
-                <div className="ad-Setting">
-                    <Control
-                        type="button"
-                        action="delete"
-                        value="Remove"
-                        onClick={ removeActivePoint } />
                 </div>
             ) }
         </div>

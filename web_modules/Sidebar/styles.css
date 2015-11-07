@@ -1,23 +1,34 @@
 @import url(App/config.css);
 
 .ad-Sidebar {
-    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--ad-Color-prim);
+}
+    .ad-Sidebar ::-webkit-scrollbar {
+        width: 5px;
+    }
+    .ad-Sidebar ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: color(var(--ad-Color-prim) l(+20%));
+    }
+
+.ad-Sidebar-tab {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
     .ad-Sidebar-settings {
         flex: 1 0 0;
-        display: flex;
-        flex-direction: column;
+        overflow: auto;
     }
-        .ad-Sidebar-content {
-            flex: 1;
-            overflow: auto;
-        }
-        .ad-Sidebar-actions {
-            flex-shrink: 0;
-            padding: 1rem 2rem;
-        }
+    .ad-Sidebar-actions {
+        flex-shrink: 0;
+        padding: 2rem;
+    }
 
 .ad-Expand-head {
     display: flex;
@@ -58,13 +69,10 @@
     display: block;
 }
 
-.ad-Settings {
-    padding: 2rem;
-}
-
 .ad-Setting {
     display: flex;
+    padding: 2rem;
 }
 .ad-Setting + .ad-Setting {
-    margin-top: 1.5rem;
+    padding-top: 0;
 }

@@ -1,5 +1,8 @@
 import React from "react"
 
+import Tabs from "Tabs"
+
+import General from "./General"
 import Path from "./Path"
 import Point from "./Point"
 import Button from "Control/Button"
@@ -20,6 +23,7 @@ function Sidebar(props) {
         setGridShow,
         addPath,
         removePath,
+        setPath,
         setActivePath,
         setRelative,
         setClosed,
@@ -43,6 +47,7 @@ function Sidebar(props) {
                 path={ path }
                 activePath={ activePath }
                 setActivePath={ setActivePath }
+                setPath={ setPath }
                 removePath={ removePath }
                 setRelative={ setRelative }
                 setClosed={ setClosed }
@@ -50,39 +55,84 @@ function Sidebar(props) {
         )
     })
 
+    const tabs = [
+        {
+            icon: "point",
+            title: "Point",
+        },
+        {
+            icon: "paths",
+            title: "Paths",
+        },
+        {
+            icon: "settings",
+            title: "Settings",
+        },
+        {
+            icon: "about",
+            title: "About",
+        },
+    ]
+
     return (
         <div className="ad-Sidebar">
-            <div className="ad-Sidebar-settings">
-                <div className="ad-Sidebar-content">
-                    <Point
-                        w={ w }
-                        h={ h }
-                        grid={ grid }
-                        activePath={ activePath }
-                        paths={ paths }
-                        setPointType={ setPointType }
-                        setPointPosition={ setPointPosition }
-                        setQuadraticPosition={ setQuadraticPosition }
-                        setQuadraticT={ setQuadraticT }
-                        setCubicPosition={ setCubicPosition }
-                        setCubicS={ setCubicS }
-                        setArcParam={ setArcParam }
-                        removeActivePoint={ removeActivePoint } />
-                </div>
-            </div>
+            <Tabs tabs={ tabs }>
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        <Point
+                            w={ w }
+                            h={ h }
+                            grid={ grid }
+                            activePath={ activePath }
+                            paths={ paths }
+                            setPointType={ setPointType }
+                            setPointPosition={ setPointPosition }
+                            setQuadraticPosition={ setQuadraticPosition }
+                            setQuadraticT={ setQuadraticT }
+                            setCubicPosition={ setCubicPosition }
+                            setCubicS={ setCubicS }
+                            setArcParam={ setArcParam } />
+                    </div>
 
-            <div className="ad-Sidebar-settings">
-                <div className="ad-Sidebar-content">
-                    { shapes }
+                    { paths[activePath].activePoint !== 0 && (
+                        <div className="ad-Sidebar-actions">
+                            <Button
+                                action="delete"
+                                value="Remove"
+                                onClick={ removeActivePoint } />
+                        </div>
+                    ) }
                 </div>
 
-                <div className="ad-Sidebar-actions">
-                    <Button
-                        icon="add"
-                        value="New path"
-                        onClick={ addPath } />
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        { shapes }
+                    </div>
+
+                    <div className="ad-Sidebar-actions">
+                        <Button
+                            icon="add"
+                            value="New path"
+                            onClick={ addPath } />
+                    </div>
                 </div>
-            </div>
+
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        <General
+                            w={ w }
+                            h={ h }
+                            grid={ grid }
+                            setWidth={ setWidth }
+                            setHeight={ setHeight }
+                            setGridSize={ setGridSize }
+                            setGridSnap={ setGridSnap }
+                            setGridShow={ setGridShow } />
+                    </div>
+                </div>
+
+                <div className="ad-Sidebar-tab" />
+            </Tabs>
         </div>
     )
 }

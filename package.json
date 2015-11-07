@@ -1,7 +1,7 @@
 {
   "name": "svg-path-builder",
-  "version": "1.0.0",
-  "description": "Build an SVG path quickly using a GUI.",
+  "version": "1.1.0",
+  "description": "Build SVG paths easily using an intuitive interface.",
   "author": {
     "name": "Anthony Dugois",
     "email": "dev.anthonydugois@gmail.com"
@@ -47,7 +47,8 @@
   "dependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-router": "^1.0.0-rc3"
+    "react-router": "^1.0.0-rc3",
+    "svg-path-parser": "^1.0.1"
   },
   "repository": {
     "type": "git",

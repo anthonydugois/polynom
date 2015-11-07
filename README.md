@@ -1,6 +1,6 @@
 # SVG Path Builder
 
-Build an SVG path quickly using a GUI. The demo is available at http://anthonydugois.com/svg-path-builder.
+Build SVG paths easily using an intuitive interface. The demo is available at http://anthonydugois.com/svg-path-builder.
 
 ## Start the dev server
 

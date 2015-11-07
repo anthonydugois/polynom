@@ -23,7 +23,7 @@ function General(props) {
                     name="Width"
                     type="range"
                     min={ 0 }
-                    max={ 1500 }
+                    max={ 1200 }
                     step={ 50 }
                     value={ w }
                     onChange={ setWidth } />
@@ -34,7 +34,7 @@ function General(props) {
                     name="Height"
                     type="range"
                     min={ 0 }
-                    max={ 850 }
+                    max={ 1200 }
                     step={ 50 }
                     value={ h }
                     onChange={ setHeight } />

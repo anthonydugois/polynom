@@ -17,6 +17,7 @@ class SVG extends Component {
         paths: React.PropTypes.array.isRequired,
         addPoint: React.PropTypes.func.isRequired,
         handleMouseMove: React.PropTypes.func.isRequired,
+        setActivePath: React.PropTypes.func.isRequired,
         drag: React.PropTypes.func.isRequired,
     }
 
