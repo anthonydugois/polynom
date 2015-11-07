@@ -1,6 +1,5 @@
 import React from "react"
 
-import Expand from "./Expand"
 import Path from "./Path"
 import Point from "./Point"
 import Button from "Control/Button"
@@ -37,28 +36,24 @@ function Sidebar(props) {
 
     const shapes = paths.map((path, index) => {
         return (
-            <Expand
+            <Path
                 key={ index }
-                initialExpanded={ index === 0 }
-                title={ `Path ${ index + 1 }` }
                 index={ index }
+                initialExpanded={ index === 0 }
+                path={ path }
                 activePath={ activePath }
                 setActivePath={ setActivePath }
-                removePath={ removePath }>
-                <Path
-                    index={ index }
-                    path={ path }
-                    setRelative={ setRelative }
-                    setClosed={ setClosed }
-                    setFilled={ setFilled } />
-            </Expand>
+                removePath={ removePath }
+                setRelative={ setRelative }
+                setClosed={ setClosed }
+                setFilled={ setFilled } />
         )
     })
 
     return (
         <div className="ad-Sidebar">
-            <div className="ad-Sidebar-content">
-                <div className="ad-Sidebar-settings">
+            <div className="ad-Sidebar-settings">
+                <div className="ad-Sidebar-content">
                     <Point
                         w={ w }
                         h={ h }
@@ -74,17 +69,19 @@ function Sidebar(props) {
                         setArcParam={ setArcParam }
                         removeActivePoint={ removeActivePoint } />
                 </div>
-
-                <div className="ad-Sidebar-settings">
-                    { shapes }
-                </div>
             </div>
 
-            <div className="ad-Sidebar-actions">
-                <Button
-                    icon="add"
-                    value="New path"
-                    onClick={ addPath } />
+            <div className="ad-Sidebar-settings">
+                <div className="ad-Sidebar-content">
+                    { shapes }
+                </div>
+
+                <div className="ad-Sidebar-actions">
+                    <Button
+                        icon="add"
+                        value="New path"
+                        onClick={ addPath } />
+                </div>
             </div>
         </div>
     )
