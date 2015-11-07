@@ -5,14 +5,19 @@
     display: flex;
     flex-direction: column;
 }
-    .ad-Sidebar-content {
-        flex: 1;
-        overflow: auto;
+    .ad-Sidebar-settings {
+        flex: 1 0 0;
+        display: flex;
+        flex-direction: column;
     }
-    .ad-Sidebar-actions {
-        flex-shrink: 0;
-        padding: 1rem 2rem;
-    }
+        .ad-Sidebar-content {
+            flex: 1;
+            overflow: auto;
+        }
+        .ad-Sidebar-actions {
+            flex-shrink: 0;
+            padding: 1rem 2rem;
+        }
 
 .ad-Expand-head {
     display: flex;

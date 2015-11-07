@@ -44,8 +44,9 @@ class Path extends Component {
 
         const {
             points,
-            closed,
             relative,
+            closed,
+            filled,
         } = this.props.path
 
         return (

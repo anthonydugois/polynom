@@ -113,12 +113,16 @@ class Builder extends Component {
         e.preventDefault()
         e.stopPropagation()
 
-        const { activePath, paths } = this.state
+        let { activePath, paths } = this.state
+
+        if (activePath === paths.length - 1) {
+            activePath--
+        }
 
         paths.splice(path, 1)
 
         this.setState({
-            activePath: activePath - 1,
+            activePath,
             paths,
         })
     }
