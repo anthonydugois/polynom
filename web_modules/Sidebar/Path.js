@@ -11,6 +11,7 @@ class Path extends Component {
         index: React.PropTypes.number.isRequired,
         initialExpanded: React.PropTypes.bool.isRequired,
         path: React.PropTypes.object.isRequired,
+        nbPaths: React.PropTypes.number.isRequired,
         activePath: React.PropTypes.number.isRequired,
         setActivePath: React.PropTypes.func.isRequired,
         setPath: React.PropTypes.func.isRequired,
@@ -62,6 +63,7 @@ class Path extends Component {
         const {
             index,
             activePath,
+            nbPaths,
             setActivePath,
             removePath,
             setRelative,
@@ -101,7 +103,7 @@ class Path extends Component {
                     </h4>
 
                     <div className="ad-Expand-actions">
-                        { index !== 0 && (
+                        { nbPaths !== 1 && (
                             <button
                                 className="ad-Expand-button"
                                 onClick={ (e) => removePath(e, index) }>

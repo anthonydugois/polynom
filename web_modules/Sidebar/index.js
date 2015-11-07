@@ -38,12 +38,13 @@ function Sidebar(props) {
         removeActivePoint,
     } = props
 
-    const shapes = paths.map((path, index) => {
+    const shapes = paths.map((path, index, _paths) => {
         return (
             <Path
                 key={ index }
                 index={ index }
                 initialExpanded={ index === 0 }
+                nbPaths={ _paths.length }
                 path={ path }
                 activePath={ activePath }
                 setActivePath={ setActivePath }

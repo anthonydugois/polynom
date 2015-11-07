@@ -136,7 +136,7 @@ class Builder extends Component {
 
         let { activePath, paths } = this.state
 
-        if (path <= activePath) {
+        if (path <= activePath && activePath > 0) {
             activePath--
         }
 
