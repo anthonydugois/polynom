@@ -8,23 +8,23 @@ export default function getPath(points, closed, relative) {
             const prev = _points[index - 1]
 
             switch (point.type) {
-                case "M":
+                case "m":
                     d += M(prev, point, relative)
                 break
 
-                case "L":
+                case "l":
                     d += L(prev, point, relative)
                 break
 
-                case "Q":
+                case "q":
                     d += Q(prev, point, relative)
                 break
 
-                case "C":
+                case "c":
                     d += C(prev, point, relative)
                 break
 
-                case "A":
+                case "a":
                     d += A(prev, point, relative)
                 break
             }

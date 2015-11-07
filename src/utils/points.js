@@ -1,16 +1,16 @@
 import parser from "svg-path-parser"
 
 export function M(x = 0, y = 0) {
-    return { type: "M", x, y }
+    return { type: "m", x, y }
 }
 
 export function L(x = 0, y = 0) {
-    return { type: "L", x, y }
+    return { type: "l", x, y }
 }
 
 export function Q(qx = 0, qy = 0, x = 0, y = 0) {
     return {
-        type: "Q", x, y,
+        type: "q", x, y,
         quadratic: { t: false, x: qx, y: qy },
     }
 }
@@ -25,7 +25,7 @@ export function T(qx = 0, qy = 0, x = 0, y = 0) {
 
 export function C(x1 = 0, y1 = 0, x2 = 0, y2 = 0, x = 0, y = 0) {
     return {
-        type: "C", x, y,
+        type: "c", x, y,
         cubic: { s: false, x1, y1, x2, y2 },
     }
 }
@@ -40,7 +40,7 @@ export function S(x1 = 0, y1 = 0, x2 = 0, y2 = 0, x = 0, y = 0) {
 
 export function A(rx = 1, ry = 1, rot = 0, laf = 1, sf = 0, x = 0, y = 0) {
     return {
-        type: "A", x, y,
+        type: "a", x, y,
         arc: { rx, ry, rot, laf, sf },
     }
 }
@@ -189,8 +189,9 @@ function getPoints(path) {
             }
         })
     } catch (e) {
-        console.log(e)
-        purifiedPoints = []
+        if (__DEV__) {
+            console.log(e)
+        }
     }
 
     return purifiedPoints

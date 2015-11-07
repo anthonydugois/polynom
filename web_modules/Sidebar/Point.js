@@ -31,11 +31,11 @@ function Point(props) {
     }
 
     const choices = [
-        { name: "Move", value: "m", checked: active.type === "M" },
-        { name: "Line", value: "l", checked: active.type === "L" },
-        { name: "Quad", value: "q", checked: active.type === "Q" },
-        { name: "Cub", value: "c", checked: active.type === "C" },
-        { name: "Arc", value: "a", checked: active.type === "A" },
+        { name: "Move", value: "m", checked: active.type === "m" },
+        { name: "Line", value: "l", checked: active.type === "l" },
+        { name: "Quad", value: "q", checked: active.type === "q" },
+        { name: "Cub", value: "c", checked: active.type === "c" },
+        { name: "Arc", value: "a", checked: active.type === "a" },
     ]
 
     return (

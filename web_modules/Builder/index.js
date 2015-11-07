@@ -10,6 +10,14 @@ import { M, L, Q, T, C, S, A, getPathFromPoints } from "../../src/utils/points"
 
 import "./styles"
 
+function isCtrlOrMetaKey(e) {
+    const appVersion = navigator.appVersion.toLowerCase(),
+        ctrl = appVersion.indexOf("win") > - 1 && e.ctrlKey,
+        meta = appVersion.indexOf("mac") > - 1 && e.metaKey
+
+    return (ctrl || meta)
+}
+
 class Builder extends Component {
     state = {
         ctrl: false,
@@ -44,13 +52,13 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (e.keyCode === 16) {
+        if (isCtrlOrMetaKey(e)) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if (e.keyCode === 16) {
+        if ( ! isCtrlOrMetaKey(e)) {
             this.setState({ ctrl: false })
         }
     }
