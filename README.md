@@ -1,6 +1,6 @@
 # SVG Path Builder
 
-[![SVG Path Builder Preview](http://www.plixup.com/pics_core3/14470227235688screen_svg_path_builder.png)](http://anthonydugois.com/)
+[![SVG Path Builder Preview](http://www.plixup.com/pics_core3/14470227235688screen_svg_path_builder.png)](http://anthonydugois.com/svg-path-builder/)
 
 Build SVG paths easily using an intuitive interface. The demo is available at http://anthonydugois.com/svg-path-builder.
 
