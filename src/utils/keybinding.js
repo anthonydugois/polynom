@@ -99,25 +99,37 @@ export const keyCodes = {
     "single_quote": 222,
 }
 
-export default function keybind(e, keys, prevent = false, agno = false) {
+export default function key(e, keys) {
     const code = e.which || e.keyCode
     let result = false
 
-    keys = keys.trim().toLowerCase().split("+")
+    keys = keys.split("+")
 
     if (keys.length > 0) {
         result = true
 
         keys.forEach((k) => {
-            if ( ! agno && k === "ctrl") {
-                result = result && isCtrlOrMetaKey(e)
-            } else {
-                result = result && keyCodes[k] === code
+            switch (k) {
+                case "ctrl":
+                    result = result && isCtrlOrMetaKey(e)
+                break
+
+                case "alt":
+                    result = result && e.altKey
+                break
+
+                case "shift":
+                    result = result && e.shiftKey
+                break
+
+                default:
+                    result = result && keyCodes[k] === code
+                break
             }
         })
     }
 
-    if (result && prevent) {
+    if (result) {
         e.preventDefault()
     }
 

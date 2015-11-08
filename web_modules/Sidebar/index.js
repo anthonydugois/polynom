@@ -35,7 +35,7 @@ function Sidebar(props) {
         setCubicPosition,
         setCubicS,
         setArcParam,
-        removeActivePoint,
+        removePoint,
         importSVG,
         exportSVG,
     } = props
@@ -102,7 +102,7 @@ function Sidebar(props) {
                             <Button
                                 action="delete"
                                 value="Remove"
-                                onClick={ removeActivePoint } />
+                                onClick={ (e) => removePoint(e, activePath, paths[activePath].activePoint) } />
                         </div>
                     ) }
                 </div>

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import SVG from "SVG"
 import Sidebar from "Sidebar"
 
-import keybind from "../../src/utils/keybinding"
+import key from "../../src/utils/keybinding"
 import { positive } from "../../src/utils/maths"
 import { M, L, Q, C, A, getPathFromString } from "../../src/utils/points"
 
@@ -44,14 +44,31 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (keybind(e, "ctrl")) {
+        if (key(e, "ctrl")) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if ( ! keybind(e, "ctrl")) {
+        const {
+            activePath,
+            paths,
+        } = this.state
+
+        if ( ! key(e, "ctrl")) {
             this.setState({ ctrl: false })
+        }
+
+        if (key(e, "ctrl+p")) {
+            this.addPath(e)
+        }
+
+        if (key(e, "delete")) {
+            this.removePoint(e, activePath, paths[activePath].activePoint)
+        }
+
+        if (key(e, "ctrl+delete")) {
+            this.removePath(e, activePath)
         }
     }
 
@@ -145,16 +162,18 @@ class Builder extends Component {
 
         let { activePath, paths } = this.state
 
-        if (path <= activePath && activePath > 0) {
-            activePath--
+        if (paths.length > 1) {
+            if (path <= activePath && activePath > 0) {
+                activePath--
+            }
+
+            paths.splice(path, 1)
+
+            this.setState({
+                activePath,
+                paths,
+            })
         }
-
-        paths.splice(path, 1)
-
-        this.setState({
-            activePath,
-            paths,
-        })
     }
 
     setGridSize = (e) => {
@@ -433,16 +452,16 @@ class Builder extends Component {
         }
     }
 
-    removeActivePoint = (e) => {
-        const { activePath, paths } = this.state
-        let { activePoint, points } = paths[activePath]
+    removePoint = (e, path, point) => {
+        const { paths } = this.state
+        let { points } = paths[path]
 
-        if (points.length > 1 && activePoint !== 0) {
-            points = this.resetNextCurve(activePoint, points)
-            points.splice(activePoint, 1)
+        if (points.length > 1 && point !== 0) {
+            points = this.resetNextCurve(point, points)
+            points.splice(point, 1)
 
-            paths[activePath].points = points
-            paths[activePath].activePoint--
+            paths[path].points = points
+            paths[path].activePoint--
 
             this.setState({ paths })
         }
@@ -474,7 +493,7 @@ class Builder extends Component {
                     setCubicPosition={ this.setCubicPosition }
                     setCubicS={ this.setCubicS }
                     setArcParam={ this.setArcParam }
-                    removeActivePoint={ this.removeActivePoint }
+                    removePoint={ this.removePoint }
                     importSVG={ this.importSVG } />
 
                 <div className="ad-Builder-rendering">
