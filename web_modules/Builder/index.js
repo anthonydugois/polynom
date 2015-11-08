@@ -6,7 +6,7 @@ import Sidebar from "Sidebar"
 import Foot from "App/Foot"
 
 import { positive } from "../../src/utils/maths"
-import { M, L, Q, T, C, S, A, getPathFromPoints } from "../../src/utils/points"
+import { M, L, Q, T, C, S, A, getPathFromString } from "../../src/utils/points"
 
 import "./styles"
 
@@ -63,6 +63,33 @@ class Builder extends Component {
         }
     }
 
+    importSVG = (e) => {
+        let file = e.target.files[0]
+        const reader = new FileReader()
+
+        reader.onload = (f) => {
+            const svg = f.target.result,
+                w = parseInt(svg.match(/width="(.+)"/)[1]),
+                h = parseInt(svg.match(/height="(.+)"/)[1]),
+                d = svg.match(/[^a-zA-Z0-9]+d=("|')(.+)("|')/g).map((_d) => _d.replace(/(d|=|"|')/g, "").trim()),
+                paths = d.map((path) => {
+                    return {
+                        filled: false,
+                        activePoint: 0,
+                        ...getPathFromString(path),
+                    }
+                })
+
+            this.setState({
+                w,
+                h,
+                paths,
+            })
+        }
+
+        reader.readAsBinaryString(file)
+    }
+
     setWidth = (e) => {
         this.setState({ w: positive(e.target.value, 1) })
     }
@@ -100,7 +127,7 @@ class Builder extends Component {
 
     setPath = (index, path) => {
         const { paths } = this.state
-        const { relative, closed, points } = getPathFromPoints(path)
+        const { relative, closed, points } = getPathFromString(path)
 
         if (points.length > 0) {
             paths[index].relative = relative
@@ -466,7 +493,8 @@ class Builder extends Component {
                     setCubicPosition={ this.setCubicPosition }
                     setCubicS={ this.setCubicS }
                     setArcParam={ this.setArcParam }
-                    removeActivePoint={ this.removeActivePoint } />
+                    removeActivePoint={ this.removeActivePoint }
+                    importSVG={ this.importSVG } />
 
                 <div className="ad-Builder-rendering">
                     <div className="ad-Builder-svg">

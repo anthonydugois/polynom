@@ -36,6 +36,8 @@ function Sidebar(props) {
         setCubicS,
         setArcParam,
         removeActivePoint,
+        importSVG,
+        exportSVG,
     } = props
 
     const shapes = paths.map((path, index, _paths) => {
@@ -124,11 +126,13 @@ function Sidebar(props) {
                             w={ w }
                             h={ h }
                             grid={ grid }
+                            paths={ paths }
                             setWidth={ setWidth }
                             setHeight={ setHeight }
                             setGridSize={ setGridSize }
                             setGridSnap={ setGridSnap }
-                            setGridShow={ setGridShow } />
+                            setGridShow={ setGridShow }
+                            importSVG={ importSVG } />
                     </div>
                 </div>
 

@@ -26,6 +26,8 @@
         overflow: auto;
     }
     .ad-Sidebar-actions {
+        display: flex;
+        align-items: center;
         flex-shrink: 0;
         padding: 2rem;
     }
@@ -76,3 +78,6 @@
 .ad-Setting + .ad-Setting {
     padding-top: 0;
 }
+    .ad-Setting > * + * {
+        margin-left: .25rem;
+    }

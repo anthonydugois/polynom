@@ -16,7 +16,7 @@ export function Q(qx = 0, qy = 0, x = 0, y = 0) {
 }
 
 export function T(qx = 0, qy = 0, x = 0, y = 0) {
-    const q = Q(x, y, qx, qy)
+    const q = Q(qx, qy, x, y)
 
     q.quadratic.t = true
 
@@ -31,7 +31,7 @@ export function C(x1 = 0, y1 = 0, x2 = 0, y2 = 0, x = 0, y = 0) {
 }
 
 export function S(x1 = 0, y1 = 0, x2 = 0, y2 = 0, x = 0, y = 0) {
-    const c = C(x, y, x1, y1, x2, y2)
+    const c = C(x1, y1, x2, y2, x, y)
 
     c.cubic.s = true
 
@@ -45,7 +45,7 @@ export function A(rx = 1, ry = 1, rot = 0, laf = 1, sf = 0, x = 0, y = 0) {
     }
 }
 
-export function getPathFromPoints(path) {
+export function getPathFromString(path) {
     return {
         relative: getRelative(path),
         closed: getClosed(path),
@@ -86,91 +86,91 @@ function getPoints(path) {
 
             switch (type) {
                 case "m":
-                    values = [
+                    values = purify([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = M(...values)
                 break
 
                 case "l":
-                    values = [
+                    values = purify([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = L(...values)
                 break
 
                 case "h":
-                    values = [
+                    values = purify([
                         p.relative ? p.x + x : p.x,
                         y,
-                    ]
+                    ])
 
                     point = L(...values)
                 break
 
                 case "v":
-                    values = [
+                    values = purify([
                         x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = L(...values)
                 break
 
                 case "q":
-                    values = [
+                    values = purify([
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = Q(...values)
                 break
 
                 case "t":
-                    values = [
+                    values = purify([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = T(...values)
                 break
 
                 case "c":
-                    values = [
+                    values = purify([
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = C(...values)
                 break
 
                 case "s":
-                    values = [
+                    values = purify([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = S(...values)
                 break
 
                 case "a":
-                    values = [
+                    values = purify([
                         p.rx,
                         p.ry,
                         p.xAxisRotation,
@@ -178,7 +178,7 @@ function getPoints(path) {
                         p.sweep,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
+                    ])
 
                     point = A(...values)
                 break
@@ -195,4 +195,8 @@ function getPoints(path) {
     }
 
     return purifiedPoints
+}
+
+function purify(values) {
+    return values.map((n) => parseInt(n))
 }

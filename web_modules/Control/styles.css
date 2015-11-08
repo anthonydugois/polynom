@@ -13,16 +13,17 @@
     }
 
 .ad-Button {
+    flex: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     padding: .8rem 1.5rem;
     background: var(--ad-Color-sec);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: background .2s;
+    text-decoration: none;
     font-size: 1rem;
     color: #fff;
 }
@@ -38,11 +39,11 @@
 .ad-Button--delete:hover {
     background: color(var(--ad-Color-del) l(+5%));
 }
-.ad-Button--reset {
+.ad-Button--secondary {
     background: color(var(--ad-Color-prim) l(+10%));
 }
-.ad-Button--reset:focus,
-.ad-Button--reset:hover {
+.ad-Button--secondary:focus,
+.ad-Button--secondary:hover {
     background: color(var(--ad-Color-prim) l(+15%));
 }
     .ad-Button-text {
@@ -55,6 +56,10 @@
     .ad-Icon + .ad-Button-text {
         margin-left: .4rem;
     }
+
+.ad-ButtonFile-file {
+    display: none;
+}
 
 .ad-Text,
 .ad-Textarea {

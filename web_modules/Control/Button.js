@@ -4,7 +4,7 @@ import cx from "classnames"
 import Icon from "Icon"
 
 function Button(props) {
-    const {
+    let {
         action,
         icon,
         onClick,

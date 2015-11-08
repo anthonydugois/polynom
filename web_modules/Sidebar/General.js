@@ -1,6 +1,9 @@
 import React from "react"
 
 import Control from "Control"
+import ButtonFile from "Control/ButtonFile"
+
+import getPath from "../../src/utils/path"
 
 import "./styles"
 
@@ -9,15 +12,37 @@ function General(props) {
         w,
         h,
         grid,
+        paths,
         setWidth,
         setHeight,
         setGridSize,
         setGridSnap,
         setGridShow,
+        importSVG,
     } = props
+
+    const svgPaths = paths.map((p) => `\n\t<path d="${ getPath(p.points, p.closed, p.relative) }"></path>`).join(""),
+        svg = `<svg width="${ w }" height="${ h }">${ svgPaths }\n</svg>`,
+        data = `data:image/svg+xml;charset=utf-8,${ encodeURIComponent(svg) }`
 
     return (
         <div className="ad-Settings">
+            <div className="ad-Setting">
+                <ButtonFile
+                    action="secondary"
+                    value="Import SVG"
+                    onChange={ importSVG } />
+
+                <a
+                    href={ data }
+                    download="paths.svg"
+                    className="ad-Button  ad-Button--secondary">
+                    <span className="ad-Button-text">
+                        Export SVG
+                    </span>
+                </a>
+            </div>
+
             <div className="ad-Setting">
                 <Control
                     name="Width"
