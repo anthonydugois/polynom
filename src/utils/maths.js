@@ -17,5 +17,13 @@ export function positive(n, min = false, max = false) {
 }
 
 export function parseIntArray(values) {
-    return values.map((n) => parseInt(n))
+    return values.map((n) => {
+        if (isNaN(parseInt(n))) {
+            n = n ? 1 : 0
+        } else {
+            n = parseInt(n)
+        }
+
+        return n
+    })
 }
