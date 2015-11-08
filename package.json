@@ -1,6 +1,6 @@
 {
   "name": "svg-path-builder",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Build SVG paths easily using an intuitive interface.",
   "author": {
     "name": "Anthony Dugois",
@@ -28,7 +28,6 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "opn": "^3.0.2",
     "path": "^0.12.7",
-    "postcss-brand-colors": "^0.3.0",
     "postcss-color-function": "^2.0.0",
     "postcss-custom-media": "^5.0.0",
     "postcss-custom-properties": "^5.0.0",
