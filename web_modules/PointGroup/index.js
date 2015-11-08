@@ -5,6 +5,8 @@ import Point from "./Point"
 import Quadratic from "./Quadratic"
 import Cubic from "./Cubic"
 
+import "./styles"
+
 function PointGroup(props) {
     const {
         pointGroup,
