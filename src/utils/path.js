@@ -38,6 +38,16 @@ export default function getPath(points, closed, relative) {
     return d.trim()
 }
 
+export function exportSVG(w, h, paths) {
+    const svgPaths = paths.map((p) => {
+        return `\n\t<path d="${ getPath(p.points, p.closed, p.relative) }"></path>`
+    }).join("")
+
+    const svg = `<svg width="${ w }" height="${ h }">${ svgPaths }\n</svg>`
+
+    return `data:image/svg+xml;charset=utf-8,${ encodeURIComponent(svg) }`
+}
+
 function position(prev, point, relative) {
     let d
 

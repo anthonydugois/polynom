@@ -2,8 +2,9 @@ import React from "react"
 
 import Control from "Control"
 import ButtonFile from "Button/ButtonFile"
+import ButtonLink from "Button/ButtonLink"
 
-import getPath from "../../src/utils/path"
+import getPath, { exportSVG } from "../../src/utils/path"
 
 import "./styles"
 
@@ -21,10 +22,6 @@ function General(props) {
         importSVG,
     } = props
 
-    const svgPaths = paths.map((p) => `\n\t<path d="${ getPath(p.points, p.closed, p.relative) }"></path>`).join(""),
-        svg = `<svg width="${ w }" height="${ h }">${ svgPaths }\n</svg>`,
-        data = `data:image/svg+xml;charset=utf-8,${ encodeURIComponent(svg) }`
-
     return (
         <div className="ad-Settings">
             <div className="ad-Setting">
@@ -33,14 +30,11 @@ function General(props) {
                     value="Import SVG"
                     onChange={ importSVG } />
 
-                <a
-                    href={ data }
-                    download="paths.svg"
-                    className="ad-Button  ad-Button--secondary">
-                    <span className="ad-Button-text">
-                        Export SVG
-                    </span>
-                </a>
+                <ButtonLink
+                    action="secondary"
+                    value="Export SVG"
+                    href={ exportSVG(w, h, paths) }
+                    download="paths.svg" />
             </div>
 
             <div className="ad-Setting">

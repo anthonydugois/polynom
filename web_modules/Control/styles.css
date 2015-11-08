@@ -12,55 +12,6 @@
         color: color(var(--ad-Color-prim) l(+60%));
     }
 
-.ad-Button {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: .8rem 1.5rem;
-    background: var(--ad-Color-sec);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background .2s;
-    text-decoration: none;
-    font-size: 1rem;
-    color: #fff;
-}
-.ad-Button:focus,
-.ad-Button:hover {
-    outline: 0;
-    background: color(var(--ad-Color-sec) l(+5%));
-}
-.ad-Button--delete {
-    background: var(--ad-Color-del);
-}
-.ad-Button--delete:focus,
-.ad-Button--delete:hover {
-    background: color(var(--ad-Color-del) l(+5%));
-}
-.ad-Button--secondary {
-    background: color(var(--ad-Color-prim) l(+10%));
-}
-.ad-Button--secondary:focus,
-.ad-Button--secondary:hover {
-    background: color(var(--ad-Color-prim) l(+15%));
-}
-    .ad-Button-text {
-        text-transform: uppercase;
-        font-family: "Open Sans", sans-serif;
-        font-weight: bold;
-        font-size: .65em;
-        letter-spacing: .05rem;
-    }
-    .ad-Icon + .ad-Button-text {
-        margin-left: .4rem;
-    }
-
-.ad-ButtonFile-file {
-    display: none;
-}
-
 .ad-Text,
 .ad-Textarea {
     background: color(var(--ad-Color-prim) l(+10%));

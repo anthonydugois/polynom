@@ -3,9 +3,7 @@ import cx from "classnames"
 
 import Icon from "Icon"
 
-import "./styles"
-
-function Button(props) {
+function ButtonLink(props) {
     let {
         action,
         icon,
@@ -14,8 +12,7 @@ function Button(props) {
     } = props
 
     return (
-        <button
-            type="button"
+        <a
             className={ cx("ad-Button", `ad-Button--${ action ? action : "default" }`) }
             { ..._props }>
             { icon && (<Icon name={ icon } />) }
@@ -24,8 +21,8 @@ function Button(props) {
                     { value }
                 </span>
             ) }
-        </button>
+        </a>
     )
 }
 
-export default Button
+export default ButtonLink
