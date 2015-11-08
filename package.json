@@ -47,7 +47,6 @@
   "dependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-router": "^1.0.0-rc3",
     "svg-path-parser": "^1.0.1"
   },
   "repository": {
