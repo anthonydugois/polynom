@@ -99,7 +99,7 @@ export const keyCodes = {
     "single_quote": 222,
 }
 
-export default function key(e, keys) {
+export default function keys(e, keys) {
     const code = e.which || e.keyCode
     let result = false
 

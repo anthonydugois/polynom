@@ -72,7 +72,7 @@ function getPoints(path) {
 
         points.forEach((p) => {
             const type = p.code.toLowerCase()
-            let point = false, values = false, x = 0, y = 0
+            let point = false, x = 0, y = 0
 
             if (purifiedPoints.length > 0) {
                 x = purifiedPoints[purifiedPoints.length - 1].x
@@ -81,91 +81,75 @@ function getPoints(path) {
 
             switch (type) {
                 case "m":
-                    values = [
+                    point = M(...parseIntArray([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = M(...parseIntArray(values))
+                    ]))
                 break
 
                 case "l":
-                    values = [
+                    point = L(...parseIntArray([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = L(...parseIntArray(values))
+                    ]))
                 break
 
                 case "h":
-                    values = [
+                    point = L(...parseIntArray([
                         p.relative ? p.x + x : p.x,
                         y,
-                    ]
-
-                    point = L(...parseIntArray(values))
+                    ]))
                 break
 
                 case "v":
-                    values = [
+                    point = L(...parseIntArray([
                         x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = L(...parseIntArray(values))
+                    ]))
                 break
 
                 case "q":
-                    values = [
+                    point = Q(...parseIntArray([
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = Q(...parseIntArray(values))
+                    ]))
                 break
 
                 case "t":
-                    values = [
+                    point = T(...parseIntArray([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = T(...parseIntArray(values))
+                    ]))
                 break
 
                 case "c":
-                    values = [
+                    point = C(...parseIntArray([
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = C(...parseIntArray(values))
+                    ]))
                 break
 
                 case "s":
-                    values = [
+                    point = S(...parseIntArray([
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = S(...parseIntArray(values))
+                    ]))
                 break
 
                 case "a":
-                    values = [
+                    point = A(...parseIntArray([
                         p.rx,
                         p.ry,
                         p.xAxisRotation,
@@ -173,9 +157,7 @@ function getPoints(path) {
                         p.sweep,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ]
-
-                    point = A(...parseIntArray(values))
+                    ]))
                 break
             }
 

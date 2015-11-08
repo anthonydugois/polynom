@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import SVG from "SVG"
 import Sidebar from "Sidebar"
 
-import key from "../../src/utils/keybinding"
+import keys from "../../src/utils/keybinding"
 import { positive } from "../../src/utils/maths"
 import { M, L, Q, C, A, getPathFromString } from "../../src/utils/points"
 
@@ -44,7 +44,7 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (key(e, "ctrl")) {
+        if (keys(e, "ctrl")) {
             this.setState({ ctrl: true })
         }
     }
@@ -55,19 +55,19 @@ class Builder extends Component {
             paths,
         } = this.state
 
-        if ( ! key(e, "ctrl")) {
+        if ( ! keys(e, "ctrl")) {
             this.setState({ ctrl: false })
         }
 
-        if (key(e, "ctrl+p")) {
+        if (keys(e, "ctrl+p")) {
             this.addPath(e)
         }
 
-        if (key(e, "delete")) {
+        if (keys(e, "delete")) {
             this.removePoint(e, activePath, paths[activePath].activePoint)
         }
 
-        if (key(e, "ctrl+delete")) {
+        if (keys(e, "ctrl+delete")) {
             this.removePath(e, activePath)
         }
     }
@@ -97,25 +97,28 @@ class Builder extends Component {
         this.setState({ h: positive(e.target.value, 1) })
     }
 
-    setRelative = (e, path) => {
-        const { paths } = this.state
-        paths[path].relative = e.target.checked
+    setGridSize = (e) => {
+        const { grid } = this.state
 
-        this.setState({ paths })
+        grid.size = positive(e.target.value, 1, Math.min(this.state.w, this.state.h))
+
+        this.setState({ grid })
     }
 
-    setClosed = (e, path) => {
-        const { paths } = this.state
-        paths[path].closed = e.target.checked
+    setGridSnap = (e) => {
+        const { grid } = this.state
 
-        this.setState({ paths })
+        grid.snap = e.target.checked
+
+        this.setState({ grid })
     }
 
-    setFilled = (e, path) => {
-        const { paths } = this.state
-        paths[path].filled = e.target.checked
+    setGridShow = (e) => {
+        const { grid } = this.state
 
-        this.setState({ paths })
+        grid.show = e.target.checked
+
+        this.setState({ grid })
     }
 
     setActivePath = (e, activePath) => {
@@ -135,6 +138,27 @@ class Builder extends Component {
 
             this.setState({ paths })
         }
+    }
+
+    setRelative = (e, path) => {
+        const { paths } = this.state
+        paths[path].relative = e.target.checked
+
+        this.setState({ paths })
+    }
+
+    setClosed = (e, path) => {
+        const { paths } = this.state
+        paths[path].closed = e.target.checked
+
+        this.setState({ paths })
+    }
+
+    setFilled = (e, path) => {
+        const { paths } = this.state
+        paths[path].filled = e.target.checked
+
+        this.setState({ paths })
     }
 
     addPath = (e) => {
@@ -176,28 +200,39 @@ class Builder extends Component {
         }
     }
 
-    setGridSize = (e) => {
-        const { grid } = this.state
+    addPoint = (e) => {
+        if (this.state.ctrl) {
+            const coords = this.getMouseCoords(e)
+            const { activePath, paths } = this.state
+            let { activePoint, points } = paths[activePath]
 
-        grid.size = positive(e.target.value, 1, Math.min(this.state.w, this.state.h))
+            points = this.resetNextCurve(activePoint, points)
+            points = [
+                ...points.slice(0, activePoint + 1),
+                L(coords.x, coords.y),
+                ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
+            ]
 
-        this.setState({ grid })
+            paths[activePath].points = points
+            paths[activePath].activePoint++
+
+            this.setState({ paths })
+        }
     }
 
-    setGridSnap = (e) => {
-        const { grid } = this.state
+    removePoint = (e, path, point) => {
+        const { paths } = this.state
+        let { points } = paths[path]
 
-        grid.snap = e.target.checked
+        if (points.length > 1 && point !== 0) {
+            points = this.resetNextCurve(point, points)
+            points.splice(point, 1)
 
-        this.setState({ grid })
-    }
+            paths[path].points = points
+            paths[path].activePoint--
 
-    setGridShow = (e) => {
-        const { grid } = this.state
-
-        grid.show = e.target.checked
-
-        this.setState({ grid })
+            this.setState({ paths })
+        }
     }
 
     getMouseCoords = (e) => {
@@ -432,48 +467,12 @@ class Builder extends Component {
         this.setState({ drag: false })
     }
 
-    addPoint = (e) => {
-        if (this.state.ctrl) {
-            const coords = this.getMouseCoords(e)
-            const { activePath, paths } = this.state
-            let { activePoint, points } = paths[activePath]
-
-            points = this.resetNextCurve(activePoint, points)
-            points = [
-                ...points.slice(0, activePoint + 1),
-                L(coords.x, coords.y),
-                ...(activePoint === points.length - 1 ? [] : points.slice(activePoint + 1, points.length)),
-            ]
-
-            paths[activePath].points = points
-            paths[activePath].activePoint++
-
-            this.setState({ paths })
-        }
-    }
-
-    removePoint = (e, path, point) => {
-        const { paths } = this.state
-        let { points } = paths[path]
-
-        if (points.length > 1 && point !== 0) {
-            points = this.resetNextCurve(point, points)
-            points.splice(point, 1)
-
-            paths[path].points = points
-            paths[path].activePoint--
-
-            this.setState({ paths })
-        }
-    }
-
     render() {
         return (
             <div
                 className="ad-Builder"
                 onMouseUp={ this.cancelDragging }>
                 <Sidebar
-                    { ...this.state }
                     setWidth={ this.setWidth }
                     setHeight={ this.setHeight }
                     setGridSize={ this.setGridSize }
@@ -494,17 +493,18 @@ class Builder extends Component {
                     setCubicS={ this.setCubicS }
                     setArcParam={ this.setArcParam }
                     removePoint={ this.removePoint }
-                    importSVG={ this.importSVG } />
+                    importSVG={ this.importSVG }
+                    { ...this.state } />
 
                 <div className="ad-Builder-rendering">
                     <div className="ad-Builder-svg">
                         <SVG
                             ref="svg"
-                            { ...this.state }
                             addPoint={ this.addPoint }
                             handleMouseMove={ this.handleMouseMove }
                             setActivePath={ this.setActivePath }
-                            drag={ this.drag } />
+                            drag={ this.drag }
+                            { ...this.state } />
                     </div>
                 </div>
             </div>
