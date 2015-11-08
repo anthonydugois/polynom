@@ -15,3 +15,7 @@ export function positive(n, min = false, max = false) {
 
     return n
 }
+
+export function parseIntArray(values) {
+    return values.map((n) => parseInt(n))
+}

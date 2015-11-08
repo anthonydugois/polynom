@@ -1,4 +1,5 @@
 import parser from "svg-path-parser"
+import { parseIntArray } from "./maths"
 
 export function M(x = 0, y = 0) {
     return { type: "m", x, y }
@@ -54,19 +55,11 @@ export function getPathFromString(path) {
 }
 
 function getClosed(path) {
-    if (path.match(/z/gi)) {
-        return true
-    }
-
-    return false
+    return !! path.match(/z/gi)
 }
 
 function getRelative(path) {
-    if (path.match(/(m|l|h|v|q|t|c|s|a)/g)) {
-        return true
-    }
-
-    return false
+    return !! path.match(/(m|l|h|v|q|t|c|s|a)/g)
 }
 
 function getPoints(path) {
@@ -86,91 +79,91 @@ function getPoints(path) {
 
             switch (type) {
                 case "m":
-                    values = purify([
+                    values = [
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = M(...values)
+                    point = M(...parseIntArray(values))
                 break
 
                 case "l":
-                    values = purify([
+                    values = [
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = L(...values)
+                    point = L(...parseIntArray(values))
                 break
 
                 case "h":
-                    values = purify([
+                    values = [
                         p.relative ? p.x + x : p.x,
                         y,
-                    ])
+                    ]
 
-                    point = L(...values)
+                    point = L(...parseIntArray(values))
                 break
 
                 case "v":
-                    values = purify([
+                    values = [
                         x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = L(...values)
+                    point = L(...parseIntArray(values))
                 break
 
                 case "q":
-                    values = purify([
+                    values = [
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = Q(...values)
+                    point = Q(...parseIntArray(values))
                 break
 
                 case "t":
-                    values = purify([
+                    values = [
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = T(...values)
+                    point = T(...parseIntArray(values))
                 break
 
                 case "c":
-                    values = purify([
+                    values = [
                         p.relative ? p.x1 + x : p.x1,
                         p.relative ? p.y1 + y : p.y1,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = C(...values)
+                    point = C(...parseIntArray(values))
                 break
 
                 case "s":
-                    values = purify([
+                    values = [
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
                         p.relative ? p.x2 + x : p.x2,
                         p.relative ? p.y2 + y : p.y2,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = S(...values)
+                    point = S(...parseIntArray(values))
                 break
 
                 case "a":
-                    values = purify([
+                    values = [
                         p.rx,
                         p.ry,
                         p.xAxisRotation,
@@ -178,9 +171,9 @@ function getPoints(path) {
                         p.sweep,
                         p.relative ? p.x + x : p.x,
                         p.relative ? p.y + y : p.y,
-                    ])
+                    ]
 
-                    point = A(...values)
+                    point = A(...parseIntArray(values))
                 break
             }
 
@@ -195,8 +188,4 @@ function getPoints(path) {
     }
 
     return purifiedPoints
-}
-
-function purify(values) {
-    return values.map((n) => parseInt(n))
 }
