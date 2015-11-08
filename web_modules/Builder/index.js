@@ -50,25 +50,41 @@ class Builder extends Component {
     }
 
     handleKeyUp = (e) => {
+        if ( ! keys(e, "ctrl")) {
+            this.setState({ ctrl: false })
+        }
+
+        this.handleShortcuts(e)
+    }
+
+    handleShortcuts = (e) => {
         const {
             activePath,
             paths,
         } = this.state
 
-        if ( ! keys(e, "ctrl")) {
-            this.setState({ ctrl: false })
-        }
+        let { activePoint, points } = paths[activePath]
 
         if (keys(e, "ctrl+p")) {
             this.addPath(e)
         }
 
-        if (keys(e, "delete")) {
+        if (keys(e, "ctrl+d")) {
+            this.removePath(e, activePath)
+        }
+
+        if (keys(e, "ctrl+r")) {
             this.removePoint(e, activePath, paths[activePath].activePoint)
         }
 
-        if (keys(e, "ctrl+delete")) {
-            this.removePath(e, activePath)
+        if (keys(e, "ctrl+q")) {
+            if (activePoint < points.length - 1) {
+                paths[activePath].activePoint++
+            } else {
+                paths[activePath].activePoint = 0
+            }
+
+            this.setState({ paths })
         }
     }
 

@@ -123,7 +123,7 @@ export default function keys(e, keys) {
                 break
 
                 default:
-                    result = result && keyCodes[k] === code
+                    result = result && code === keyCodes[k]
                 break
             }
         })

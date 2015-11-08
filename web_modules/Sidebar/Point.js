@@ -23,23 +23,21 @@ function Point(props) {
     const { activePoint, points } = paths[activePath],
         step = grid.snap ? grid.size : 1,
         point = points[activePoint],
-        prev = activePoint !== 0 ? points[activePoint - 1] : false
-
-    const choices = [
-        { name: "Move", value: "m", checked: point.type === "m" },
-        { name: "Line", value: "l", checked: point.type === "l" },
-        { name: "Quad", value: "q", checked: point.type === "q" },
-        { name: "Cub", value: "c", checked: point.type === "c" },
-        { name: "Arc", value: "a", checked: point.type === "a" },
-    ]
+        prev = activePoint > 0 ? points[activePoint - 1] : false
 
     return (
         <div className="ad-Settings">
-            { activePoint !== 0 && (
+            { activePoint > 0 && (
                 <div className="ad-Setting">
                     <Control
                         type="choices"
-                        choices={ choices }
+                        choices={ [
+                            { name: "Move", value: "m", checked: point.type === "m" },
+                            { name: "Line", value: "l", checked: point.type === "l" },
+                            { name: "Quad", value: "q", checked: point.type === "q" },
+                            { name: "Cub", value: "c", checked: point.type === "c" },
+                            { name: "Arc", value: "a", checked: point.type === "a" },
+                        ] }
                         name="pointType"
                         onChange={ setPointType } />
                 </div>
