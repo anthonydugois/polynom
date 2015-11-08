@@ -44,15 +44,15 @@ function Point(props) {
                 <div className="ad-Setting">
                     <Control
                         type="choices"
-                        id="pointType"
                         choices={ choices }
+                        name="pointType"
                         onChange={ setPointType } />
                 </div>
             ) }
 
             <div className="ad-Setting">
                 <Control
-                    name="Point X position"
+                    label="Point X position"
                     type="range"
                     min={ 0 }
                     max={ w }
@@ -63,7 +63,7 @@ function Point(props) {
 
             <div className="ad-Setting">
                 <Control
-                    name="Point Y position"
+                    label="Point Y position"
                     type="range"
                     min={ 0 }
                     max={ h }
@@ -75,7 +75,7 @@ function Point(props) {
             { active.quadratic && prev && prev.quadratic && (
                 <div className="ad-Setting">
                     <Control
-                        name="String to previous curve"
+                        label="String to previous curve"
                         type="checkbox"
                         checked={ active.quadratic.t }
                         onChange={ setQuadraticT } />
@@ -85,7 +85,7 @@ function Point(props) {
             { active.quadratic && ! (prev.quadratic && active.quadratic.t) && (
                 <div className="ad-Setting">
                     <Control
-                        name="Anchor X position"
+                        label="Anchor X position"
                         type="range"
                         min={ 0 }
                         max={ w }
@@ -98,7 +98,7 @@ function Point(props) {
             { active.quadratic && ! (prev.quadratic && active.quadratic.t) && (
                 <div className="ad-Setting">
                     <Control
-                        name="Anchor Y position"
+                        label="Anchor Y position"
                         type="range"
                         min={ 0 }
                         max={ h }
@@ -111,7 +111,7 @@ function Point(props) {
             { active.cubic && prev && prev.cubic && (
                 <div className="ad-Setting">
                     <Control
-                        name="String to previous curve"
+                        label="String to previous curve"
                         type="checkbox"
                         checked={ active.cubic.s }
                         onChange={ setCubicS } />
@@ -121,7 +121,7 @@ function Point(props) {
             { active.cubic && ! (prev.cubic && active.cubic.s) && (
                 <div className="ad-Setting">
                     <Control
-                        name="First anchor X position"
+                        label="First anchor X position"
                         type="range"
                         min={ 0 }
                         max={ w }
@@ -134,7 +134,7 @@ function Point(props) {
             { active.cubic && ! (prev.cubic && active.cubic.s) && (
                 <div className="ad-Setting">
                     <Control
-                        name="First anchor Y position"
+                        label="First anchor Y position"
                         type="range"
                         min={ 0 }
                         max={ h }
@@ -147,7 +147,7 @@ function Point(props) {
             { active.cubic && (
                 <div className="ad-Setting">
                     <Control
-                        name="Second anchor X position"
+                        label="Second anchor X position"
                         type="range"
                         min={ 0 }
                         max={ w }
@@ -160,7 +160,7 @@ function Point(props) {
             { active.cubic && (
                 <div className="ad-Setting">
                     <Control
-                        name="Second anchor Y position"
+                        label="Second anchor Y position"
                         type="range"
                         min={ 0 }
                         max={ h }
@@ -173,7 +173,7 @@ function Point(props) {
             { active.arc && (
                 <div className="ad-Setting">
                     <Control
-                        name="X Radius"
+                        label="X Radius"
                         type="range"
                         min={ 0 }
                         max={ w }
@@ -186,7 +186,7 @@ function Point(props) {
             { active.arc && (
                 <div className="ad-Setting">
                     <Control
-                        name="Y Radius"
+                        label="Y Radius"
                         type="range"
                         min={ 0 }
                         max={ h }
@@ -199,7 +199,7 @@ function Point(props) {
             { active.arc && (
                 <div className="ad-Setting">
                     <Control
-                        name="Rotation"
+                        label="Rotation"
                         type="range"
                         min={ 0 }
                         max={ 360 }
@@ -212,13 +212,13 @@ function Point(props) {
             { active.arc && (
                 <div className="ad-Setting">
                     <Control
-                        name="Large arc"
+                        label="Large arc"
                         type="checkbox"
                         checked={ active.arc.laf }
                         onChange={ (e) => setArcParam(e, "laf") } />
 
                     <Control
-                        name="Sweep flag"
+                        label="Sweep flag"
                         type="checkbox"
                         checked={ active.arc.sf }
                         onChange={ (e) => setArcParam(e, "sf") } />

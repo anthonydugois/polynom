@@ -4,11 +4,9 @@ import Text from "./Text"
 
 function Range(props) {
     const {
-        min,
-        max,
-        step,
         value,
         onChange,
+        ..._props,
     } = props
 
     return (
@@ -16,11 +14,9 @@ function Range(props) {
             <input
                 className="ad-Range-input"
                 type="range"
-                min={ min }
-                max={ max }
-                step={ step }
                 value={ value }
-                onChange={ onChange } />
+                onChange={ onChange }
+                { ..._props } />
 
             <Text
                 value={ value }

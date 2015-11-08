@@ -5,7 +5,7 @@ import Tabs from "Tabs"
 import General from "./General"
 import Path from "./Path"
 import Point from "./Point"
-import Button from "Control/Button"
+import Button from "Button"
 
 import "./styles"
 

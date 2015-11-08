@@ -3,8 +3,7 @@ import React from "react"
 function Choices(props) {
     const {
         choices,
-        id,
-        onChange,
+        ..._props,
     } = props
 
     let _choices = choices.map((choice, index) => {
@@ -17,8 +16,7 @@ function Choices(props) {
                     type="radio"
                     value={ choice.value }
                     checked={ choice.checked }
-                    name={ id }
-                    onChange={ onChange } />
+                    { ..._props } />
 
                 <div className="ad-Choice-fake">
                     { choice.name }

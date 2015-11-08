@@ -1,7 +1,7 @@
 import React from "react"
 
 import Control from "Control"
-import ButtonFile from "Control/ButtonFile"
+import ButtonFile from "Button/ButtonFile"
 
 import getPath from "../../src/utils/path"
 
@@ -45,7 +45,7 @@ function General(props) {
 
             <div className="ad-Setting">
                 <Control
-                    name="Width"
+                    label="Width"
                     type="range"
                     min={ 0 }
                     max={ 1200 }
@@ -56,7 +56,7 @@ function General(props) {
 
             <div className="ad-Setting">
                 <Control
-                    name="Height"
+                    label="Height"
                     type="range"
                     min={ 0 }
                     max={ 1200 }
@@ -67,7 +67,7 @@ function General(props) {
 
             <div className="ad-Setting">
                 <Control
-                    name="Grid size"
+                    label="Grid size"
                     type="range"
                     min={ 1 }
                     max={ Math.min(w, h) / 2 }
@@ -78,13 +78,13 @@ function General(props) {
 
             <div className="ad-Setting">
                 <Control
-                    name="Snap grid"
+                    label="Snap grid"
                     type="checkbox"
                     checked={ grid.snap }
                     onChange={ setGridSnap } />
 
                 <Control
-                    name="Show grid"
+                    label="Show grid"
                     type="checkbox"
                     checked={ grid.show }
                     onChange={ setGridShow } />

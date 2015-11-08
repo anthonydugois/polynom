@@ -4,19 +4,18 @@ import Range from "./Range"
 import Text from "./Text"
 import Textarea from "./Textarea"
 import Checkbox from "./Checkbox"
-import Button from "./Button"
 import Choices from "./Choices"
 
 import "./styles"
 
 function Control(props) {
     const {
-        name,
+        label,
         type,
         ..._props,
     } = props
 
-    let control, label
+    let control, _label
 
     switch (type) {
         case "range":
@@ -35,10 +34,6 @@ function Control(props) {
             control = <Checkbox { ..._props } />
         break
 
-        case "button":
-            control = <Button { ..._props } />
-        break
-
         case "choices":
             control = <Choices { ..._props } />
         break
@@ -48,17 +43,17 @@ function Control(props) {
         break
     }
 
-    if (name) {
-        label = (
+    if (label) {
+        _label = (
             <label className="ad-Control-label">
-                { name }
+                { label }
             </label>
         )
     }
 
     return (
         <div className="ad-Control">
-            { label }
+            { _label }
             { control }
         </div>
     )

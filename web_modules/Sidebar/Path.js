@@ -126,17 +126,17 @@ class Path extends Component {
 
                         <div className="ad-Setting">
                             <Control
-                                name="Relative"
+                                label="Relative"
                                 type="checkbox"
                                 checked={ relative }
                                 onChange={ (e) => setRelative(e, index) } />
                             <Control
-                                name="Closed"
+                                label="Closed"
                                 type="checkbox"
                                 checked={ closed }
                                 onChange={ (e) => setClosed(e, index) } />
                             <Control
-                                name="Filled"
+                                label="Filled"
                                 type="checkbox"
                                 checked={ filled }
                                 onChange={ (e) => setFilled(e, index) } />
