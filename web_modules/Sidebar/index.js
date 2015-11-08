@@ -1,11 +1,14 @@
 import React from "react"
 
 import Tabs from "Tabs"
+
 import General from "./General"
 import Path from "./Path"
 import Point from "./Point"
 import Button from "Button"
+
 import About from "App/About"
+import Help from "App/Help"
 
 import "./styles"
 
@@ -72,6 +75,10 @@ function Sidebar(props) {
             title: "Settings",
         },
         {
+            icon: "help",
+            title: "Help",
+        },
+        {
             icon: "about",
             title: "About",
         },
@@ -133,6 +140,12 @@ function Sidebar(props) {
                             setGridSnap={ setGridSnap }
                             setGridShow={ setGridShow }
                             importSVG={ importSVG } />
+                    </div>
+                </div>
+
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        <Help />
                     </div>
                 </div>
 

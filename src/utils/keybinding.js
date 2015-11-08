@@ -136,11 +136,14 @@ export default function keys(e, keys) {
     return result
 }
 
+export function platform(p) {
+    return navigator.appVersion.toLowerCase().indexOf(p) > - 1
+}
+
 // avoid right click emulation on Mac systems
 function isCtrlOrMetaKey(e) {
-    const appVersion = navigator.appVersion.toLowerCase(),
-        ctrl = appVersion.indexOf("win") > - 1 && e.ctrlKey,
-        meta = appVersion.indexOf("mac") > - 1 && e.metaKey
+    const ctrl = platform("win") && e.ctrlKey,
+        meta = platform("mac") && e.metaKey
 
     return (ctrl || meta)
 }
