@@ -1,11 +1,11 @@
 import React from "react"
 
 import Tabs from "Tabs"
-
 import General from "./General"
 import Path from "./Path"
 import Point from "./Point"
 import Button from "Button"
+import About from "App/About"
 
 import "./styles"
 
@@ -136,7 +136,11 @@ function Sidebar(props) {
                     </div>
                 </div>
 
-                <div className="ad-Sidebar-tab" />
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        <About />
+                    </div>
+                </div>
             </Tabs>
         </div>
     )
