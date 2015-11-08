@@ -88,7 +88,7 @@ function Sidebar(props) {
         <div className="ad-Sidebar">
             <Tabs
                 tabs={ tabs }
-                initialActive={ 1 }>
+                initialActive={ 0 }>
                 <div className="ad-Sidebar-tab">
                     <div className="ad-Sidebar-settings">
                         { shapes }

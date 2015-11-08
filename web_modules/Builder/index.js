@@ -25,10 +25,42 @@ class Builder extends Component {
         paths: [
             {
                 closed: false,
+                relative: true,
+                filled: false,
+                activePoint: 1,
+                points: [
+                    { x: 350, y: 300 },
+                    { type: "a", x: 150, y: 300, arc: { rx: 50, ry: 50, rot: 0, laf: 1, sf: 0 }},
+                    { type: "c", x: 350, y: 400, cubic: { s: false, x1: 150, y1: 400, x2: 350, y2: 300 }},
+                    { type: "a", x: 150, y: 400, arc: { rx: 50, ry: 50, rot: 0, laf: 1, sf: 1 }},
+                ],
+            },
+            {
+                closed: false,
                 relative: false,
                 filled: false,
-                activePoint: 0,
-                points: [{ x: 500, y: 400 }],
+                activePoint: 1,
+                points: [
+                    { x: 400, y: 250 },
+                    { type: "l", x: 400, y: 400 },
+                    { type: "l", x: 500, y: 500 },
+                    { type: "l", x: 600, y: 400 },
+                    { type: "l", x: 600, y: 250 },
+                ],
+            },
+            {
+                closed: false,
+                relative: false,
+                filled: false,
+                activePoint: 1,
+                points: [
+                    { x: 850, y: 300 },
+                    { type: "a", x: 650, y: 300, arc: { rx: 50, ry: 50, rot: 0, laf: 1, sf: 0 }},
+                    { type: "l", x: 650, y: 400 },
+                    { type: "a", x: 850, y: 400, arc: { rx: 50, ry: 50, rot: 0, laf: 1, sf: 0 }},
+                    { type: "l", x: 850, y: 350 },
+                    { type: "l", x: 750, y: 350 },
+                ],
             },
         ],
     }
