@@ -48,8 +48,10 @@ export function A(rx = 1, ry = 1, rot = 0, laf = 1, sf = 0, x = 0, y = 0) {
 
 export function getPathFromString(path) {
     return {
-        relative: getRelative(path),
         closed: getClosed(path),
+        relative: getRelative(path),
+        filled: false,
+        activePoint: 0,
         points: getPoints(path),
     }
 }

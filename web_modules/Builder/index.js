@@ -3,20 +3,12 @@ import ReactDOM from "react-dom"
 
 import SVG from "SVG"
 import Sidebar from "Sidebar"
-import Foot from "App/Foot"
 
+import keybind from "../../src/utils/keybinding"
 import { positive } from "../../src/utils/maths"
-import { M, L, Q, T, C, S, A, getPathFromString } from "../../src/utils/points"
+import { M, L, Q, C, A, getPathFromString } from "../../src/utils/points"
 
 import "./styles"
-
-function isCtrlOrMetaKey(e) {
-    const appVersion = navigator.appVersion.toLowerCase(),
-        ctrl = appVersion.indexOf("win") > - 1 && e.ctrlKey,
-        meta = appVersion.indexOf("mac") > - 1 && e.metaKey
-
-    return (ctrl || meta)
-}
 
 class Builder extends Component {
     state = {
@@ -52,13 +44,13 @@ class Builder extends Component {
     }
 
     handleKeyDown = (e) => {
-        if (isCtrlOrMetaKey(e)) {
+        if (keybind(e, "ctrl")) {
             this.setState({ ctrl: true })
         }
     }
 
     handleKeyUp = (e) => {
-        if ( ! isCtrlOrMetaKey(e)) {
+        if ( ! keybind(e, "ctrl")) {
             this.setState({ ctrl: false })
         }
     }
@@ -72,19 +64,9 @@ class Builder extends Component {
                 w = parseInt(svg.match(/width="(.+)"/)[1]),
                 h = parseInt(svg.match(/height="(.+)"/)[1]),
                 d = svg.match(/[^a-zA-Z0-9]+d=("|')(.+)("|')/g).map((_d) => _d.replace(/(d|=|"|')/g, "").trim()),
-                paths = d.map((path) => {
-                    return {
-                        filled: false,
-                        activePoint: 0,
-                        ...getPathFromString(path),
-                    }
-                })
+                paths = d.map((path) => getPathFromString(path))
 
-            this.setState({
-                w,
-                h,
-                paths,
-            })
+            this.setState({ w, h, paths })
         }
 
         reader.readAsBinaryString(file)
@@ -127,11 +109,11 @@ class Builder extends Component {
 
     setPath = (index, path) => {
         const { paths } = this.state
-        const { relative, closed, points } = getPathFromString(path)
+        const { closed, relative, points } = getPathFromString(path)
 
         if (points.length > 0) {
-            paths[index].relative = relative
             paths[index].closed = closed
+            paths[index].relative = relative
             paths[index].points = points
 
             this.setState({ paths })
@@ -232,7 +214,6 @@ class Builder extends Component {
         const { activePath, paths } = this.state
         let { activePoint, points } = paths[activePath]
 
-        // not the first point
         if (activePoint !== 0) {
             points = this.resetNextCurve(activePoint, points)
 
