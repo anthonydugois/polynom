@@ -3,8 +3,6 @@ import cx from "classnames"
 
 import Grid from "./Grid"
 import Shape from "./Shape"
-import Cubic from "./Cubic"
-import Quadratic from "./Quadratic"
 
 import "./styles"
 

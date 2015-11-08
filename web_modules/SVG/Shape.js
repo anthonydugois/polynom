@@ -1,7 +1,7 @@
 import React from "react"
 import cx from "classnames"
 
-import PointGroup from "./PointGroup"
+import PointGroup from "PointGroup"
 
 import getPath from "../../src/utils/path"
 
