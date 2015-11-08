@@ -21,14 +21,9 @@ function Point(props) {
     } = props
 
     const { activePoint, points } = paths[activePath],
-        step = grid.snap ? grid.size : 1
-
-    let point = points[activePoint],
-        prev = false
-
-    if (activePoint !== 0) {
-        prev = points[activePoint - 1]
-    }
+        step = grid.snap ? grid.size : 1,
+        point = points[activePoint],
+        prev = activePoint !== 0 ? points[activePoint - 1] : false
 
     const choices = [
         { name: "Move", value: "m", checked: point.type === "m" },

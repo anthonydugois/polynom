@@ -35,7 +35,7 @@ function Grid(props) {
     }
 
     return (
-        <g className={ cx("ad-Grid", { "is-hidden": !grid.show }) }>
+        <g className={ cx("ad-Grid", { "is-hidden": ! grid.show }) }>
             { _grid }
         </g>
     )

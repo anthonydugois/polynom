@@ -16,7 +16,7 @@ function Quadratic(props) {
 
     let anchor = (<g />)
 
-    if (! t) {
+    if ( ! t) {
         anchor = (
             <g className="ad-Anchor">
                 <line

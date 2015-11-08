@@ -13,7 +13,7 @@ import "./styles"
 class Builder extends Component {
     state = {
         ctrl: false,
-        drag: false,
+        dragging: false,
         w: 1000,
         h: 800,
         grid: {
@@ -429,7 +429,7 @@ class Builder extends Component {
         e.preventDefault()
 
         if ( ! this.state.ctrl) {
-            const { object, anchor } = this.state.drag
+            const { object, anchor } = this.state.dragging
 
             switch (object) {
                 case "point":
@@ -458,13 +458,13 @@ class Builder extends Component {
             this.setState({
                 paths,
                 activePath,
-                drag: { object, anchor },
+                dragging: { object, anchor },
             })
         }
     }
 
     cancelDragging = (e) => {
-        this.setState({ drag: false })
+        this.setState({ dragging: false })
     }
 
     render() {

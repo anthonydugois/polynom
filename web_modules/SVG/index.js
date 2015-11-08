@@ -37,92 +37,12 @@ class SVG extends Component {
             return (
                 <Shape
                     key={ index }
-                    index={ index }
+                    shape={ index }
                     activePath={ activePath }
                     path={ path }
                     { ...props } />
             )
         })
-
-        /*let circles = points.map((point, index, _points) => {
-            let anchors = [],
-                previous = false
-
-            if (index !== 0) {
-                previous = _points[index - 1]
-            }
-
-            if (point.quadratic) {
-                anchors.push(
-                    <Quadratic
-                        key={ `q_${ index }` }
-                        index={ index }
-                        p1x={ previous.x }
-                        p1y={ previous.y }
-                        p2x={ point.x }
-                        p2y={ point.y }
-                        x={ point.quadratic.x }
-                        y={ point.quadratic.y }
-                        t={ previous.quadratic && point.quadratic.t }
-                        drag={ drag } />
-                )
-            } else if (point.cubic) {
-                anchors.push(
-                    <Cubic
-                        key={ `c_${ index }` }
-                        index={ index }
-                        p1x={ previous.x }
-                        p1y={ previous.y }
-                        p2x={ point.x }
-                        p2y={ point.y }
-                        x1={ point.cubic.x1 }
-                        y1={ point.cubic.y1 }
-                        x2={ point.cubic.x2 }
-                        y2={ point.cubic.y2 }
-                        s={ previous.cubic && point.cubic.s }
-                        drag={ drag } />
-                )
-            }
-
-            return (
-                <g
-                    key={ index }
-                    className={ cx("ad-PointGroup", {
-                        "ad-PointGroup--first": (index === 0),
-                        "is-active": (activePoint === index),
-                    }) }>
-                    <Point
-                        index={ index }
-                        x={ point.x }
-                        y={ point.y }
-                        drag={ drag } />
-
-                    { anchors }
-                </g>
-            )
-        })
-
-        return (
-            <svg
-                className="ad-SVG"
-                width={ w }
-                height={ h }
-                onClick={ addPoint }
-                onMouseMove={ handleMouseMove }>
-                <Grid
-                    w={ w }
-                    h={ h }
-                    grid={ grid } />
-
-                <path
-                    className={ cx("ad-Path", { "ad-Path--filled": fillPath }) }
-                    d={ path } />
-
-                <g className="ad-Points">
-                    { circles }
-                </g>
-            </svg>
-        )*/
 
         return (
             <svg
