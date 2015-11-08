@@ -63,12 +63,12 @@ function Sidebar(props) {
 
     const tabs = [
         {
-            icon: "point",
-            title: "Point",
-        },
-        {
             icon: "paths",
             title: "Paths",
+        },
+        {
+            icon: "point",
+            title: "Point",
         },
         {
             icon: "settings",
@@ -86,7 +86,22 @@ function Sidebar(props) {
 
     return (
         <div className="ad-Sidebar">
-            <Tabs tabs={ tabs }>
+            <Tabs
+                tabs={ tabs }
+                initialActive={ 1 }>
+                <div className="ad-Sidebar-tab">
+                    <div className="ad-Sidebar-settings">
+                        { shapes }
+                    </div>
+
+                    <div className="ad-Sidebar-actions">
+                        <Button
+                            icon="add"
+                            value="New path"
+                            onClick={ addPath } />
+                    </div>
+                </div>
+
                 <div className="ad-Sidebar-tab">
                     <div className="ad-Sidebar-settings">
                         <Point
@@ -112,19 +127,6 @@ function Sidebar(props) {
                                 onClick={ (e) => removePoint(e, activePath, paths[activePath].activePoint) } />
                         </div>
                     ) }
-                </div>
-
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        { shapes }
-                    </div>
-
-                    <div className="ad-Sidebar-actions">
-                        <Button
-                            icon="add"
-                            value="New path"
-                            onClick={ addPath } />
-                    </div>
                 </div>
 
                 <div className="ad-Sidebar-tab">

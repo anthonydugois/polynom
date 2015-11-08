@@ -12,11 +12,12 @@ class Tabs extends Component {
             icon: React.PropTypes.string.isRequired,
             title: React.PropTypes.string.isRequired,
         })).isRequired,
+        initialActive: React.PropTypes.number.isRequired,
         children: React.PropTypes.any.isRequired,
     }
 
     state = {
-        activeTab: 0,
+        activeTab: this.props.initialActive,
     }
 
     setActiveTab = (e, activeTab) => {
