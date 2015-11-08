@@ -39,8 +39,8 @@ class Path extends Component {
     handleFocus = (e) => {
         const {
             points,
-            relative,
             closed,
+            relative,
         } = this.props.path
 
         this.setState({
@@ -62,21 +62,15 @@ class Path extends Component {
     render() {
         const {
             index,
-            activePath,
+            path,
             nbPaths,
+            activePath,
             setActivePath,
             removePath,
             setRelative,
             setClosed,
             setFilled,
         } = this.props
-
-        const {
-            points,
-            relative,
-            closed,
-            filled,
-        } = this.props.path
 
         const {
             expanded,
@@ -118,7 +112,7 @@ class Path extends Component {
                         <div className="ad-Setting">
                             <Control
                                 type="textarea"
-                                value={ shouldEditPath ? customPath : getPath(points, closed, relative) }
+                                value={ shouldEditPath ? customPath : getPath(path.points, path.closed, path.relative) }
                                 onChange={ this.handleChange }
                                 onFocus={ this.handleFocus }
                                 onBlur={ this.handleBlur } />
@@ -128,17 +122,17 @@ class Path extends Component {
                             <Control
                                 label="Relative"
                                 type="checkbox"
-                                checked={ relative }
+                                checked={ path.relative }
                                 onChange={ (e) => setRelative(e, index) } />
                             <Control
                                 label="Closed"
                                 type="checkbox"
-                                checked={ closed }
+                                checked={ path.closed }
                                 onChange={ (e) => setClosed(e, index) } />
                             <Control
                                 label="Filled"
                                 type="checkbox"
-                                checked={ filled }
+                                checked={ path.filled }
                                 onChange={ (e) => setFilled(e, index) } />
                         </div>
                     </div>
