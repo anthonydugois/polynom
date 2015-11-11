@@ -8,6 +8,7 @@ const variables = {
     __SERVER_PROTOCOL__: "http://",
     __SERVER_HOST__: "localhost",
     __SERVER_PORT__: "1337",
+    __BASENAME__: "/",
 }
 
 variables.__SERVER_URL__ = `${variables.__SERVER_PROTOCOL__}${variables.__SERVER_HOST__}:${variables.__SERVER_PORT__}`
