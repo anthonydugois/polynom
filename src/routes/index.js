@@ -5,7 +5,7 @@ import { createHistory, useBasename } from "history"
 import App from "App"
 
 const history = useBasename(createHistory)({
-    basename: __BASENAME__,
+    basename: "/",
 })
 
 const routes = (

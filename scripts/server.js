@@ -5,13 +5,11 @@ import config from "../webpack.config"
 export default (options, callback) => {
     const compiler = webpack({
         ...config,
-        entry: {
-            index: [
-                ...(config.entry.index || []),
-                `webpack-dev-server/client?${__SERVER_URL__}`,
-                "webpack/hot/only-dev-server",
-            ],
-        },
+        entry: [
+            ...(config.entry || []),
+            `webpack-dev-server/client?${__SERVER_URL__}`,
+            "webpack/hot/only-dev-server",
+        ],
         plugins: [
             ...(config.plugins || []),
             new webpack.NoErrorsPlugin(),

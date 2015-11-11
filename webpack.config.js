@@ -4,7 +4,6 @@ import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 import autoprefixer from "autoprefixer"
 import stylelint from "stylelint"
-import postcssBrandColors from "postcss-brand-colors"
 import postcssColorFunction from "postcss-color-function"
 import postcssCustomMedia from "postcss-custom-media"
 import postcssCustomProperties from "postcss-custom-properties"
@@ -18,11 +17,9 @@ import variables, { defineVariables } from "./variables"
 defineVariables()
 
 export default {
-    entry: {
-        index: [
-            "./src/index.js",
-        ],
-    },
+    entry: [
+        "./src/index.js",
+    ],
     output: {
         path: path.join(__dirname, __OUTPUT_DIR__),
         publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
@@ -37,16 +34,14 @@ export default {
     },
     module: {
         loaders: [
-            // js files
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
                     "babel",
-                    "eslint",
+                    //"eslint",
                 ],
             },
-            // css files
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract(
@@ -67,9 +62,9 @@ export default {
             }),
         ] : [])
     ],
-    eslint: {
+    /*eslint: {
         configFile: "./.eslintrc",
-    },
+    },*/
     postcss: (webpack) => {
         return [
             postcssImport({ addDependencyTo: webpack }),
@@ -78,7 +73,6 @@ export default {
             postcssCustomProperties,
             postcssCustomSelectors,
             postcssMediaMinmax,
-            postcssBrandColors,
             postcssColorFunction,
             postcssUrl,
         ]
