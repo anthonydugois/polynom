@@ -45,7 +45,6 @@
             2,
             "none"
         ],
-        "value-no-vendor-prefix": 2,
         "value-list-comma-newline-after": [
             2,
             "always-multi-line"
@@ -154,7 +153,6 @@
             2,
             "always"
         ],
-        "at-rule-no-vendor-prefix": 2,
         "comment-space-inside": [
             2,
             "always"
