@@ -39,7 +39,7 @@ export default {
                 exclude: /node_modules/,
                 loaders: [
                     "babel",
-                    //"eslint",
+                    "eslint",
                 ],
             },
             {
@@ -62,9 +62,9 @@ export default {
             }),
         ] : [])
     ],
-    /*eslint: {
+    eslint: {
         configFile: "./.eslintrc",
-    },*/
+    },
     postcss: (webpack) => {
         return [
             postcssImport({ addDependencyTo: webpack }),

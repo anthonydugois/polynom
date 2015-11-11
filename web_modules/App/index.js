@@ -5,7 +5,11 @@ import "./styles"
 class App extends Component {
     render() {
         // render your webapp
-        return (<div />)
+        return (
+            <div>
+                Hello World!
+            </div>
+        )
     }
 }
 
