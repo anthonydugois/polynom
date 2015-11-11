@@ -14,10 +14,14 @@
     ],
     "rules": {
         "comma-dangle": [
-            2,
+            1,
             "always-multiline"
         ],
-        "no-constant-condition": 2,
+        "no-cond-assign": [
+            2,
+            "except-parens"
+        ],
+        "no-constant-condition": 1,
         "no-control-regex": 2,
         "no-debugger": 2,
         "no-dupe-args": 2,
@@ -26,9 +30,9 @@
         "no-empty-character-class": 2,
         "no-empty": 2,
         "no-ex-assign": 2,
-        "no-extra-boolean-cast": 2,
+        "no-extra-boolean-cast": 1,
         "no-extra-parens": [
-            2,
+            1,
             "functions"
         ],
         "no-extra-semi": 2,
@@ -39,15 +43,15 @@
         "no-negated-in-lhs": 2,
         "no-obj-calls": 2,
         "no-regex-spaces": 2,
-        "no-sparse-arrays": 2,
+        "no-sparse-arrays": 1,
         "no-unreachable": 2,
         "use-isnan": 2,
         "valid-typeof": 2,
         "accessor-pairs": 2,
         "block-scoped-var": 2,
         "consistent-return": 2,
-        "curly": 2,
-        "default-case": 2,
+        "curly": 1,
+        "default-case": 1,
         "dot-notation": 2,
         "dot-location": [
             2,
@@ -59,13 +63,13 @@
         ],
         "no-alert": 2,
         "no-caller": 2,
-        "no-div-regex": 2,
+        "no-div-regex": 1,
         "no-else-return": 2,
         "no-eq-null": 2,
         "no-eval": 2,
         "no-extend-native": 2,
         "no-extra-bind": 2,
-        "no-fallthrough": 2,
+        "no-fallthrough": 1,
         "no-implied-eval": 2,
         "no-iterator": 2,
         "no-labels": 2,
@@ -128,8 +132,10 @@
         "react/no-direct-mutation-state": 2,
         "react/no-multi-comp": 2,
         "react/no-unknown-property": 2,
+        "react/prefer-es6-class": 2,
+        "react/react-in-jsx-scope": 2,
         "react/prop-types": 2,
-        "react/self-closing-comp": 2,
+        "react/self-closing-comp": 1,
         "react/wrap-multilines": 2
     }
 }

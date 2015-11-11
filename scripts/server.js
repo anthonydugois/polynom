@@ -12,7 +12,6 @@ export default (options, callback) => {
         ],
         plugins: [
             ...(config.plugins || []),
-            new webpack.NoErrorsPlugin(),
             new webpack.HotModuleReplacementPlugin(),
         ],
         debug: true,

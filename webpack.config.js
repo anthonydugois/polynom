@@ -53,17 +53,12 @@ export default {
     },
     plugins: [
         new webpack.DefinePlugin(variables),
-        new ExtractTextPlugin("styles.css", {
-            disable: __DEV__,
-        }),
-        ...(__PROD__ ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: { warnings: false },
-            }),
-        ] : [])
+        new ExtractTextPlugin("styles.css", { disable: __DEV__ }),
+        ...(__PROD__ ? [new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })] : []),
     ],
     eslint: {
         configFile: "./.eslintrc",
+        failOnError: true,
     },
     postcss: (webpack) => {
         return [
@@ -76,5 +71,5 @@ export default {
             postcssColorFunction,
             postcssUrl,
         ]
-    }
+    },
 }
