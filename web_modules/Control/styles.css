@@ -1,141 +1,141 @@
 @import url(App/config.css);
 
 .ad-Control {
-    flex: 1;
+  flex: 1;
 }
-    .ad-Control-label {
-        display: block;
-        margin-bottom: .5rem;
-        text-transform: uppercase;
-        font-size: .6rem;
-        letter-spacing: .06rem;
-        color: color(var(--ad-Color-prim) l(+60%));
-    }
+  .ad-Control-label {
+    display: block;
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+    font-size: .6rem;
+    letter-spacing: .06rem;
+    color: color(var(--ad-Color-prim) l(+60%));
+  }
 
 .ad-Text {
-    height: 1.25rem;
-    width: 2rem;
-    text-align: center;
+  height: 1.25rem;
+  width: 2rem;
+  text-align: center;
 }
 .ad-Textarea {
-    height: 5rem;
-    width: 100%;
-    padding: .8rem 1rem;
-    resize: none;
-    font-weight: bold;
-    line-height: 1.6;
+  height: 5rem;
+  width: 100%;
+  padding: .8rem 1rem;
+  resize: none;
+  font-weight: bold;
+  line-height: 1.6;
 }
 .ad-Text,
 .ad-Textarea {
-    background: color(var(--ad-Color-prim) l(+10%));
-    border: none;
-    border-radius: 4px;
-    transition: background .2s;
-    font-family: "Open Sans", sans-serif;
-    font-size: .6rem;
-    color: #fff;
+  background: color(var(--ad-Color-prim) l(+10%));
+  border: none;
+  border-radius: 4px;
+  transition: background .2s;
+  font-family: "Open Sans", sans-serif;
+  font-size: .6rem;
+  color: #fff;
 }
 .ad-Text:focus,
 .ad-Textarea:focus {
-    outline: 0;
-    background: color(var(--ad-Color-prim) l(+15%));
+  outline: 0;
+  background: color(var(--ad-Color-prim) l(+15%));
 }
 
 .ad-Checkbox-input {
-    display: none;
+  display: none;
 }
 .ad-Checkbox-fake {
-    position: relative;
-    height: 14px;
-    width: 2rem;
-    cursor: pointer;
-    background: color(var(--ad-Color-prim) l(+10%));
-    border-radius: 30px;
+  position: relative;
+  height: 14px;
+  width: 2rem;
+  cursor: pointer;
+  background: color(var(--ad-Color-prim) l(+10%));
+  border-radius: 30px;
 }
-    .ad-Checkbox-fake::after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: -2px;
-        left: 0;
-        height: 18px;
-        width: 18px;
-        border: 4px solid #fff;
-        background: color(var(--ad-Color-prim) l(+10%));
-        border-radius: 50%;
-        transform: translateX(0);
-        transition: transform .2s, border .2s;
-    }
-    .ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
-        border-color: var(--ad-Color-sec);
-        transform: translateX(14px);
-    }
+  .ad-Checkbox-fake::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+    transform: translateX(0);
+    transition: transform .2s, border .2s;
+  }
+  .ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
+    border-color: var(--ad-Color-sec);
+    transform: translateX(14px);
+  }
 
 .ad-Choices {
-    display: flex;
+  display: flex;
 }
-    .ad-Choice {
-        flex: 1;
+  .ad-Choice {
+    flex: 1;
+  }
+    .ad-Choice-input {
+      display: none;
     }
-        .ad-Choice-input {
-            display: none;
-        }
-        .ad-Choice-fake {
-            padding: .75rem 0;
-            background: color(var(--ad-Color-prim) l(+10%));
-            transition: background .2s;
-            cursor: pointer;
-            text-align: center;
-            text-transform: uppercase;
-            font-family: "Open Sans", sans-serif;
-            font-size: .6rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        .ad-Choice-fake:hover {
-            background: color(var(--ad-Color-prim) l(+15%));
-        }
-        .ad-Choice:first-child .ad-Choice-fake {
-            border-radius: 4px 0 0 4px;
-        }
-        .ad-Choice:last-child .ad-Choice-fake {
-            border-radius: 0 4px 4px 0;
-        }
-        .ad-Choice-input:checked + .ad-Choice-fake {
-            background: var(--ad-Color-sec);
-        }
+    .ad-Choice-fake {
+      padding: .75rem 0;
+      background: color(var(--ad-Color-prim) l(+10%));
+      transition: background .2s;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: "Open Sans", sans-serif;
+      font-size: .6rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .ad-Choice-fake:hover {
+      background: color(var(--ad-Color-prim) l(+15%));
+    }
+    .ad-Choice:first-child .ad-Choice-fake {
+      border-radius: 4px 0 0 4px;
+    }
+    .ad-Choice:last-child .ad-Choice-fake {
+      border-radius: 0 4px 4px 0;
+    }
+    .ad-Choice-input:checked + .ad-Choice-fake {
+      background: var(--ad-Color-sec);
+    }
 
 .ad-Range {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-    .ad-Range-input {
-        width: 100%;
-        height: 14px;
-        margin-right: .5rem;
-        border-radius: 30px;
-        background: color(var(--ad-Color-prim) l(+10%));
-    }
-    .ad-Range-input:focus {
-        outline: 0;
-        background: color(var(--ad-Color-prim) l(+15%));
-    }
-    .ad-Range-input::track {
-        background: none;
-    }
-    .ad-Range-input::thumb {
-        width: 18px;
-        height: 18px;
-        border: 4px solid #fff;
-        background: color(var(--ad-Color-prim) l(+10%));
-        border-radius: 50%;
-        cursor: pointer;
-        transition: border .2s;
-    }
-    .ad-Range-input:hover::thumb,
-    .ad-Range-input:focus::thumb {
-        border-color: var(--ad-Color-sec);
-    }
-    .ad-Range-input:focus::thumb {
-        background: color(var(--ad-Color-prim) l(+15%));
-    }
+  .ad-Range-input {
+    width: 100%;
+    height: 14px;
+    margin-right: .5rem;
+    border-radius: 30px;
+    background: color(var(--ad-Color-prim) l(+10%));
+  }
+  .ad-Range-input:focus {
+    outline: 0;
+    background: color(var(--ad-Color-prim) l(+15%));
+  }
+  .ad-Range-input::track {
+    background: none;
+  }
+  .ad-Range-input::thumb {
+    width: 18px;
+    height: 18px;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border .2s;
+  }
+  .ad-Range-input:hover::thumb,
+  .ad-Range-input:focus::thumb {
+    border-color: var(--ad-Color-sec);
+  }
+  .ad-Range-input:focus::thumb {
+    background: color(var(--ad-Color-prim) l(+15%));
+  }

@@ -9,54 +9,54 @@ import Choices from "./Choices"
 import "./styles"
 
 function Control(props) {
-    const {
-        label,
-        type,
-        ..._props,
-    } = props
+  const {
+    label,
+    type,
+    ..._props,
+  } = props
 
-    let control, _label
+  let control, _label
 
-    switch (type) {
-        case "range":
-            control = <Range { ..._props } />
-        break
+  switch (type) {
+    case "range":
+      control = <Range { ..._props } />
+      break
 
-        case "text":
-            control = <Text { ..._props } />
-        break
+    case "text":
+      control = <Text { ..._props } />
+      break
 
-        case "textarea":
-            control = <Textarea { ..._props } />
-        break
+    case "textarea":
+      control = <Textarea { ..._props } />
+      break
 
-        case "checkbox":
-            control = <Checkbox { ..._props } />
-        break
+    case "checkbox":
+      control = <Checkbox { ..._props } />
+      break
 
-        case "choices":
-            control = <Choices { ..._props } />
-        break
+    case "choices":
+      control = <Choices { ..._props } />
+      break
 
-        default:
-            control = ""
-        break
-    }
+    default:
+      control = ""
+      break
+  }
 
-    if (label) {
-        _label = (
-            <label className="ad-Control-label">
-                { label }
-            </label>
-        )
-    }
-
-    return (
-        <div className="ad-Control">
-            { _label }
-            { control }
-        </div>
+  if (label) {
+    _label = (
+      <label className="ad-Control-label">
+        { label }
+      </label>
     )
+  }
+
+  return (
+    <div className="ad-Control">
+      { _label }
+      { control }
+    </div>
+  )
 }
 
 export default Control

@@ -3,36 +3,36 @@ import React, { Component } from "react"
 import Button from "Button"
 
 class ButtonFile extends Component {
-    static propTypes = {
-        onChange: React.PropTypes.func,
-    }
+  static propTypes = {
+    onChange: React.PropTypes.func,
+  }
 
-    handleClick = (e) => {
-        e.preventDefault()
+  handleClick = (e) => {
+    e.preventDefault()
 
-        this.refs.file.click()
-    }
+    this.refs.file.click()
+  }
 
-    render() {
-        const {
-            onChange,
-            ...props,
-        } = this.props
+  render() {
+    const {
+      onChange,
+      ...props,
+    } = this.props
 
-        return (
-            <div className="ad-ButtonFile">
-                <input
-                    ref="file"
-                    type="file"
-                    className="ad-ButtonFile-file"
-                    onChange={ onChange } />
+    return (
+      <div className="ad-ButtonFile">
+        <input
+          ref="file"
+          type="file"
+          className="ad-ButtonFile-file"
+          onChange={ onChange } />
 
-                <Button
-                    onClick={ this.handleClick }
-                    { ...props } />
-            </div>
-        )
-    }
+        <Button
+          onClick={ this.handleClick }
+          { ...props } />
+      </div>
+    )
+  }
 }
 
 export default ButtonFile

@@ -18,67 +18,59 @@ import variables, { defineVariables } from "./variables"
 defineVariables()
 
 export default {
-    entry: {
-        index: [
-            "./src/index.js",
-        ],
-    },
-    output: {
-        path: path.join(__dirname, __OUTPUT_DIR__),
-        publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
-        filename: "bundle.js",
-    },
-    resolve: {
-        extensions: [
-            "",
-            ".js",
-            ".css",
-        ],
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: [
-                    "babel",
-                    "eslint",
-                ],
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    "style",
-                    "css!postcss"
-                ),
-            },
-        ],
-    },
-    plugins: [
-        new webpack.DefinePlugin(variables),
-        new ExtractTextPlugin("styles.css", {
-            disable: __DEV__,
-        }),
-        ...(__PROD__ ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: { warnings: false },
-            }),
-        ] : [])
+  entry: [
+    "./src/index.js",
+  ],
+  output: {
+    path: path.join(__dirname, __OUTPUT_DIR__),
+    publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
+    filename: "bundle.js",
+  },
+  resolve: {
+    extensions: [
+      "",
+      ".js",
+      ".css",
     ],
-    eslint: {
-        configFile: "./.eslintrc",
-    },
-    postcss: (webpack) => {
-        return [
-            postcssImport({ addDependencyTo: webpack }),
-            stylelint,
-            postcssCustomMedia,
-            postcssCustomProperties,
-            postcssCustomSelectors,
-            postcssMediaMinmax,
-            postcssColorFunction,
-            postcssInputStyle,
-            postcssUrl,
-        ]
-    }
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: [
+          "babel",
+          "eslint",
+        ],
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          "style",
+          "css!postcss"
+        ),
+      },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin(variables),
+    new ExtractTextPlugin("styles.css", { disable: __DEV__ }),
+    ...(__PROD__ ? [new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }) ] : []),
+  ],
+  eslint: {
+    configFile: "./.eslintrc",
+  },
+  postcss: (webpack) => {
+    return [
+      postcssImport({ addDependencyTo: webpack }),
+      stylelint,
+      postcssCustomMedia,
+      postcssCustomProperties,
+      postcssCustomSelectors,
+      postcssMediaMinmax,
+      postcssColorFunction,
+      postcssInputStyle,
+      postcssUrl,
+    ]
+  },
 }
