@@ -1,164 +1,164 @@
 {
-    "rules": {
-        "string-quotes": [
-            2,
-            "double"
-        ],
-        "color-hex-case": [
-            2,
-            "lower"
-        ],
-        "color-hex-length": [
-            2,
-            "short"
-        ],
-        "color-no-invalid-hex": 2,
-        "number-leading-zero": [
-            2,
-            "never"
-        ],
-        "number-max-precision": [
-            2,
-            5
-        ],
-        "number-no-trailing-zeros": 2,
-        "number-zero-length-no-unit": 2,
-        "function-calc-no-unspaced-operator": 2,
-        "function-comma-space-after": [
-            2,
-            "always-single-line"
-        ],
-        "function-comma-space-before": [
-            2,
-            "never-single-line"
-        ],
-        "function-linear-gradient-no-nonstandard-direction": 2,
-        "function-parentheses-space-inside": [
-            2,
-            "never"
-        ],
-        "function-space-after": [
-            2,
-            "always"
-        ],
-        "function-url-quotes": [
-            2,
-            "none"
-        ],
-        "value-list-comma-newline-after": [
-            2,
-            "always-multi-line"
-        ],
-        "value-list-comma-newline-before": [
-            2,
-            "never-multi-line"
-        ],
-        "value-list-comma-space-after": [
-            2,
-            "always"
-        ],
-        "value-list-comma-space-before": [
-            2,
-            "never"
-        ],
-        "custom-property-no-outside-root": 2,
-        "declaration-bang-space-after": [
-            2,
-            "never"
-        ],
-        "declaration-bang-space-before": [
-            2,
-            "always"
-        ],
-        "declaration-colon-space-after": [
-            2,
-            "always"
-        ],
-        "declaration-colon-space-before": [
-            2,
-            "never"
-        ],
-        "declaration-no-important": 2,
-        "declaration-block-semicolon-newline-after": [
-            2,
-            "always"
-        ],
-        "block-closing-brace-newline-after": [
-            2,
-            "always"
-        ],
-        "block-closing-brace-newline-before": [
-            2,
-            "always"
-        ],
-        "block-no-empty": 2,
-        "block-opening-brace-newline-after": [
-            2,
-            "always"
-        ],
-        "block-opening-brace-space-before": [
-            2,
-            "always"
-        ],
-        "selector-combinator-space-after": [
-            2,
-            "always"
-        ],
-        "selector-combinator-space-before": [
-            2,
-            "always"
-        ],
-        "selector-no-id": 2,
-        "selector-pseudo-element-colon-notation": [
-            2,
-            "double"
-        ],
-        "selector-list-comma-newline-after": [
-            2,
-            "always"
-        ],
-        "selector-list-comma-newline-before": [
-            2,
-            "never-multi-line"
-        ],
-        "selector-list-comma-space-before": [
-            2,
-            "never"
-        ],
-        "rule-nested-empty-line-before": [
-            2,
-            "never"
-        ],
-        "rule-no-duplicate-properties": 2,
-        "rule-no-shorthand-property-overrides": 2,
-        "rule-no-single-line": 2,
-        "rule-trailing-semicolon": [
-            2,
-            "always"
-        ],
-        "root-no-standard-properties": 2,
-        "media-feature-colon-space-after": [
-            2,
-            "always"
-        ],
-        "media-feature-colon-space-before": [
-            2,
-            "never"
-        ],
-        "media-feature-range-operator-space-after": [
-            2,
-            "always"
-        ],
-        "media-feature-range-operator-space-before": [
-            2,
-            "always"
-        ],
-        "comment-space-inside": [
-            2,
-            "always"
-        ],
-        "no-eol-whitespace": 2,
-        "no-missing-eof-newline": 2,
-        "no-multiple-empty-lines": 2
-    }
+  "rules": {
+    "string-quotes": [
+      2,
+      "double"
+    ],
+    "color-hex-case": [
+      2,
+      "lower"
+    ],
+    "color-hex-length": [
+      2,
+      "short"
+    ],
+    "color-no-invalid-hex": 2,
+    "number-leading-zero": [
+      2,
+      "never"
+    ],
+    "number-max-precision": [
+      2,
+      5
+    ],
+    "number-no-trailing-zeros": 2,
+    "number-zero-length-no-unit": 2,
+    "function-calc-no-unspaced-operator": 2,
+    "function-comma-space-after": [
+      2,
+      "always-single-line"
+    ],
+    "function-comma-space-before": [
+      2,
+      "never-single-line"
+    ],
+    "function-linear-gradient-no-nonstandard-direction": 2,
+    "function-parentheses-space-inside": [
+      2,
+      "never"
+    ],
+    "function-space-after": [
+      2,
+      "always"
+    ],
+    "function-url-quotes": [
+      2,
+      "none"
+    ],
+    "value-list-comma-newline-after": [
+      2,
+      "always-multi-line"
+    ],
+    "value-list-comma-newline-before": [
+      2,
+      "never-multi-line"
+    ],
+    "value-list-comma-space-after": [
+      2,
+      "always"
+    ],
+    "value-list-comma-space-before": [
+      2,
+      "never"
+    ],
+    "custom-property-no-outside-root": 2,
+    "declaration-bang-space-after": [
+      2,
+      "never"
+    ],
+    "declaration-bang-space-before": [
+      2,
+      "always"
+    ],
+    "declaration-colon-space-after": [
+      2,
+      "always"
+    ],
+    "declaration-colon-space-before": [
+      2,
+      "never"
+    ],
+    "declaration-no-important": 2,
+    "declaration-block-semicolon-newline-after": [
+      2,
+      "always"
+    ],
+    "block-closing-brace-newline-after": [
+      2,
+      "always"
+    ],
+    "block-closing-brace-newline-before": [
+      2,
+      "always"
+    ],
+    "block-no-empty": 2,
+    "block-opening-brace-newline-after": [
+      2,
+      "always"
+    ],
+    "block-opening-brace-space-before": [
+      2,
+      "always"
+    ],
+    "selector-combinator-space-after": [
+      2,
+      "always"
+    ],
+    "selector-combinator-space-before": [
+      2,
+      "always"
+    ],
+    "selector-no-id": 2,
+    "selector-pseudo-element-colon-notation": [
+      2,
+      "double"
+    ],
+    "selector-list-comma-newline-after": [
+      2,
+      "always"
+    ],
+    "selector-list-comma-newline-before": [
+      2,
+      "never-multi-line"
+    ],
+    "selector-list-comma-space-before": [
+      2,
+      "never"
+    ],
+    "rule-nested-empty-line-before": [
+      2,
+      "never"
+    ],
+    "rule-no-duplicate-properties": 2,
+    "rule-no-shorthand-property-overrides": 2,
+    "rule-no-single-line": 2,
+    "rule-trailing-semicolon": [
+      2,
+      "always"
+    ],
+    "root-no-standard-properties": 2,
+    "media-feature-colon-space-after": [
+      2,
+      "always"
+    ],
+    "media-feature-colon-space-before": [
+      2,
+      "never"
+    ],
+    "media-feature-range-operator-space-after": [
+      2,
+      "always"
+    ],
+    "media-feature-range-operator-space-before": [
+      2,
+      "always"
+    ],
+    "comment-space-inside": [
+      2,
+      "always"
+    ],
+    "no-eol-whitespace": 2,
+    "no-missing-eof-newline": 2,
+    "no-multiple-empty-lines": 2
+  }
 }

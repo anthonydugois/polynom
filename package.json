@@ -1,7 +1,7 @@
 {
   "name": "react-webpack-boiler",
   "version": "1.0.0",
-  "description": "react project boilerplate using webpack",
+  "description": "React project boilerplate based on webpack",
   "author": {
     "name": "Anthony Dugois",
     "email": "dev.anthonydugois@gmail.com"

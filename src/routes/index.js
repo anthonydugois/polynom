@@ -4,16 +4,14 @@ import { createHistory, useBasename } from "history"
 
 import App from "App"
 
-const history = useBasename(createHistory)({
-    basename: "/",
-})
+const history = useBasename(createHistory)({ basename: "/" })
 
 const routes = (
-    <Router history={ history }>
-        <Route
-            path="/"
-            component={ App } />
-    </Router>
+  <Router history={ history }>
+    <Route
+      path="/"
+      component={ App } />
+  </Router>
 )
 
 export default routes
