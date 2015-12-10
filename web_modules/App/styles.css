@@ -1,5 +1,27 @@
 @import url(./config.css);
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 html {
   font-size: var(--ad-FontSize);
+}
+
+body {
+  background: #fff;
+  line-height: 1;
+  font-size: 100%;
+  color: #000;
+}
+
+div,
+span {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
+  align-content: flex-start;
 }
