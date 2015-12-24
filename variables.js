@@ -15,5 +15,5 @@ variables.__SERVER_URL__ = `${variables.__SERVER_PROTOCOL__}${variables.__SERVER
 export default variables
 
 export function defineVariables() {
-  Object.keys(variables).forEach(k => global[k] = variables[k])
+  Object.keys(variables).forEach((k) => global[k] = variables[k])
 }
