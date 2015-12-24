@@ -4,7 +4,6 @@ import "./styles"
 
 class App extends Component {
   render() {
-    // render your webapp
     return (<div />)
   }
 }

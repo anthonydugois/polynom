@@ -1,12 +1,12 @@
 # react-webpack-boiler
-react project boilerplate using webpack
+This is a simple React project boilerplate with webpack and redux.
 
-this boilerplate includes:
+This boilerplate includes:
 
 - react
 - react-dom
-- react-router
-- react-transform-hmr
+- react-redux
+- redux
 - webpack
 - webpack-dev-server
 - babel
@@ -14,13 +14,13 @@ this boilerplate includes:
 - eslint
 - stylelint
 
-## start the dev server
+## Start the dev server
 
 ```
 $ npm start
 ```
 
-## build all files
+## Build all files
 
 ```
 $ npm run prod

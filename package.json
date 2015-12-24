@@ -42,11 +42,9 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
-    "history": "^1.17.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.5",
-    "react-router": "^1.0.3",
     "redux": "^3.0.5"
   },
   "repository": {
