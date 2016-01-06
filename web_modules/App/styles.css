@@ -13,6 +13,8 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background: #fff;
   line-height: 1;
   font-size: 100%;

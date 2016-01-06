@@ -3,12 +3,10 @@
 .ad-Builder {
   height: 100%;
   width: 100%;
-  display: flex;
 }
   .ad-Builder-rendering {
     overflow: auto;
     flex: 1;
-    display: flex;
     padding: 2rem;
     background: color(var(--ad-Color-prim) l(+75%));
   }
