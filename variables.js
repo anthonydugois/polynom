@@ -1,4 +1,4 @@
-const __PROD__ = process.argv.includes("--production")
+const __PROD__ = process.env.NODE_ENV === "production"
 const __DEV__ = !__PROD__
 
 const variables = {

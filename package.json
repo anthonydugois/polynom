@@ -8,9 +8,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "npm run build",
-    "build": "babel-node -- scripts/build",
-    "prod": "npm run build -- --production"
+    "start": "set NODE_ENV=development&npm run build",
+    "prod": "set NODE_ENV=production&npm run build",
+    "build": "babel-node -- scripts/build"
   },
   "devDependencies": {
     "autoprefixer": "^6.2.3",
@@ -41,7 +41,8 @@
     "style-loader": "^0.13.0",
     "stylelint": "^3.2.0",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "^1.14.0",
+    "webpack-sources": "^0.1.0"
   },
   "dependencies": {
     "react": "^0.14.5",

@@ -11,6 +11,8 @@
   },
   "plugins": ["react"],
   "rules": {
+    "indent": [2, 2],
+    "max-len": [2, 80, 4],
     "comma-dangle": [1, "always-multiline"],
     "no-cond-assign": [2, "except-parens"],
     "no-constant-condition": 2,
@@ -91,7 +93,7 @@
     "react/jsx-max-props-per-line": 2,
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
-    "react/jsx-pascale-case": 2,
+    "react/jsx-pascal-case": 2,
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/no-danger": 2,
