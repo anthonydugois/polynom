@@ -1,6 +1,6 @@
 @import url(App/config.css);
 
-.ad-SVG {
+.ad-Overview {
   display: block;
   flex-shrink: 0;
   background: #fff;
@@ -11,9 +11,10 @@
   fill: none;
   stroke: color(var(--ad-Color-prim) l(+75%));
   stroke-width: 1px;
-}
-.ad-Grid.is-hidden {
   opacity: 0;
+}
+.ad-Grid.is-shown {
+  opacity: 1;
 }
 
 .ad-Shape {

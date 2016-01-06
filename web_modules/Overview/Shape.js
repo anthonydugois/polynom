@@ -1,4 +1,45 @@
-import React from "react"
+import React, { Component, PropTypes } from "react"
+import Point from "Point"
+import cx from "classnames"
+
+class Shape extends Component {
+  static propTypes = {
+    path: PropTypes.object.isRequired,
+  }
+
+  renderPoint(point, previousPoint) {
+    return (
+      <Point
+        key={ point.id }
+        point={ point }
+        previousPoint={ previousPoint } />
+    )
+  }
+
+  render() {
+    const {
+      path,
+    } = this.props
+
+    return (
+      <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
+        <path
+          className={ cx("ad-Path", { "is-filled": path.isFilled }) } />
+
+        <g className="ad-Points">
+          {
+            path.points.map((point, index, points) =>
+              this.renderPoint(point, index > 0 && points[index - 1]))
+          }
+        </g>
+      </g>
+    )
+  }
+}
+
+export default Shape
+
+/*import React from "react"
 import cx from "classnames"
 
 import PointGroup from "PointGroup"
@@ -51,4 +92,4 @@ function Shape(props) {
   )
 }
 
-export default Shape
+export default Shape*/

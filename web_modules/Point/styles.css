@@ -1,0 +1,34 @@
+@import url(App/config.css);
+
+.ad-Point-circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: color(var(--ad-Color-prim) l(+15%));
+  stroke-width: 5px;
+  transition: fill .2s;
+}
+.ad-Point-circle:hover,
+.ad-Shape.is-active .ad-Point.is-active .ad-Point-circle {
+  fill: var(--ad-Color-sec);
+}
+.ad-Point-circle.is-first {
+  stroke: var(--ad-Color-sec);
+}
+
+.ad-Anchor {
+  opacity: .5;
+}
+.ad-Point.is-active .ad-Anchor {
+  opacity: 1;
+}
+  .ad-Anchor-point {
+    cursor: pointer;
+    fill: #fff;
+    stroke: color(var(--ad-Color-prim) l(+35%));
+    stroke-width: 4px;
+  }
+  .ad-Anchor-line {
+    stroke: color(var(--ad-Color-prim) l(+35%));
+    stroke-width: 1px;
+    stroke-dasharray: 10 10;
+  }

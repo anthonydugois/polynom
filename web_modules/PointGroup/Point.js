@@ -1,6 +1,24 @@
-import React from "react"
+import React, { PropTypes } from "react"
 
-function Point(props) {
+const Point = ({
+  x,
+  y,
+}) => (
+  <circle
+    className="ad-Point"
+    cx={ x }
+    cy={ y }
+    r={ 8 } />
+)
+
+Point.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+}
+
+export default Point
+
+/*function Point(props) {
   const {
     activePath,
     activePoint,
@@ -20,3 +38,4 @@ function Point(props) {
 }
 
 export default Point
+*/
