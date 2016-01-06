@@ -25,9 +25,21 @@ const initialState = [
         isActive: true,
         isRelative: false,
         parameters: {
-          code: "L",
+          code: "Q",
           x: 100,
           y: 100,
+          x1: 150,
+          y1: 75,
+        },
+      },
+      {
+        id: 2,
+        isActive: false,
+        isRelative: false,
+        parameters: {
+          code: "T",
+          x: 150,
+          y: 150,
         },
       },
     ],
@@ -51,6 +63,62 @@ function L(state = {
   relative: false,
   x: 0,
   y: 0,
+}, action) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}
+
+function Q(state = {
+  code: "Q",
+  relative: false,
+  x: 0,
+  y: 0,
+  x1: 0,
+  y1: 0,
+}, action) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}
+
+function T(state = {
+  code: "T",
+  relative: false,
+  x: 0,
+  y: 0,
+}, action) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}
+
+function C(state = {
+  code: "C",
+  relative: false,
+  x: 0,
+  y: 0,
+  x1: 0,
+  y1: 0,
+  x2: 0,
+  y2: 0,
+}, action) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}
+
+function S(state = {
+  code: "S",
+  relative: false,
+  x: 0,
+  y: 0,
+  x2: 0,
+  y2: 0,
 }, action) {
   switch (action.type) {
   default:

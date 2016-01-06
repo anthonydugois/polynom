@@ -12,7 +12,7 @@ class Shape extends Component {
       <Point
         key={ point.id }
         point={ point }
-        previousPoint={ previousPoint } />
+        previousPoint={ previousPoint || null } />
     )
   }
 
