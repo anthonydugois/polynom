@@ -7,12 +7,11 @@ export default (options, callback) => {
     ...config,
     entry: [
       ...(config.entry || []),
-      `webpack-dev-server/client?${__SERVER_URL__}`,
+      `webpack-dev-server/client?${ __SERVER_URL__ }`,
       "webpack/hot/only-dev-server",
     ],
     plugins: [
       ...(config.plugins || []),
-      new webpack.NoErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin(),
     ],
     debug: true,
@@ -22,7 +21,7 @@ export default (options, callback) => {
   })
 
   const server = new webpackDevServer(compiler, {
-    publicPath: `/${options.__OUTPUT_DIR__}/`,
+    publicPath: `/${ options.__OUTPUT_DIR__ }/`,
     historyApiFallback: true,
     hot: true,
     noInfo: true,

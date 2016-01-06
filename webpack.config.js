@@ -18,44 +18,37 @@ import variables, { defineVariables } from "./variables"
 defineVariables()
 
 export default {
-  entry: [
-    "./src/index.js",
-  ],
+  entry: ["./src/index.js"],
   output: {
     path: path.join(__dirname, __OUTPUT_DIR__),
-    publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
+    publicPath: `${ __SERVER_URL__ }/${ __OUTPUT_DIR__ }/`,
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [
-      "",
-      ".js",
-      ".css",
-    ],
+    extensions: ["", ".js", ".css"],
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          "babel",
-          "eslint",
-        ],
+        loaders: ["babel", "eslint"],
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          "style",
-          "css!postcss"
-        ),
+        loader: ExtractTextPlugin.extract("style", "css!postcss"),
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin(variables),
     new ExtractTextPlugin("styles.css", { disable: __DEV__ }),
-    ...(__PROD__ ? [new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }) ] : []),
+    ...(__PROD__ ?
+      [new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+      })] :
+      []
+    ),
   ],
   eslint: {
     configFile: "./.eslintrc",
