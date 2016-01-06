@@ -20,7 +20,7 @@ export default {
   entry: ["./src/index.js"],
   output: {
     path: path.join(__dirname, __OUTPUT_DIR__),
-    publicPath: `${__SERVER_URL__}/${__OUTPUT_DIR__}/`,
+    publicPath: `${ __SERVER_URL__ }/${ __OUTPUT_DIR__ }/`,
     filename: "bundle.js",
   },
   resolve: {

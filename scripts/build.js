@@ -28,6 +28,6 @@ if (__PROD__) {
 
     opn(__SERVER_URL__)
 
-    console.log(colors.green(`\nServer started at ${__SERVER_URL__}`))
+    console.log(colors.green(`\nServer started at ${ __SERVER_URL__ }`))
   })
 }
