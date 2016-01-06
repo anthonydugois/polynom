@@ -50,9 +50,9 @@ export default {
       []
     ),
   ],
-  eslint: {
+  /*eslint: {
     configFile: "./.eslintrc",
-  },
+  },*/
   postcss: (webpack) => {
     return [
       postcssImport({ addDependencyTo: webpack }),

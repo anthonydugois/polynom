@@ -29,8 +29,7 @@ span {
 }
 
 html,
-body,
-.ad-AppContainer {
+body {
   height: 100%;
 }
 
