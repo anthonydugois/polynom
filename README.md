@@ -5,6 +5,7 @@ This boilerplate includes:
 
 - react
 - react-dom
+- react-transform-hmr
 - react-redux
 - redux
 - webpack
