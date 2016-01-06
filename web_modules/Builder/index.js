@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import SVG from "SVG"
 import Sidebar from "Sidebar"
 
-import keys from "../../src/utils/keybinding"
+import { keyCodes, isCtrlOrMetaKey } from "../../src/utils/keybinding"
 import { positive } from "../../src/utils/maths"
 import { M, L, Q, C, A, getPathFromString } from "../../src/utils/points"
 
@@ -76,13 +76,13 @@ class Builder extends Component {
   }
 
   handleKeyDown = (e) => {
-    if (keys(e, "ctrl")) {
+    if (isCtrlOrMetaKey(e)) {
       this.setState({ ctrl: true })
     }
   }
 
   handleKeyUp = (e) => {
-    if ( ! keys(e, "ctrl")) {
+    if ( ! isCtrlOrMetaKey(e)) {
       this.setState({ ctrl: false })
     }
 
@@ -90,33 +90,37 @@ class Builder extends Component {
   }
 
   handleShortcuts = (e) => {
-    const {
-      activePath,
-      paths,
-    } = this.state
+    if (isCtrlOrMetaKey(e)) {
+      const {
+        activePath,
+        paths,
+      } = this.state
 
-    let { activePoint, points } = paths[activePath]
+      let { activePoint, points } = paths[activePath]
 
-    if (keys(e, "ctrl+p")) {
-      this.addPath(e)
-    }
+      switch (e.keyCode || e.which) {
+        case keyCodes["p"]:
+          this.addPath(e)
+          break
 
-    if (keys(e, "ctrl+d")) {
-      this.removePath(e, activePath)
-    }
+        case keyCodes["d"]:
+          this.removePath(e, activePath)
+          break
 
-    if (keys(e, "ctrl+r")) {
-      this.removePoint(e, activePath, paths[activePath].activePoint)
-    }
+        case keyCodes["r"]:
+          this.removePoint(e, activePath, paths[activePath].activePoint)
+          break
 
-    if (keys(e, "ctrl+q")) {
-      if (activePoint < points.length - 1) {
-        paths[activePath].activePoint++
-      } else {
-        paths[activePath].activePoint = 0
+        case keyCodes["q"]:
+          if (activePoint < points.length - 1) {
+            paths[activePath].activePoint++
+          } else {
+            paths[activePath].activePoint = 0
+          }
+
+          this.setState({ paths })
+          break
       }
-
-      this.setState({ paths })
     }
   }
 

@@ -99,49 +99,12 @@ export const keyCodes = {
   "single_quote": 222,
 }
 
-export default function keys(e, keys) {
-  const code = e.which || e.keyCode
-  let result = false
-
-  keys = keys.split("+")
-
-  if (keys.length > 0) {
-    result = true
-
-    keys.forEach((k) => {
-      switch (k) {
-        case "ctrl":
-          result = result && isCtrlOrMetaKey(e)
-          break
-
-        case "alt":
-          result = result && e.altKey
-          break
-
-        case "shift":
-          result = result && e.shiftKey
-          break
-
-        default:
-          result = result && code === keyCodes[k]
-          break
-      }
-    })
-  }
-
-  if (result) {
-    e.preventDefault()
-  }
-
-  return result
-}
-
 export function platform(p) {
   return navigator.appVersion.toLowerCase().indexOf(p) > - 1
 }
 
 // avoid right click emulation on Mac systems
-function isCtrlOrMetaKey(e) {
+export function isCtrlOrMetaKey(e) {
   const ctrl = platform("win") && e.ctrlKey,
     meta = platform("mac") && e.metaKey
 
