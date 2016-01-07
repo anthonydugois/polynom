@@ -20,14 +20,10 @@ class Shape extends Component {
     return (
       <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
         <path
-          className={ cx("ad-Path", { "is-filled": path.isFilled }) } />
+          className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) } />
 
-        <g className="ad-Points">
-          {
-            path.points.map((point, index, points) =>
-              this.renderPoint(point, index > 0 && points[index - 1]))
-          }
-        </g>
+        { path.points.map((point, index, points) =>
+            this.renderPoint(point, index > 0 && points[index - 1])) }
       </g>
     )
   }

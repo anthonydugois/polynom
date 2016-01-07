@@ -2,25 +2,20 @@
 
 .ad-Tabs {
   height: 100%;
-  display: flex;
+  flex-direction: row;
 }
-  .ad-Tabs-nav {
-    margin: 0;
-    padding: 0;
-    width: 5rem;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    background: color(var(--ad-Color-prim) l(-5%));
-  }
-    .ad-Tabs-item {
-      height: 5rem;
-    }
 
-  .ad-Tabs-tabs {
-    height: 100%;
-    flex: 1;
-  }
+.ad-TabList {
+  margin: 0;
+  padding: 0;
+  width: 5rem;
+  list-style: none;
+  background: color(var(--ad-Color-prim) l(-5%));
+}
+
+.ad-Tab {
+  height: 5rem;
+}
 
 .ad-TabsButton {
   position: relative;
@@ -56,10 +51,11 @@
     color: #fff;
   }
 
-.ad-Tab {
+.ad-TabPanel {
+  flex: 1;
   height: 100%;
   display: none;
 }
-.ad-Tab.is-active {
+.ad-TabPanel.is-active {
   display: block;
 }

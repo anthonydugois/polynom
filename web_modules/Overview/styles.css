@@ -23,13 +23,12 @@
 .ad-Shape.is-active {
   opacity: 1;
 }
-
-.ad-Path {
-  fill: none;
-  stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 4px;
-  stroke-linecap: round;
-}
-.ad-Path--filled {
-  fill: color(var(--ad-Color-prim) l(+15%));
-}
+  .ad-Shape-path {
+    fill: none;
+    stroke: color(var(--ad-Color-prim) l(+15%));
+    stroke-width: 4px;
+    stroke-linecap: round;
+  }
+  .ad-Shape-path.is-filled {
+    fill: color(var(--ad-Color-prim) l(+15%));
+  }

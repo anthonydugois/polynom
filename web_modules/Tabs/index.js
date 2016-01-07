@@ -1,74 +1,78 @@
-import React, { Component } from "react"
-import cx from "classnames"
-
-import Icon from "Icon"
-import Tab from "./Tab"
-
+import React, { Component, PropTypes } from "react"
 import "./styles"
 
 class Tabs extends Component {
-  static propTypes = {
-    tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
-      icon: React.PropTypes.string.isRequired,
-      title: React.PropTypes.string.isRequired,
-    })).isRequired,
-    initialActive: React.PropTypes.number.isRequired,
-    children: React.PropTypes.any.isRequired,
+  state = { selected: this.props.selected };
+
+  setSelected(selected) {
+    if (selected !== this.state.selected) {
+      this.setState({ selected })
+    }
   }
 
-  state = {
-    activeTab: this.props.initialActive,
+  handleClick(tab) {
+    return () => this.setSelected(tab)
   }
 
-  setActiveTab = (e, activeTab) => {
-    e.preventDefault()
+  renderTabList(child) {
+    let tab = 0
 
-    this.setState({ activeTab })
+    return React.cloneElement(child, {
+      children: React.Children.map(child.props.children, (childTab) => {
+        if (childTab.type.name === "Tab") {
+          const isActive = tab === this.state.selected
+          const onClick = this.handleClick(tab)
+
+          tab++
+
+          return React.cloneElement(childTab, {
+            isActive,
+            onClick,
+          })
+        }
+
+        return childTab
+      }),
+    })
+  }
+
+  renderChildren(children) {
+    let panel = 0
+
+    return React.Children.map(children, (child) => {
+      if (child.type.name === "TabList") {
+        return this.renderTabList(child)
+      }
+
+      if (child.type.name === "TabPanel") {
+        const isActive = panel === this.state.selected
+
+        panel++
+
+        return React.cloneElement(child, { isActive })
+      }
+
+      return child
+    })
   }
 
   render() {
-    const { tabs, children } = this.props,
-      { activeTab } = this.state
-
-    const list = tabs.map((tab, index) => {
-      return (
-        <li
-          key={ index }
-          className="ad-Tabs-item">
-          <button
-            className={ cx("ad-TabsButton", { "is-active": index === activeTab }) }
-            onClick={ (e) => this.setActiveTab(e, index) }>
-            <Icon name={ tab.icon } />
-            <span className="ad-TabsButton-text">
-              { tab.title }
-            </span>
-          </button>
-        </li>
-      )
-    })
-
-    const _tabs = children.map((child, index) => {
-      return (
-        <Tab
-          key={ index }
-          active={ index === activeTab }>
-          { child }
-        </Tab>
-      )
-    })
+    const { children } = this.props
 
     return (
       <div className="ad-Tabs">
-        <ul className="ad-Tabs-nav">
-          { list }
-        </ul>
-
-        <div className="ad-Tabs-tabs">
-          { _tabs }
-        </div>
+        { this.renderChildren(children) }
       </div>
     )
   }
+}
+
+Tabs.propTypes = {
+  selected: PropTypes.number.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
 }
 
 export default Tabs

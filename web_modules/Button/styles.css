@@ -8,7 +8,7 @@
   padding: .8rem 1.5rem;
   background: var(--ad-Color-sec);
   border: none;
-  border-radius: 50px;
+  border-radius: 5rem;
   cursor: pointer;
   transition: background .2s;
   text-decoration: none;

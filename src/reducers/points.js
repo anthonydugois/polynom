@@ -2,7 +2,6 @@ import * from "../constants/ActionTypes"
 
 function M(state = {
   code: "M",
-  relative: false,
   x: 0,
   y: 0,
 }, action) {
@@ -14,7 +13,6 @@ function M(state = {
 
 function L(state = {
   code: "L",
-  relative: false,
   x: 0,
   y: 0,
 }, action) {
@@ -26,7 +24,6 @@ function L(state = {
 
 function Q(state = {
   code: "Q",
-  relative: false,
   x: 0,
   y: 0,
   x1: 0,
@@ -40,7 +37,6 @@ function Q(state = {
 
 function T(state = {
   code: "T",
-  relative: false,
   x: 0,
   y: 0,
 }, action) {
@@ -52,7 +48,6 @@ function T(state = {
 
 function C(state = {
   code: "C",
-  relative: false,
   x: 0,
   y: 0,
   x1: 0,
@@ -68,7 +63,6 @@ function C(state = {
 
 function S(state = {
   code: "S",
-  relative: false,
   x: 0,
   y: 0,
   x2: 0,
@@ -82,7 +76,6 @@ function S(state = {
 
 function A(state = {
   code: "A",
-  relative: false,
   x: 0,
   y: 0,
   rx: 0,
@@ -100,6 +93,7 @@ function A(state = {
 function point(state = {
   id: 0,
   isActive: false,
+  isRelative: false,
   parameters: {},
 }, action) {
   switch (action.type) {
