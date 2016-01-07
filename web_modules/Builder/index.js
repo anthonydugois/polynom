@@ -8,7 +8,7 @@ class Builder extends Component {
     dispatch: PropTypes.func.isRequired,
     builder: PropTypes.object.isRequired,
     paths: PropTypes.array.isRequired,
-  }
+  };
 
   render() {
     const {

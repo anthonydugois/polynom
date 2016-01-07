@@ -1,18 +1,9 @@
 import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
-
-import autoprefixer from "autoprefixer"
-import stylelint from "stylelint"
-import postcssColorFunction from "postcss-color-function"
-import postcssCustomMedia from "postcss-custom-media"
-import postcssCustomProperties from "postcss-custom-properties"
-import postcssCustomSelectors from "postcss-custom-selectors"
 import postcssImport from "postcss-import"
-import postcssInputStyle from "postcss-input-style"
-import postcssMediaMinmax from "postcss-media-minmax"
 import postcssUrl from "postcss-url"
-
+import postcssNext from "postcss-cssnext"
 import variables, { defineVariables } from "./variables"
 
 defineVariables()
@@ -28,11 +19,22 @@ export default {
     extensions: ["", ".js", ".css"],
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "eslint",
+      },
+      {
+        test: /\.css$/,
+        loader: "stylelint",
+      },
+    ],
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ["babel", "eslint"],
+        loader: "babel",
       },
       {
         test: /\.css$/,
@@ -51,19 +53,16 @@ export default {
     ),
   ],
   eslint: {
-    configFile: "./.eslintrc",
+    configFile: path.join(__dirname, "./.eslintrc"),
+  },
+  stylelint: {
+    configFile: path.join(__dirname, "./.stylelintrc"),
   },
   postcss: (webpack) => {
     return [
       postcssImport({ addDependencyTo: webpack }),
-      stylelint,
-      postcssCustomMedia,
-      postcssCustomProperties,
-      postcssCustomSelectors,
-      postcssMediaMinmax,
-      postcssColorFunction,
-      postcssInputStyle,
       postcssUrl,
+      postcssNext,
     ]
   },
 }

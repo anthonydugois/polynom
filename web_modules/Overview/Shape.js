@@ -5,7 +5,7 @@ import cx from "classnames"
 class Shape extends Component {
   static propTypes = {
     path: PropTypes.object.isRequired,
-  }
+  };
 
   renderPoint(point, previousPoint) {
     return (

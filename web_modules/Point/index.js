@@ -6,7 +6,7 @@ class Point extends Component {
   static propTypes = {
     point: PropTypes.object.isRequired,
     previousPoint: PropTypes.object,
-  }
+  };
 
   renderPoint(point) {
     return (

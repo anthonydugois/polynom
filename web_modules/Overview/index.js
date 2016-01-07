@@ -21,7 +21,7 @@ class Overview extends Component {
     height: PropTypes.number.isRequired,
     grid: PropTypes.object.isRequired,
     paths: PropTypes.array.isRequired,
-  }
+  };
 
   renderShape(path) {
     return (
