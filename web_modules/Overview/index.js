@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import { connect } from "react-redux"
 import Grid from "./Grid"
 import Shape from "./Shape"
 import "./styles"
@@ -7,7 +8,7 @@ function getStyles(props) {
   const {
     width,
     height,
-  } = props
+  } = props.builder
 
   return {
     width,
@@ -16,13 +17,6 @@ function getStyles(props) {
 }
 
 class Overview extends Component {
-  static propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    grid: PropTypes.object.isRequired,
-    paths: PropTypes.array.isRequired,
-  };
-
   renderShape(path) {
     return (
       <Shape
@@ -33,9 +27,7 @@ class Overview extends Component {
 
   render() {
     const {
-      width,
-      height,
-      grid,
+      builder,
       paths,
     } = this.props
 
@@ -44,9 +36,9 @@ class Overview extends Component {
         className="ad-Overview"
         style={ getStyles(this.props) }>
         <Grid
-          width={ width }
-          height={ height }
-          grid={ grid } />
+          width={ builder.width }
+          height={ builder.height }
+          grid={ builder.grid } />
 
         { paths.map((path) => this.renderShape(path)) }
       </svg>
@@ -54,4 +46,10 @@ class Overview extends Component {
   }
 }
 
-export default Overview
+Overview.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  builder: PropTypes.object.isRequired,
+  paths: PropTypes.array.isRequired,
+}
+
+export default connect((state) => state)(Overview)

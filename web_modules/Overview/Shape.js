@@ -3,10 +3,6 @@ import Point from "Point"
 import cx from "classnames"
 
 class Shape extends Component {
-  static propTypes = {
-    path: PropTypes.object.isRequired,
-  };
-
   renderPoint(point, previousPoint) {
     return (
       <Point
@@ -35,6 +31,10 @@ class Shape extends Component {
       </g>
     )
   }
+}
+
+Shape.propTypes = {
+  path: PropTypes.object.isRequired,
 }
 
 export default Shape

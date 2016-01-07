@@ -3,11 +3,6 @@ import cx from "classnames"
 import "./styles"
 
 class Point extends Component {
-  static propTypes = {
-    point: PropTypes.object.isRequired,
-    previousPoint: PropTypes.object,
-  };
-
   renderPoint(point) {
     return (
       <circle
@@ -108,6 +103,11 @@ class Point extends Component {
       </g>
     )
   }
+}
+
+Point.propTypes = {
+  point: PropTypes.object.isRequired,
+  previousPoint: PropTypes.object,
 }
 
 export default Point

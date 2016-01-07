@@ -1,6 +1,7 @@
 @import url(App/config.css);
 
 .ad-Builder {
+  flex-direction: row;
   height: 100%;
   width: 100%;
 }

@@ -31,15 +31,9 @@ span {
 }
 
 html,
-body {
-  height: 100%;
-}
-
+body,
 .ad-App {
   height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .ad-About {
