@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react"
 import "./styles.css"
 
 class Expand extends Component {
-  static defaultProps = { isOpened: true };
+  static defaultProps = { isOpened: false };
 
   state = { isOpened: this.props.isOpened };
 

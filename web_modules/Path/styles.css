@@ -1,1 +1,6 @@
 @import url(App/config.css);
+
+.ad-Path-name {
+  font-size: .8rem;
+  color: #fff;
+}

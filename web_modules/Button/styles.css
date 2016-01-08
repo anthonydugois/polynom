@@ -40,6 +40,14 @@
 
 .ad-Button--expand {
   padding: .2rem;
+  background: color(#fff a(.1));
+  border-radius: 2px;
+  font-size: .8rem;
+  color: #fff;
+}
+.ad-Button--expand:focus,
+.ad-Button--expand:hover {
+  background: color(#fff a(.2));
 }
 
 .ad-Button--delete {

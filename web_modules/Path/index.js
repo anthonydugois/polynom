@@ -19,7 +19,9 @@ class Path extends Component {
             </div>
           </ExpandCaption>
 
-          <ExpandPanel />
+          <ExpandPanel>
+            test
+          </ExpandPanel>
         </Expand>
       </div>
     )
