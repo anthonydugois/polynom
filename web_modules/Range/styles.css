@@ -1,0 +1,36 @@
+@import url(App/config.css);
+
+.ad-Range {
+  display: flex;
+  align-items: center;
+}
+  .ad-Range-input {
+    width: 100%;
+    height: 14px;
+    margin-right: .5rem;
+    border-radius: 30px;
+    background: color(var(--ad-Color-prim) l(+10%));
+  }
+  .ad-Range-input:focus {
+    outline: 0;
+    background: color(var(--ad-Color-prim) l(+15%));
+  }
+  .ad-Range-input::track {
+    background: none;
+  }
+  .ad-Range-input::thumb {
+    width: 18px;
+    height: 18px;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border .2s;
+  }
+  .ad-Range-input:hover::thumb,
+  .ad-Range-input:focus::thumb {
+    border-color: var(--ad-Color-sec);
+  }
+  .ad-Range-input:focus::thumb {
+    background: color(var(--ad-Color-prim) l(+15%));
+  }
