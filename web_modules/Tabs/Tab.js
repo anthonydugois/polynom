@@ -1,28 +1,17 @@
-import React, { Component, PropTypes } from "react"
+import React, { PropTypes } from "react"
 import cx from "classnames"
 
-class Tab extends Component {
-  handleClick = (e) => {
-    e.preventDefault()
-
-    this.props.onClick()
-  };
-
-  render() {
-    const {
-      isActive,
-      children,
-    } = this.props
-
-    return (
-      <li
-        className={ cx("ad-Tab", { "is-active": isActive }) }
-        onClick={ this.handleClick }>
-        { children }
-      </li>
-    )
-  }
-}
+const Tab = ({
+  onClick,
+  isActive,
+  children,
+}) => (
+  <li
+    className={ cx("ad-Tab", { "is-active": isActive }) }
+    onClick={ onClick }>
+    { children }
+  </li>
+)
 
 Tab.propTypes = {
   onClick: PropTypes.func,
@@ -30,6 +19,7 @@ Tab.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
+    PropTypes.string,
   ]),
 }
 

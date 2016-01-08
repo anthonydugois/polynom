@@ -1,0 +1,11 @@
+@import url(App/config.css);
+
+.ad-Grid {
+  fill: none;
+  stroke: color(var(--ad-Color-prim) l(+75%));
+  stroke-width: 1px;
+  opacity: 0;
+}
+.ad-Grid.is-shown {
+  opacity: 1;
+}

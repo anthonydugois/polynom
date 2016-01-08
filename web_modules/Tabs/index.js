@@ -57,11 +57,9 @@ class Tabs extends Component {
   }
 
   render() {
-    const { children } = this.props
-
     return (
       <div className="ad-Tabs">
-        { this.renderChildren(children) }
+        { this.renderChildren(this.props.children) }
       </div>
     )
   }

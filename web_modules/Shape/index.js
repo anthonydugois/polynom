@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from "react"
 import Point from "Point"
 import cx from "classnames"
+import "./styles"
 
 class Shape extends Component {
-  renderPoint(point, previousPoint) {
+  renderPoint(point, index, points) {
+    const previousPoint = index > 0 ? points[index - 1] : null
+
     return (
       <Point
         key={ point.id }
         point={ point }
-        previousPoint={ previousPoint || null } />
+        previousPoint={ previousPoint } />
     )
   }
 
@@ -22,8 +25,7 @@ class Shape extends Component {
         <path
           className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) } />
 
-        { path.points.map((point, index, points) =>
-            this.renderPoint(point, index > 0 && points[index - 1])) }
+        { path.points.map(this.renderPoint) }
       </g>
     )
   }

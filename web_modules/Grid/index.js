@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react"
 import cx from "classnames"
+import "./styles"
 
 const Grid = ({
   width,

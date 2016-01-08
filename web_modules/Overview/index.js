@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
-import Grid from "./Grid"
-import Shape from "./Shape"
+import Grid from "Grid"
+import Shape from "Shape"
 import "./styles"
 
 function getStyles(props) {

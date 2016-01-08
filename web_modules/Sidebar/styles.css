@@ -4,8 +4,6 @@
   overflow: hidden;
   height: 100%;
   width: 25rem;
-  display: flex;
-  flex-direction: column;
   background: var(--ad-Color-prim);
 }
   .ad-Sidebar ::-webkit-scrollbar {

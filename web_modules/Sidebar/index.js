@@ -8,7 +8,13 @@ import TabPanel from "Tabs/TabPanel"
 import "./styles"
 
 class Sidebar extends Component {
+  renderPath(path) {
+    return null
+  }
+
   render() {
+    const { paths } = this.props
+
     return (
       <div className="ad-Sidebar">
         <Tabs selected={ 0 }>
@@ -29,7 +35,11 @@ class Sidebar extends Component {
             </Tab>
           </TabList>
 
-          <TabPanel><div>Hello!</div></TabPanel>
+          <TabPanel>
+            <div className="ad-Sidebar-settings">
+              { paths.map(this.renderPath) }
+            </div>
+          </TabPanel>
           <TabPanel><div>World!</div></TabPanel>
         </Tabs>
       </div>
@@ -37,6 +47,9 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.propTypes = {}
+Sidebar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  paths: PropTypes.array.isRequired,
+}
 
 export default connect((state) => state)(Sidebar)
