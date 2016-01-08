@@ -13,21 +13,8 @@
     border-radius: 1rem;
     background: color(var(--ad-Color-prim) l(+20%));
   }
-
-.ad-Sidebar-tab {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
   .ad-Sidebar-settings {
-    flex: 1 0 0;
-    overflow: auto;
-  }
-  .ad-Sidebar-actions {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    padding: 2rem;
+    flex: 1;
   }
 
 .ad-Expand-head {

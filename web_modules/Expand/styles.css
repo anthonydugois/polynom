@@ -1,0 +1,12 @@
+@import url(App/config.css);
+
+.ad-ExpandCaption {
+  flex-direction: row;
+}
+  .ad-ExpandCaption-label {
+    flex: 1;
+  }
+
+.ad-ExpandPanel {
+  flex: 1;
+}

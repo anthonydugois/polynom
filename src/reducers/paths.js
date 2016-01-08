@@ -5,6 +5,7 @@ import {
 const initialState = [
   {
     id: 0,
+    name: "First Path",
     isActive: true,
     isClosed: false,
     isRelative: false,
@@ -48,6 +49,7 @@ const initialState = [
 
 function path(state = {
   id: 0,
+  name: "",
   isActive: false,
   isClosed: false,
   isRelative: false,

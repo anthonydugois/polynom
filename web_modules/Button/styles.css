@@ -38,6 +38,10 @@
     margin-top: .5rem;
   }
 
+.ad-Button--expand {
+  padding: .2rem;
+}
+
 .ad-Button--delete {
   background: var(--ad-Color-del);
 }

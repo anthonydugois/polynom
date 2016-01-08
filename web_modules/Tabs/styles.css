@@ -26,5 +26,5 @@
   display: none;
 }
 .ad-TabPanel.is-active {
-  display: block;
+  display: flex;
 }

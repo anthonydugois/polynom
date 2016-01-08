@@ -5,11 +5,16 @@ import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
 import Tab from "Tabs/Tab"
 import TabPanel from "Tabs/TabPanel"
+import Path from "Path"
 import "./styles"
 
 class Sidebar extends Component {
   renderPath(path) {
-    return null
+    return (
+      <Path
+        key={ path.id }
+        path={ path } />
+    )
   }
 
   render() {
