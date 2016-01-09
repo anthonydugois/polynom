@@ -60,3 +60,21 @@ export function setPointY(id, pointId, y) {
     y,
   }
 }
+
+export function setQuadX(id, pointId, x1) {
+  return {
+    type: types.SET_QUAD_X,
+    id,
+    pointId,
+    x1,
+  }
+}
+
+export function setQuadY(id, pointId, y1) {
+  return {
+    type: types.SET_QUAD_Y,
+    id,
+    pointId,
+    y1,
+  }
+}

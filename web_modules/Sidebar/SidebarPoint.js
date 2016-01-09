@@ -30,57 +30,58 @@ function getParameters(code, point, previousPoint) {
   }
 }
 
+function keepInRange(n, min, max) {
+  n = parseInt(n)
+
+  if (isNaN(n) || n < min) {
+    return min
+  } else if (n > max) {
+    return max
+  }
+
+  return n
+}
+
 class SidebarPoint extends Component {
   handleTypeChange = (e) => {
-    const {
-      dispatch,
-      path,
-      point,
-      previousPoint,
-    } = this.props
-
-    dispatch(pointsActions.setPointCode(
-      path.id,
-      point.id,
+    this.props.dispatch(pointsActions.setPointCode(
+      this.props.path.id,
+      this.props.point.id,
       e.target.value,
-      getParameters(e.target.value, point, previousPoint)
+      getParameters(e.target.value, this.props.point, this.props.previousPoint)
     ))
   };
 
   handleXPositionChange = (e) => {
-    let x = parseInt(e.target.value)
-
-    if (isNaN(x) || x < 0) {
-      x = 0
-    } else if (x > this.props.builder.width) {
-      x = this.props.builder.width
-    }
-
     this.props.dispatch(pointsActions.setPointX(
       this.props.path.id,
       this.props.point.id,
-      x
+      keepInRange(e.target.value, 0, this.props.builder.width)
     ))
   };
 
   handleYPositionChange = (e) => {
-    let y = parseInt(e.target.value)
-
-    if (isNaN(y) || y < 0) {
-      y = 0
-    } else if (y > this.props.builder.height) {
-      y = this.props.builder.height
-    }
-
     this.props.dispatch(pointsActions.setPointY(
       this.props.path.id,
       this.props.point.id,
-      y
+      keepInRange(e.target.value, 0, this.props.builder.height)
     ))
   };
 
-  handleXAnchorChange = (e) => {
+  handleQuadXChange = (e) => {
+    this.props.dispatch(pointsActions.setQuadX(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.width)
+    ))
+  };
 
+  handleQuadYChange = (e) => {
+    this.props.dispatch(pointsActions.setQuadY(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
   };
 
   render() {
@@ -170,7 +171,18 @@ class SidebarPoint extends Component {
               max={ builder.width }
               step={ step }
               value={ point.parameters.x1 }
-              onChange={ this.handleXAnchorChange } />
+              onChange={ this.handleQuadXChange } />
+          </Setting>
+        ) }
+
+        { (code === "q" || (code === "t" && prevCode !== "q")) && (
+          <Setting label="Anchor Y position">
+            <Range
+              min={ 0 }
+              max={ builder.height }
+              step={ step }
+              value={ point.parameters.y1 }
+              onChange={ this.handleQuadYChange } />
           </Setting>
         ) }
       </Settings>

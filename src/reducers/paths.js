@@ -9,6 +9,8 @@ import {
   SET_POINT_CODE,
   SET_POINT_X,
   SET_POINT_Y,
+  SET_QUAD_X,
+  SET_QUAD_Y,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -63,6 +65,8 @@ function path(state = {
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
+  case SET_QUAD_X:
+  case SET_QUAD_Y:
     return {
       ...state,
       points: points(state.points, action),
@@ -91,6 +95,8 @@ export default function paths(state = initialState, action) {
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
+  case SET_QUAD_X:
+  case SET_QUAD_Y:
     return state.map((p) =>
       p.id === action.id ? path(p, action) : p)
 
