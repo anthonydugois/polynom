@@ -11,3 +11,6 @@ export const SET_GRID = "SET_GRID"
  */
 
 export const ADD_PATH = "ADD_PATH"
+export const SET_RELATIVE = "SET_RELATIVE"
+export const SET_CLOSED = "SET_CLOSED"
+export const SET_FILLED = "SET_FILLED"

@@ -1,5 +1,8 @@
 import {
   ADD_PATH,
+  SET_RELATIVE,
+  SET_CLOSED,
+  SET_FILLED,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -57,6 +60,24 @@ function path(state = {
   points: [],
 }, action) {
   switch (action.type) {
+  case SET_RELATIVE:
+    return {
+      ...state,
+      isRelative: action.isRelative,
+    }
+
+  case SET_CLOSED:
+    return {
+      ...state,
+      isClosed: action.isClosed,
+    }
+
+  case SET_FILLED:
+    return {
+      ...state,
+      isFilled: action.isFilled,
+    }
+
   default:
     return state
   }
@@ -64,6 +85,11 @@ function path(state = {
 
 export default function paths(state = initialState, action) {
   switch (action.type) {
+  case SET_RELATIVE:
+  case SET_CLOSED:
+  case SET_FILLED:
+    return state.map((p) => p.id === action.id ? path(p, action) : p)
+
   default:
     return state
   }

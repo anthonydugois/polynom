@@ -8,14 +8,24 @@ import TabPanel from "Tabs/TabPanel"
 import Path from "Path"
 import "./styles"
 
+import * as pathsActions from "../../src/actions/paths"
+
 class Sidebar extends Component {
-  renderPath(path) {
+  renderPath = (path) => {
+    const { dispatch } = this.props
+
     return (
       <Path
         key={ path.id }
-        path={ path } />
+        path={ path }
+        onRelativeChange={ (id, isRelative) =>
+          dispatch(pathsActions.setRelative(id, isRelative)) }
+        onClosedChange={ (id, isClosed) =>
+          dispatch(pathsActions.setClosed(id, isClosed)) }
+        onFilledChange={ (id, isFilled) =>
+          dispatch(pathsActions.setFilled(id, isFilled)) } />
     )
-  }
+  };
 
   render() {
     const { paths } = this.props

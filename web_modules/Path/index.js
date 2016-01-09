@@ -8,6 +8,18 @@ import Checkbox from "Checkbox"
 import "./styles"
 
 class Path extends Component {
+  handleRelativeChange = (e) => {
+    this.props.onRelativeChange(this.props.path.id, e.target.checked)
+  };
+
+  handleClosedChange = (e) => {
+    this.props.onClosedChange(this.props.path.id, e.target.checked)
+  };
+
+  handleFilledChange = (e) => {
+    this.props.onFilledChange(this.props.path.id, e.target.checked)
+  };
+
   render() {
     const {
       path,
@@ -25,15 +37,21 @@ class Path extends Component {
           <ExpandPanel>
             <Settings>
               <Setting label="Relative">
-                <Checkbox />
+                <Checkbox
+                  checked={ path.isRelative }
+                  onChange={ this.handleRelativeChange } />
               </Setting>
 
               <Setting label="Closed">
-                <Checkbox />
+                <Checkbox
+                  checked={ path.isClosed }
+                  onChange={ this.handleClosedChange } />
               </Setting>
 
               <Setting label="Filled">
-                <Checkbox />
+                <Checkbox
+                  checked={ path.isFilled }
+                  onChange={ this.handleFilledChange } />
               </Setting>
             </Settings>
           </ExpandPanel>
@@ -45,6 +63,9 @@ class Path extends Component {
 
 Path.propTypes = {
   path: PropTypes.object.isRequired,
+  onRelativeChange: PropTypes.func.isRequired,
+  onClosedChange: PropTypes.func.isRequired,
+  onFilledChange: PropTypes.func.isRequired,
 }
 
 export default Path
