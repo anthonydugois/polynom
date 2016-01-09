@@ -8,12 +8,42 @@ import Choice from "Choices/Choice"
 
 import * as pointsActions from "../../src/actions/points"
 
+function getParameters(code, point, previousPoint) {
+  const middleX = previousPoint.x + (point.x - previousPoint.x) / 2
+  const middleY = previousPoint.y + (point.y - previousPoint.y) / 2
+
+  switch (code.toLowerCase()) {
+  case "q":
+    return pointsActions.Q(middleX, middleY)
+
+  case "c":
+    return pointsActions.C(middleX, middleY, middleX, middleY)
+
+  case "s":
+    return pointsActions.S(middleX, middleY)
+
+  case "a":
+    return pointsActions.A(50, 50, 0, false, false)
+
+  default:
+    return {}
+  }
+}
+
 class SidebarPoint extends Component {
   handleTypeChange = (e) => {
-    this.props.dispatch(pointsActions.setPointCode(
-      this.props.path.id,
-      this.props.point.id,
-      e.target.value
+    const {
+      dispatch,
+      path,
+      point,
+      previousPoint,
+    } = this.props
+
+    dispatch(pointsActions.setPointCode(
+      path.id,
+      point.id,
+      e.target.value,
+      getParameters(e.target.value, point, previousPoint)
     ))
   };
 
@@ -49,24 +79,32 @@ class SidebarPoint extends Component {
     ))
   };
 
+  handleXAnchorChange = (e) => {
+
+  };
+
   render() {
     const {
       builder,
       path,
       point,
+      previousPoint,
     } = this.props
 
-    const gridStep = builder.grid.snapToGrid ? builder.grid.size : 1
-    const pointCode = point.code.toLowerCase()
+    const step = builder.grid.snapToGrid ? builder.grid.size : 1
+    const code = point.code.toLowerCase()
+    const prevCode = previousPoint.code.toLowerCase()
 
     return (
       <Settings>
+        { /* Point general settings */ }
+
         <Setting>
           <Choices>
             <Choice
               name="type"
               value="M"
-              checked={ pointCode === "m" }
+              checked={ code === "m" }
               onChange={ this.handleTypeChange }>
               Move
             </Choice>
@@ -74,7 +112,7 @@ class SidebarPoint extends Component {
             <Choice
               name="type"
               value="L"
-              checked={ pointCode === "l" }
+              checked={ code === "l" }
               onChange={ this.handleTypeChange }>
               Line
             </Choice>
@@ -82,7 +120,7 @@ class SidebarPoint extends Component {
             <Choice
               name="type"
               value="Q"
-              checked={ pointCode === "q" }
+              checked={ code === "q" }
               onChange={ this.handleTypeChange }>
               Quad
             </Choice>
@@ -90,7 +128,7 @@ class SidebarPoint extends Component {
             <Choice
               name="type"
               value="C"
-              checked={ pointCode === "c" }
+              checked={ code === "c" }
               onChange={ this.handleTypeChange }>
               Cub
             </Choice>
@@ -98,7 +136,7 @@ class SidebarPoint extends Component {
             <Choice
               name="type"
               value="A"
-              checked={ pointCode === "a" }
+              checked={ code === "a" }
               onChange={ this.handleTypeChange }>
               Arc
             </Choice>
@@ -109,7 +147,7 @@ class SidebarPoint extends Component {
           <Range
             min={ 0 }
             max={ builder.width }
-            step={ gridStep }
+            step={ step }
             value={ point.x }
             onChange={ this.handleXPositionChange } />
         </Setting>
@@ -118,10 +156,23 @@ class SidebarPoint extends Component {
           <Range
             min={ 0 }
             max={ builder.height }
-            step={ gridStep }
+            step={ step }
             value={ point.y }
             onChange={ this.handleYPositionChange } />
         </Setting>
+
+        { /* Quadratic curve settings */ }
+
+        { (code === "q" || (code === "t" && prevCode !== "q")) && (
+          <Setting label="Anchor X position">
+            <Range
+              min={ 0 }
+              max={ builder.width }
+              step={ step }
+              value={ point.parameters.x1 }
+              onChange={ this.handleXAnchorChange } />
+          </Setting>
+        ) }
       </Settings>
     )
   }
@@ -132,17 +183,27 @@ SidebarPoint.propTypes = {
   builder: PropTypes.object.isRequired,
   path: PropTypes.object.isRequired,
   point: PropTypes.object.isRequired,
+  previousPoint: PropTypes.object.isRequired,
 }
 
 export default connect((state) => {
-  const { builder, paths } = state
+  const path = state.paths.filter(({ isActive }) => isActive)[0]
+  let point = {}, previousPoint = {}
 
-  const path = paths.filter(({ isActive }) => isActive)[0]
-  const point = path.points.filter(({ isActive }) => isActive)[0]
+  path.points.forEach((p, index, points) => {
+    if (p.isActive) {
+      point = p
+
+      if (index > 0) {
+        previousPoint = points[index - 1]
+      }
+    }
+  })
 
   return {
-    builder,
+    builder: state.builder,
     path,
     point,
+    previousPoint,
   }
 })(SidebarPoint)

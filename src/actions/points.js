@@ -1,11 +1,45 @@
 import * as types from "../constants/ActionTypes"
 
-export function setPointCode(id, pointId, code) {
+export function Q(x1, y1) {
+  return {
+    x1,
+    y1,
+  }
+}
+
+export function C(x1, y1, x2, y2) {
+  return {
+    x1,
+    y1,
+    x2,
+    y2,
+  }
+}
+
+export function S(x2, y2) {
+  return {
+    x2,
+    y2,
+  }
+}
+
+export function A(rx, ry, xAxisRotation, largeArc, sweep) {
+  return {
+    rx,
+    ry,
+    xAxisRotation,
+    largeArc,
+    sweep,
+  }
+}
+
+export function setPointCode(id, pointId, code, parameters) {
   return {
     type: types.SET_POINT_CODE,
     id,
     pointId,
     code,
+    parameters,
   }
 }
 
