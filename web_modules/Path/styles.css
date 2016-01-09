@@ -1,5 +1,12 @@
 @import url(App/config.css);
 
+.ad-Path {
+  border-left: 3px solid transparent;
+}
+.ad-Path.is-active {
+  border-color: var(--ad-Color-sec);
+}
+
 .ad-Path-name {
   font-size: .8rem;
   color: #fff;

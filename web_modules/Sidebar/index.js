@@ -18,6 +18,8 @@ class Sidebar extends Component {
       <Path
         key={ path.id }
         path={ path }
+        onPathClick={ (id) =>
+          dispatch(pathsActions.setActivePath(id)) }
         onRelativeChange={ (id, isRelative) =>
           dispatch(pathsActions.setRelative(id, isRelative)) }
         onClosedChange={ (id, isClosed) =>

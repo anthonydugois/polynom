@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import cx from "classnames"
 import Expand from "Expand"
 import ExpandCaption from "Expand/ExpandCaption"
 import ExpandPanel from "Expand/ExpandPanel"
@@ -8,6 +9,10 @@ import Checkbox from "Checkbox"
 import "./styles"
 
 class Path extends Component {
+  handlePathClick = (e) => {
+    this.props.onPathClick(this.props.path.id)
+  };
+
   handleRelativeChange = (e) => {
     this.props.onRelativeChange(this.props.path.id, e.target.checked)
   };
@@ -21,12 +26,12 @@ class Path extends Component {
   };
 
   render() {
-    const {
-      path,
-    } = this.props
+    const { path } = this.props
 
     return (
-      <div className="ad-Path">
+      <div
+        className={ cx("ad-Path", { "is-active": path.isActive }) }
+        onClick={ this.handlePathClick }>
         <Expand>
           <ExpandCaption>
             <div className="ad-Path-name">
@@ -63,6 +68,7 @@ class Path extends Component {
 
 Path.propTypes = {
   path: PropTypes.object.isRequired,
+  onPathClick: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,

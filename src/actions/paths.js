@@ -1,5 +1,12 @@
 import * as types from "../constants/ActionTypes"
 
+export function setActivePath(id) {
+  return {
+    type: types.SET_ACTIVE_PATH,
+    id,
+  }
+}
+
 export function setRelative(id, isRelative) {
   return {
     type: types.SET_RELATIVE,
