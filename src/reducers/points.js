@@ -1,5 +1,7 @@
 import {
   SET_POINT_CODE,
+  SET_POINT_X,
+  SET_POINT_Y,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -118,6 +120,18 @@ export function point(state = {
       isRelative: action.code === action.code.toLowerCase(),
     }
 
+  case SET_POINT_X:
+    return {
+      ...state,
+      x: action.x,
+    }
+
+  case SET_POINT_Y:
+    return {
+      ...state,
+      y: action.y,
+    }
+
   default:
     return state
   }
@@ -126,6 +140,8 @@ export function point(state = {
 export default function points(state = initialState, action) {
   switch (action.type) {
   case SET_POINT_CODE:
+  case SET_POINT_X:
+  case SET_POINT_Y:
     return state.map((p) =>
       p.id === action.pointId ? point(p, action) : p)
 

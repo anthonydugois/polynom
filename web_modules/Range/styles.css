@@ -1,7 +1,14 @@
 @import url(App/config.css);
 
+input[type=range] {
+  -webkit-appearance: none;
+}
+input[type=range]::-moz-focus-outer {
+  border: 0;
+}
+
 .ad-Range {
-  display: flex;
+  flex-direction: row;
   align-items: center;
 }
   .ad-Range-input {
@@ -15,10 +22,21 @@
     outline: 0;
     background: color(var(--ad-Color-prim) l(+15%));
   }
-  .ad-Range-input::track {
+  /* Track */
+  .ad-Range-input::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
     background: none;
   }
-  .ad-Range-input::thumb {
+  .ad-Range-input::-moz-range-track {
+    -moz-appearance: none;
+    background: none;
+  }
+  .ad-Range-input::-ms-track {
+    background: none;
+  }
+  /* Thumb */
+  .ad-Range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
     width: 18px;
     height: 18px;
     border: 4px solid #fff;
@@ -27,10 +45,47 @@
     cursor: pointer;
     transition: border .2s;
   }
-  .ad-Range-input:hover::thumb,
-  .ad-Range-input:focus::thumb {
+  .ad-Range-input::-moz-range-thumb {
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border .2s;
+  }
+  .ad-Range-input::-ms-thumb {
+    width: 18px;
+    height: 18px;
+    border: 4px solid #fff;
+    background: color(var(--ad-Color-prim) l(+10%));
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border .2s;
+  }
+  .ad-Range-input:focus::-webkit-slider-thumb,
+  .ad-Range-input:hover::-webkit-slider-thumb {
+    -webkit-appearance: none;
     border-color: var(--ad-Color-sec);
   }
-  .ad-Range-input:focus::thumb {
+  .ad-Range-input:focus::-moz-range-thumb,
+  .ad-Range-input:hover::-moz-range-thumb {
+    -moz-appearance: none;
+    border-color: var(--ad-Color-sec);
+  }
+  .ad-Range-input:focus::-ms-thumb,
+  .ad-Range-input:hover::-ms-thumb {
+    border-color: var(--ad-Color-sec);
+  }
+  .ad-Range-input:focus::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: color(var(--ad-Color-prim) l(+15%));
+  }
+  .ad-Range-input:focus::-moz-range-thumb {
+    -moz-appearance: none;
+    background: color(var(--ad-Color-prim) l(+15%));
+  }
+  .ad-Range-input:focus::-ms-thumb {
     background: color(var(--ad-Color-prim) l(+15%));
   }

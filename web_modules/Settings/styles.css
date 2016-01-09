@@ -1,11 +1,11 @@
 @import url(App/config.css);
 
 .ad-Settings {
-  padding: 1rem 1.5rem;
-  flex-direction: row;
+  padding: .5rem 1.5rem;
 }
 
 .ad-Setting {
+  padding: 1rem 0;
   flex: 1;
 }
   .ad-Setting-label {
