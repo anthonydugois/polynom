@@ -1,5 +1,12 @@
 import * as types from "../constants/ActionTypes"
 
+export function removePath(id) {
+  return {
+    type: types.REMOVE_PATH,
+    id,
+  }
+}
+
 export function setActivePath(id) {
   return {
     type: types.SET_ACTIVE_PATH,

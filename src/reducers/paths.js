@@ -1,5 +1,6 @@
 import {
   ADD_PATH,
+  REMOVE_PATH,
   SET_ACTIVE_PATH,
   SET_RELATIVE,
   SET_CLOSED,
@@ -128,6 +129,10 @@ function path(state = {
 
 export default function paths(state = initialState, action) {
   switch (action.type) {
+  case REMOVE_PATH:
+    return state.reduce((acc, p) =>
+      p.id !== action.id ? [...acc, p] : acc, [])
+
   case SET_ACTIVE_PATH:
     return state.map((p) => ({
       ...p,

@@ -8,6 +8,8 @@
 }
   .ad-ExpandCaption-label {
     flex: 1;
+    flex-direction: row;
+    align-items: center;
     margin-left: .5rem;
   }
 

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
+import Button from "Button"
 import Expand from "Expand"
 import ExpandCaption from "Expand/ExpandCaption"
 import ExpandPanel from "Expand/ExpandPanel"
@@ -9,8 +10,14 @@ import Checkbox from "Checkbox"
 import "./styles"
 
 class Path extends Component {
-  handlePathClick = (e) => {
+  handlePathClick = () => {
     this.props.onPathClick(this.props.path.id)
+  };
+
+  handleRemoveClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.props.onRemoveClick(this.props.path.id)
   };
 
   handleRelativeChange = (e) => {
@@ -36,6 +43,13 @@ class Path extends Component {
           <ExpandCaption>
             <div className="ad-Path-name">
               { path.name }
+            </div>
+
+            <div className="ad-Path-actions">
+              <Button
+                type="expand"
+                icon="close"
+                onClick={ this.handleRemoveClick } />
             </div>
           </ExpandCaption>
 
@@ -69,6 +83,7 @@ class Path extends Component {
 Path.propTypes = {
   path: PropTypes.object.isRequired,
   onPathClick: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
