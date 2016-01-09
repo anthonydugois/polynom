@@ -1,21 +1,48 @@
-import * from "../constants/ActionTypes"
+import {
+  SET_POINT_CODE,
+} from "../constants/ActionTypes"
 
-function M(state = {
-  code: "M",
-  x: 0,
-  y: 0,
-}, action) {
+const initialState = [
+  {
+    id: 0,
+    code: "M",
+    x: 50,
+    y: 50,
+    isActive: false,
+    isRelative: false,
+    parameters: {},
+  },
+  {
+    id: 1,
+    code: "Q",
+    x: 100,
+    y: 100,
+    isActive: true,
+    isRelative: false,
+    parameters: {
+      x1: 150,
+      y1: 75,
+    },
+  },
+  /*{
+    id: 2,
+    code: "T",
+    x: 150,
+    y: 150,
+    isActive: false,
+    isRelative: false,
+    parameters: {},
+  },*/
+]
+
+function M(state = {}, action) {
   switch (action.type) {
   default:
     return state
   }
 }
 
-function L(state = {
-  code: "L",
-  x: 0,
-  y: 0,
-}, action) {
+function L(state = {}, action) {
   switch (action.type) {
   default:
     return state
@@ -23,9 +50,6 @@ function L(state = {
 }
 
 function Q(state = {
-  code: "Q",
-  x: 0,
-  y: 0,
   x1: 0,
   y1: 0,
 }, action) {
@@ -35,11 +59,7 @@ function Q(state = {
   }
 }
 
-function T(state = {
-  code: "T",
-  x: 0,
-  y: 0,
-}, action) {
+function T(state = {}, action) {
   switch (action.type) {
   default:
     return state
@@ -47,9 +67,6 @@ function T(state = {
 }
 
 function C(state = {
-  code: "C",
-  x: 0,
-  y: 0,
   x1: 0,
   y1: 0,
   x2: 0,
@@ -62,9 +79,6 @@ function C(state = {
 }
 
 function S(state = {
-  code: "S",
-  x: 0,
-  y: 0,
   x2: 0,
   y2: 0,
 }, action) {
@@ -75,9 +89,6 @@ function S(state = {
 }
 
 function A(state = {
-  code: "A",
-  x: 0,
-  y: 0,
   rx: 0,
   ry: 0,
   xAxisRotation: 0,
@@ -90,13 +101,34 @@ function A(state = {
   }
 }
 
-function point(state = {
+export function point(state = {
   id: 0,
+  code: "",
+  x: 0,
+  y: 0,
   isActive: false,
   isRelative: false,
   parameters: {},
 }, action) {
   switch (action.type) {
+  case SET_POINT_CODE:
+    return {
+      ...state,
+      code: action.code,
+      isRelative: action.code === action.code.toLowerCase(),
+    }
+
+  default:
+    return state
+  }
+}
+
+export default function points(state = initialState, action) {
+  switch (action.type) {
+  case SET_POINT_CODE:
+    return state.map((p) =>
+      p.id === action.pointId ? point(p, action) : p)
+
   default:
     return state
   }

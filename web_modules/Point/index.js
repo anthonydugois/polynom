@@ -7,23 +7,23 @@ class Point extends Component {
     return (
       <circle
         className="ad-Point-circle"
-        cx={ point.parameters.x }
-        cy={ point.parameters.y }
+        cx={ point.x }
+        cy={ point.y }
         r={ 8 } />
     )
   }
 
   renderQuadraticAnchors(point, previousPoint) {
-    const code = point.parameters.code.toLowerCase()
-    const prevCode = previousPoint.parameters.code.toLowerCase()
+    const code = point.code.toLowerCase()
+    const prevCode = previousPoint.code.toLowerCase()
 
     if (code === "q" || (code === "t" && prevCode !== "q")) {
       return (
         <g className="ad-Anchor">
           <line
             className="ad-Anchor-line"
-            x1={ previousPoint.parameters.x }
-            y1={ previousPoint.parameters.y }
+            x1={ previousPoint.x }
+            y1={ previousPoint.y }
             x2={ point.parameters.x1 }
             y2={ point.parameters.y1 } />
 
@@ -31,8 +31,8 @@ class Point extends Component {
             className="ad-Anchor-line"
             x1={ point.parameters.x1 }
             y1={ point.parameters.y1 }
-            x2={ point.parameters.x }
-            y2={ point.parameters.y } />
+            x2={ point.x }
+            y2={ point.y } />
 
           <circle
             className="ad-Anchor-point"
@@ -47,8 +47,8 @@ class Point extends Component {
   }
 
   renderCubicAnchors(point, previousPoint) {
-    const code = point.parameters.code.toLowerCase()
-    const prevCode = previousPoint.parameters.code.toLowerCase()
+    const code = point.code.toLowerCase()
+    const prevCode = previousPoint.code.toLowerCase()
 
     if (code === "c" || code === "s") {
       return (
@@ -56,16 +56,16 @@ class Point extends Component {
           { !(code === "s" && prevCode === "c") && (
             <line
               className="ad-Anchor-line"
-              x1={ previousPoint.parameters.x }
-              y1={ previousPoint.parameters.y }
+              x1={ previousPoint.x }
+              y1={ previousPoint.y }
               x2={ point.parameters.x1 }
               y2={ point.parameters.y1 } />
           ) }
 
           <line
             className="ad-Anchor-line"
-            x1={ point.parameters.x }
-            y1={ point.parameters.y }
+            x1={ point.x }
+            y1={ point.y }
             x2={ point.parameters.x2 }
             y2={ point.parameters.y2 } />
 

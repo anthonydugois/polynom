@@ -5,16 +5,26 @@ import Setting from "Settings/Setting"
 import Choices from "Choices"
 import Choice from "Choices/Choice"
 
+import * as pointsActions from "../../src/actions/points"
+
 class SidebarPoint extends Component {
   handlePointTypeChange = (e) => {
-    console.log(e)
+    const {
+      dispatch,
+      path,
+      point,
+    } = this.props
+
+    dispatch(pointsActions.setPointCode(path.id, point.id, e.target.value))
   };
 
   render() {
-    const { path } = this.props
+    const {
+      path,
+      point,
+    } = this.props
 
-    const point = path.points.filter(({ isActive }) => isActive)[0]
-    const pointCode = point.parameters.code.toLowerCase()
+    const pointCode = point.code.toLowerCase()
 
     return (
       <Settings>
@@ -22,7 +32,7 @@ class SidebarPoint extends Component {
           <Choices>
             <Choice
               name="type"
-              value="m"
+              value="M"
               checked={ pointCode === "m" }
               onChange={ this.handlePointTypeChange }>
               Move
@@ -30,7 +40,7 @@ class SidebarPoint extends Component {
 
             <Choice
               name="type"
-              value="l"
+              value="L"
               checked={ pointCode === "l" }
               onChange={ this.handlePointTypeChange }>
               Line
@@ -38,7 +48,7 @@ class SidebarPoint extends Component {
 
             <Choice
               name="type"
-              value="q"
+              value="Q"
               checked={ pointCode === "q" }
               onChange={ this.handlePointTypeChange }>
               Quad
@@ -46,7 +56,7 @@ class SidebarPoint extends Component {
 
             <Choice
               name="type"
-              value="c"
+              value="C"
               checked={ pointCode === "c" }
               onChange={ this.handlePointTypeChange }>
               Cub
@@ -54,7 +64,7 @@ class SidebarPoint extends Component {
 
             <Choice
               name="type"
-              value="a"
+              value="A"
               checked={ pointCode === "a" }
               onChange={ this.handlePointTypeChange }>
               Arc
@@ -69,8 +79,12 @@ class SidebarPoint extends Component {
 SidebarPoint.propTypes = {
   dispatch: PropTypes.func.isRequired,
   path: PropTypes.object.isRequired,
+  point: PropTypes.object.isRequired,
 }
 
-export default connect((state) => ({
-  path: state.paths.filter(({ isActive }) => isActive)[0],
-}))(SidebarPoint)
+export default connect((state) => {
+  const path = state.paths.filter(({ isActive }) => isActive)[0]
+  const point = path.points.filter(({ isActive }) => isActive)[0]
+
+  return { path, point }
+})(SidebarPoint)

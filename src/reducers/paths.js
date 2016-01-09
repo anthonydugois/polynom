@@ -1,3 +1,4 @@
+import points from "./points"
 import {
   ADD_PATH,
   REMOVE_PATH,
@@ -5,6 +6,7 @@ import {
   SET_RELATIVE,
   SET_CLOSED,
   SET_FILLED,
+  SET_POINT_CODE,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -15,83 +17,17 @@ const initialState = [
     isClosed: false,
     isRelative: false,
     isFilled: false,
-    points: [
-      {
-        id: 0,
-        isActive: false,
-        isRelative: false,
-        parameters: {
-          code: "M",
-          x: 50,
-          y: 50,
-        },
-      },
-      {
-        id: 1,
-        isActive: true,
-        isRelative: false,
-        parameters: {
-          code: "Q",
-          x: 100,
-          y: 100,
-          x1: 150,
-          y1: 75,
-        },
-      },
-      {
-        id: 2,
-        isActive: false,
-        isRelative: false,
-        parameters: {
-          code: "T",
-          x: 150,
-          y: 150,
-        },
-      },
-    ],
+    points: points(undefined, { type: null }),
   },
-  {
+  /*{
     id: 1,
-    name: "First Path",
+    name: "Second Path",
     isActive: false,
     isClosed: false,
     isRelative: false,
     isFilled: false,
-    points: [
-      {
-        id: 0,
-        isActive: false,
-        isRelative: false,
-        parameters: {
-          code: "M",
-          x: 50,
-          y: 50,
-        },
-      },
-      {
-        id: 1,
-        isActive: true,
-        isRelative: false,
-        parameters: {
-          code: "Q",
-          x: 100,
-          y: 100,
-          x1: 150,
-          y1: 75,
-        },
-      },
-      {
-        id: 2,
-        isActive: false,
-        isRelative: false,
-        parameters: {
-          code: "T",
-          x: 150,
-          y: 150,
-        },
-      },
-    ],
-  },
+    points: points(undefined, { type: null }),
+  },*/
 ]
 
 function path(state = {
@@ -122,6 +58,12 @@ function path(state = {
       isFilled: action.isFilled,
     }
 
+  case SET_POINT_CODE:
+    return {
+      ...state,
+      points: points(state.points, action),
+    }
+
   default:
     return state
   }
@@ -142,7 +84,9 @@ export default function paths(state = initialState, action) {
   case SET_RELATIVE:
   case SET_CLOSED:
   case SET_FILLED:
-    return state.map((p) => p.id === action.id ? path(p, action) : p)
+  case SET_POINT_CODE:
+    return state.map((p) =>
+      p.id === action.id ? path(p, action) : p)
 
   default:
     return state

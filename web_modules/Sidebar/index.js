@@ -29,14 +29,6 @@ class Sidebar extends Component {
                 Point
               </Button>
             </Tab>
-
-            <Tab>
-              <Button
-                icon="settings"
-                type="tab">
-                Settings
-              </Button>
-            </Tab>
           </TabList>
 
           <TabPanel>
@@ -46,8 +38,6 @@ class Sidebar extends Component {
           <TabPanel>
             <SidebarPoint />
           </TabPanel>
-
-          <TabPanel><div>World!</div></TabPanel>
         </Tabs>
       </div>
     )
