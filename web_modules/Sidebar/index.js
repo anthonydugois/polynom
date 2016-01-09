@@ -1,42 +1,18 @@
 import React, { Component, PropTypes } from "react"
-import { connect } from "react-redux"
 import Button from "Button"
 import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
 import Tab from "Tabs/Tab"
 import TabPanel from "Tabs/TabPanel"
-import Path from "Path"
+import SidebarPaths from "./SidebarPaths"
+import SidebarPoint from "./SidebarPoint"
 import "./styles"
 
-import * as pathsActions from "../../src/actions/paths"
-
 class Sidebar extends Component {
-  renderPath = (path) => {
-    const { dispatch } = this.props
-
-    return (
-      <Path
-        key={ path.id }
-        path={ path }
-        onPathClick={ (id) =>
-          dispatch(pathsActions.setActivePath(id)) }
-        onRemoveClick={ (id) =>
-          dispatch(pathsActions.removePath(id)) }
-        onRelativeChange={ (id, isRelative) =>
-          dispatch(pathsActions.setRelative(id, isRelative)) }
-        onClosedChange={ (id, isClosed) =>
-          dispatch(pathsActions.setClosed(id, isClosed)) }
-        onFilledChange={ (id, isFilled) =>
-          dispatch(pathsActions.setFilled(id, isFilled)) } />
-    )
-  };
-
   render() {
-    const { paths } = this.props
-
     return (
       <div className="ad-Sidebar">
-        <Tabs selected={ 0 }>
+        <Tabs selected={ 1 }>
           <TabList>
             <Tab>
               <Button
@@ -45,6 +21,15 @@ class Sidebar extends Component {
                 Paths
               </Button>
             </Tab>
+
+            <Tab>
+              <Button
+                icon="point"
+                type="tab">
+                Point
+              </Button>
+            </Tab>
+
             <Tab>
               <Button
                 icon="settings"
@@ -55,8 +40,13 @@ class Sidebar extends Component {
           </TabList>
 
           <TabPanel>
-            { paths.map(this.renderPath) }
+            <SidebarPaths />
           </TabPanel>
+
+          <TabPanel>
+            <SidebarPoint />
+          </TabPanel>
+
           <TabPanel><div>World!</div></TabPanel>
         </Tabs>
       </div>
@@ -64,9 +54,4 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  paths: PropTypes.array.isRequired,
-}
-
-export default connect((state) => state)(Sidebar)
+export default Sidebar

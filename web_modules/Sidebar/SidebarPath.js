@@ -7,9 +7,8 @@ import ExpandPanel from "Expand/ExpandPanel"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
-import "./styles"
 
-class Path extends Component {
+class SidebarPath extends Component {
   handlePathClick = () => {
     this.props.onPathClick(this.props.path.id)
   };
@@ -17,7 +16,17 @@ class Path extends Component {
   handleRemoveClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    this.props.onRemoveClick(this.props.path.id)
+
+    const { path, index, paths } = this.props
+
+    if (paths.length > 1) {
+      if (path.isActive) {
+        this.props.onPathClick(index === 0 ?
+          paths[index + 1].id : paths[index - 1].id)
+      }
+
+      this.props.onRemoveClick(this.props.path.id)
+    }
   };
 
   handleRelativeChange = (e) => {
@@ -33,23 +42,28 @@ class Path extends Component {
   };
 
   render() {
-    const { path } = this.props
+    const {
+      path,
+      paths,
+    } = this.props
 
     return (
       <div
-        className={ cx("ad-Path", { "is-active": path.isActive }) }
+        className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }
         onClick={ this.handlePathClick }>
         <Expand>
           <ExpandCaption>
-            <div className="ad-Path-name">
+            <div className="ad-SidebarPath-name">
               { path.name }
             </div>
 
-            <div className="ad-Path-actions">
-              <Button
-                type="expand"
-                icon="close"
-                onClick={ this.handleRemoveClick } />
+            <div className="ad-SidebarPath-actions">
+              { paths.length > 1 && (
+                <Button
+                  type="expand"
+                  icon="close"
+                  onClick={ this.handleRemoveClick } />
+              ) }
             </div>
           </ExpandCaption>
 
@@ -80,8 +94,10 @@ class Path extends Component {
   }
 }
 
-Path.propTypes = {
+SidebarPath.propTypes = {
   path: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  paths: PropTypes.array.isRequired,
   onPathClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
@@ -89,4 +105,4 @@ Path.propTypes = {
   onFilledChange: PropTypes.func.isRequired,
 }
 
-export default Path
+export default SidebarPath

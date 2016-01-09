@@ -13,3 +13,15 @@
     border-radius: 1rem;
     background: color(var(--ad-Color-prim) l(+20%));
   }
+
+.ad-SidebarPath {
+  border-left: 3px solid transparent;
+}
+.ad-SidebarPath.is-active {
+  border-color: var(--ad-Color-sec);
+}
+  .ad-SidebarPath-name {
+    flex: 1;
+    font-size: .8rem;
+    color: #fff;
+  }

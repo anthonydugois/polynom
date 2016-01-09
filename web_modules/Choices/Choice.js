@@ -16,7 +16,7 @@ const Choice = ({
   </label>
 )
 
-Choices.propTypes = {
+Choice.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
