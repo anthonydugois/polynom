@@ -6,10 +6,10 @@
 .ad-Checkbox-fake {
   position: relative;
   height: 14px;
-  width: 2rem;
+  width: 32px;
   cursor: pointer;
   background: color(var(--ad-Color-prim) l(+10%));
-  border-radius: 30px;
+  border-radius: 5rem;
 }
   .ad-Checkbox-fake::after {
     content: "";

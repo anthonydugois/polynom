@@ -3,7 +3,7 @@
 .ad-ExpandCaption {
   flex-direction: row;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   background: color(var(--ad-Color-prim) l(-2%));
 }
   .ad-ExpandCaption-label {

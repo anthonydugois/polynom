@@ -41,9 +41,7 @@ class Sidebar extends Component {
           </TabList>
 
           <TabPanel>
-            <div className="ad-Sidebar-settings">
-              { paths.map(this.renderPath) }
-            </div>
+            { paths.map(this.renderPath) }
           </TabPanel>
           <TabPanel><div>World!</div></TabPanel>
         </Tabs>

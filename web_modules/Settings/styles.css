@@ -1,10 +1,14 @@
 @import url(App/config.css);
 
-.ad-Control {
+.ad-Settings {
+  padding: 1rem 1.5rem;
+  flex-direction: row;
+}
+
+.ad-Setting {
   flex: 1;
 }
-  .ad-Control-label {
-    display: block;
+  .ad-Setting-label {
     margin-bottom: .5rem;
     text-transform: uppercase;
     font-size: .6rem;
