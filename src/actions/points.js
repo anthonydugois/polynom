@@ -1,35 +1,19 @@
 import * as types from "../constants/ActionTypes"
 
-export function Q(x1, y1) {
+export function addPoint(id, x, y) {
   return {
-    x1,
-    y1,
+    type: types.ADD_POINT,
+    id,
+    x,
+    y,
   }
 }
 
-export function C(x1, y1, x2, y2) {
+export function removePoint(id, pointId) {
   return {
-    x1,
-    y1,
-    x2,
-    y2,
-  }
-}
-
-export function S(x2, y2) {
-  return {
-    x2,
-    y2,
-  }
-}
-
-export function A(rx, ry, xAxisRotation, largeArc, sweep) {
-  return {
-    rx,
-    ry,
-    xAxisRotation,
-    largeArc,
-    sweep,
+    type: types.REMOVE_POINT,
+    id,
+    pointId,
   }
 }
 

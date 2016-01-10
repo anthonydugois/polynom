@@ -21,6 +21,8 @@ export const SET_FILLED = "SET_FILLED"
  * Points
  */
 
+export const ADD_POINT = "ADD_POINT"
+export const REMOVE_POINT = "REMOVE_POINT"
 export const SET_POINT_CODE = "SET_POINT_CODE"
 export const SET_ACTIVE_POINT = "SET_ACTIVE_POINT"
 export const SET_POINT_X = "SET_POINT_X"

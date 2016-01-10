@@ -15,16 +15,33 @@ function getParameters(code, point, previousPoint) {
 
   switch (code.toLowerCase()) {
   case "q":
-    return pointsActions.Q(middleX, middleY)
+    return {
+      x1: middleX,
+      y1: middleY,
+    }
 
   case "c":
-    return pointsActions.C(middleX, middleY, middleX, middleY)
+    return {
+      x1: middleX,
+      y1: middleY,
+      x2: middleX,
+      y2: middleY,
+    }
 
   case "s":
-    return pointsActions.S(middleX, middleY)
+    return {
+      x2: middleX,
+      y2: middleY,
+    }
 
   case "a":
-    return pointsActions.A(50, 50, 0, false, false)
+    return {
+      rx: 50,
+      ry: 50,
+      xAxisRotation: 0,
+      largeArc: false,
+      sweep: false,
+    }
 
   default:
     return {}

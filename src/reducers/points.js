@@ -1,4 +1,6 @@
 import {
+  ADD_POINT,
+  REMOVE_POINT,
   SET_ACTIVE_POINT,
   SET_POINT_CODE,
   SET_POINT_X,
@@ -235,6 +237,24 @@ function point(state = {
 
 export default function points(state = initialState, action) {
   switch (action.type) {
+  case ADD_POINT:
+    return [
+      ...state,
+      {
+        id: state.length,
+        code: "L",
+        x: action.x,
+        y: action.y,
+        isActive: false,
+        isRelative: false,
+        parameters: {},
+      },
+    ]
+
+  case REMOVE_POINT:
+    return state.reduce((acc, p) =>
+      p.id !== action.pointId ? [...acc, p] : acc, [])
+
   case SET_ACTIVE_POINT:
     return state.map((p) => ({
       ...p,

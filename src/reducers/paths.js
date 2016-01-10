@@ -6,6 +6,8 @@ import {
   SET_RELATIVE,
   SET_CLOSED,
   SET_FILLED,
+  ADD_POINT,
+  REMOVE_POINT,
   SET_ACTIVE_POINT,
   SET_POINT_CODE,
   SET_POINT_X,
@@ -74,6 +76,8 @@ function path(state = {
       isFilled: action.isFilled,
     }
 
+  case ADD_POINT:
+  case REMOVE_POINT:
   case SET_ACTIVE_POINT:
   case SET_POINT_CODE:
   case SET_POINT_X:
@@ -103,6 +107,28 @@ function path(state = {
 
 export default function paths(state = initialState, action) {
   switch (action.type) {
+  case ADD_PATH:
+    return [
+      ...state,
+      {
+        id: state.length,
+        name: `Path ${ state.length }`,
+        isActive: false,
+        isClosed: false,
+        isRelative: false,
+        isFilled: false,
+        points: [
+          {
+            id: 0,
+            code: "M",
+            x: action.x,
+            y: action.y,
+            parameters: {},
+          },
+        ],
+      },
+    ]
+
   case REMOVE_PATH:
     return state.reduce((acc, p) =>
       p.id !== action.id ? [...acc, p] : acc, [])
@@ -116,6 +142,8 @@ export default function paths(state = initialState, action) {
   case SET_RELATIVE:
   case SET_CLOSED:
   case SET_FILLED:
+  case ADD_POINT:
+  case REMOVE_POINT:
   case SET_ACTIVE_POINT:
   case SET_POINT_CODE:
   case SET_POINT_X:

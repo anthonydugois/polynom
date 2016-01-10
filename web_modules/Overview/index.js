@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import { findDOMNode } from "react-dom"
 import { connect } from "react-redux"
 import Grid from "Grid"
 import Shape from "Shape"
@@ -19,6 +20,21 @@ function getStyles(props) {
 }
 
 class Overview extends Component {
+  handleOverviewClick = (e) => {
+    const {
+      dispatch,
+      paths,
+    } = this.props
+
+    const path = paths.filter(({ isActive }) => isActive)[0]
+    const { left, top } = findDOMNode(this).getBoundingClientRect()
+    const x = e.clientX - left
+    const y = e.clientY - top
+
+    dispatch(pointsActions.addPoint(path.id, x, y))
+    dispatch(pointsActions.setActivePoint(path.id, path.points.length))
+  };
+
   renderShape = (path) => {
     const { dispatch } = this.props
 
@@ -40,7 +56,8 @@ class Overview extends Component {
     return (
       <svg
         className="ad-Overview"
-        style={ getStyles(this.props) }>
+        style={ getStyles(this.props) }
+        onClick={ this.handleOverviewClick }>
         <Grid
           width={ builder.width }
           height={ builder.height }
