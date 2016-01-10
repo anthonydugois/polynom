@@ -183,70 +183,77 @@ class SidebarPoint extends Component {
 
     const step = builder.grid.snapToGrid ? builder.grid.size : 1
     const code = point.code.toLowerCase()
-    const prevCode = previousPoint.code.toLowerCase()
+
+    let prevCode
+
+    if (Object.keys(previousPoint).length > 0) {
+      prevCode = previousPoint.code.toLowerCase()
+    }
 
     return (
       <div className="ad-SidebarPoint">
         { /* Point general settings */ }
 
-        <Settings>
-          <Setting>
-            <Choices>
-              <Choice
-                value="M"
-                checked={ code === "m" }
-                onChange={ this.handleTypeChange }>
-                M
-              </Choice>
-
-              <Choice
-                value="L"
-                checked={ code === "l" }
-                onChange={ this.handleTypeChange }>
-                L
-              </Choice>
-
-              <Choice
-                value="Q"
-                checked={ code === "q" }
-                onChange={ this.handleTypeChange }>
-                Q
-              </Choice>
-
-              { (prevCode === "q" || prevCode === "t") && (
+        { prevCode && (
+          <Settings>
+            <Setting>
+              <Choices>
                 <Choice
-                  value="T"
-                  checked={ code === "t" }
+                  value="M"
+                  checked={ code === "m" }
                   onChange={ this.handleTypeChange }>
-                  T
+                  M
                 </Choice>
-              ) }
 
-              <Choice
-                value="C"
-                checked={ code === "c" }
-                onChange={ this.handleTypeChange }>
-                C
-              </Choice>
-
-              { (prevCode === "c" || prevCode === "s") && (
                 <Choice
-                  value="S"
-                  checked={ code === "s" }
+                  value="L"
+                  checked={ code === "l" }
                   onChange={ this.handleTypeChange }>
-                  S
+                  L
                 </Choice>
-              ) }
 
-              <Choice
-                value="A"
-                checked={ code === "a" }
-                onChange={ this.handleTypeChange }>
-                A
-              </Choice>
-            </Choices>
-          </Setting>
-        </Settings>
+                <Choice
+                  value="Q"
+                  checked={ code === "q" }
+                  onChange={ this.handleTypeChange }>
+                  Q
+                </Choice>
+
+                { (prevCode === "q" || prevCode === "t") && (
+                  <Choice
+                    value="T"
+                    checked={ code === "t" }
+                    onChange={ this.handleTypeChange }>
+                    T
+                  </Choice>
+                ) }
+
+                <Choice
+                  value="C"
+                  checked={ code === "c" }
+                  onChange={ this.handleTypeChange }>
+                  C
+                </Choice>
+
+                { (prevCode === "c" || prevCode === "s") && (
+                  <Choice
+                    value="S"
+                    checked={ code === "s" }
+                    onChange={ this.handleTypeChange }>
+                    S
+                  </Choice>
+                ) }
+
+                <Choice
+                  value="A"
+                  checked={ code === "a" }
+                  onChange={ this.handleTypeChange }>
+                  A
+                </Choice>
+              </Choices>
+            </Setting>
+          </Settings>
+        ) }
 
         <Settings>
           <Setting label="Point X position">
@@ -465,5 +472,10 @@ export default connect((state) => {
     }
   })
 
-  return { builder, path, point, previousPoint }
+  return {
+    builder,
+    path,
+    point,
+    previousPoint,
+  }
 })(SidebarPoint)

@@ -6,6 +6,7 @@ import {
   SET_RELATIVE,
   SET_CLOSED,
   SET_FILLED,
+  SET_ACTIVE_POINT,
   SET_POINT_CODE,
   SET_POINT_X,
   SET_POINT_Y,
@@ -73,6 +74,7 @@ function path(state = {
       isFilled: action.isFilled,
     }
 
+  case SET_ACTIVE_POINT:
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
@@ -114,6 +116,7 @@ export default function paths(state = initialState, action) {
   case SET_RELATIVE:
   case SET_CLOSED:
   case SET_FILLED:
+  case SET_ACTIVE_POINT:
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:

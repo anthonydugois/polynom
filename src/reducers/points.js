@@ -1,4 +1,5 @@
 import {
+  SET_ACTIVE_POINT,
   SET_POINT_CODE,
   SET_POINT_X,
   SET_POINT_Y,
@@ -234,6 +235,12 @@ function point(state = {
 
 export default function points(state = initialState, action) {
   switch (action.type) {
+  case SET_ACTIVE_POINT:
+    return state.map((p) => ({
+      ...p,
+      isActive: p.id === action.pointId,
+    }))
+
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:

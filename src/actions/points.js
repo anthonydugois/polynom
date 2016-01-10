@@ -33,6 +33,14 @@ export function A(rx, ry, xAxisRotation, largeArc, sweep) {
   }
 }
 
+export function setActivePoint(id, pointId) {
+  return {
+    type: types.SET_ACTIVE_POINT,
+    id,
+    pointId,
+  }
+}
+
 export function setPointCode(id, pointId, code, parameters) {
   return {
     type: types.SET_POINT_CODE,

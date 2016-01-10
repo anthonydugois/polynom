@@ -3,13 +3,18 @@ import cx from "classnames"
 import "./styles"
 
 class Point extends Component {
+  handlePointClick = (e) => {
+    this.props.onPointClick(this.props.point.id)
+  };
+
   renderPoint(point) {
     return (
       <circle
         className="ad-Point-circle"
         cx={ point.x }
         cy={ point.y }
-        r={ 8 } />
+        r={ 8 }
+        onClick={ this.handlePointClick } />
     )
   }
 
@@ -108,6 +113,7 @@ class Point extends Component {
 Point.propTypes = {
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object,
+  onPointClick: PropTypes.func.isRequired,
 }
 
 export default Point

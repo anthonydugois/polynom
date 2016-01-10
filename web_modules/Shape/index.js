@@ -4,21 +4,22 @@ import cx from "classnames"
 import "./styles"
 
 class Shape extends Component {
-  renderPoint(point, index, points) {
+  renderPoint = (point, index, points) => {
+    const { path, onPointClick } = this.props
     const previousPoint = index > 0 ? points[index - 1] : null
 
     return (
       <Point
         key={ point.id }
         point={ point }
-        previousPoint={ previousPoint } />
+        previousPoint={ previousPoint }
+        onPointClick={ (pointId) =>
+          onPointClick(path.id, pointId) } />
     )
-  }
+  };
 
   render() {
-    const {
-      path,
-    } = this.props
+    const { path } = this.props
 
     return (
       <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
@@ -33,6 +34,7 @@ class Shape extends Component {
 
 Shape.propTypes = {
   path: PropTypes.object.isRequired,
+  onPointClick: PropTypes.func.isRequired,
 }
 
 export default Shape

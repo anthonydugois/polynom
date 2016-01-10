@@ -4,6 +4,8 @@ import Grid from "Grid"
 import Shape from "Shape"
 import "./styles"
 
+import * as pointsActions from "../../src/actions/points"
+
 function getStyles(props) {
   const {
     width,
@@ -17,13 +19,17 @@ function getStyles(props) {
 }
 
 class Overview extends Component {
-  renderShape(path) {
+  renderShape = (path) => {
+    const { dispatch } = this.props
+
     return (
       <Shape
         key={ path.id }
-        path={ path } />
+        path={ path }
+        onPointClick={ (id, pointId) =>
+          dispatch(pointsActions.setActivePoint(id, pointId)) } />
     )
-  }
+  };
 
   render() {
     const {
