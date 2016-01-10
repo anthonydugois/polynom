@@ -2,8 +2,19 @@ import {
   SET_POINT_CODE,
   SET_POINT_X,
   SET_POINT_Y,
-  SET_QUAD_X,
-  SET_QUAD_Y,
+  SET_QUAD_X1,
+  SET_QUAD_Y1,
+  SET_CUB_X1,
+  SET_CUB_Y1,
+  SET_CUB_X2,
+  SET_CUB_Y2,
+  SET_SMOOTH_X2,
+  SET_SMOOTH_Y2,
+  SET_ARC_RX,
+  SET_ARC_RY,
+  SET_ARC_ROT,
+  SET_ARC_LARGE,
+  SET_ARC_SWEEP,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -35,16 +46,117 @@ function Q(state = {
   y1: 0,
 }, action) {
   switch (action.type) {
-  case SET_QUAD_X:
+  case SET_QUAD_X1:
     return {
       ...state,
       x1: action.x1,
     }
 
-  case SET_QUAD_Y:
+  case SET_QUAD_Y1:
     return {
       ...state,
       y1: action.y1,
+    }
+
+  default:
+    return state
+  }
+}
+
+function C(state = {
+  x1: 0,
+  y1: 0,
+  x2: 0,
+  y2: 0,
+}, action) {
+  switch (action.type) {
+  case SET_CUB_X1:
+    return {
+      ...state,
+      x1: action.x1,
+    }
+
+  case SET_CUB_Y1:
+    return {
+      ...state,
+      y1: action.y1,
+    }
+
+  case SET_CUB_X2:
+    return {
+      ...state,
+      x2: action.x2,
+    }
+
+  case SET_CUB_Y2:
+    return {
+      ...state,
+      y2: action.y2,
+    }
+
+  default:
+    return state
+  }
+}
+
+function S(state = {
+  x2: 0,
+  y2: 0,
+}, action) {
+  switch (action.type) {
+  case SET_SMOOTH_X2:
+    return {
+      ...state,
+      x2: action.x2,
+    }
+
+  case SET_SMOOTH_Y2:
+    return {
+      ...state,
+      y2: action.y2,
+    }
+
+  default:
+    return state
+  }
+}
+
+function A(state = {
+  rx: 0,
+  ry: 0,
+  xAxisRotation: 0,
+  largeArc: false,
+  sweep: false,
+}, action) {
+  switch (action.type) {
+  case SET_ARC_RX:
+    return {
+      ...state,
+      rx: action.rx,
+    }
+
+  case SET_ARC_RY:
+    return {
+      ...state,
+      ry: action.ry,
+    }
+
+  case SET_ARC_ROT:
+    return {
+      ...state,
+      xAxisRotation: action.xAxisRotation,
+    }
+
+  case SET_ARC_LARGE:
+    return {
+      ...state,
+      largeArc: action.largeArc,
+    }
+
+  case SET_ARC_SWEEP:
+    return {
+      ...state,
+      sweep: action.sweep,
     }
 
   default:
@@ -82,11 +194,37 @@ function point(state = {
       y: action.y,
     }
 
-  case SET_QUAD_X:
-  case SET_QUAD_Y:
+  case SET_QUAD_X1:
+  case SET_QUAD_Y1:
     return {
       ...state,
       parameters: Q(state.parameters, action),
+    }
+
+  case SET_CUB_X1:
+  case SET_CUB_Y1:
+  case SET_CUB_X2:
+  case SET_CUB_Y2:
+    return {
+      ...state,
+      parameters: C(state.parameters, action),
+    }
+
+  case SET_SMOOTH_X2:
+  case SET_SMOOTH_Y2:
+    return {
+      ...state,
+      parameters: S(state.parameters, action),
+    }
+
+  case SET_ARC_RX:
+  case SET_ARC_RY:
+  case SET_ARC_ROT:
+  case SET_ARC_LARGE:
+  case SET_ARC_SWEEP:
+    return {
+      ...state,
+      parameters: A(state.parameters, action),
     }
 
   default:
@@ -99,8 +237,19 @@ export default function points(state = initialState, action) {
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
-  case SET_QUAD_X:
-  case SET_QUAD_Y:
+  case SET_QUAD_X1:
+  case SET_QUAD_Y1:
+  case SET_CUB_X1:
+  case SET_CUB_Y1:
+  case SET_CUB_X2:
+  case SET_CUB_Y2:
+  case SET_SMOOTH_X2:
+  case SET_SMOOTH_Y2:
+  case SET_ARC_RX:
+  case SET_ARC_RY:
+  case SET_ARC_ROT:
+  case SET_ARC_LARGE:
+  case SET_ARC_SWEEP:
     return state.map((p) =>
       p.id === action.pointId ? point(p, action) : p)
 

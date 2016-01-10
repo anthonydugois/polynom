@@ -9,8 +9,19 @@ import {
   SET_POINT_CODE,
   SET_POINT_X,
   SET_POINT_Y,
-  SET_QUAD_X,
-  SET_QUAD_Y,
+  SET_QUAD_X1,
+  SET_QUAD_Y1,
+  SET_CUB_X1,
+  SET_CUB_Y1,
+  SET_CUB_X2,
+  SET_CUB_Y2,
+  SET_SMOOTH_X2,
+  SET_SMOOTH_Y2,
+  SET_ARC_RX,
+  SET_ARC_RY,
+  SET_ARC_ROT,
+  SET_ARC_LARGE,
+  SET_ARC_SWEEP,
 } from "../constants/ActionTypes"
 
 const initialState = [
@@ -65,8 +76,19 @@ function path(state = {
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
-  case SET_QUAD_X:
-  case SET_QUAD_Y:
+  case SET_QUAD_X1:
+  case SET_QUAD_Y1:
+  case SET_CUB_X1:
+  case SET_CUB_Y1:
+  case SET_CUB_X2:
+  case SET_CUB_Y2:
+  case SET_SMOOTH_X2:
+  case SET_SMOOTH_Y2:
+  case SET_ARC_RX:
+  case SET_ARC_RY:
+  case SET_ARC_ROT:
+  case SET_ARC_LARGE:
+  case SET_ARC_SWEEP:
     return {
       ...state,
       points: points(state.points, action),
@@ -95,8 +117,19 @@ export default function paths(state = initialState, action) {
   case SET_POINT_CODE:
   case SET_POINT_X:
   case SET_POINT_Y:
-  case SET_QUAD_X:
-  case SET_QUAD_Y:
+  case SET_QUAD_X1:
+  case SET_QUAD_Y1:
+  case SET_CUB_X1:
+  case SET_CUB_Y1:
+  case SET_CUB_X2:
+  case SET_CUB_Y2:
+  case SET_SMOOTH_X2:
+  case SET_SMOOTH_Y2:
+  case SET_ARC_RX:
+  case SET_ARC_RY:
+  case SET_ARC_ROT:
+  case SET_ARC_LARGE:
+  case SET_ARC_SWEEP:
     return state.map((p) =>
       p.id === action.id ? path(p, action) : p)
 

@@ -5,6 +5,7 @@ import Setting from "Settings/Setting"
 import Range from "Range"
 import Choices from "Choices"
 import Choice from "Choices/Choice"
+import Checkbox from "Checkbox"
 
 import * as pointsActions from "../../src/actions/points"
 
@@ -68,19 +69,107 @@ class SidebarPoint extends Component {
     ))
   };
 
-  handleQuadXChange = (e) => {
-    this.props.dispatch(pointsActions.setQuadX(
+  handleQuadX1Change = (e) => {
+    this.props.dispatch(pointsActions.setQuadX1(
       this.props.path.id,
       this.props.point.id,
       keepInRange(e.target.value, 0, this.props.builder.width)
     ))
   };
 
-  handleQuadYChange = (e) => {
-    this.props.dispatch(pointsActions.setQuadY(
+  handleQuadY1Change = (e) => {
+    this.props.dispatch(pointsActions.setQuadY1(
       this.props.path.id,
       this.props.point.id,
       keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
+  };
+
+  handleCubX1Change = (e) => {
+    this.props.dispatch(pointsActions.setCubX1(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.width)
+    ))
+  };
+
+  handleCubY1Change = (e) => {
+    this.props.dispatch(pointsActions.setCubY1(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
+  };
+
+  handleCubX2Change = (e) => {
+    this.props.dispatch(pointsActions.setCubX2(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.width)
+    ))
+  };
+
+  handleCubY2Change = (e) => {
+    this.props.dispatch(pointsActions.setCubY2(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
+  };
+
+  handleSmoothX2Change = (e) => {
+    this.props.dispatch(pointsActions.setSmoothX2(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.width)
+    ))
+  };
+
+  handleSmoothY2Change = (e) => {
+    this.props.dispatch(pointsActions.setSmoothY2(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
+  };
+
+  handleArcRXChange = (e) => {
+    this.props.dispatch(pointsActions.setArcRX(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.width)
+    ))
+  };
+
+  handleArcRYChange = (e) => {
+    this.props.dispatch(pointsActions.setArcRY(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, this.props.builder.height)
+    ))
+  };
+
+  handleArcRotChange = (e) => {
+    this.props.dispatch(pointsActions.setArcRot(
+      this.props.path.id,
+      this.props.point.id,
+      keepInRange(e.target.value, 0, 360)
+    ))
+  };
+
+  handleArcLargeChange = (e) => {
+    this.props.dispatch(pointsActions.setArcLarge(
+      this.props.path.id,
+      this.props.point.id,
+      e.target.checked
+    ))
+  };
+
+  handleArcSweepChange = (e) => {
+    this.props.dispatch(pointsActions.setArcSweep(
+      this.props.path.id,
+      this.props.point.id,
+      e.target.checked
     ))
   };
 
@@ -97,95 +186,257 @@ class SidebarPoint extends Component {
     const prevCode = previousPoint.code.toLowerCase()
 
     return (
-      <Settings>
+      <div className="ad-SidebarPoint">
         { /* Point general settings */ }
 
-        <Setting>
-          <Choices>
-            <Choice
-              name="type"
-              value="M"
-              checked={ code === "m" }
-              onChange={ this.handleTypeChange }>
-              Move
-            </Choice>
+        <Settings>
+          <Setting>
+            <Choices>
+              <Choice
+                value="M"
+                checked={ code === "m" }
+                onChange={ this.handleTypeChange }>
+                M
+              </Choice>
 
-            <Choice
-              name="type"
-              value="L"
-              checked={ code === "l" }
-              onChange={ this.handleTypeChange }>
-              Line
-            </Choice>
+              <Choice
+                value="L"
+                checked={ code === "l" }
+                onChange={ this.handleTypeChange }>
+                L
+              </Choice>
 
-            <Choice
-              name="type"
-              value="Q"
-              checked={ code === "q" }
-              onChange={ this.handleTypeChange }>
-              Quad
-            </Choice>
+              <Choice
+                value="Q"
+                checked={ code === "q" }
+                onChange={ this.handleTypeChange }>
+                Q
+              </Choice>
 
-            <Choice
-              name="type"
-              value="C"
-              checked={ code === "c" }
-              onChange={ this.handleTypeChange }>
-              Cub
-            </Choice>
+              { (prevCode === "q" || prevCode === "t") && (
+                <Choice
+                  value="T"
+                  checked={ code === "t" }
+                  onChange={ this.handleTypeChange }>
+                  T
+                </Choice>
+              ) }
 
-            <Choice
-              name="type"
-              value="A"
-              checked={ code === "a" }
-              onChange={ this.handleTypeChange }>
-              Arc
-            </Choice>
-          </Choices>
-        </Setting>
+              <Choice
+                value="C"
+                checked={ code === "c" }
+                onChange={ this.handleTypeChange }>
+                C
+              </Choice>
 
-        <Setting label="Point X position">
-          <Range
-            min={ 0 }
-            max={ builder.width }
-            step={ step }
-            value={ point.x }
-            onChange={ this.handleXPositionChange } />
-        </Setting>
+              { (prevCode === "c" || prevCode === "s") && (
+                <Choice
+                  value="S"
+                  checked={ code === "s" }
+                  onChange={ this.handleTypeChange }>
+                  S
+                </Choice>
+              ) }
 
-        <Setting label="Point Y position">
-          <Range
-            min={ 0 }
-            max={ builder.height }
-            step={ step }
-            value={ point.y }
-            onChange={ this.handleYPositionChange } />
-        </Setting>
+              <Choice
+                value="A"
+                checked={ code === "a" }
+                onChange={ this.handleTypeChange }>
+                A
+              </Choice>
+            </Choices>
+          </Setting>
+        </Settings>
 
-        { /* Quadratic curve settings */ }
-
-        { (code === "q" || (code === "t" && prevCode !== "q")) && (
-          <Setting label="Anchor X position">
+        <Settings>
+          <Setting label="Point X position">
             <Range
               min={ 0 }
               max={ builder.width }
               step={ step }
-              value={ point.parameters.x1 }
-              onChange={ this.handleQuadXChange } />
+              value={ point.x }
+              onChange={ this.handleXPositionChange } />
           </Setting>
-        ) }
+        </Settings>
 
-        { (code === "q" || (code === "t" && prevCode !== "q")) && (
-          <Setting label="Anchor Y position">
+        <Settings>
+          <Setting label="Point Y position">
             <Range
               min={ 0 }
               max={ builder.height }
               step={ step }
-              value={ point.parameters.y1 }
-              onChange={ this.handleQuadYChange } />
+              value={ point.y }
+              onChange={ this.handleYPositionChange } />
           </Setting>
+        </Settings>
+
+        { /* Quadratic curve settings */ }
+
+        { code === "q" && (
+          <Settings>
+            <Setting label="Anchor X position">
+              <Range
+                min={ 0 }
+                max={ builder.width }
+                step={ step }
+                value={ point.parameters.x1 }
+                onChange={ this.handleQuadX1Change } />
+            </Setting>
+          </Settings>
         ) }
-      </Settings>
+
+        { code === "q" && (
+          <Settings>
+            <Setting label="Anchor Y position">
+              <Range
+                min={ 0 }
+                max={ builder.height }
+                step={ step }
+                value={ point.parameters.y1 }
+                onChange={ this.handleQuadY1Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { /* Cubic curve settings */ }
+
+        { code === "c" && (
+          <Settings>
+            <Setting label="First anchor X position">
+              <Range
+                min={ 0 }
+                max={ builder.width }
+                step={ step }
+                value={ point.parameters.x1 }
+                onChange={ this.handleCubX1Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "c" && (
+          <Settings>
+            <Setting label="First anchor Y position">
+              <Range
+                min={ 0 }
+                max={ builder.height }
+                step={ step }
+                value={ point.parameters.y1 }
+                onChange={ this.handleCubY1Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "c" && (
+          <Settings>
+            <Setting label="Second anchor X position">
+              <Range
+                min={ 0 }
+                max={ builder.width }
+                step={ step }
+                value={ point.parameters.x2 }
+                onChange={ this.handleCubX2Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "c" && (
+          <Settings>
+            <Setting label="Second anchor Y position">
+              <Range
+                min={ 0 }
+                max={ builder.height }
+                step={ step }
+                value={ point.parameters.y2 }
+                onChange={ this.handleCubY2Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { /* Smooth cubic curve settings */ }
+
+        { code === "s" && (
+          <Settings>
+            <Setting label="Anchor X position">
+              <Range
+                min={ 0 }
+                max={ builder.width }
+                step={ step }
+                value={ point.parameters.x2 }
+                onChange={ this.handleSmoothX2Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "s" && (
+          <Settings>
+            <Setting label="Anchor Y position">
+              <Range
+                min={ 0 }
+                max={ builder.height }
+                step={ step }
+                value={ point.parameters.y2 }
+                onChange={ this.handleSmoothY2Change } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { /* Arc settings */ }
+
+        { code === "a" && (
+          <Settings>
+            <Setting label="X Radius">
+              <Range
+                min={ 0 }
+                max={ builder.width }
+                step={ step }
+                value={ point.parameters.rx }
+                onChange={ this.handleArcRXChange } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "a" && (
+          <Settings>
+            <Setting label="Y Radius">
+              <Range
+                min={ 0 }
+                max={ builder.height }
+                step={ step }
+                value={ point.parameters.ry }
+                onChange={ this.handleArcRYChange } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "a" && (
+          <Settings>
+            <Setting label="X Axis Rotation">
+              <Range
+                min={ 0 }
+                max={ 360 }
+                step={ 1 }
+                value={ point.parameters.xAxisRotation }
+                onChange={ this.handleArcRotChange } />
+            </Setting>
+          </Settings>
+        ) }
+
+        { code === "a" && (
+          <Settings>
+            <Setting label="Large arc">
+              <Checkbox
+                checked={ point.parameters.largeArc }
+                onChange={ this.handleArcLargeChange } />
+            </Setting>
+
+            <Setting label="Sweep">
+              <Checkbox
+                checked={ point.parameters.sweep }
+                onChange={ this.handleArcSweepChange } />
+            </Setting>
+          </Settings>
+        ) }
+      </div>
     )
   }
 }
@@ -199,23 +450,20 @@ SidebarPoint.propTypes = {
 }
 
 export default connect((state) => {
-  const path = state.paths.filter(({ isActive }) => isActive)[0]
+  const { builder, paths } = state
+  const path = paths.filter(({ isActive }) => isActive)[0]
+
   let point = {}, previousPoint = {}
 
-  path.points.forEach((p, index, points) => {
+  path.points.forEach((p, i, pts) => {
     if (p.isActive) {
       point = p
 
-      if (index > 0) {
-        previousPoint = points[index - 1]
+      if (i > 0) {
+        previousPoint = pts[i - 1]
       }
     }
   })
 
-  return {
-    builder: state.builder,
-    path,
-    point,
-    previousPoint,
-  }
+  return { builder, path, point, previousPoint }
 })(SidebarPoint)
