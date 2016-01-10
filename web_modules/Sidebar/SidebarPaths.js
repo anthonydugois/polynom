@@ -42,12 +42,16 @@ class SidebarPaths extends Component {
 
     return (
       <div className="ad-SidebarPaths">
-        { paths.map(this.renderSidebarPath) }
+        <div className="ad-SidebarPaths-module">
+          { paths.map(this.renderSidebarPath) }
+        </div>
 
-        <Button
-          onClick={ this.handleAddClick }>
-          New path
-        </Button>
+        <div className="ad-SidebarPaths-actions">
+          <Button
+            onClick={ this.handleAddClick }>
+            New path
+          </Button>
+        </div>
       </div>
     )
   }

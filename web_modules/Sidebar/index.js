@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from "react"
+import React, { PropTypes } from "react"
 import Button from "Button"
 import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
@@ -8,40 +8,25 @@ import SidebarPaths from "./SidebarPaths"
 import SidebarPoint from "./SidebarPoint"
 import "./styles"
 
-class Sidebar extends Component {
-  render() {
-    return (
-      <div className="ad-Sidebar">
-        <Tabs selected={ 1 }>
-          <TabList>
-            <Tab>
-              <Button
-                icon="paths"
-                type="tab">
-                Paths
-              </Button>
-            </Tab>
+const Sidebar = () => (
+  <div className="ad-Sidebar">
+    <Tabs selected={ 0 }>
+      <TabList>
+        <Tab>
+          <Button
+            icon="paths"
+            type="tab">
+            Paths
+          </Button>
+        </Tab>
+      </TabList>
 
-            <Tab>
-              <Button
-                icon="point"
-                type="tab">
-                Point
-              </Button>
-            </Tab>
-          </TabList>
-
-          <TabPanel>
-            <SidebarPaths />
-          </TabPanel>
-
-          <TabPanel>
-            <SidebarPoint />
-          </TabPanel>
-        </Tabs>
-      </div>
-    )
-  }
-}
+      <TabPanel>
+        <SidebarPoint />
+        <SidebarPaths />
+      </TabPanel>
+    </Tabs>
+  </div>
+)
 
 export default Sidebar

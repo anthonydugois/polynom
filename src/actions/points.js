@@ -19,10 +19,10 @@ export function addPoint(id, x, y) {
       y,
     })
 
-    const { paths } = getState()
-    const path = paths.filter((p) => p.id === id)[0]
+    const { path } = getPathById(getState().paths, id)
+    const activeId = path.points[path.points.length - 1].id
 
-    dispatch(setActivePoint(path.points[path.points.length - 1].id))
+    dispatch(setActivePoint(id, activeId))
   }
 }
 

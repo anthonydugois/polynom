@@ -14,8 +14,30 @@
     background: color(var(--ad-Color-prim) l(+20%));
   }
 
+.ad-SidebarPaths {
+  height: 50%;
+}
+  .ad-SidebarPaths-module {
+    flex: 1;
+    overflow: auto;
+  }
+  .ad-SidebarPaths-actions {
+    padding: 1.5rem;
+  }
+
+.ad-SidebarPoint {
+  height: 50%;
+}
+  .ad-SidebarPoint-module {
+    flex: 1;
+    overflow: auto;
+  }
+  .ad-SidebarPoint-actions {
+    padding: 1.5rem;
+  }
+
 .ad-SidebarPath {
-  border-left: 3px solid transparent;
+  border-left: 3px solid color(var(--ad-Color-prim) l(-8%));
 }
 .ad-SidebarPath.is-active {
   border-color: var(--ad-Color-sec);

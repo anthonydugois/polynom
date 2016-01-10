@@ -24,7 +24,7 @@ class Point extends Component {
     const code = point.code.toLowerCase()
     const prevCode = previousPoint.code.toLowerCase()
 
-    if (code === "q" || (code === "t" && prevCode !== "q")) {
+    if (code === "q") {
       return (
         <g className="ad-Anchor">
           <line
@@ -60,7 +60,7 @@ class Point extends Component {
     if (code === "c" || code === "s") {
       return (
         <g className="ad-Anchor">
-          { !(code === "s" && prevCode === "c") && (
+          { code === "c" && (
             <line
               className="ad-Anchor-line"
               x1={ previousPoint.x }
@@ -76,7 +76,7 @@ class Point extends Component {
             x2={ point.parameters.x2 }
             y2={ point.parameters.y2 } />
 
-          { !(code === "s" && prevCode === "c") && (
+          { code === "c" && (
             <circle
               className="ad-Anchor-point"
               cx={ point.parameters.x1 }
