@@ -23,13 +23,20 @@ class Overview extends Component {
   handleOverviewClick = (e) => {
     const {
       dispatch,
+      builder,
       paths,
     } = this.props
 
     const path = paths.filter(({ isActive }) => isActive)[0]
     const { left, top } = findDOMNode(this).getBoundingClientRect()
-    const x = e.clientX - left
-    const y = e.clientY - top
+
+    let x = Math.round(e.clientX - left)
+    let y = Math.round(e.clientY - top)
+
+    if (builder.grid.snapToGrid) {
+      x = builder.grid.size * Math.round(x / builder.grid.size)
+      y = builder.grid.size * Math.round(y / builder.grid.size)
+    }
 
     dispatch(pointsActions.addPoint(path.id, x, y))
     dispatch(pointsActions.setActivePoint(path.id, path.points.length))
