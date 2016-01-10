@@ -241,7 +241,7 @@ export default function points(state = initialState, action) {
     return [
       ...state,
       {
-        id: state.length,
+        id: state[state.length - 1].id + 1,
         code: "L",
         x: action.x,
         y: action.y,

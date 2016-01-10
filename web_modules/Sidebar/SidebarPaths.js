@@ -6,6 +6,15 @@ import SidebarPath from "./SidebarPath"
 import * as pathsActions from "../../src/actions/paths"
 
 class SidebarPaths extends Component {
+  handleAddClick = (e) => {
+    const {
+      dispatch,
+      builder,
+    } = this.props
+
+    dispatch(pathsActions.addPath(builder.width / 2, builder.height / 2))
+  };
+
   renderSidebarPath = (path, index, paths) => {
     const { dispatch } = this.props
 
@@ -34,6 +43,11 @@ class SidebarPaths extends Component {
     return (
       <div className="ad-SidebarPaths">
         { paths.map(this.renderSidebarPath) }
+
+        <Button
+          onClick={ this.handleAddClick }>
+          New path
+        </Button>
       </div>
     )
   }
@@ -41,6 +55,7 @@ class SidebarPaths extends Component {
 
 SidebarPaths.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  builder: PropTypes.object.isRequired,
   paths: PropTypes.array.isRequired,
 }
 

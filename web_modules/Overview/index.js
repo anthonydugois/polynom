@@ -39,7 +39,6 @@ class Overview extends Component {
     }
 
     dispatch(pointsActions.addPoint(path.id, x, y))
-    dispatch(pointsActions.setActivePoint(path.id, path.points.length))
   };
 
   renderShape = (path) => {

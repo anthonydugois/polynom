@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
+import Button from "Button"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Range from "Range"
@@ -187,6 +188,13 @@ class SidebarPoint extends Component {
       this.props.path.id,
       this.props.point.id,
       e.target.checked
+    ))
+  };
+
+  handleRemoveClick = (e) => {
+    this.props.dispatch(pointsActions.removePoint(
+      this.props.path.id,
+      this.props.point.id
     ))
   };
 
@@ -459,6 +467,14 @@ class SidebarPoint extends Component {
                 onChange={ this.handleArcSweepChange } />
             </Setting>
           </Settings>
+        ) }
+
+        { prevCode && (
+          <Button
+            type="delete"
+            onClick={ this.handleRemoveClick }>
+            Remove point
+          </Button>
         ) }
       </div>
     )

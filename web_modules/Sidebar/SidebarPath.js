@@ -14,19 +14,8 @@ class SidebarPath extends Component {
   };
 
   handleRemoveClick = (e) => {
-    e.preventDefault()
     e.stopPropagation()
-
-    const { path, index, paths } = this.props
-
-    if (paths.length > 1) {
-      if (path.isActive) {
-        this.props.onPathClick(index === 0 ?
-          paths[index + 1].id : paths[index - 1].id)
-      }
-
-      this.props.onRemoveClick(this.props.path.id)
-    }
+    this.props.onRemoveClick(this.props.path.id)
   };
 
   handleRelativeChange = (e) => {

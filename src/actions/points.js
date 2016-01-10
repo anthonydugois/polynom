@@ -1,19 +1,50 @@
 import * as types from "../constants/ActionTypes"
+import { getPathById } from "./paths"
+
+export function getPointById(points, id) {
+  const index = points.map((point) => point.id).indexOf(id)
+
+  return {
+    index,
+    point: points[index],
+  }
+}
 
 export function addPoint(id, x, y) {
-  return {
-    type: types.ADD_POINT,
-    id,
-    x,
-    y,
+  return (dispatch, getState) => {
+    dispatch({
+      type: types.ADD_POINT,
+      id,
+      x,
+      y,
+    })
+
+    const { paths } = getState()
+    const path = paths.filter((p) => p.id === id)[0]
+
+    dispatch(setActivePoint(path.points[path.points.length - 1].id))
   }
 }
 
 export function removePoint(id, pointId) {
-  return {
-    type: types.REMOVE_POINT,
-    id,
-    pointId,
+  return (dispatch, getState) => {
+    const { path } = getPathById(getState().paths, id)
+    const { index, point } = getPointById(path.points, pointId)
+
+    if (path.points.length > 1) {
+      if (point.isActive) {
+        const activeId = index === 0 ?
+          path.points[index + 1].id : path.points[index - 1].id
+
+        dispatch(setActivePoint(id, activeId))
+      }
+
+      dispatch({
+        type: types.REMOVE_POINT,
+        id,
+        pointId,
+      })
+    }
   }
 }
 

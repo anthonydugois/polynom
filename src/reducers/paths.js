@@ -111,7 +111,7 @@ export default function paths(state = initialState, action) {
     return [
       ...state,
       {
-        id: state.length,
+        id: state[state.length - 1].id + 1,
         name: `Path ${ state.length }`,
         isActive: false,
         isClosed: false,
@@ -123,6 +123,8 @@ export default function paths(state = initialState, action) {
             code: "M",
             x: action.x,
             y: action.y,
+            isActive: true,
+            isRelative: false,
             parameters: {},
           },
         ],
