@@ -17,7 +17,7 @@
 .ad-Button:focus,
 .ad-Button:hover {
   outline: 0;
-  background: color(var(--ad-Color-sec) l(+5%));
+  background: color(var(--ad-Color-sec) l(-5%));
 }
 
 .ad-Button--tab {
@@ -55,7 +55,7 @@
 }
 .ad-Button--delete:focus,
 .ad-Button--delete:hover {
-  background: color(var(--ad-Color-del) l(+5%));
+  background: color(var(--ad-Color-del) l(-5%));
 }
 
 .ad-Button--secondary {
@@ -70,7 +70,7 @@
     font-family: "Open Sans", sans-serif;
     font-weight: bold;
     font-size: .65rem;
-    letter-spacing: .05rem;
+    letter-spacing: .02rem;
   }
   .ad-Icon + .ad-Button-text {
     margin-left: .4rem;
