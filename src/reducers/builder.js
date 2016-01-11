@@ -1,8 +1,4 @@
-import {
-  SET_WIDTH,
-  SET_HEIGHT,
-  SET_GRID,
-} from "../constants/ActionTypes"
+import * as ActionTypes from "../constants/ActionTypes"
 
 const initialState = {
   width: 1000,
@@ -14,28 +10,31 @@ const initialState = {
   },
 }
 
+function grid(state = initialState.grid, action) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}
+
 export default function builder(state = initialState, action) {
   switch (action.type) {
-  case SET_WIDTH:
+  case ActionTypes.SET_WIDTH:
     return {
       ...state,
       width: action.width,
     }
 
-  case SET_HEIGHT:
+  case ActionTypes.SET_HEIGHT:
     return {
       ...state,
       height: action.height,
     }
 
-  case SET_GRID:
+  case ActionTypes.SET_GRID:
     return {
       ...state,
-      grid: {
-        isShown: action.isShown,
-        snapToGrid: action.snapToGrid,
-        size: action.size,
-      },
+      grid: grid(state.grid, action),
     }
 
   default:

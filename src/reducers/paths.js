@@ -1,31 +1,5 @@
+import * as ActionTypes from "../constants/ActionTypes"
 import points from "./points"
-import {
-  ADD_PATH,
-  REMOVE_PATH,
-  SET_ACTIVE_PATH,
-  SET_RELATIVE,
-  SET_CLOSED,
-  SET_FILLED,
-  ADD_POINT,
-  REMOVE_POINT,
-  SET_ACTIVE_POINT,
-  SET_POINT_CODE,
-  SET_POINT_X,
-  SET_POINT_Y,
-  SET_QUAD_X1,
-  SET_QUAD_Y1,
-  SET_CUB_X1,
-  SET_CUB_Y1,
-  SET_CUB_X2,
-  SET_CUB_Y2,
-  SET_SMOOTH_X2,
-  SET_SMOOTH_Y2,
-  SET_ARC_RX,
-  SET_ARC_RY,
-  SET_ARC_ROT,
-  SET_ARC_LARGE,
-  SET_ARC_SWEEP,
-} from "../constants/ActionTypes"
 
 const initialState = [
   {
@@ -37,15 +11,6 @@ const initialState = [
     isFilled: false,
     points: points(undefined, { type: null }),
   },
-  /*{
-    id: 1,
-    name: "Second Path",
-    isActive: false,
-    isClosed: false,
-    isRelative: false,
-    isFilled: false,
-    points: points(undefined, { type: null }),
-  },*/
 ]
 
 function path(state = {
@@ -58,43 +23,43 @@ function path(state = {
   points: [],
 }, action) {
   switch (action.type) {
-  case SET_RELATIVE:
+  case ActionTypes.SET_RELATIVE:
     return {
       ...state,
       isRelative: action.isRelative,
     }
 
-  case SET_CLOSED:
+  case ActionTypes.SET_CLOSED:
     return {
       ...state,
       isClosed: action.isClosed,
     }
 
-  case SET_FILLED:
+  case ActionTypes.SET_FILLED:
     return {
       ...state,
       isFilled: action.isFilled,
     }
 
-  case ADD_POINT:
-  case REMOVE_POINT:
-  case SET_ACTIVE_POINT:
-  case SET_POINT_CODE:
-  case SET_POINT_X:
-  case SET_POINT_Y:
-  case SET_QUAD_X1:
-  case SET_QUAD_Y1:
-  case SET_CUB_X1:
-  case SET_CUB_Y1:
-  case SET_CUB_X2:
-  case SET_CUB_Y2:
-  case SET_SMOOTH_X2:
-  case SET_SMOOTH_Y2:
-  case SET_ARC_RX:
-  case SET_ARC_RY:
-  case SET_ARC_ROT:
-  case SET_ARC_LARGE:
-  case SET_ARC_SWEEP:
+  case ActionTypes.ADD_POINT:
+  case ActionTypes.REMOVE_POINT:
+  case ActionTypes.SET_ACTIVE_POINT:
+  case ActionTypes.SET_POINT_CODE:
+  case ActionTypes.SET_POINT_X:
+  case ActionTypes.SET_POINT_Y:
+  case ActionTypes.SET_QUAD_X1:
+  case ActionTypes.SET_QUAD_Y1:
+  case ActionTypes.SET_CUB_X1:
+  case ActionTypes.SET_CUB_Y1:
+  case ActionTypes.SET_CUB_X2:
+  case ActionTypes.SET_CUB_Y2:
+  case ActionTypes.SET_SMOOTH_X2:
+  case ActionTypes.SET_SMOOTH_Y2:
+  case ActionTypes.SET_ARC_RX:
+  case ActionTypes.SET_ARC_RY:
+  case ActionTypes.SET_ARC_ROT:
+  case ActionTypes.SET_ARC_LARGE:
+  case ActionTypes.SET_ARC_SWEEP:
     return {
       ...state,
       points: points(state.points, action),
@@ -111,7 +76,7 @@ export default function paths(state = initialState, action) {
   /**
    * Insert a path just after the active one
    */
-  case ADD_PATH:
+  case ActionTypes.ADD_PATH:
     return state.reduce((acc, path) => {
       if (path.isActive) {
         return [
@@ -145,38 +110,37 @@ export default function paths(state = initialState, action) {
       return [...acc, path]
     }, [])
 
-  case REMOVE_PATH:
-    return state.reduce((acc, p) =>
-      p.id !== action.id ? [...acc, p] : acc, [])
+  case ActionTypes.REMOVE_PATH:
+    return state.filter((p) => p.id !== action.id)
 
-  case SET_ACTIVE_PATH:
+  case ActionTypes.SET_ACTIVE_PATH:
     return state.map((p) => ({
       ...p,
       isActive: p.id === action.id,
     }))
 
-  case SET_RELATIVE:
-  case SET_CLOSED:
-  case SET_FILLED:
-  case ADD_POINT:
-  case REMOVE_POINT:
-  case SET_ACTIVE_POINT:
-  case SET_POINT_CODE:
-  case SET_POINT_X:
-  case SET_POINT_Y:
-  case SET_QUAD_X1:
-  case SET_QUAD_Y1:
-  case SET_CUB_X1:
-  case SET_CUB_Y1:
-  case SET_CUB_X2:
-  case SET_CUB_Y2:
-  case SET_SMOOTH_X2:
-  case SET_SMOOTH_Y2:
-  case SET_ARC_RX:
-  case SET_ARC_RY:
-  case SET_ARC_ROT:
-  case SET_ARC_LARGE:
-  case SET_ARC_SWEEP:
+  case ActionTypes.SET_RELATIVE:
+  case ActionTypes.SET_CLOSED:
+  case ActionTypes.SET_FILLED:
+  case ActionTypes.ADD_POINT:
+  case ActionTypes.REMOVE_POINT:
+  case ActionTypes.SET_ACTIVE_POINT:
+  case ActionTypes.SET_POINT_CODE:
+  case ActionTypes.SET_POINT_X:
+  case ActionTypes.SET_POINT_Y:
+  case ActionTypes.SET_QUAD_X1:
+  case ActionTypes.SET_QUAD_Y1:
+  case ActionTypes.SET_CUB_X1:
+  case ActionTypes.SET_CUB_Y1:
+  case ActionTypes.SET_CUB_X2:
+  case ActionTypes.SET_CUB_Y2:
+  case ActionTypes.SET_SMOOTH_X2:
+  case ActionTypes.SET_SMOOTH_Y2:
+  case ActionTypes.SET_ARC_RX:
+  case ActionTypes.SET_ARC_RY:
+  case ActionTypes.SET_ARC_ROT:
+  case ActionTypes.SET_ARC_LARGE:
+  case ActionTypes.SET_ARC_SWEEP:
     return state.map((p) =>
       p.id === action.id ? path(p, action) : p)
 

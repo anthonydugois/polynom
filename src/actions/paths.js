@@ -1,4 +1,5 @@
 import * as types from "../constants/ActionTypes"
+import { M, L, Q, T, C, S, A } from "./points"
 
 export function getPathById(paths, id) {
   const index = paths.map((path) => path.id).indexOf(id)
@@ -67,4 +68,42 @@ export function setFilled(id, isFilled) {
     id,
     isFilled,
   }
+}
+
+export function getPathCode(path) {
+  let code = path.points.reduce((acc, point, index, points) => {
+    const previousPoint = index > 0 ? points[index - 1] : false
+
+    switch (point.code.toLowerCase()) {
+    case "m":
+      return acc + M(point, previousPoint, path.isClosed)
+
+    case "l":
+      return acc + L(point, previousPoint)
+
+    case "q":
+      return acc + Q(point, previousPoint)
+
+    case "t":
+      return acc + T(point, previousPoint)
+
+    case "c":
+      return acc + C(point, previousPoint)
+
+    case "s":
+      return acc + S(point, previousPoint)
+
+    case "a":
+      return acc + A(point, previousPoint)
+
+    default:
+      return ""
+    }
+  }, "")
+
+  if (path.isClosed) {
+    code += "z"
+  }
+
+  return code
 }
