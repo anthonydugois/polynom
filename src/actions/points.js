@@ -11,18 +11,11 @@ export function getPointById(points, id) {
 }
 
 export function addPoint(id, x, y) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: types.ADD_POINT,
-      id,
-      x,
-      y,
-    })
-
-    const { path } = getPathById(getState().paths, id)
-    const activeId = path.points[path.points.length - 1].id
-
-    dispatch(setActivePoint(id, activeId))
+  return {
+    type: types.ADD_POINT,
+    id,
+    x,
+    y,
   }
 }
 

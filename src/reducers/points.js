@@ -237,19 +237,33 @@ function point(state = {
 
 export default function points(state = initialState, action) {
   switch (action.type) {
+
+  /**
+   * Insert a point just after the active one
+   */
   case ADD_POINT:
-    return [
-      ...state,
-      {
-        id: state[state.length - 1].id + 1,
-        code: "L",
-        x: action.x,
-        y: action.y,
-        isActive: false,
-        isRelative: false,
-        parameters: {},
-      },
-    ]
+    return state.reduce((acc, point) => {
+      if (point.isActive) {
+        return [
+          ...acc,
+          {
+            ...point,
+            isActive: false,
+          },
+          {
+            id: Math.max(...state.map(({ id }) => id)) + 1,
+            code: "L",
+            x: action.x,
+            y: action.y,
+            isActive: true,
+            isRelative: false,
+            parameters: {},
+          },
+        ]
+      }
+
+      return [...acc, point]
+    }, [])
 
   case REMOVE_POINT:
     return state.reduce((acc, p) =>

@@ -10,16 +10,10 @@ export function getPathById(paths, id) {
 }
 
 export function addPath(x, y) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: types.ADD_PATH,
-      x,
-      y,
-    })
-
-    const { paths } = getState()
-
-    dispatch(setActivePath(paths[paths.length - 1].id))
+  return {
+    type: types.ADD_PATH,
+    x,
+    y,
   }
 }
 

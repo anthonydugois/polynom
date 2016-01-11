@@ -107,29 +107,43 @@ function path(state = {
 
 export default function paths(state = initialState, action) {
   switch (action.type) {
+
+  /**
+   * Insert a path just after the active one
+   */
   case ADD_PATH:
-    return [
-      ...state,
-      {
-        id: state[state.length - 1].id + 1,
-        name: `Path ${ state.length }`,
-        isActive: false,
-        isClosed: false,
-        isRelative: false,
-        isFilled: false,
-        points: [
+    return state.reduce((acc, path) => {
+      if (path.isActive) {
+        return [
+          ...acc,
           {
-            id: 0,
-            code: "M",
-            x: action.x,
-            y: action.y,
-            isActive: true,
-            isRelative: false,
-            parameters: {},
+            ...path,
+            isActive: false,
           },
-        ],
-      },
-    ]
+          {
+            id: Math.max(...state.map(({ id }) => id)) + 1,
+            name: `Path ${ state.length }`,
+            isActive: true,
+            isClosed: false,
+            isRelative: false,
+            isFilled: false,
+            points: [
+              {
+                id: 0,
+                code: "M",
+                x: action.x,
+                y: action.y,
+                isActive: true,
+                isRelative: false,
+                parameters: {},
+              },
+            ],
+          },
+        ]
+      }
+
+      return [...acc, path]
+    }, [])
 
   case REMOVE_PATH:
     return state.reduce((acc, p) =>
