@@ -1,5 +1,17 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
+const initialState = {
+  0: {
+    id: 0,
+    code: "M",
+    x: 50,
+    y: 50,
+    isActive: true,
+    isRelative: false,
+    parameters: {},
+  },
+}
+
 function Q(state, action) {
   switch (action.type) {
   case ActionTypes.SET_QUAD_X1:
@@ -185,50 +197,46 @@ function point(state, action) {
   }
 }
 
-export default function points(state, action) {
+export default function points(state = initialState, action) {
   switch (action.type) {
 
   /**
    * Insert a point just after the active one
    */
   case ActionTypes.ADD_POINT:
-    return state.reduce((acc, point) => {
-      if (point.isActive) {
-        return [
-          ...acc,
-          {
-            ...point,
-            isActive: false,
-          },
-          {
-            id: Math.max(...state.map(({ id }) => id)) + 1,
-            code: "L",
-            x: action.x,
-            y: action.y,
-            isActive: true,
-            isRelative: false,
-            parameters: {},
-          },
-        ]
-      }
+    const newId = Math.max(...Object.keys(state)) + 1
 
-      return [...acc, point]
-    }, [])
+    return {
+      ...state,
+      [newId]: {
+        id: newId,
+        code: "L",
+        x: action.x,
+        y: action.y,
+        isActive: false,
+        isRelative: false,
+        parameters: {},
+      }
+    }
 
   /**
    * Remove a point
    */
   case ActionTypes.REMOVE_POINT:
-    return state.filter((p) => p.id !== action.pointId)
+    return Object.keys(state).reduce((acc, id) =>
+      id === action.id ? { ...acc } : { ...acc, [id]: state[id] }, {})
 
   /**
    * Make a point active; only one point at a time can be in this state
    */
   case ActionTypes.SET_ACTIVE_POINT:
-    return state.map((p) => ({
-      ...p,
-      isActive: p.id === action.pointId,
-    }))
+    return Object.keys(state).reduce((acc, id) => ({
+      ...acc,
+      [id]: {
+        ...state[id],
+        isActive: id === action.id,
+      },
+    }), {})
 
   case ActionTypes.SET_POINT_CODE:
   case ActionTypes.SET_POINT_X:
@@ -246,8 +254,10 @@ export default function points(state, action) {
   case ActionTypes.SET_ARC_ROT:
   case ActionTypes.SET_ARC_LARGE:
   case ActionTypes.SET_ARC_SWEEP:
-    return state.map((p) =>
-      p.id === action.pointId ? point(p, action) : p)
+    return {
+      ...state,
+      [action.id]: point(state[action.id], action),
+    }
 
   default:
     return state

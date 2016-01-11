@@ -1,15 +1,6 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { M, L, Q, T, C, S, A } from "./points"
 
-export function getPathById(paths, id) {
-  const index = paths.map((path) => path.id).indexOf(id)
-
-  return {
-    index,
-    path: paths[index],
-  }
-}
-
 export function addPath(x, y) {
   return {
     type: ActionTypes.ADD_PATH,
@@ -21,15 +12,15 @@ export function addPath(x, y) {
 export function removePath(id) {
   return (dispatch, getState) => {
     const { paths } = getState()
-    const { index, path } = getPathById(paths, id)
+    // const { index, path } = getPathById(paths, id)
 
     if (paths.length > 1) {
-      if (path.isActive) {
+      /* if (path.isActive) {
         const activeId = index === 0 ?
           paths[index + 1].id : paths[index - 1].id
 
         dispatch(setActivePath(activeId))
-      }
+      } */
 
       dispatch({
         type: ActionTypes.REMOVE_PATH,
