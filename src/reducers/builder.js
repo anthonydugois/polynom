@@ -10,7 +10,7 @@ const initialState = {
   },
 }
 
-function grid(state = initialState.grid, action) {
+function grid(state, action) {
   switch (action.type) {
   case ActionTypes.SET_GRID_SHOWN:
     return {

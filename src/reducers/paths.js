@@ -9,12 +9,26 @@ const initialState = [
     isClosed: false,
     isRelative: false,
     isFilled: false,
-    points: points(undefined, { type: null }),
+    points: [
+      {
+        id: 0,
+        code: "M",
+        x: 50,
+        y: 50,
+        isActive: true,
+        isRelative: false,
+        parameters: {},
+      },
+    ],
   },
 ]
 
-function path(state = initialState[0], action) {
+function path(state, action) {
   switch (action.type) {
+
+  /**
+   * Path parameters
+   */
   case ActionTypes.SET_RELATIVE:
     return {
       ...state,
@@ -79,7 +93,7 @@ export default function paths(state = initialState, action) {
           },
           {
             id: Math.max(...state.map(({ id }) => id)) + 1,
-            name: `Path ${ state.length }`,
+            name: `Path ${ state.length + 1 }`,
             isActive: true,
             isClosed: false,
             isRelative: false,
@@ -102,9 +116,15 @@ export default function paths(state = initialState, action) {
       return [...acc, path]
     }, [])
 
+  /**
+   * Remove a path
+   */
   case ActionTypes.REMOVE_PATH:
     return state.filter((p) => p.id !== action.id)
 
+  /**
+   * Make a path active; only one path at a time can be active
+   */
   case ActionTypes.SET_ACTIVE_PATH:
     return state.map((p) => ({
       ...p,

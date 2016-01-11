@@ -1,33 +1,6 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
-const initialState = [
-  {
-    id: 0,
-    code: "M",
-    x: 50,
-    y: 50,
-    isActive: false,
-    isRelative: false,
-    parameters: {},
-  },
-  {
-    id: 1,
-    code: "Q",
-    x: 100,
-    y: 100,
-    isActive: true,
-    isRelative: false,
-    parameters: {
-      x1: 150,
-      y1: 75,
-    },
-  },
-]
-
-function Q(state = {
-  x1: 0,
-  y1: 0,
-}, action) {
+function Q(state, action) {
   switch (action.type) {
   case ActionTypes.SET_QUAD_X1:
     return {
@@ -46,12 +19,7 @@ function Q(state = {
   }
 }
 
-function C(state = {
-  x1: 0,
-  y1: 0,
-  x2: 0,
-  y2: 0,
-}, action) {
+function C(state, action) {
   switch (action.type) {
   case ActionTypes.SET_CUB_X1:
     return {
@@ -82,10 +50,7 @@ function C(state = {
   }
 }
 
-function S(state = {
-  x2: 0,
-  y2: 0,
-}, action) {
+function S(state, action) {
   switch (action.type) {
   case ActionTypes.SET_SMOOTH_X2:
     return {
@@ -104,13 +69,7 @@ function S(state = {
   }
 }
 
-function A(state = {
-  rx: 0,
-  ry: 0,
-  xAxisRotation: 0,
-  largeArc: false,
-  sweep: false,
-}, action) {
+function A(state, action) {
   switch (action.type) {
   case ActionTypes.SET_ARC_RX:
     return {
@@ -147,7 +106,7 @@ function A(state = {
   }
 }
 
-function point(state = initialState[0], action) {
+function point(state, action) {
   switch (action.type) {
 
   /**
@@ -226,7 +185,7 @@ function point(state = initialState[0], action) {
   }
 }
 
-export default function points(state = initialState, action) {
+export default function points(state, action) {
   switch (action.type) {
 
   /**
