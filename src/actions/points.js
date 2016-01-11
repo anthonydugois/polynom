@@ -1,4 +1,4 @@
-import * as types from "../constants/ActionTypes"
+import * as ActionTypes from "../constants/ActionTypes"
 import { getPathById } from "./paths"
 
 export function getPointById(points, id) {
@@ -12,7 +12,7 @@ export function getPointById(points, id) {
 
 export function addPoint(id, x, y) {
   return {
-    type: types.ADD_POINT,
+    type: ActionTypes.ADD_POINT,
     id,
     x,
     y,
@@ -33,7 +33,7 @@ export function removePoint(id, pointId) {
       }
 
       dispatch({
-        type: types.REMOVE_POINT,
+        type: ActionTypes.REMOVE_POINT,
         id,
         pointId,
       })
@@ -43,7 +43,7 @@ export function removePoint(id, pointId) {
 
 export function setActivePoint(id, pointId) {
   return {
-    type: types.SET_ACTIVE_POINT,
+    type: ActionTypes.SET_ACTIVE_POINT,
     id,
     pointId,
   }
@@ -51,7 +51,7 @@ export function setActivePoint(id, pointId) {
 
 export function setPointCode(id, pointId, code, parameters) {
   return {
-    type: types.SET_POINT_CODE,
+    type: ActionTypes.SET_POINT_CODE,
     id,
     pointId,
     code,
@@ -61,7 +61,7 @@ export function setPointCode(id, pointId, code, parameters) {
 
 export function setPointX(id, pointId, x) {
   return {
-    type: types.SET_POINT_X,
+    type: ActionTypes.SET_POINT_X,
     id,
     pointId,
     x,
@@ -70,7 +70,7 @@ export function setPointX(id, pointId, x) {
 
 export function setPointY(id, pointId, y) {
   return {
-    type: types.SET_POINT_Y,
+    type: ActionTypes.SET_POINT_Y,
     id,
     pointId,
     y,
@@ -79,7 +79,7 @@ export function setPointY(id, pointId, y) {
 
 export function setQuadX1(id, pointId, x1) {
   return {
-    type: types.SET_QUAD_X1,
+    type: ActionTypes.SET_QUAD_X1,
     id,
     pointId,
     x1,
@@ -88,7 +88,7 @@ export function setQuadX1(id, pointId, x1) {
 
 export function setQuadY1(id, pointId, y1) {
   return {
-    type: types.SET_QUAD_Y1,
+    type: ActionTypes.SET_QUAD_Y1,
     id,
     pointId,
     y1,
@@ -97,7 +97,7 @@ export function setQuadY1(id, pointId, y1) {
 
 export function setCubX1(id, pointId, x1) {
   return {
-    type: types.SET_CUB_X1,
+    type: ActionTypes.SET_CUB_X1,
     id,
     pointId,
     x1,
@@ -106,7 +106,7 @@ export function setCubX1(id, pointId, x1) {
 
 export function setCubY1(id, pointId, y1) {
   return {
-    type: types.SET_CUB_Y1,
+    type: ActionTypes.SET_CUB_Y1,
     id,
     pointId,
     y1,
@@ -115,7 +115,7 @@ export function setCubY1(id, pointId, y1) {
 
 export function setCubX2(id, pointId, x2) {
   return {
-    type: types.SET_CUB_X2,
+    type: ActionTypes.SET_CUB_X2,
     id,
     pointId,
     x2,
@@ -124,7 +124,7 @@ export function setCubX2(id, pointId, x2) {
 
 export function setCubY2(id, pointId, y2) {
   return {
-    type: types.SET_CUB_Y2,
+    type: ActionTypes.SET_CUB_Y2,
     id,
     pointId,
     y2,
@@ -133,7 +133,7 @@ export function setCubY2(id, pointId, y2) {
 
 export function setSmoothX2(id, pointId, x2) {
   return {
-    type: types.SET_SMOOTH_X2,
+    type: ActionTypes.SET_SMOOTH_X2,
     id,
     pointId,
     x2,
@@ -142,7 +142,7 @@ export function setSmoothX2(id, pointId, x2) {
 
 export function setSmoothY2(id, pointId, y2) {
   return {
-    type: types.SET_SMOOTH_Y2,
+    type: ActionTypes.SET_SMOOTH_Y2,
     id,
     pointId,
     y2,
@@ -151,7 +151,7 @@ export function setSmoothY2(id, pointId, y2) {
 
 export function setArcRX(id, pointId, rx) {
   return {
-    type: types.SET_ARC_RX,
+    type: ActionTypes.SET_ARC_RX,
     id,
     pointId,
     rx,
@@ -160,7 +160,7 @@ export function setArcRX(id, pointId, rx) {
 
 export function setArcRY(id, pointId, ry) {
   return {
-    type: types.SET_ARC_RY,
+    type: ActionTypes.SET_ARC_RY,
     id,
     pointId,
     ry,
@@ -169,7 +169,7 @@ export function setArcRY(id, pointId, ry) {
 
 export function setArcRot(id, pointId, xAxisRotation) {
   return {
-    type: types.SET_ARC_ROT,
+    type: ActionTypes.SET_ARC_ROT,
     id,
     pointId,
     xAxisRotation,
@@ -178,7 +178,7 @@ export function setArcRot(id, pointId, xAxisRotation) {
 
 export function setArcLarge(id, pointId, largeArc) {
   return {
-    type: types.SET_ARC_LARGE,
+    type: ActionTypes.SET_ARC_LARGE,
     id,
     pointId,
     largeArc,
@@ -187,7 +187,7 @@ export function setArcLarge(id, pointId, largeArc) {
 
 export function setArcSweep(id, pointId, sweep) {
   return {
-    type: types.SET_ARC_SWEEP,
+    type: ActionTypes.SET_ARC_SWEEP,
     id,
     pointId,
     sweep,

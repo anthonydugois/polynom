@@ -1,4 +1,4 @@
-import * as types from "../constants/ActionTypes"
+import * as ActionTypes from "../constants/ActionTypes"
 import { M, L, Q, T, C, S, A } from "./points"
 
 export function getPathById(paths, id) {
@@ -12,7 +12,7 @@ export function getPathById(paths, id) {
 
 export function addPath(x, y) {
   return {
-    type: types.ADD_PATH,
+    type: ActionTypes.ADD_PATH,
     x,
     y,
   }
@@ -32,7 +32,7 @@ export function removePath(id) {
       }
 
       dispatch({
-        type: types.REMOVE_PATH,
+        type: ActionTypes.REMOVE_PATH,
         id,
       })
     }
@@ -41,14 +41,14 @@ export function removePath(id) {
 
 export function setActivePath(id) {
   return {
-    type: types.SET_ACTIVE_PATH,
+    type: ActionTypes.SET_ACTIVE_PATH,
     id,
   }
 }
 
 export function setRelative(id, isRelative) {
   return {
-    type: types.SET_RELATIVE,
+    type: ActionTypes.SET_RELATIVE,
     id,
     isRelative,
   }
@@ -56,7 +56,7 @@ export function setRelative(id, isRelative) {
 
 export function setClosed(id, isClosed) {
   return {
-    type: types.SET_CLOSED,
+    type: ActionTypes.SET_CLOSED,
     id,
     isClosed,
   }
@@ -64,7 +64,7 @@ export function setClosed(id, isClosed) {
 
 export function setFilled(id, isFilled) {
   return {
-    type: types.SET_FILLED,
+    type: ActionTypes.SET_FILLED,
     id,
     isFilled,
   }

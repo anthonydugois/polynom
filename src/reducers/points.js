@@ -147,16 +147,12 @@ function A(state = {
   }
 }
 
-function point(state = {
-  id: 0,
-  code: "",
-  x: 0,
-  y: 0,
-  isActive: false,
-  isRelative: false,
-  parameters: {},
-}, action) {
+function point(state = initialState[0], action) {
   switch (action.type) {
+
+  /**
+   * Update SVG code and parameters
+   */
   case ActionTypes.SET_POINT_CODE:
     return {
       ...state,
@@ -165,6 +161,9 @@ function point(state = {
       parameters: action.parameters,
     }
 
+  /**
+   * Default position
+   */
   case ActionTypes.SET_POINT_X:
     return {
       ...state,
@@ -177,6 +176,9 @@ function point(state = {
       y: action.y,
     }
 
+  /**
+   * Quadratic curve anchor position
+   */
   case ActionTypes.SET_QUAD_X1:
   case ActionTypes.SET_QUAD_Y1:
     return {
@@ -184,6 +186,9 @@ function point(state = {
       parameters: Q(state.parameters, action),
     }
 
+  /**
+   * Cubic curve anchors positions
+   */
   case ActionTypes.SET_CUB_X1:
   case ActionTypes.SET_CUB_Y1:
   case ActionTypes.SET_CUB_X2:
@@ -193,6 +198,9 @@ function point(state = {
       parameters: C(state.parameters, action),
     }
 
+  /**
+   * Smooth cubic curve anchor position
+   */
   case ActionTypes.SET_SMOOTH_X2:
   case ActionTypes.SET_SMOOTH_Y2:
     return {
@@ -200,6 +208,9 @@ function point(state = {
       parameters: S(state.parameters, action),
     }
 
+  /**
+   * Arc parameters
+   */
   case ActionTypes.SET_ARC_RX:
   case ActionTypes.SET_ARC_RY:
   case ActionTypes.SET_ARC_ROT:
@@ -245,9 +256,15 @@ export default function points(state = initialState, action) {
       return [...acc, point]
     }, [])
 
+  /**
+   * Remove a point
+   */
   case ActionTypes.REMOVE_POINT:
     return state.filter((p) => p.id !== action.pointId)
 
+  /**
+   * Make a point active; only one point at a time can be in this state
+   */
   case ActionTypes.SET_ACTIVE_POINT:
     return state.map((p) => ({
       ...p,

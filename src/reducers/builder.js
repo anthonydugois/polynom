@@ -12,6 +12,24 @@ const initialState = {
 
 function grid(state = initialState.grid, action) {
   switch (action.type) {
+  case ActionTypes.SET_GRID_SHOWN:
+    return {
+      ...state,
+      isShown: action.isShown,
+    }
+
+  case ActionTypes.SET_GRID_SNAP:
+    return {
+      ...state,
+      snapToGrid: action.snapToGrid,
+    }
+
+  case ActionTypes.SET_GRID_SIZE:
+    return {
+      ...state,
+      size: action.size,
+    }
+
   default:
     return state
   }
@@ -31,7 +49,9 @@ export default function builder(state = initialState, action) {
       height: action.height,
     }
 
-  case ActionTypes.SET_GRID:
+  case ActionTypes.SET_GRID_SHOWN:
+  case ActionTypes.SET_GRID_SNAP:
+  case ActionTypes.SET_GRID_SIZE:
     return {
       ...state,
       grid: grid(state.grid, action),

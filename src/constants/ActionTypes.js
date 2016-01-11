@@ -4,7 +4,9 @@
 
 export const SET_WIDTH = "SET_WIDTH"
 export const SET_HEIGHT = "SET_HEIGHT"
-export const SET_GRID = "SET_GRID"
+export const SET_GRID_SHOWN = "SET_GRID_SHOWN"
+export const SET_GRID_SNAP = "SET_GRID_SNAP"
+export const SET_GRID_SIZE = "SET_GRID_SIZE"
 
 /**
  * Paths

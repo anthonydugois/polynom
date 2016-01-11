@@ -13,15 +13,7 @@ const initialState = [
   },
 ]
 
-function path(state = {
-  id: 0,
-  name: "",
-  isActive: false,
-  isClosed: false,
-  isRelative: false,
-  isFilled: false,
-  points: [],
-}, action) {
+function path(state = initialState[0], action) {
   switch (action.type) {
   case ActionTypes.SET_RELATIVE:
     return {

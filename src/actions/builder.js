@@ -1,24 +1,36 @@
-import * as types from "../constants/ActionTypes"
+import * as ActionTypes from "../constants/ActionTypes"
 
 export function setWidth(width) {
   return {
-    type: types.SET_WIDTH,
+    type: ActionTypes.SET_WIDTH,
     width,
   }
 }
 
 export function setHeight(height) {
   return {
-    type: types.SET_HEIGHT,
+    type: ActionTypes.SET_HEIGHT,
     height,
   }
 }
 
-export function setGrid(isShown, snapToGrid, size) {
+export function setGridShown(isShown) {
   return {
-    type: types.SET_GRID,
+    type: ActionTypes.SET_GRID_SHOWN,
     isShown,
+  }
+}
+
+export function setGridSnap(snapToGrid) {
+  return {
+    type: ActionTypes.SET_GRID_SNAP,
     snapToGrid,
+  }
+}
+
+export function setGridSize(size) {
+  return {
+    type: ActionTypes.SET_GRID_SIZE,
     size,
   }
 }
