@@ -1,33 +1,48 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
-export function addPoint(id, x, y) {
-  return {
-    type: ActionTypes.ADD_POINT,
-    id,
-    x,
-    y,
+export function addPoint(id, code, x, y, isActive, isRelative, parameters) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: ActionTypes.ADD_POINT,
+      code,
+      x,
+      y,
+      isActive,
+      isRelative,
+      parameters,
+    })
+
+    // then insert it in the path
+    const pointId = Math.max(...Object.keys(getState().points))
+
+    dispatch(addPointToPath(id, pointId))
   }
 }
 
-export function removePoint(id) {
+export function removePoint(pathId, id) {
   return (dispatch, getState) => {
-    const { path } = getPathById(getState().paths, id)
-    // const { index, point } = getPointById(path.points)
+    dispatch({
+      type: ActionTypes.REMOVE_POINT,
+      id,
+    })
 
-    if (path.points.length > 1) {
-      /* if (point.isActive) {
-        const activeId = index === 0 ?
-          path.points[index + 1].id : path.points[index - 1].id
+    dispatch(removePointFromPath(pathId, id))
+  }
+}
 
-        dispatch(setActivePoint(id, activeId))
-      } */
+function addPointToPath(id, pointId) {
+  return {
+    type: ActionTypes.ADD_POINT_TO_PATH,
+    id,
+    pointId,
+  }
+}
 
-      dispatch({
-        type: ActionTypes.REMOVE_POINT,
-        id,
-        pointId,
-      })
-    }
+function removePointFromPath(id, pointId) {
+  return {
+    type: ActionTypes.REMOVE_POINT_FROM_PATH,
+    id,
+    pointId,
   }
 }
 

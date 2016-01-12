@@ -210,12 +210,12 @@ export default function points(state = initialState, action) {
       ...state,
       [newId]: {
         id: newId,
-        code: "L",
+        code: action.code,
         x: action.x,
         y: action.y,
-        isActive: false,
-        isRelative: false,
-        parameters: {},
+        isActive: action.isActive,
+        isRelative: action.isRelative,
+        parameters: action.parameters,
       }
     }
 

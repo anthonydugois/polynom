@@ -36,6 +36,18 @@ function path(state, action) {
       isFilled: action.isFilled,
     }
 
+  case ActionTypes.ADD_POINT_TO_PATH:
+    return {
+      ...state,
+      points: [...state.points, action.pointId],
+    }
+
+  case ActionTypes.REMOVE_POINT_FROM_PATH:
+    return {
+      ...state,
+      points: state.points.filter((pointId) => pointId !== action.pointId),
+    }
+
   default:
     return state
   }
@@ -59,6 +71,7 @@ export default function paths(state = initialState, action) {
         isClosed: false,
         isRelative: false,
         isFilled: false,
+        points: [],
       },
     }
 
@@ -84,6 +97,8 @@ export default function paths(state = initialState, action) {
   case ActionTypes.SET_RELATIVE:
   case ActionTypes.SET_CLOSED:
   case ActionTypes.SET_FILLED:
+  case ActionTypes.ADD_POINT_TO_PATH:
+  case ActionTypes.REMOVE_POINT_FROM_PATH:
     return {
       ...state,
       [action.id]: path(state[action.id], action),

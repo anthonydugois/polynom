@@ -18,6 +18,8 @@ export const SET_ACTIVE_PATH = "SET_ACTIVE_PATH"
 export const SET_RELATIVE = "SET_RELATIVE"
 export const SET_CLOSED = "SET_CLOSED"
 export const SET_FILLED = "SET_FILLED"
+export const ADD_POINT_TO_PATH = "ADD_POINT_TO_PATH"
+export const REMOVE_POINT_FROM_PATH = "REMOVE_POINT_FROM_PATH"
 
 /**
  * Points

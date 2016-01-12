@@ -1,32 +1,30 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { M, L, Q, T, C, S, A } from "./points"
+import { addPoint, removePoint, M, L, Q, T, C, S, A } from "./points"
 
 export function addPath(x, y) {
-  return {
-    type: ActionTypes.ADD_PATH,
-    x,
-    y,
+  return (dispatch, getState) => {
+    dispatch({
+      type: ActionTypes.ADD_PATH,
+    })
+
+    // then insert a default point
+    const id = Math.max(...Object.keys(getState().paths))
+
+    dispatch(addPoint(id, "M", x, y, false, false, {}))
   }
 }
 
 export function removePath(id) {
   return (dispatch, getState) => {
-    const { paths } = getState()
-    // const { index, path } = getPathById(paths, id)
+    // first remove all related points
+    getState().paths[id].points.forEach((pointId) => {
+      dispatch(removePoint(id, pointId))
+    })
 
-    if (paths.length > 1) {
-      /* if (path.isActive) {
-        const activeId = index === 0 ?
-          paths[index + 1].id : paths[index - 1].id
-
-        dispatch(setActivePath(activeId))
-      } */
-
-      dispatch({
-        type: ActionTypes.REMOVE_PATH,
-        id,
-      })
-    }
+    dispatch({
+      type: ActionTypes.REMOVE_PATH,
+      id,
+    })
   }
 }
 
