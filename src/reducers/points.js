@@ -216,7 +216,7 @@ export default function points(state = initialState, action) {
         isActive: action.isActive,
         isRelative: action.isRelative,
         parameters: action.parameters,
-      }
+      },
     }
 
   /**
@@ -224,7 +224,8 @@ export default function points(state = initialState, action) {
    */
   case ActionTypes.REMOVE_POINT:
     return Object.keys(state).reduce((acc, id) =>
-      id === action.id ? { ...acc } : { ...acc, [id]: state[id] }, {})
+      state[id].id === action.pointId ?
+        { ...acc } : { ...acc, [id]: state[id] }, {})
 
   /**
    * Make a point active; only one point at a time can be in this state
@@ -234,7 +235,7 @@ export default function points(state = initialState, action) {
       ...acc,
       [id]: {
         ...state[id],
-        isActive: id === action.id,
+        isActive: state[id].id === action.pointId,
       },
     }), {})
 
@@ -256,7 +257,7 @@ export default function points(state = initialState, action) {
   case ActionTypes.SET_ARC_SWEEP:
     return {
       ...state,
-      [action.id]: point(state[action.id], action),
+      [action.pointId]: point(state[action.pointId], action),
     }
 
   default:

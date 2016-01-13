@@ -8,53 +8,54 @@ export function addPath(x, y) {
     })
 
     // then insert a default point
-    const id = Math.max(...Object.keys(getState().paths))
+    const pathId = Math.max(...Object.keys(getState().paths))
 
-    dispatch(addPoint(id, "M", x, y, false, false, {}))
+    dispatch(addPoint(pathId, "M", x, y, false, false, {}))
+    dispatch(setActivePath(pathId))
   }
 }
 
-export function removePath(id) {
+export function removePath(pathId) {
   return (dispatch, getState) => {
     // first remove all related points
-    getState().paths[id].points.forEach((pointId) => {
-      dispatch(removePoint(id, pointId))
+    getState().paths[pathId].points.forEach((pointId) => {
+      dispatch(removePoint(pathId, pointId))
     })
 
     dispatch({
       type: ActionTypes.REMOVE_PATH,
-      id,
+      pathId,
     })
   }
 }
 
-export function setActivePath(id) {
+export function setActivePath(pathId) {
   return {
     type: ActionTypes.SET_ACTIVE_PATH,
-    id,
+    pathId,
   }
 }
 
-export function setRelative(id, isRelative) {
+export function setRelative(pathId, isRelative) {
   return {
     type: ActionTypes.SET_RELATIVE,
-    id,
+    pathId,
     isRelative,
   }
 }
 
-export function setClosed(id, isClosed) {
+export function setClosed(pathId, isClosed) {
   return {
     type: ActionTypes.SET_CLOSED,
-    id,
+    pathId,
     isClosed,
   }
 }
 
-export function setFilled(id, isFilled) {
+export function setFilled(pathId, isFilled) {
   return {
     type: ActionTypes.SET_FILLED,
-    id,
+    pathId,
     isFilled,
   }
 }

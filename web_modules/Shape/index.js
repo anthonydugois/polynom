@@ -5,28 +5,27 @@ import "./styles"
 
 class Shape extends Component {
   renderPoint = (point, index, points) => {
-    const { path, onPointClick } = this.props
-    const previousPoint = index > 0 ? points[index - 1] : null
-
     return (
       <Point
         key={ point.id }
         point={ point }
-        previousPoint={ previousPoint }
-        onPointClick={ (pointId) =>
-          onPointClick(path.id, pointId) } />
+        previousPoint={ index > 0 ? points[index - 1] : null }
+        onPointClick={ () => this.props.onPointClick(point.id) } />
     )
   };
 
   render() {
-    const { path } = this.props
+    const {
+      path,
+      points,
+    } = this.props
 
     return (
       <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
         <path
           className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) } />
 
-        { path.points.map(this.renderPoint) }
+        { points.map(this.renderPoint) }
       </g>
     )
   }
@@ -34,6 +33,7 @@ class Shape extends Component {
 
 Shape.propTypes = {
   path: PropTypes.object.isRequired,
+  points: PropTypes.array.isRequired,
   onPointClick: PropTypes.func.isRequired,
 }
 

@@ -36,16 +36,19 @@ function path(state, action) {
       isFilled: action.isFilled,
     }
 
-  case ActionTypes.ADD_POINT_TO_PATH:
+  case ActionTypes.INSERT_POINT:
     return {
       ...state,
-      points: [...state.points, action.pointId],
+      points: state.points.reduce((acc, id) =>
+        id === action.activePointId ?
+          [...acc, id, action.pointId] : [...acc, id], []),
     }
 
-  case ActionTypes.REMOVE_POINT_FROM_PATH:
+  case ActionTypes.REMOVE_POINT:
     return {
       ...state,
-      points: state.points.filter((pointId) => pointId !== action.pointId),
+      points: state.points.filter((pointId) =>
+        pointId !== action.pointId),
     }
 
   default:
@@ -66,7 +69,7 @@ export default function paths(state = initialState, action) {
       ...state,
       [newId]: {
         id: newId,
-        name: `Path ${ keys.length + 1 }`,
+        name: `Path ${ newId }`,
         isActive: false,
         isClosed: false,
         isRelative: false,
@@ -80,7 +83,8 @@ export default function paths(state = initialState, action) {
    */
   case ActionTypes.REMOVE_PATH:
     return Object.keys(state).reduce((acc, id) =>
-      id === action.id ? { ...acc } : { ...acc, [id]: state[id] }, {})
+      state[id].id === action.pathId ?
+        { ...acc } : { ...acc, [id]: state[id] }, {})
 
   /**
    * Make a path active; only one path at a time can be active
@@ -90,18 +94,18 @@ export default function paths(state = initialState, action) {
       ...acc,
       [id]: {
         ...state[id],
-        isActive: id === action.id,
+        isActive: state[id].id === action.pathId,
       },
     }), {})
 
   case ActionTypes.SET_RELATIVE:
   case ActionTypes.SET_CLOSED:
   case ActionTypes.SET_FILLED:
-  case ActionTypes.ADD_POINT_TO_PATH:
-  case ActionTypes.REMOVE_POINT_FROM_PATH:
+  case ActionTypes.INSERT_POINT:
+  case ActionTypes.REMOVE_POINT:
     return {
       ...state,
-      [action.id]: path(state[action.id], action),
+      [action.pathId]: path(state[action.pathId], action),
     }
 
   default:

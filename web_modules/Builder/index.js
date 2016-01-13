@@ -7,7 +7,6 @@ class Builder extends Component {
   render() {
     return (
       <div className="ad-Builder">
-        <Sidebar />
         <Overview />
       </div>
     )

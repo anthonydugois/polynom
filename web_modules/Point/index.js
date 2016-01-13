@@ -5,8 +5,7 @@ import "./styles"
 class Point extends Component {
   handlePointClick = (e) => {
     e.stopPropagation()
-
-    this.props.onPointClick(this.props.point.id)
+    this.props.onPointClick()
   };
 
   renderPoint(point) {
@@ -24,76 +23,68 @@ class Point extends Component {
     const code = point.code.toLowerCase()
     const prevCode = previousPoint.code.toLowerCase()
 
-    if (code === "q") {
-      return (
-        <g className="ad-Anchor">
-          <line
-            className="ad-Anchor-line"
-            x1={ previousPoint.x }
-            y1={ previousPoint.y }
-            x2={ point.parameters.x1 }
-            y2={ point.parameters.y1 } />
+    return (
+      <g className="ad-Anchor">
+        <line
+          className="ad-Anchor-line"
+          x1={ previousPoint.x }
+          y1={ previousPoint.y }
+          x2={ point.parameters.x1 }
+          y2={ point.parameters.y1 } />
 
-          <line
-            className="ad-Anchor-line"
-            x1={ point.parameters.x1 }
-            y1={ point.parameters.y1 }
-            x2={ point.x }
-            y2={ point.y } />
+        <line
+          className="ad-Anchor-line"
+          x1={ point.parameters.x1 }
+          y1={ point.parameters.y1 }
+          x2={ point.x }
+          y2={ point.y } />
 
-          <circle
-            className="ad-Anchor-point"
-            cx={ point.parameters.x1 }
-            cy={ point.parameters.y1 }
-            r={ 6 } />
-        </g>
-      )
-    }
-
-    return null
+        <circle
+          className="ad-Anchor-point"
+          cx={ point.parameters.x1 }
+          cy={ point.parameters.y1 }
+          r={ 6 } />
+      </g>
+    )
   }
 
   renderCubicAnchors(point, previousPoint) {
     const code = point.code.toLowerCase()
     const prevCode = previousPoint.code.toLowerCase()
 
-    if (code === "c" || code === "s") {
-      return (
-        <g className="ad-Anchor">
-          { code === "c" && (
-            <line
-              className="ad-Anchor-line"
-              x1={ previousPoint.x }
-              y1={ previousPoint.y }
-              x2={ point.parameters.x1 }
-              y2={ point.parameters.y1 } />
-          ) }
-
+    return (
+      <g className="ad-Anchor">
+        { code === "c" && (
           <line
             className="ad-Anchor-line"
-            x1={ point.x }
-            y1={ point.y }
-            x2={ point.parameters.x2 }
-            y2={ point.parameters.y2 } />
+            x1={ previousPoint.x }
+            y1={ previousPoint.y }
+            x2={ point.parameters.x1 }
+            y2={ point.parameters.y1 } />
+        ) }
 
-          { code === "c" && (
-            <circle
-              className="ad-Anchor-point"
-              cx={ point.parameters.x1 }
-              cy={ point.parameters.y1 }
-              r={ 6 } />
-          ) }
+        <line
+          className="ad-Anchor-line"
+          x1={ point.x }
+          y1={ point.y }
+          x2={ point.parameters.x2 }
+          y2={ point.parameters.y2 } />
 
+        { code === "c" && (
           <circle
             className="ad-Anchor-point"
-            cx={ point.parameters.x2 }
-            cy={ point.parameters.y2 }
+            cx={ point.parameters.x1 }
+            cy={ point.parameters.y1 }
             r={ 6 } />
-        </g>
-      )
-    }
+        ) }
 
-    return null
+        <circle
+          className="ad-Anchor-point"
+          cx={ point.parameters.x2 }
+          cy={ point.parameters.y2 }
+          r={ 6 } />
+      </g>
+    )
   }
 
   render() {
@@ -102,11 +93,17 @@ class Point extends Component {
       previousPoint,
     } = this.props
 
+    const code = point.code.toLowerCase()
+
     return (
       <g className={ cx("ad-Point", { "is-active": point.isActive }) }>
         { this.renderPoint(point) }
-        { previousPoint && this.renderQuadraticAnchors(point, previousPoint) }
-        { previousPoint && this.renderCubicAnchors(point, previousPoint) }
+
+        { /* If there is a Bezier curve, we have to render anchors */ }
+        { (code === "q") &&
+            this.renderQuadraticAnchors(point, previousPoint) }
+        { (code === "c" || code === "s") &&
+            this.renderCubicAnchors(point, previousPoint) }
       </g>
     )
   }
