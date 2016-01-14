@@ -32,36 +32,46 @@ const path = (state, action) => {
   /**
    * Path parameters
    */
-  case ActionTypes.SET_RELATIVE:
+  case ActionTypes.SET_ACTIVE_PATH:
+    return {
+      ...state,
+      isActive: action.isActive,
+    }
+
+  case ActionTypes.SET_RELATIVE_PATH:
     return {
       ...state,
       isRelative: action.isRelative,
     }
 
-  case ActionTypes.SET_CLOSED:
+  case ActionTypes.SET_CLOSED_PATH:
     return {
       ...state,
       isClosed: action.isClosed,
     }
 
-  case ActionTypes.SET_FILLED:
+  case ActionTypes.SET_FILLED_PATH:
     return {
       ...state,
       isFilled: action.isFilled,
     }
 
-  case ActionTypes.INSERT_POINT:
+  /**
+   * Insert the added point in the corresponding path
+   */
+  case ActionTypes.ADD_POINT:
     return {
       ...state,
-      points: state.points.reduce((acc, id) => {
-        if (id === action.activePointId) {
-          return [...acc, id, action.pointId]
-        }
-
-        return [...acc, id]
-      }, []),
+      points: [
+        ...state.points.slice(0, action.insertAt),
+        action.pointId,
+        ...state.points.slice(action.insertAt),
+      ],
     }
 
+  /**
+   * Remove a point from the path
+   */
   case ActionTypes.REMOVE_POINT:
     return {
       ...state,
@@ -97,22 +107,11 @@ export default (state = initialState, action) => {
       return { ...acc, [id]: state[id] }
     }, {})
 
-  /**
-   * Make a path active; only one path at a time can be active
-   */
   case ActionTypes.SET_ACTIVE_PATH:
-    return Object.keys(state).reduce((acc, id) => ({
-      ...acc,
-      [id]: {
-        ...state[id],
-        isActive: state[id].id === action.pathId,
-      },
-    }), {})
-
-  case ActionTypes.SET_RELATIVE:
-  case ActionTypes.SET_CLOSED:
-  case ActionTypes.SET_FILLED:
-  case ActionTypes.INSERT_POINT:
+  case ActionTypes.SET_RELATIVE_PATH:
+  case ActionTypes.SET_CLOSED_PATH:
+  case ActionTypes.SET_FILLED_PATH:
+  case ActionTypes.ADD_POINT:
   case ActionTypes.REMOVE_POINT:
     return {
       ...state,

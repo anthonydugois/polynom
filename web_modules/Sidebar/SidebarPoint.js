@@ -12,6 +12,7 @@ import {
   setPointCode,
   setPointX,
   setPointY,
+  activatePoint,
   setPointParameters,
   removePoint,
 } from "../../src/actions/points"
@@ -86,7 +87,7 @@ const mapStateToProps = (state) => {
   )
 
   let previousPoint = {}
-  let point = activePath.points.reduce(
+  const point = activePath.points.reduce(
     (acc, pointId, i, pts) => {
       if (points[pointId].isActive) {
         if (i > 0) {
@@ -113,14 +114,16 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCodeChange: (pointId, code, parameters) =>
       dispatch(setPointCode(pointId, code, parameters)),
-    onXPositionChange: (pathId, pointId, x) =>
-      dispatch(setPointX(pathId, pointId, x)),
-    onYPositionChange: (pathId, pointId, y) =>
-      dispatch(setPointY(pathId, pointId, y)),
+    onXPositionChange: (pointId, x) =>
+      dispatch(setPointX(pointId, x)),
+    onYPositionChange: (pointId, y) =>
+      dispatch(setPointY(pointId, y)),
+    onActiveChange: (pathId, pointId) =>
+      dispatch(activatePoint(pathId, pointId)),
     onParametersChange: (pointId, parameters) =>
       dispatch(setPointParameters(pointId, parameters)),
-    onRemoveClick: (pointId) =>
-      dispatch(removePoint(pointId)),
+    onRemoveClick: (pathId, pointId) =>
+      dispatch(removePoint(pathId, pointId)),
   }
 }
 
@@ -136,20 +139,18 @@ class SidebarPoint extends Component {
   };
 
   handleXPositionChange = (e) => {
-    const { builder, activePath, point } = this.props
+    const { builder, point } = this.props
 
     this.props.onXPositionChange(
-      activePath.id,
       point.id,
       keepInRange(e.target.value, 0, builder.width)
     )
   };
 
   handleYPositionChange = (e) => {
-    const { builder, activePath, point } = this.props
+    const { builder, point } = this.props
 
     this.props.onYPositionChange(
-      activePath.id,
       point.id,
       keepInRange(e.target.value, 0, builder.height)
     )
@@ -237,7 +238,12 @@ class SidebarPoint extends Component {
   };
 
   handleRemoveClick = (e) => {
-    this.props.onRemoveClick(this.props.point.id)
+    const { activePath, point, previousPoint } = this.props
+
+    // active the previous point
+    this.props.onActiveChange(activePath.id, previousPoint.id)
+    // then remove the point
+    this.props.onRemoveClick(activePath.id, point.id)
   };
 
   render() {
@@ -525,6 +531,7 @@ SidebarPoint.propTypes = {
   onCodeChange: PropTypes.func.isRequired,
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
+  onActiveChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,

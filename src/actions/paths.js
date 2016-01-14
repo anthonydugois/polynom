@@ -1,24 +1,23 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { addPoint, removePoint, M, L, Q, T, C, S, A } from "./points"
+import { addPoint, removePoint } from "./points"
 
-export function addPath() {
+export function addPath(x, y) {
   return (dispatch, getState) => {
-    const { builder, paths } = getState()
-    const pathId = Math.max(...Object.keys(paths)) + 1
-    const x = builder.width / 2
-    const y = builder.height / 2
+    const pathId = Math.max(...Object.keys(getState().paths)) + 1
 
     dispatch({
       type: ActionTypes.ADD_PATH,
       pathId,
     })
-  
-    dispatch(setActivePath(pathId))
+
+    // add the first point
     dispatch(addPoint(pathId, "M", x, y, {}))
+    // activate the new path
+    dispatch(activatePath(pathId))
   }
 }
 
-export function removePath(pathId) {
+/* export function removePath(pathId) {
   return (dispatch, getState) => {
     // first remove all related points
     getState().paths[pathId].points.forEach((pointId) => {
@@ -30,34 +29,46 @@ export function removePath(pathId) {
       pathId,
     })
   }
-}
+} */
 
-export function setActivePath(pathId) {
-  return {
-    type: ActionTypes.SET_ACTIVE_PATH,
-    pathId,
+export function activatePath(pathId) {
+  return (dispatch, getState) => {
+    const { paths } = getState()
+
+    Object.keys(paths).forEach((key) =>
+      dispatch(setActivePath(paths[key].id, false)))
+
+    dispatch(setActivePath(pathId, true))
   }
 }
 
-export function setRelative(pathId, isRelative) {
+function setActivePath(pathId, isActive) {
   return {
-    type: ActionTypes.SET_RELATIVE,
+    type: ActionTypes.SET_ACTIVE_PATH,
+    pathId,
+    isActive,
+  }
+}
+
+export function setRelativePath(pathId, isRelative) {
+  return {
+    type: ActionTypes.SET_RELATIVE_PATH,
     pathId,
     isRelative,
   }
 }
 
-export function setClosed(pathId, isClosed) {
+export function setClosedPath(pathId, isClosed) {
   return {
-    type: ActionTypes.SET_CLOSED,
+    type: ActionTypes.SET_CLOSED_PATH,
     pathId,
     isClosed,
   }
 }
 
-export function setFilled(pathId, isFilled) {
+export function setFilledPath(pathId, isFilled) {
   return {
-    type: ActionTypes.SET_FILLED,
+    type: ActionTypes.SET_FILLED_PATH,
     pathId,
     isFilled,
   }

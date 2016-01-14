@@ -4,22 +4,26 @@ export function addPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
     const { paths, points } = getState()
     const pointId = Math.max(...Object.keys(points)) + 1
+    // determine the position of the point in the corresponding path
+    const insertAt = paths[pathId].points.reduce((acc, key, index) => {
+      if (points[key].isActive) {
+        return index + 1
+      }
+
+      return acc
+    }, 0)
 
     dispatch({
       type: ActionTypes.ADD_POINT,
+      pathId,
       pointId,
+      insertAt,
       code,
       x, y,
       parameters,
     })
 
-    // then insert it in the path and make it active
-    const activePointId = paths[pathId].points.filter((i) => {
-      return points[i].isActive
-    })[0]
-
-    dispatch(insertPoint(pathId, activePointId, pointId))
-    dispatch(setActivePoint(pointId))
+    dispatch(activatePoint(pathId, pointId))
   }
 }
 
@@ -31,19 +35,20 @@ export function removePoint(pathId, pointId) {
   }
 }
 
-function insertPoint(pathId, activePointId, pointId) {
-  return {
-    type: ActionTypes.INSERT_POINT,
-    pathId,
-    activePointId,
-    pointId,
+export function activatePoint(pathId, pointId) {
+  return (dispatch, getState) => {
+    getState().paths[pathId].points.forEach((id) =>
+      dispatch(setActivePoint(id, false)))
+
+    dispatch(setActivePoint(pointId, true))
   }
 }
 
-export function setActivePoint(pointId) {
+function setActivePoint(pointId, isActive) {
   return {
     type: ActionTypes.SET_ACTIVE_POINT,
     pointId,
+    isActive,
   }
 }
 

@@ -26,8 +26,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddClick: () =>
-      dispatch(addPath()),
+    onAddClick: (x, y) =>
+      dispatch(addPath(x, y)),
     onRemoveClick: (pathId) =>
       dispatch(removePath(pathId)),
     onPathClick: (pathId) =>
@@ -37,13 +37,15 @@ const mapDispatchToProps = (dispatch) => {
     onClosedChange: (pathId, isClosed) =>
       dispatch(setClosed(pathId, isClosed)),
     onFilledChange: (pathId, isFilled) =>
-      dispatch(setFilled(pathId, isClosed)),
+      dispatch(setFilled(pathId, isFilled)),
   }
 }
 
 class SidebarPaths extends Component {
   handleAddClick = (e) => {
-    this.props.onAddClick()
+    const { builder } = this.props
+
+    this.props.onAddClick(builder.width / 2, builder.height / 2)
   };
 
   renderSidebarPath = (path) => {

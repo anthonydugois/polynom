@@ -10,7 +10,8 @@ class Shape extends Component {
         key={ point.id }
         point={ point }
         previousPoint={ index > 0 ? points[index - 1] : null }
-        onPointClick={ () => this.props.onPointClick(point.id) } />
+        onPointClick={ () =>
+          this.props.onPointClick(point.id) } />
     )
   };
 
@@ -32,9 +33,9 @@ class Shape extends Component {
 }
 
 Shape.propTypes = {
+  onPointClick: PropTypes.func.isRequired,
   path: PropTypes.object.isRequired,
   points: PropTypes.array.isRequired,
-  onPointClick: PropTypes.func.isRequired,
 }
 
 export default Shape

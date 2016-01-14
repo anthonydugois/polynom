@@ -7,7 +7,7 @@ import "./styles"
 
 import {
   addPoint,
-  setActivePoint,
+  activatePoint,
 } from "../../src/actions/points"
 
 function getStyles(props) {
@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onOverviewClick: (pathId, code, x, y, parameters) =>
       dispatch(addPoint(pathId, code, x, y, parameters)),
-    onPointClick: (pointId) =>
-      dispatch(setActivePoint(pointId)),
+    onPointClick: (pathId, pointId) =>
+      dispatch(activatePoint(pathId, pointId)),
   }
 }
 
@@ -75,7 +75,7 @@ class Overview extends Component {
       y = builder.grid.size * Math.round(y / builder.grid.size)
     }
 
-    this.props.onOverviewClick(activePath.id, "L", x, y, false, false, {})
+    this.props.onOverviewClick(activePath.id, "L", x, y, {})
   };
 
   renderShape = (path) => {
@@ -84,7 +84,8 @@ class Overview extends Component {
         key={ path.id }
         path={ path }
         points={ path.points.map((id) => this.props.points[id]) }
-        onPointClick={ this.props.onPointClick } />
+        onPointClick={ (pointId) =>
+          this.props.onPointClick(this.props.activePath.id, pointId) } />
     )
   };
 
