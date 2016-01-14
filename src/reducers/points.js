@@ -12,7 +12,7 @@ const initialState = {
   },
 }
 
-function Q(state, action) {
+const Q = (state, action) => {
   switch (action.type) {
   case ActionTypes.SET_QUAD_X1:
     return {
@@ -31,7 +31,7 @@ function Q(state, action) {
   }
 }
 
-function C(state, action) {
+const C = (state, action) => {
   switch (action.type) {
   case ActionTypes.SET_CUB_X1:
     return {
@@ -62,7 +62,7 @@ function C(state, action) {
   }
 }
 
-function S(state, action) {
+const S = (state, action) => {
   switch (action.type) {
   case ActionTypes.SET_SMOOTH_X2:
     return {
@@ -81,7 +81,7 @@ function S(state, action) {
   }
 }
 
-function A(state, action) {
+const A = (state, action) => {
   switch (action.type) {
   case ActionTypes.SET_ARC_RX:
     return {
@@ -118,7 +118,7 @@ function A(state, action) {
   }
 }
 
-function point(state, action) {
+const point = (state, action) => {
   switch (action.type) {
 
   /**
@@ -197,7 +197,7 @@ function point(state, action) {
   }
 }
 
-export default function points(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
 
   /**

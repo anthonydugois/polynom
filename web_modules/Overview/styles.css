@@ -2,7 +2,6 @@
 
 .ad-Overview {
   display: block;
-  flex-shrink: 0;
   background: #fff;
   border-radius: 4px;
 }

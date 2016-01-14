@@ -5,7 +5,10 @@ import Grid from "Grid"
 import Shape from "Shape"
 import "./styles"
 
-import * as pointsActions from "../../src/actions/points"
+import {
+  addPoint,
+  setActivePoint,
+} from "../../src/actions/points"
 
 function mapStateToProps(state) {
   const {
@@ -25,6 +28,15 @@ function mapStateToProps(state) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onOverviewClick: (pathId, code, x, y, isActive, isRelative, parameters) =>
+      dispatch(addPoint(pathId, code, x, y, isActive, isRelative, parameters)),
+    onPointClick: (pointId) =>
+      dispatch(setActivePoint(pointId)),
+  }
+}
+
 function getStyles(props) {
   const {
     width,
@@ -40,7 +52,6 @@ function getStyles(props) {
 class Overview extends Component {
   handleOverviewClick = (e) => {
     const {
-      dispatch,
       builder,
       activePath,
     } = this.props
@@ -56,7 +67,7 @@ class Overview extends Component {
       y = builder.grid.size * Math.round(y / builder.grid.size)
     }
 
-    dispatch(pointsActions.addPoint(activePath.id, "L", x, y, false, false, {}))
+    this.props.onOverviewClick(activePath.id, "L", x, y, false, false, {})
   };
 
   renderShape = (path) => {
@@ -65,8 +76,7 @@ class Overview extends Component {
         key={ path.id }
         path={ path }
         points={ path.points.map((id) => this.props.points[id]) }
-        onPointClick={ (id) =>
-          this.props.dispatch(pointsActions.setActivePoint(id)) } />
+        onPointClick={ this.props.onPointClick } />
     )
   };
 
@@ -86,19 +96,22 @@ class Overview extends Component {
           height={ builder.height }
           grid={ builder.grid } />
 
-        { Object.keys(paths).map((id) =>
-            this.renderShape(paths[id])) }
+        { Object.keys(paths).map((id) => this.renderShape(paths[id])) }
       </svg>
     )
   }
 }
 
 Overview.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onOverviewClick: PropTypes.func.isRequired,
+  onPointClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
   paths: PropTypes.object.isRequired,
   points: PropTypes.object.isRequired,
   activePath: PropTypes.object.isRequired,
 }
 
-export default connect(mapStateToProps)(Overview)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Overview)

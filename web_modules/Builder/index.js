@@ -8,6 +8,7 @@ class Builder extends Component {
     return (
       <div className="ad-Builder">
         <Overview />
+        <Sidebar />
       </div>
     )
   }

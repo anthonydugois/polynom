@@ -1,14 +1,12 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { addPoint, removePoint, M, L, Q, T, C, S, A } from "./points"
 
-export function addPath(x, y) {
+export function addPath(pathId, x, y) {
   return (dispatch, getState) => {
     dispatch({
       type: ActionTypes.ADD_PATH,
+      pathId,
     })
-
-    // then insert a default point
-    const pathId = Math.max(...Object.keys(getState().paths))
 
     dispatch(addPoint(pathId, "M", x, y, false, false, {}))
     dispatch(setActivePath(pathId))

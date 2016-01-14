@@ -65,9 +65,7 @@ function getIcon(name) {
   }
 }
 
-const Icon = ({
-  name,
-}) => (
+const Icon = ({ name }) => (
   <svg
     className="ad-Icon"
     viewBox="0 0 1024 1024">

@@ -10,7 +10,7 @@ const initialState = {
   },
 }
 
-function grid(state, action) {
+const grid = (state, action) => {
   switch (action.type) {
   case ActionTypes.SET_GRID_SHOWN:
     return {
@@ -35,7 +35,7 @@ function grid(state, action) {
   }
 }
 
-export default function builder(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
   case ActionTypes.SET_WIDTH:
     return {
