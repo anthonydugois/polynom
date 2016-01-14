@@ -10,33 +10,6 @@ import {
   setActivePoint,
 } from "../../src/actions/points"
 
-function mapStateToProps(state) {
-  const {
-    builder,
-    paths,
-    points,
-  } = state
-
-  const activePathId = Object.keys(paths).filter((id) => paths[id].isActive)[0]
-  const activePath = paths[activePathId]
-
-  return {
-    builder,
-    paths,
-    activePath,
-    points,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onOverviewClick: (pathId, code, x, y, isActive, isRelative, parameters) =>
-      dispatch(addPoint(pathId, code, x, y, isActive, isRelative, parameters)),
-    onPointClick: (pointId) =>
-      dispatch(setActivePoint(pointId)),
-  }
-}
-
 function getStyles(props) {
   const {
     width,
@@ -46,6 +19,41 @@ function getStyles(props) {
   return {
     width,
     height,
+  }
+}
+
+const mapStateToProps = (state) => {
+  const {
+    builder,
+    paths,
+    points,
+  } = state
+
+  const activePath = Object.keys(paths).reduce(
+    (acc, pathId) => {
+      if (paths[pathId].isActive) {
+        return paths[pathId]
+      }
+
+      return acc
+    },
+    {}
+  )
+
+  return {
+    builder,
+    paths,
+    activePath,
+    points,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOverviewClick: (pathId, code, x, y, parameters) =>
+      dispatch(addPoint(pathId, code, x, y, parameters)),
+    onPointClick: (pointId) =>
+      dispatch(setActivePoint(pointId)),
   }
 }
 

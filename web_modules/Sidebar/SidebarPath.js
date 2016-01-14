@@ -31,10 +31,7 @@ class SidebarPath extends Component {
   };
 
   render() {
-    const {
-      path,
-      paths,
-    } = this.props
+    const { path } = this.props
 
     return (
       <div
@@ -47,7 +44,7 @@ class SidebarPath extends Component {
             </div>
 
             <div className="ad-SidebarPath-actions">
-              { paths.length > 1 && (
+              { this.props.showRemoveButton && (
                 <Button
                   type="expand"
                   icon="close"
@@ -84,14 +81,13 @@ class SidebarPath extends Component {
 }
 
 SidebarPath.propTypes = {
-  path: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
-  paths: PropTypes.array.isRequired,
   onPathClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
+  path: PropTypes.object.isRequired,
+  showRemoveButton: PropTypes.bool.isRequired,
 }
 
 export default SidebarPath

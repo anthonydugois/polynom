@@ -8,9 +8,15 @@ import Choices from "Choices"
 import Choice from "Choices/Choice"
 import Checkbox from "Checkbox"
 
-import * as pointsActions from "../../src/actions/points"
+import {
+  setPointCode,
+  setPointX,
+  setPointY,
+  setPointParameters,
+  removePoint,
+} from "../../src/actions/points"
 
-function getParameters(code, point, previousPoint) {
+function getDefaultParameters(code, point, previousPoint) {
   const middleX = previousPoint.x + (point.x - previousPoint.x) / 2
   const middleY = previousPoint.y + (point.y - previousPoint.y) / 2
 
@@ -61,159 +67,189 @@ function keepInRange(n, min, max) {
   return n
 }
 
+const mapStateToProps = (state) => {
+  const {
+    builder,
+    paths,
+    points,
+  } = state
+
+  const activePath = Object.keys(paths).reduce(
+    (acc, pathId) => {
+      if (paths[pathId].isActive) {
+        return paths[pathId]
+      }
+
+      return acc
+    },
+    {}
+  )
+
+  let previousPoint = {}
+  let point = activePath.points.reduce(
+    (acc, pointId, i, pts) => {
+      if (points[pointId].isActive) {
+        if (i > 0) {
+          previousPoint = points[pts[i - 1]]
+        }
+
+        return points[pointId]
+      }
+
+      return acc
+    },
+    {}
+  )
+
+  return {
+    builder,
+    activePath,
+    point,
+    previousPoint,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCodeChange: (pointId, code, parameters) =>
+      dispatch(setPointCode(pointId, code, parameters)),
+    onXPositionChange: (pathId, pointId, x) =>
+      dispatch(setPointX(pathId, pointId, x)),
+    onYPositionChange: (pathId, pointId, y) =>
+      dispatch(setPointY(pathId, pointId, y)),
+    onParametersChange: (pointId, parameters) =>
+      dispatch(setPointParameters(pointId, parameters)),
+    onRemoveClick: (pointId) =>
+      dispatch(removePoint(pointId)),
+  }
+}
+
 class SidebarPoint extends Component {
-  handleTypeChange = (e) => {
-    this.props.dispatch(pointsActions.setPointCode(
-      this.props.path.id,
-      this.props.point.id,
+  handleCodeChange = (e) => {
+    const { point, previousPoint } = this.props
+
+    this.props.onCodeChange(
+      point.id,
       e.target.value,
-      getParameters(e.target.value, this.props.point, this.props.previousPoint)
-    ))
+      getDefaultParameters(e.target.value, point, previousPoint)
+    )
   };
 
   handleXPositionChange = (e) => {
-    this.props.dispatch(pointsActions.setPointX(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
+    const { builder, activePath, point } = this.props
+
+    this.props.onXPositionChange(
+      activePath.id,
+      point.id,
+      keepInRange(e.target.value, 0, builder.width)
+    )
   };
 
   handleYPositionChange = (e) => {
-    this.props.dispatch(pointsActions.setPointY(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
+    const { builder, activePath, point } = this.props
+
+    this.props.onYPositionChange(
+      activePath.id,
+      point.id,
+      keepInRange(e.target.value, 0, builder.height)
+    )
   };
 
-  handleQuadX1Change = (e) => {
-    this.props.dispatch(pointsActions.setQuadX1(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
+  handleX1Change = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      x1: keepInRange(e.target.value, 0, builder.width),
+    })
   };
 
-  handleQuadY1Change = (e) => {
-    this.props.dispatch(pointsActions.setQuadY1(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
+  handleY1Change = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      y1: keepInRange(e.target.value, 0, builder.height),
+    })
   };
 
-  handleCubX1Change = (e) => {
-    this.props.dispatch(pointsActions.setCubX1(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
+  handleX2Change = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      x2: keepInRange(e.target.value, 0, builder.width),
+    })
   };
 
-  handleCubY1Change = (e) => {
-    this.props.dispatch(pointsActions.setCubY1(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
+  handleY2Change = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      y2: keepInRange(e.target.value, 0, builder.height),
+    })
   };
 
-  handleCubX2Change = (e) => {
-    this.props.dispatch(pointsActions.setCubX2(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
+  handleRXChange = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      rx: keepInRange(e.target.value, 0, builder.width),
+    })
   };
 
-  handleCubY2Change = (e) => {
-    this.props.dispatch(pointsActions.setCubY2(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
+  handleRYChange = (e) => {
+    const { builder, point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      ry: keepInRange(e.target.value, 0, builder.height),
+    })
   };
 
-  handleSmoothX2Change = (e) => {
-    this.props.dispatch(pointsActions.setSmoothX2(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
+  handleRotChange = (e) => {
+    const { point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      xAxisRotation: keepInRange(e.target.value, 0, 360),
+    })
   };
 
-  handleSmoothY2Change = (e) => {
-    this.props.dispatch(pointsActions.setSmoothY2(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
+  handleLargeChange = (e) => {
+    const { point } = this.props
+
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      largeArc: e.target.checked,
+    })
   };
 
-  handleArcRXChange = (e) => {
-    this.props.dispatch(pointsActions.setArcRX(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.width)
-    ))
-  };
+  handleSweepChange = (e) => {
+    const { point } = this.props
 
-  handleArcRYChange = (e) => {
-    this.props.dispatch(pointsActions.setArcRY(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, this.props.builder.height)
-    ))
-  };
-
-  handleArcRotChange = (e) => {
-    this.props.dispatch(pointsActions.setArcRot(
-      this.props.path.id,
-      this.props.point.id,
-      keepInRange(e.target.value, 0, 360)
-    ))
-  };
-
-  handleArcLargeChange = (e) => {
-    this.props.dispatch(pointsActions.setArcLarge(
-      this.props.path.id,
-      this.props.point.id,
-      e.target.checked
-    ))
-  };
-
-  handleArcSweepChange = (e) => {
-    this.props.dispatch(pointsActions.setArcSweep(
-      this.props.path.id,
-      this.props.point.id,
-      e.target.checked
-    ))
+    this.props.onParametersChange(point.id, {
+      ...point.parameters,
+      sweep: e.target.checked,
+    })
   };
 
   handleRemoveClick = (e) => {
-    this.props.dispatch(pointsActions.removePoint(
-      this.props.path.id,
-      this.props.point.id
-    ))
+    this.props.onRemoveClick(this.props.point.id)
   };
 
   render() {
     const {
       builder,
-      path,
       point,
       previousPoint,
     } = this.props
 
     const step = builder.grid.snapToGrid ? builder.grid.size : 1
     const code = point.code.toLowerCase()
-
-    let prevCode
-
-    if (Object.keys(previousPoint).length > 0) {
-      prevCode = previousPoint.code.toLowerCase()
-    }
+    const prevCode = previousPoint.code && previousPoint.code.toLowerCase()
 
     return (
       <div className="ad-SidebarPoint">
@@ -227,21 +263,21 @@ class SidebarPoint extends Component {
                   <Choice
                     value="M"
                     checked={ code === "m" }
-                    onChange={ this.handleTypeChange }>
+                    onChange={ this.handleCodeChange }>
                     M
                   </Choice>
 
                   <Choice
                     value="L"
                     checked={ code === "l" }
-                    onChange={ this.handleTypeChange }>
+                    onChange={ this.handleCodeChange }>
                     L
                   </Choice>
 
                   <Choice
                     value="Q"
                     checked={ code === "q" }
-                    onChange={ this.handleTypeChange }>
+                    onChange={ this.handleCodeChange }>
                     Q
                   </Choice>
 
@@ -249,7 +285,7 @@ class SidebarPoint extends Component {
                     <Choice
                       value="T"
                       checked={ code === "t" }
-                      onChange={ this.handleTypeChange }>
+                      onChange={ this.handleCodeChange }>
                       T
                     </Choice>
                   ) }
@@ -257,7 +293,7 @@ class SidebarPoint extends Component {
                   <Choice
                     value="C"
                     checked={ code === "c" }
-                    onChange={ this.handleTypeChange }>
+                    onChange={ this.handleCodeChange }>
                     C
                   </Choice>
 
@@ -265,7 +301,7 @@ class SidebarPoint extends Component {
                     <Choice
                       value="S"
                       checked={ code === "s" }
-                      onChange={ this.handleTypeChange }>
+                      onChange={ this.handleCodeChange }>
                       S
                     </Choice>
                   ) }
@@ -273,7 +309,7 @@ class SidebarPoint extends Component {
                   <Choice
                     value="A"
                     checked={ code === "a" }
-                    onChange={ this.handleTypeChange }>
+                    onChange={ this.handleCodeChange }>
                     A
                   </Choice>
                 </Choices>
@@ -313,7 +349,7 @@ class SidebarPoint extends Component {
                   max={ builder.width }
                   step={ step }
                   value={ point.parameters.x1 }
-                  onChange={ this.handleQuadX1Change } />
+                  onChange={ this.handleX1Change } />
               </Setting>
             </Settings>
           ) }
@@ -326,7 +362,7 @@ class SidebarPoint extends Component {
                   max={ builder.height }
                   step={ step }
                   value={ point.parameters.y1 }
-                  onChange={ this.handleQuadY1Change } />
+                  onChange={ this.handleY1Change } />
               </Setting>
             </Settings>
           ) }
@@ -341,7 +377,7 @@ class SidebarPoint extends Component {
                   max={ builder.width }
                   step={ step }
                   value={ point.parameters.x1 }
-                  onChange={ this.handleCubX1Change } />
+                  onChange={ this.handleX1Change } />
               </Setting>
             </Settings>
           ) }
@@ -354,7 +390,7 @@ class SidebarPoint extends Component {
                   max={ builder.height }
                   step={ step }
                   value={ point.parameters.y1 }
-                  onChange={ this.handleCubY1Change } />
+                  onChange={ this.handleY1Change } />
               </Setting>
             </Settings>
           ) }
@@ -367,7 +403,7 @@ class SidebarPoint extends Component {
                   max={ builder.width }
                   step={ step }
                   value={ point.parameters.x2 }
-                  onChange={ this.handleCubX2Change } />
+                  onChange={ this.handleX2Change } />
               </Setting>
             </Settings>
           ) }
@@ -380,7 +416,7 @@ class SidebarPoint extends Component {
                   max={ builder.height }
                   step={ step }
                   value={ point.parameters.y2 }
-                  onChange={ this.handleCubY2Change } />
+                  onChange={ this.handleY2Change } />
               </Setting>
             </Settings>
           ) }
@@ -395,7 +431,7 @@ class SidebarPoint extends Component {
                   max={ builder.width }
                   step={ step }
                   value={ point.parameters.x2 }
-                  onChange={ this.handleSmoothX2Change } />
+                  onChange={ this.handleX2Change } />
               </Setting>
             </Settings>
           ) }
@@ -408,7 +444,7 @@ class SidebarPoint extends Component {
                   max={ builder.height }
                   step={ step }
                   value={ point.parameters.y2 }
-                  onChange={ this.handleSmoothY2Change } />
+                  onChange={ this.handleY2Change } />
               </Setting>
             </Settings>
           ) }
@@ -423,7 +459,7 @@ class SidebarPoint extends Component {
                   max={ builder.width }
                   step={ step }
                   value={ point.parameters.rx }
-                  onChange={ this.handleArcRXChange } />
+                  onChange={ this.handleRXChange } />
               </Setting>
             </Settings>
           ) }
@@ -436,7 +472,7 @@ class SidebarPoint extends Component {
                   max={ builder.height }
                   step={ step }
                   value={ point.parameters.ry }
-                  onChange={ this.handleArcRYChange } />
+                  onChange={ this.handleRYChange } />
               </Setting>
             </Settings>
           ) }
@@ -449,7 +485,7 @@ class SidebarPoint extends Component {
                   max={ 360 }
                   step={ 1 }
                   value={ point.parameters.xAxisRotation }
-                  onChange={ this.handleArcRotChange } />
+                  onChange={ this.handleRotChange } />
               </Setting>
             </Settings>
           ) }
@@ -459,13 +495,13 @@ class SidebarPoint extends Component {
               <Setting label="Large arc">
                 <Checkbox
                   checked={ point.parameters.largeArc }
-                  onChange={ this.handleArcLargeChange } />
+                  onChange={ this.handleLargeChange } />
               </Setting>
 
               <Setting label="Sweep">
                 <Checkbox
                   checked={ point.parameters.sweep }
-                  onChange={ this.handleArcSweepChange } />
+                  onChange={ this.handleSweepChange } />
               </Setting>
             </Settings>
           ) }
@@ -486,33 +522,18 @@ class SidebarPoint extends Component {
 }
 
 SidebarPoint.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onCodeChange: PropTypes.func.isRequired,
+  onXPositionChange: PropTypes.func.isRequired,
+  onYPositionChange: PropTypes.func.isRequired,
+  onParametersChange: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  path: PropTypes.object.isRequired,
+  activePath: PropTypes.object.isRequired,
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object.isRequired,
 }
 
-export default connect((state) => {
-  const { builder, paths } = state
-  const path = paths.filter(({ isActive }) => isActive)[0]
-
-  let point = {}, previousPoint = {}
-
-  path.points.forEach((p, i, pts) => {
-    if (p.isActive) {
-      point = p
-
-      if (i > 0) {
-        previousPoint = pts[i - 1]
-      }
-    }
-  })
-
-  return {
-    builder,
-    path,
-    point,
-    previousPoint,
-  }
-})(SidebarPoint)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SidebarPoint)

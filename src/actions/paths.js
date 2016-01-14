@@ -1,15 +1,20 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { addPoint, removePoint, M, L, Q, T, C, S, A } from "./points"
 
-export function addPath(pathId, x, y) {
+export function addPath() {
   return (dispatch, getState) => {
+    const { builder, paths } = getState()
+    const pathId = Math.max(...Object.keys(paths)) + 1
+    const x = builder.width / 2
+    const y = builder.height / 2
+
     dispatch({
       type: ActionTypes.ADD_PATH,
       pathId,
     })
-
-    dispatch(addPoint(pathId, "M", x, y, false, false, {}))
+  
     dispatch(setActivePath(pathId))
+    dispatch(addPoint(pathId, "M", x, y, {}))
   }
 }
 

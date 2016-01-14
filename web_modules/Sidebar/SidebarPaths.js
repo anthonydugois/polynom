@@ -3,37 +3,60 @@ import { connect } from "react-redux"
 import Button from "Button"
 import SidebarPath from "./SidebarPath"
 
-import * as pathsActions from "../../src/actions/paths"
+import {
+  addPath,
+  removePath,
+  setActivePath,
+  setRelative,
+  setClosed,
+  setFilled,
+} from "../../src/actions/paths"
+
+const mapStateToProps = (state) => {
+  const {
+    builder,
+    paths,
+  } = state
+
+  return {
+    builder,
+    paths,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddClick: () =>
+      dispatch(addPath()),
+    onRemoveClick: (pathId) =>
+      dispatch(removePath(pathId)),
+    onPathClick: (pathId) =>
+      dispatch(setActivePath(pathId)),
+    onRelativeChange: (pathId, isRelative) =>
+      dispatch(setRelative(pathId, isRelative)),
+    onClosedChange: (pathId, isClosed) =>
+      dispatch(setClosed(pathId, isClosed)),
+    onFilledChange: (pathId, isFilled) =>
+      dispatch(setFilled(pathId, isClosed)),
+  }
+}
 
 class SidebarPaths extends Component {
   handleAddClick = (e) => {
-    const {
-      dispatch,
-      builder,
-    } = this.props
-
-    dispatch(pathsActions.addPath(builder.width / 2, builder.height / 2))
+    this.props.onAddClick()
   };
 
-  renderSidebarPath = (path, index, paths) => {
-    const { dispatch } = this.props
-
+  renderSidebarPath = (path) => {
     return (
       <SidebarPath
         key={ path.id }
         path={ path }
-        index={ index }
-        paths={ paths }
-        onPathClick={ (id) =>
-          dispatch(pathsActions.setActivePath(id)) }
-        onRemoveClick={ (id) =>
-          dispatch(pathsActions.removePath(id)) }
-        onRelativeChange={ (id, isRelative) =>
-          dispatch(pathsActions.setRelative(id, isRelative)) }
-        onClosedChange={ (id, isClosed) =>
-          dispatch(pathsActions.setClosed(id, isClosed)) }
-        onFilledChange={ (id, isFilled) =>
-          dispatch(pathsActions.setFilled(id, isFilled)) } />
+        showRemoveButton={ Object.keys(this.props.paths).length > 1 }
+        onPathClick={ this.props.onPathClick }
+        onRemoveClick={ this.props.onRemoveClick }
+        onRelativeChange={ this.props.onRelativeChange }
+        onClosedChange={ this.props.onClosedChange }
+        onFilledChange={ this.props.onFilledChange } />
     )
   };
 
@@ -43,7 +66,7 @@ class SidebarPaths extends Component {
     return (
       <div className="ad-SidebarPaths">
         <div className="ad-SidebarPaths-module">
-          { paths.map(this.renderSidebarPath) }
+          { Object.keys(paths).map((id) => this.renderSidebarPath(paths[id])) }
         </div>
 
         <div className="ad-SidebarPaths-actions">
@@ -58,9 +81,17 @@ class SidebarPaths extends Component {
 }
 
 SidebarPaths.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onAddClick: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+  onPathClick: PropTypes.func.isRequired,
+  onRelativeChange: PropTypes.func.isRequired,
+  onClosedChange: PropTypes.func.isRequired,
+  onFilledChange: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  paths: PropTypes.array.isRequired,
+  paths: PropTypes.object.isRequired,
 }
 
-export default connect((state) => state)(SidebarPaths)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SidebarPaths)
