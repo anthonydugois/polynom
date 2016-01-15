@@ -19,7 +19,10 @@ export function deletePath(pathId) {
     const index = paths.indexOf(pathId)
 
     if (pathsById[pathId].isActive && index > -1) {
-      dispatch(activatePath(index === 0 ? index + 1 : index - 1))
+      const activatePathId = index === 0 ?
+        paths[index + 1] : paths[index - 1]
+
+      dispatch(activatePath(activatePathId))
     }
 
     dispatch(removePath(pathId))
