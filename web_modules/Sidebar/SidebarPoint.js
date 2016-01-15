@@ -71,22 +71,14 @@ function keepInRange(n, min, max) {
 const mapStateToProps = (state) => {
   const { builder, points } = state
   const { paths, pathsById } = state.paths
+
   const activePathId = paths.filter((id) => pathsById[id].isActive)[0]
   const activePath = pathsById[activePathId]
 
-  let previousPoint = {}
-
-  const point = activePath.points.reduce(
-    (acc, pointId, index, pts) => {
-      if (points[pointId].isActive) {
-        previousPoint = index > 0 ? points[pts[index - 1]]
-        return points[pointId]
-      }
-
-      return acc
-    },
-    {}
-  )
+  const pointId = activePath.points.filter((id) => points[id].isActive)[0]
+  const index = activePath.points.indexOf(pointId)
+  const point = points[pointId]
+  const previousPoint = index > 0 ? points[activePath.points[index - 1]] : {}
 
   return {
     builder,
@@ -234,6 +226,7 @@ class SidebarPoint extends Component {
 
   render() {
     const { builder, point, previousPoint } = this.props
+
     const step = builder.grid.snapToGrid ? builder.grid.size : 1
     const code = point.code.toLowerCase()
     const prevCode = previousPoint.code && previousPoint.code.toLowerCase()
