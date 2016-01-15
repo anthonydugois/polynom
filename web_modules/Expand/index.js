@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from "react"
 import "./styles.css"
 
 class Expand extends Component {
-  static defaultProps = { isOpened: false };
-
   state = { isOpened: this.props.isOpened };
 
   handleClick(isOpened) {
@@ -39,6 +37,8 @@ class Expand extends Component {
     )
   }
 }
+
+Expand.defaultProps = { isOpened: false }
 
 Expand.propTypes = {
   isOpened: PropTypes.bool,

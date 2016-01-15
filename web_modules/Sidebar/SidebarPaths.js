@@ -5,7 +5,7 @@ import SidebarPath from "./SidebarPath"
 
 import {
   createPath,
-  removePath,
+  deletePath,
   activatePath,
   setRelative,
   setClosed,
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
     onAddClick: (x, y) =>
       dispatch(createPath(x, y)),
     onRemoveClick: (pathId) =>
-      dispatch(removePath(pathId)),
+      dispatch(deletePath(pathId)),
     onPathClick: (pathId) =>
       dispatch(activatePath(pathId)),
     onRelativeChange: (pathId, isRelative) =>
@@ -48,12 +48,15 @@ class SidebarPaths extends Component {
     this.props.onAddClick(builder.width / 2, builder.height / 2)
   };
 
-  renderSidebarPath = (path) => {
+  renderSidebarPath = (key, index, paths) => {
+    const { pathsById } = this.props.paths
+    const path = pathsById[key]
+
     return (
       <SidebarPath
-        key={ path.id }
+        key={ key }
         path={ path }
-        showRemoveButton={ Object.keys(this.props.paths).length > 1 }
+        showRemoveButton={ paths.length > 1 }
         onPathClick={ this.props.onPathClick }
         onRemoveClick={ this.props.onRemoveClick }
         onRelativeChange={ this.props.onRelativeChange }
@@ -63,12 +66,12 @@ class SidebarPaths extends Component {
   };
 
   render() {
-    const { paths } = this.props
+    const { paths } = this.props.paths
 
     return (
       <div className="ad-SidebarPaths">
         <div className="ad-SidebarPaths-module">
-          { Object.keys(paths).map((id) => this.renderSidebarPath(paths[id])) }
+          { paths.map(this.renderSidebarPath) }
         </div>
 
         <div className="ad-SidebarPaths-actions">

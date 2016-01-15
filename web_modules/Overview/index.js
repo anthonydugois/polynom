@@ -45,11 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class Overview extends Component {
   handleOverviewClick = (e) => {
-    const {
-      builder,
-      activePath,
-    } = this.props
-
+    const { builder, activePath } = this.props
     const { left, top } = findDOMNode(this).getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
@@ -64,10 +60,13 @@ class Overview extends Component {
     this.props.onOverviewClick(activePath.id, "L", x, y, {})
   };
 
-  renderShape = (path) => {
+  renderShape = (key, index, paths) => {
+    const { pathsById } = this.props.paths
+    const path = pathsById[key]
+
     return (
       <Shape
-        key={ path.id }
+        key={ key }
         path={ path }
         points={ path.points.map((id) => this.props.points[id]) }
         onPointClick={ (pointId) =>
@@ -76,10 +75,8 @@ class Overview extends Component {
   };
 
   render() {
-    const {
-      builder,
-      paths,
-    } = this.props
+    const { builder } = this.props
+    const { paths } = this.props.paths
 
     return (
       <svg
@@ -91,7 +88,7 @@ class Overview extends Component {
           height={ builder.height }
           grid={ builder.grid } />
 
-        { Object.keys(paths).map((id) => this.renderShape(paths[id])) }
+        { paths.map(this.renderShape) }
       </svg>
     )
   }

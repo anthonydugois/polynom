@@ -30,9 +30,7 @@ export function activatePath(pathId) {
   return (dispatch, getState) => {
     const { paths } = getState().paths
 
-    paths.forEach((id) =>
-      dispatch(setActivePath(id, false)))
-
+    paths.forEach((id) => dispatch(setActivePath(id, false)))
     dispatch(setActivePath(pathId, true))
   }
 }

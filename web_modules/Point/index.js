@@ -88,18 +88,14 @@ class Point extends Component {
   }
 
   render() {
-    const {
-      point,
-      previousPoint,
-    } = this.props
-
+    const { point, previousPoint } = this.props
     const code = point.code.toLowerCase()
 
     return (
       <g className={ cx("ad-Point", { "is-active": point.isActive }) }>
         { this.renderPoint(point) }
 
-        { /* If there is a Bezier curve, we have to render anchors */ }
+        { /* If there is a Bezier curve: render anchors */ }
         { (code === "q") &&
             this.renderQuadraticAnchors(point, previousPoint) }
         { (code === "c" || code === "s") &&
@@ -110,9 +106,9 @@ class Point extends Component {
 }
 
 Point.propTypes = {
+  onPointClick: PropTypes.func.isRequired,
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object,
-  onPointClick: PropTypes.func.isRequired,
 }
 
 export default Point
