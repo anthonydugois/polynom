@@ -1,9 +1,6 @@
 @import url(App/config.css);
 
 .ad-Button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: .8rem 1.4rem;
   background: var(--ad-Color-sec);
   border: none;
@@ -11,6 +8,7 @@
   cursor: pointer;
   transition: background .2s;
   text-decoration: none;
+  font-family: inherit;
   font-size: 1rem;
   color: #fff;
 }
@@ -19,11 +17,24 @@
   outline: 0;
   background: color(var(--ad-Color-sec) l(-5%));
 }
+  .ad-Button-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+    .ad-Button-text {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: .65rem;
+      letter-spacing: .02rem;
+    }
+    .ad-Icon + .ad-Button-text {
+      margin-left: .4rem;
+    }
 
 .ad-Button--tab {
   width: 100%;
   height: 100%;
-  flex-direction: column;
   padding: 0;
   border-radius: 0;
   background: none;
@@ -33,21 +44,24 @@
 .ad-Button--tab:hover {
   background: none;
 }
-  .ad-Button--tab .ad-Icon + .ad-Button-text {
-    margin-left: 0;
-    margin-top: .5rem;
+  .ad-Button--tab .ad-Button-content {
+    flex-direction: column;
   }
+    .ad-Button--tab .ad-Icon + .ad-Button-text {
+      margin-left: 0;
+      margin-top: .4rem;
+    }
 
 .ad-Button--expand {
   padding: .2rem;
-  background: color(#fff a(.1));
+  background: color(#fff a(.05));
   border-radius: 2px;
   font-size: .8rem;
   color: #fff;
 }
 .ad-Button--expand:focus,
 .ad-Button--expand:hover {
-  background: color(#fff a(.2));
+  background: color(#fff a(.1));
 }
 
 .ad-Button--delete {
@@ -65,16 +79,6 @@
 .ad-Button--secondary:hover {
   background: color(var(--ad-Color-prim) l(+15%));
 }
-  .ad-Button-text {
-    text-transform: uppercase;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
-    font-size: .65rem;
-    letter-spacing: .02rem;
-  }
-  .ad-Icon + .ad-Button-text {
-    margin-left: .4rem;
-  }
 
 .ad-ButtonFile-file {
   display: none;

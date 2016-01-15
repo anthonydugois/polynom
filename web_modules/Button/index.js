@@ -13,12 +13,14 @@ const Button = ({
     type="button"
     className={ cx("ad-Button", { [`ad-Button--${ type }`]: type }) }
     { ...props }>
-    { icon && (<Icon name={ icon } />) }
-    { children && (
-      <span className="ad-Button-text">
-        { children }
-      </span>
-    ) }
+    <div className="ad-Button-content">
+      { icon && (<Icon name={ icon } />) }
+      { children && (
+        <span className="ad-Button-text">
+          { children }
+        </span>
+      ) }
+    </div>
   </button>
 )
 

@@ -14,6 +14,7 @@ input[type=range]::-moz-focus-outer {
   .ad-Range-input {
     width: 100%;
     height: 14px;
+    margin: 0;
     margin-right: .5rem;
     border-radius: 30px;
     background: color(var(--ad-Color-prim) l(+10%));
@@ -37,31 +38,34 @@ input[type=range]::-moz-focus-outer {
   /* Thumb */
   .ad-Range-input::-webkit-slider-thumb {
     -webkit-appearance: none;
+    box-sizing: border-box;
     width: 18px;
     height: 18px;
     border: 4px solid #fff;
     background: color(var(--ad-Color-prim) l(+10%));
     border-radius: 50%;
-    cursor: pointer;
+    cursor: ew-resize;
     transition: border .2s;
   }
   .ad-Range-input::-moz-range-thumb {
     -moz-appearance: none;
+    box-sizing: border-box;
     width: 18px;
     height: 18px;
     border: 4px solid #fff;
     background: color(var(--ad-Color-prim) l(+10%));
     border-radius: 50%;
-    cursor: pointer;
+    cursor: ew-resize;
     transition: border .2s;
   }
   .ad-Range-input::-ms-thumb {
+    box-sizing: border-box;
     width: 18px;
     height: 18px;
     border: 4px solid #fff;
     background: color(var(--ad-Color-prim) l(+10%));
     border-radius: 50%;
-    cursor: pointer;
+    cursor: ew-resize;
     transition: border .2s;
   }
   .ad-Range-input:focus::-webkit-slider-thumb,

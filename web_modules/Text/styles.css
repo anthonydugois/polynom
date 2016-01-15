@@ -10,17 +10,17 @@
   width: 100%;
   padding: .8rem 1rem;
   resize: none;
-  font-weight: bold;
   line-height: 1.6;
 }
 .ad-Text,
 .ad-Textarea {
-  background: color(var(--ad-Color-prim) l(+10%));
+  background: none;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   transition: background .2s;
-  font-family: "Open Sans", sans-serif;
-  font-size: .6rem;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: .65rem;
   color: #fff;
 }
 .ad-Text:focus,
