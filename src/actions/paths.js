@@ -1,14 +1,39 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { createPoint, removePoint } from "./points"
+import { createPoint } from "./points"
 
 export function createPath(x, y) {
   return (dispatch, getState) => {
-    const pathId = Math.max(...Object.keys(getState().paths)) + 1
+    const { pathsById } = getState().paths
+    const pathId = Math.max(...Object.keys(pathsById)) + 1
 
     // add a path to state
     dispatch(addPath(pathId))
     // create the first point
     dispatch(createPoint(pathId, "M", x, y, {}))
+  }
+}
+
+export function deletePath(pathId) {
+  return (dispatch, getState) => {
+    const { paths, pathsById } = getState().paths
+    const index = paths.indexOf(pathId)
+
+    if (pathsById[pathId].isActive && index > -1) {
+      dispatch(activatePath(index === 0 ? index + 1 : index - 1))
+    }
+
+    dispatch(removePath(pathId))
+  }
+}
+
+export function activatePath(pathId) {
+  return (dispatch, getState) => {
+    const { paths } = getState().paths
+
+    paths.forEach((id) =>
+      dispatch(setActivePath(id, false)))
+
+    dispatch(setActivePath(pathId, true))
   }
 }
 
@@ -19,28 +44,10 @@ function addPath(pathId) {
   }
 }
 
-/* export function removePath(pathId) {
-  return (dispatch, getState) => {
-    // first remove all related points
-    getState().paths[pathId].points.forEach((pointId) => {
-      dispatch(removePoint(pathId, pointId))
-    })
-
-    dispatch({
-      type: ActionTypes.REMOVE_PATH,
-      pathId,
-    })
-  }
-} */
-
-export function activatePath(pathId) {
-  return (dispatch, getState) => {
-    const { paths } = getState()
-
-    Object.keys(paths).forEach((key) =>
-      dispatch(setActivePath(paths[key].id, false)))
-
-    dispatch(setActivePath(pathId, true))
+export function removePath(pathId) {
+  return {
+    type: ActionTypes.REMOVE_PATH,
+    pathId,
   }
 }
 
@@ -76,7 +83,7 @@ export function setFilledPath(pathId, isFilled) {
   }
 }
 
-export function getPathCode(path) {
+/* export function getPathCode(path) {
   let code = path.points.reduce((acc, point, index, points) => {
     const previousPoint = index > 0 ? points[index - 1] : false
 
@@ -112,4 +119,4 @@ export function getPathCode(path) {
   }
 
   return code
-}
+} */

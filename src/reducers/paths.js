@@ -1,23 +1,22 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
 const initialState = {
-  0: {
-    id: 0,
-    name: "Path 1",
-    isActive: true,
-    isClosed: false,
-    isRelative: false,
-    isFilled: false,
-    points: [0],
+  paths: [0],
+  pathsById: {
+    0: {
+      id: 0,
+      name: "Path 1",
+      isActive: true,
+      isClosed: false,
+      isRelative: false,
+      isFilled: false,
+      points: [0],
+    },
   },
 }
 
 const path = (state, action) => {
   switch (action.type) {
-
-  /**
-   * Create a new path
-   */
   case ActionTypes.ADD_PATH:
     return {
       id: action.pathId,
@@ -29,9 +28,6 @@ const path = (state, action) => {
       points: [],
     }
 
-  /**
-   * Path parameters
-   */
   case ActionTypes.SET_ACTIVE_PATH:
     return {
       ...state,
@@ -56,9 +52,6 @@ const path = (state, action) => {
       isFilled: action.isFilled,
     }
 
-  /**
-   * Insert the added point in the corresponding path
-   */
   case ActionTypes.ADD_POINT:
     return {
       ...state,
@@ -69,13 +62,10 @@ const path = (state, action) => {
       ],
     }
 
-  /**
-   * Remove a point from the path
-   */
   case ActionTypes.REMOVE_POINT:
     return {
       ...state,
-      points: state.points.filter((pointId) => pointId !== action.pointId),
+      points: state.points.filter((id) => id !== action.pointId),
     }
 
   default:
@@ -83,29 +73,13 @@ const path = (state, action) => {
   }
 }
 
-export default (state = initialState, action) => {
+function pathsById(state, action) {
   switch (action.type) {
-
-  /**
-   * Insert a path just after the active one
-   */
   case ActionTypes.ADD_PATH:
     return {
       ...state,
       [action.pathId]: path(undefined, action),
     }
-
-  /**
-   * Remove a path
-   */
-  case ActionTypes.REMOVE_PATH:
-    return Object.keys(state).reduce((acc, id) => {
-      if (state[id].id === action.pathId) {
-        return { ...acc }
-      }
-
-      return { ...acc, [id]: state[id] }
-    }, {})
 
   case ActionTypes.SET_ACTIVE_PATH:
   case ActionTypes.SET_RELATIVE_PATH:
@@ -116,6 +90,37 @@ export default (state = initialState, action) => {
     return {
       ...state,
       [action.pathId]: path(state[action.pathId], action),
+    }
+
+  default:
+    return state
+  }
+}
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+  case ActionTypes.ADD_PATH:
+    return {
+      ...state,
+      paths: [...state.paths, action.pathId],
+      pathsById: pathsById(state.pathsById, action),
+    }
+
+  case ActionTypes.REMOVE_PATH:
+    return {
+      ...state,
+      paths: state.paths.filter((id) => id !== action.pathId),
+    }
+
+  case ActionTypes.SET_ACTIVE_PATH:
+  case ActionTypes.SET_RELATIVE_PATH:
+  case ActionTypes.SET_CLOSED_PATH:
+  case ActionTypes.SET_FILLED_PATH:
+  case ActionTypes.ADD_POINT:
+  case ActionTypes.REMOVE_POINT:
+    return {
+      ...state,
+      pathsById: pathsById(state.pathsById, action),
     }
 
   default:

@@ -14,10 +14,6 @@ const initialState = {
 
 const point = (state, action) => {
   switch (action.type) {
-
-  /**
-   * Create a new point
-   */
   case ActionTypes.ADD_POINT:
     return {
       id: action.pointId,
@@ -29,9 +25,6 @@ const point = (state, action) => {
       parameters: action.parameters,
     }
 
-  /**
-   * Update SVG code and parameters
-   */
   case ActionTypes.SET_POINT_CODE:
     return {
       ...state,
@@ -40,9 +33,6 @@ const point = (state, action) => {
       parameters: action.parameters,
     }
 
-  /**
-   * Set position
-   */
   case ActionTypes.SET_POINT_X:
     return {
       ...state,
@@ -55,9 +45,6 @@ const point = (state, action) => {
       y: action.y,
     }
 
-  /**
-   * Set parameters
-   */
   case ActionTypes.SET_ACTIVE_POINT:
     return {
       ...state,
@@ -77,23 +64,11 @@ const point = (state, action) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
-  /**
-   * Insert a point just after the active one
-   */
   case ActionTypes.ADD_POINT:
     return {
       ...state,
       [action.pointId]: point(undefined, action),
     }
-
-  /**
-   * Remove a point
-   */
-  case ActionTypes.REMOVE_POINT:
-    return Object.keys(state).reduce((acc, id) =>
-      state[id].id === action.pointId ?
-        { ...acc } : { ...acc, [id]: state[id] }, {})
 
   case ActionTypes.SET_POINT_CODE:
   case ActionTypes.SET_POINT_X:

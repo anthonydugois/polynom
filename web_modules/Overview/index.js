@@ -23,28 +23,14 @@ function getStyles(props) {
 }
 
 const mapStateToProps = (state) => {
-  const {
-    builder,
-    paths,
-    points,
-  } = state
-
-  const activePath = Object.keys(paths).reduce(
-    (acc, pathId) => {
-      if (paths[pathId].isActive) {
-        return paths[pathId]
-      }
-
-      return acc
-    },
-    {}
-  )
+  const { paths, pathsById } = state.paths
+  const activePathId = paths.filter((id) => pathsById[id].isActive)[0]
 
   return {
-    builder,
-    paths,
-    activePath,
-    points,
+    builder: state.builder,
+    paths: state.paths,
+    activePath: pathsById[activePathId],
+    points: state.points,
   }
 }
 

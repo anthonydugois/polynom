@@ -4,9 +4,11 @@ import { activatePath } from "./paths"
 export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
     const { paths, points } = getState()
+    const { pathsById } = paths
     const pointId = Math.max(...Object.keys(points)) + 1
+
     // determine the position of the point in the corresponding path
-    const insertAt = paths[pathId].points.reduce((acc, key, index) => {
+    const insertAt = pathsById[pathId].points.reduce((acc, key, index) => {
       if (points[key].isActive) {
         return index + 1
       }
@@ -23,12 +25,14 @@ export function createPoint(pathId, code, x, y, parameters) {
 
 export function activatePoint(pathId, pointId) {
   return (dispatch, getState) => {
+    const { pathsById } = getState().paths
+
     // when a user active a point, the system has to keep
     // the corresponding path active
     dispatch(activatePath(pathId))
 
     // then deactivate all point of the path and active the good one
-    getState().paths[pathId].points.forEach((id) =>
+    pathsById[pathId].points.forEach((id) =>
       dispatch(setActivePoint(id, false)))
 
     dispatch(setActivePoint(pointId, true))
@@ -96,7 +100,7 @@ export function setPointParameters(pointId, parameters) {
   }
 }
 
-function getPointPosition(point, previousPoint) {
+/* function getPointPosition(point, previousPoint) {
   if (point.isRelative) {
     return `
       ${ point.x - previousPoint.x }
@@ -195,4 +199,4 @@ export function A(point, previousPoint) {
     ${ point.parameters.sweep ? 1 : 0 }
     ${ getPointPosition(point, previousPoint) }
   `
-}
+} */
