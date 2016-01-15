@@ -52,6 +52,14 @@ export function removePath(pathId) {
   }
 }
 
+export function setPathName(pathId, name) {
+  return {
+    type: ActionTypes.SET_PATH_NAME,
+    pathId,
+    name,
+  }
+}
+
 function setActivePath(pathId, isActive) {
   return {
     type: ActionTypes.SET_ACTIVE_PATH,

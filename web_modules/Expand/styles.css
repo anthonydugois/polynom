@@ -3,14 +3,13 @@
 .ad-ExpandCaption {
   flex-direction: row;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: .75rem 1.5rem;
   background: color(var(--ad-Color-prim) l(-2%));
 }
   .ad-ExpandCaption-label {
     flex: 1;
     flex-direction: row;
     align-items: center;
-    margin-left: .5rem;
   }
 
 .ad-ExpandPanel {

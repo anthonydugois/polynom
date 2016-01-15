@@ -7,9 +7,10 @@ import {
   createPath,
   deletePath,
   activatePath,
-  setRelative,
-  setClosed,
-  setFilled,
+  setPathName,
+  setRelativePath,
+  setClosedPath,
+  setFilledPath,
 } from "../../src/actions/paths"
 
 const mapStateToProps = (state) => {
@@ -32,12 +33,14 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deletePath(pathId)),
     onPathClick: (pathId) =>
       dispatch(activatePath(pathId)),
+    onNameChange: (pathId, name) =>
+      dispatch(setPathName(pathId, name)),
     onRelativeChange: (pathId, isRelative) =>
-      dispatch(setRelative(pathId, isRelative)),
+      dispatch(setRelativePath(pathId, isRelative)),
     onClosedChange: (pathId, isClosed) =>
-      dispatch(setClosed(pathId, isClosed)),
+      dispatch(setClosedPath(pathId, isClosed)),
     onFilledChange: (pathId, isFilled) =>
-      dispatch(setFilled(pathId, isFilled)),
+      dispatch(setFilledPath(pathId, isFilled)),
   }
 }
 
@@ -59,6 +62,7 @@ class SidebarPaths extends Component {
         showRemoveButton={ paths.length > 1 }
         onPathClick={ this.props.onPathClick }
         onRemoveClick={ this.props.onRemoveClick }
+        onNameChange={ this.props.onNameChange }
         onRelativeChange={ this.props.onRelativeChange }
         onClosedChange={ this.props.onClosedChange }
         onFilledChange={ this.props.onFilledChange } />
@@ -89,6 +93,7 @@ SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   onPathClick: PropTypes.func.isRequired,
+  onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,

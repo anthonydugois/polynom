@@ -5,7 +5,7 @@ const initialState = {
   pathsById: {
     0: {
       id: 0,
-      name: "Path 1",
+      name: "Default",
       isActive: true,
       isClosed: false,
       isRelative: false,
@@ -26,6 +26,12 @@ const path = (state, action) => {
       isRelative: false,
       isFilled: false,
       points: [],
+    }
+
+  case ActionTypes.SET_PATH_NAME:
+    return {
+      ...state,
+      name: action.name,
     }
 
   case ActionTypes.SET_ACTIVE_PATH:
@@ -81,6 +87,7 @@ function pathsById(state, action) {
       [action.pathId]: path(undefined, action),
     }
 
+  case ActionTypes.SET_PATH_NAME:
   case ActionTypes.SET_ACTIVE_PATH:
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:
@@ -112,6 +119,7 @@ export default (state = initialState, action) => {
       paths: state.paths.filter((id) => id !== action.pathId),
     }
 
+  case ActionTypes.SET_PATH_NAME:
   case ActionTypes.SET_ACTIVE_PATH:
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:

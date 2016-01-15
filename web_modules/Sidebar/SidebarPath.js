@@ -18,6 +18,14 @@ class SidebarPath extends Component {
     this.props.onRemoveClick(this.props.path.id)
   };
 
+  handleNameChange = (e) => {
+    const value = e.target.value
+
+    if (value.trim() !== "") {
+      this.props.onNameChange(this.props.path.id, value)
+    }
+  };
+
   handleRelativeChange = (e) => {
     this.props.onRelativeChange(this.props.path.id, e.target.checked)
   };
@@ -40,7 +48,11 @@ class SidebarPath extends Component {
         <Expand>
           <ExpandCaption>
             <div className="ad-SidebarPath-name">
-              { path.name }
+              <input
+                type="text"
+                className="ad-SidebarPath-input"
+                value={ path.name }
+                onChange={ this.handleNameChange } />
             </div>
 
             <div className="ad-SidebarPath-actions">
@@ -83,6 +95,7 @@ class SidebarPath extends Component {
 SidebarPath.propTypes = {
   onPathClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
+  onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,

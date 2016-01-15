@@ -44,6 +44,19 @@
 }
   .ad-SidebarPath-name {
     flex: 1;
-    font-size: .8rem;
-    color: #fff;
+    flex-direction: row;
+    padding: 0 .5rem;
   }
+    .ad-SidebarPath-input {
+      width: 100%;
+      padding: .25rem .5rem;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: .8rem;
+      color: #fff;
+    }
+    .ad-SidebarPath-input:focus {
+      outline: 0;
+      background: color(var(--ad-Color-prim) l(-5%));
+    }
