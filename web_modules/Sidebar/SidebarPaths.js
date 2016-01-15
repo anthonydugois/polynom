@@ -4,9 +4,9 @@ import Button from "Button"
 import SidebarPath from "./SidebarPath"
 
 import {
-  addPath,
+  createPath,
   removePath,
-  setActivePath,
+  activatePath,
   setRelative,
   setClosed,
   setFilled,
@@ -27,11 +27,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddClick: (x, y) =>
-      dispatch(addPath(x, y)),
+      dispatch(createPath(x, y)),
     onRemoveClick: (pathId) =>
       dispatch(removePath(pathId)),
     onPathClick: (pathId) =>
-      dispatch(setActivePath(pathId)),
+      dispatch(activatePath(pathId)),
     onRelativeChange: (pathId, isRelative) =>
       dispatch(setRelative(pathId, isRelative)),
     onClosedChange: (pathId, isClosed) =>

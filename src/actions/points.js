@@ -1,6 +1,7 @@
 import * as ActionTypes from "../constants/ActionTypes"
+import { activatePath } from "./paths"
 
-export function addPoint(pathId, code, x, y, parameters) {
+export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
     const { paths, points } = getState()
     const pointId = Math.max(...Object.keys(points)) + 1
@@ -13,17 +14,36 @@ export function addPoint(pathId, code, x, y, parameters) {
       return acc
     }, 0)
 
-    dispatch({
-      type: ActionTypes.ADD_POINT,
-      pathId,
-      pointId,
-      insertAt,
-      code,
-      x, y,
-      parameters,
-    })
-
+    // add a point to state
+    dispatch(addPoint(pathId, pointId, insertAt, code, x, y, parameters))
+    // activate the new point
     dispatch(activatePoint(pathId, pointId))
+  }
+}
+
+export function activatePoint(pathId, pointId) {
+  return (dispatch, getState) => {
+    // when a user active a point, the system has to keep
+    // the corresponding path active
+    dispatch(activatePath(pathId))
+
+    // then deactivate all point of the path and active the good one
+    getState().paths[pathId].points.forEach((id) =>
+      dispatch(setActivePoint(id, false)))
+
+    dispatch(setActivePoint(pointId, true))
+  }
+}
+
+function addPoint(pathId, pointId, insertAt, code, x, y, parameters) {
+  return {
+    type: ActionTypes.ADD_POINT,
+    pathId,
+    pointId,
+    insertAt,
+    code,
+    x, y,
+    parameters,
   }
 }
 
@@ -32,15 +52,6 @@ export function removePoint(pathId, pointId) {
     type: ActionTypes.REMOVE_POINT,
     pathId,
     pointId,
-  }
-}
-
-export function activatePoint(pathId, pointId) {
-  return (dispatch, getState) => {
-    getState().paths[pathId].points.forEach((id) =>
-      dispatch(setActivePoint(id, false)))
-
-    dispatch(setActivePoint(pointId, true))
   }
 }
 

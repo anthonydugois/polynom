@@ -6,7 +6,7 @@ import Shape from "Shape"
 import "./styles"
 
 import {
-  addPoint,
+  createPoint,
   activatePoint,
 } from "../../src/actions/points"
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onOverviewClick: (pathId, code, x, y, parameters) =>
-      dispatch(addPoint(pathId, code, x, y, parameters)),
+      dispatch(createPoint(pathId, code, x, y, parameters)),
     onPointClick: (pathId, pointId) =>
       dispatch(activatePoint(pathId, pointId)),
   }
@@ -85,7 +85,7 @@ class Overview extends Component {
         path={ path }
         points={ path.points.map((id) => this.props.points[id]) }
         onPointClick={ (pointId) =>
-          this.props.onPointClick(this.props.activePath.id, pointId) } />
+          this.props.onPointClick(path.id, pointId) } />
     )
   };
 
