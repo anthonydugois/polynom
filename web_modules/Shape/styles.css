@@ -15,3 +15,9 @@
   .ad-Shape-path.is-filled {
     fill: color(var(--ad-Color-prim) l(+15%));
   }
+  .ad-Shape-points {
+    /* opacity: 0; */
+  }
+  .ad-Shape.is-active .ad-Shape-points {
+    opacity: 1;
+  }

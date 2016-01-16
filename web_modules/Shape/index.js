@@ -20,7 +20,9 @@ class Shape extends Component {
         <path
           className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) } />
 
-        { points.map(this.renderPoint) }
+        <g className="ad-Shape-points">
+          { points.map(this.renderPoint) }
+        </g>
       </g>
     )
   }

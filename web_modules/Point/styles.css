@@ -8,7 +8,7 @@
   transition: fill .2s;
 }
 .ad-Point-circle:hover,
-.ad-Shape.is-active .ad-Point.is-active .ad-Point-circle {
+.ad-Point.is-active .ad-Point-circle {
   fill: var(--ad-Color-sec);
 }
 .ad-Point-circle.is-first {

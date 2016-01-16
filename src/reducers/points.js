@@ -46,10 +46,14 @@ const point = (state, action) => {
     }
 
   case ActionTypes.DEACTIVATE_POINTS:
-    return {
-      ...state,
-      isActive: action.pointIds.indexOf(state.id) === -1,
+    if (action.pointIds.indexOf(state.id) > -1) {
+      return {
+        ...state,
+        isActive: false,
+      }
     }
+
+    return state
 
   case ActionTypes.SET_ACTIVE_POINT:
     return {
