@@ -3,11 +3,16 @@ import { createPoint } from "./points"
 
 export function createPath(x, y) {
   return (dispatch, getState) => {
-    const { pathsById } = getState().paths
+    const { paths, pathsById } = getState().paths
     const pathId = Math.max(...Object.keys(pathsById)) + 1
 
+    // determine the position of the new path
+    const insertAt = paths.reduce((acc, key, index) => {
+      return pathsById[key].isActive ? index + 1 : acc
+    }, 0)
+
     // add a path to state
-    dispatch(addPath(pathId))
+    dispatch(addPath(pathId, insertAt))
     // create the first point
     dispatch(createPoint(pathId, "M", x, y, {}))
   }
@@ -29,10 +34,11 @@ export function deletePath(pathId) {
   }
 }
 
-function addPath(pathId) {
+function addPath(pathId, insertAt) {
   return {
     type: ActionTypes.ADD_PATH,
     pathId,
+    insertAt,
   }
 }
 

@@ -9,11 +9,7 @@ export function createPoint(pathId, code, x, y, parameters) {
 
     // determine the position of the point in the corresponding path
     const insertAt = pathsById[pathId].points.reduce((acc, key, index) => {
-      if (points[key].isActive) {
-        return index + 1
-      }
-
-      return acc
+      return points[key].isActive ? index + 1 : acc
     }, 0)
 
     // add a point to state

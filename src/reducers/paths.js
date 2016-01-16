@@ -114,7 +114,11 @@ export default (state = initialState, action) => {
   case ActionTypes.ADD_PATH:
     return {
       ...state,
-      paths: [...state.paths, action.pathId],
+      paths: [
+        ...state.paths.slice(0, action.insertAt),
+        action.pathId,
+        ...state.paths.slice(action.insertAt),
+      ],
       pathsById: pathsById(state.pathsById, action),
     }
 
