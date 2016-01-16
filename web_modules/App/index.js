@@ -5,7 +5,9 @@ import "./styles"
 class App extends Component {
   render() {
     return (
-      <Builder />
+      <div className="ad-App">
+        <Builder />
+      </div>
     )
   }
 }

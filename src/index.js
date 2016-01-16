@@ -5,5 +5,5 @@ import Root from "Root"
 
 render(
   <Root store={ store() } />,
-  document.querySelector("#app")
+  document.querySelector("#root")
 )

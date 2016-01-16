@@ -30,10 +30,8 @@ span {
   align-content: flex-start;
 }
 
-html,
-body,
 .ad-App {
-  height: 100%;
+  height: 100vh;
 }
 
 .ad-About {
