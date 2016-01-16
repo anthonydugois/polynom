@@ -10,7 +10,9 @@ import Checkbox from "Checkbox"
 
 class SidebarPath extends Component {
   handlePathClick = () => {
-    this.props.onPathClick(this.props.path.id)
+    if (!this.props.path.isActive) {
+      this.props.onPathClick(this.props.path.id)
+    }
   };
 
   handleRemoveClick = (e) => {

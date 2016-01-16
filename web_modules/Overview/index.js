@@ -10,6 +10,8 @@ import {
   activatePoint,
 } from "../../src/actions/points"
 
+import pathCode from "../../src/utils/pathCode"
+
 function getStyles(props) {
   const {
     width,
@@ -68,6 +70,7 @@ class Overview extends Component {
       <Shape
         key={ key }
         path={ path }
+        d={ pathCode(path, this.props.points) }
         points={ path.points.map((id) => this.props.points[id]) }
         onPointClick={ (pointId) =>
           this.props.onPointClick(path.id, pointId) } />

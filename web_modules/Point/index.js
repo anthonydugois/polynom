@@ -5,6 +5,7 @@ import "./styles"
 class Point extends Component {
   handlePointClick = (e) => {
     e.stopPropagation()
+
     this.props.onPointClick()
   };
 
