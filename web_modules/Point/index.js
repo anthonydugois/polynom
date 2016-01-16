@@ -14,7 +14,7 @@ class Point extends Component {
         className="ad-Point-circle"
         cx={ point.x }
         cy={ point.y }
-        r={ 8 }
+        r={ 6 }
         onClick={ this.handlePointClick } />
     )
   }
@@ -43,7 +43,7 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x1 }
           cy={ point.parameters.y1 }
-          r={ 6 } />
+          r={ 4 } />
       </g>
     )
   }
@@ -75,14 +75,14 @@ class Point extends Component {
             className="ad-Anchor-point"
             cx={ point.parameters.x1 }
             cy={ point.parameters.y1 }
-            r={ 6 } />
+            r={ 4 } />
         ) }
 
         <circle
           className="ad-Anchor-point"
           cx={ point.parameters.x2 }
           cy={ point.parameters.y2 }
-          r={ 6 } />
+          r={ 4 } />
       </g>
     )
   }
