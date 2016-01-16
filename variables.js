@@ -3,7 +3,7 @@ const __DEV__ = !__PROD__
 const __OUTPUT_DIR__ = "dist"
 const __SERVER_PROTOCOL__ = "http://"
 const __SERVER_HOST__ = "localhost"
-const __SERVER_PORT__ = "1337"
+const __SERVER_PORT__ = "3000"
 
 const variables = {
   __PROD__,
