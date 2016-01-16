@@ -37,7 +37,7 @@ const path = (state, action) => {
   case ActionTypes.SET_ACTIVE_PATH:
     return {
       ...state,
-      isActive: action.isActive,
+      isActive: state.id === action.pathId,
     }
 
   case ActionTypes.SET_RELATIVE_PATH:
@@ -87,8 +87,13 @@ function pathsById(state, action) {
       [action.pathId]: path(undefined, action),
     }
 
-  case ActionTypes.SET_PATH_NAME:
   case ActionTypes.SET_ACTIVE_PATH:
+    return Object.keys(state).reduce((acc, key) => ({
+      ...acc,
+      [key]: path(state[key], action),
+    }), {})
+
+  case ActionTypes.SET_PATH_NAME:
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:
   case ActionTypes.SET_FILLED_PATH:

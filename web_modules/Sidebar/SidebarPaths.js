@@ -6,7 +6,7 @@ import SidebarPath from "./SidebarPath"
 import {
   createPath,
   deletePath,
-  activatePath,
+  setActivePath,
   setPathName,
   setRelativePath,
   setClosedPath,
@@ -31,10 +31,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createPath(x, y)),
     onRemoveClick: (pathId) =>
       dispatch(deletePath(pathId)),
-    onPathClick: (pathId) =>
-      dispatch(activatePath(pathId)),
     onNameChange: (pathId, name) =>
       dispatch(setPathName(pathId, name)),
+    onPathClick: (pathId) =>
+      dispatch(setActivePath(pathId)),
     onRelativeChange: (pathId, isRelative) =>
       dispatch(setRelativePath(pathId, isRelative)),
     onClosedChange: (pathId, isClosed) =>

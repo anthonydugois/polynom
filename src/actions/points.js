@@ -1,5 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { activatePath } from "./paths"
+import { setActivePath } from "./paths"
 
 export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
@@ -29,12 +29,10 @@ export function activatePoint(pathId, pointId) {
 
     // when a user active a point, the system has to keep
     // the corresponding path active
-    dispatch(activatePath(pathId))
+    dispatch(setActivePath(pathId))
 
     // then deactivate all point of the path and active the good one
-    pathsById[pathId].points.forEach((id) =>
-      dispatch(setActivePoint(id, false)))
-
+    dispatch(deactivatePoints(pathsById[pathId].points))
     dispatch(setActivePoint(pointId, true))
   }
 }
@@ -56,6 +54,13 @@ export function removePoint(pathId, pointId) {
     type: ActionTypes.REMOVE_POINT,
     pathId,
     pointId,
+  }
+}
+
+function deactivatePoints(pointIds) {
+  return {
+    type: ActionTypes.DEACTIVATE_POINTS,
+    pointIds,
   }
 }
 

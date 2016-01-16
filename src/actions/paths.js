@@ -22,19 +22,10 @@ export function deletePath(pathId) {
       const activatePathId = index === 0 ?
         paths[index + 1] : paths[index - 1]
 
-      dispatch(activatePath(activatePathId))
+      dispatch(setActivePath(activatePathId))
     }
 
     dispatch(removePath(pathId))
-  }
-}
-
-export function activatePath(pathId) {
-  return (dispatch, getState) => {
-    const { paths } = getState().paths
-
-    paths.forEach((id) => dispatch(setActivePath(id, false)))
-    dispatch(setActivePath(pathId, true))
   }
 }
 
@@ -60,11 +51,10 @@ export function setPathName(pathId, name) {
   }
 }
 
-function setActivePath(pathId, isActive) {
+export function setActivePath(pathId) {
   return {
     type: ActionTypes.SET_ACTIVE_PATH,
     pathId,
-    isActive,
   }
 }
 
