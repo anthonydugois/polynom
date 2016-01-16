@@ -8,9 +8,10 @@ import "./styles"
 import {
   createPoint,
   activatePoint,
+  setPointX,
+  setPointY,
+  setPointParameters,
 } from "../../src/actions/points"
-
-import pathCode from "../../src/utils/pathCode"
 
 function getStyles(props) {
   const {
@@ -42,12 +43,35 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createPoint(pathId, code, x, y, parameters)),
     onPointClick: (pathId, pointId) =>
       dispatch(activatePoint(pathId, pointId)),
+    onXPositionChange: (pointId, x) =>
+      dispatch(setPointX(pointId, x)),
+    onYPositionChange: (pointId, y) =>
+      dispatch(setPointY(pointId, y)),
+    onParametersChange: (pointId, parameters) =>
+      dispatch(setPointParameters(pointId, parameters)),
   }
 }
 
 class Overview extends Component {
-  handleOverviewClick = (e) => {
-    const { builder, activePath } = this.props
+  state = {
+    isDragging: false,
+    draggedPoint: null,
+    x: null,
+    y: null,
+  };
+
+  componentDidMount() {
+    document.addEventListener("mousemove", this.handleMouseMove)
+    document.addEventListener("mouseup", this.handleMouseUp)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousemove", this.handleMouseMove)
+    document.removeEventListener("mouseup", this.handleMouseUp)
+  }
+
+  getCoords = (e) => {
+    const { builder } = this.props
     const { left, top } = findDOMNode(this).getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
@@ -58,6 +82,47 @@ class Overview extends Component {
       x = builder.grid.size * Math.round(x / builder.grid.size)
       y = builder.grid.size * Math.round(y / builder.grid.size)
     }
+
+    return { x, y }
+  };
+
+  handlePointMouseDown = (key) => {
+    this.setState({
+      isDragging: true,
+      draggedPoint: key,
+      x: this.props.points[key].x,
+      y: this.props.points[key].y,
+    })
+  };
+
+  handleMouseUp = (e) => {
+    if (this.state.isDragging) {
+      const { draggedPoint, x, y } = this.state
+
+      this.props.onXPositionChange(this.state.draggedPoint, x)
+      this.props.onYPositionChange(this.state.draggedPoint, y)
+
+      this.setState({
+        isDragging: false,
+        draggedPoint: null,
+        x: null,
+        y: null,
+      })
+    }
+  };
+
+  handleMouseMove = (e) => {
+    if (this.state.isDragging) {
+      e.preventDefault()
+
+      const { x, y } = this.getCoords(e)
+      this.setState({ x, y })
+    }
+  };
+
+  handleOverviewClick = (e) => {
+    const { activePath } = this.props
+    const { x, y } = this.getCoords(e)
 
     this.props.onOverviewClick(activePath.id, "L", x, y, {})
   };
@@ -70,10 +135,13 @@ class Overview extends Component {
       <Shape
         key={ key }
         path={ path }
-        d={ pathCode(path, this.props.points) }
-        points={ path.points.map((id) => this.props.points[id]) }
-        onPointClick={ (pointId) =>
-          this.props.onPointClick(path.id, pointId) } />
+        points={ this.props.points }
+        onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
+        onPointMouseDown={ this.handlePointMouseDown }
+        isDragging={ this.state.isDragging }
+        draggedPoint={ this.state.draggedPoint }
+        x={ this.state.x }
+        y={ this.state.y } />
     )
   };
 
@@ -85,7 +153,7 @@ class Overview extends Component {
       <svg
         className="ad-Overview"
         style={ getStyles(this.props) }
-        onClick={ this.handleOverviewClick }>
+        onDoubleClick={ this.handleOverviewClick }>
         <Grid
           width={ builder.width }
           height={ builder.height }
@@ -100,6 +168,9 @@ class Overview extends Component {
 Overview.propTypes = {
   onOverviewClick: PropTypes.func.isRequired,
   onPointClick: PropTypes.func.isRequired,
+  onXPositionChange: PropTypes.func.isRequired,
+  onYPositionChange: PropTypes.func.isRequired,
+  onParametersChange: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
   paths: PropTypes.object.isRequired,
   points: PropTypes.object.isRequired,

@@ -6,6 +6,4 @@ const _createStore = compose(
   applyMiddleware(thunkMiddleware)
 )(createStore)
 
-export default (initialState) => {
-  return _createStore(rootReducer, initialState)
-}
+export default (initialState) => _createStore(rootReducer, initialState)

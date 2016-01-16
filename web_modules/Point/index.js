@@ -2,23 +2,45 @@ import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import "./styles"
 
+function getPointStyles(props, point) {
+  const {
+    isDragging,
+    draggedPoint,
+    x,
+    y,
+  } = props
+
+  if (isDragging && draggedPoint === point.id) {
+    return {
+      transform: `translate(${ x - point.x }px, ${ y - point.y }px)`,
+    }
+  }
+
+  return null
+}
+
 class Point extends Component {
   handlePointClick = (e) => {
-    e.stopPropagation()
-
     this.props.onPointClick()
   };
 
-  renderPoint(point) {
+  handlePointMouseDown = (e) => {
+    this.props.onPointClick()
+    this.props.onPointMouseDown(this.props.point.id)
+  };
+
+  renderPoint = (point) => {
     return (
       <circle
         className="ad-Point-circle"
+        style={ getPointStyles(this.props, point) }
         cx={ point.x }
         cy={ point.y }
         r={ 6 }
-        onClick={ this.handlePointClick } />
+        onClick={ this.handlePointClick }
+        onMouseDown={ this.handlePointMouseDown } />
     )
-  }
+  };
 
   renderQuadraticAnchors(point, previousPoint) {
     const code = point.code.toLowerCase()
@@ -108,8 +130,13 @@ class Point extends Component {
 
 Point.propTypes = {
   onPointClick: PropTypes.func.isRequired,
+  onPointMouseDown: PropTypes.func.isRequired,
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object,
+  isDragging: PropTypes.bool,
+  draggedPoint: PropTypes.number,
+  x: PropTypes.number,
+  y: PropTypes.number,
 }
 
 export default Point
