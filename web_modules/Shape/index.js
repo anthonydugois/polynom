@@ -5,24 +5,6 @@ import "./styles"
 
 import pathCode from "../../src/utils/pathCode"
 
-function getPath(props) {
-  const {
-    path,
-    points,
-    isDragging,
-    draggedPoint,
-    x,
-    y,
-  } = props
-
-  if (isDragging && path.points.indexOf(draggedPoint) > -1) {
-    points[draggedPoint].x = x
-    points[draggedPoint].y = y
-  }
-
-  return pathCode(path, points)
-}
-
 class Shape extends Component {
   renderPoint = (key, index, keys) => {
     const { points } = this.props
@@ -34,22 +16,18 @@ class Shape extends Component {
         point={ point }
         previousPoint={ index > 0 ? points[keys[index - 1]] : null }
         onPointClick={ () => this.props.onPointClick(point.id) }
-        onPointMouseDown={ this.props.onPointMouseDown }
-        isDragging={ this.props.isDragging }
-        draggedPoint={ this.props.draggedPoint }
-        x={ this.props.x }
-        y={ this.props.y } />
+        onPointMouseDown={ this.props.onPointMouseDown } />
     )
   };
 
   render() {
-    const { path } = this.props
+    const { path, points } = this.props
 
     return (
       <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
         <path
           className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) }
-          d={ getPath(this.props) } />
+          d={ pathCode(path, points) } />
 
         <g className="ad-Shape-points">
           { path.points.map(this.renderPoint) }
@@ -64,10 +42,6 @@ Shape.propTypes = {
   onPointMouseDown: PropTypes.func.isRequired,
   path: PropTypes.object.isRequired,
   points: PropTypes.object.isRequired,
-  isDragging: PropTypes.bool,
-  draggedPoint: PropTypes.number,
-  x: PropTypes.number,
-  y: PropTypes.number,
 }
 
 export default Shape

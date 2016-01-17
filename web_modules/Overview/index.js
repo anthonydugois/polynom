@@ -127,6 +127,21 @@ class Overview extends Component {
     this.props.onOverviewClick(activePath.id, "L", x, y, {})
   };
 
+  reducePathPoints = (path) => {
+    const { points } = this.props
+    const { isDragging, draggedPoint, x, y } = this.state
+    const pathPoints = path.points.reduce((acc, key) => {
+      return { ...acc, [key]: points[key] }
+    }, {})
+
+    if (isDragging && path.points.indexOf(draggedPoint) > -1) {
+      pathPoints[draggedPoint].x = x
+      pathPoints[draggedPoint].y = y
+    }
+
+    return pathPoints
+  };
+
   renderShape = (key, index, paths) => {
     const { pathsById } = this.props.paths
     const path = pathsById[key]
@@ -135,13 +150,9 @@ class Overview extends Component {
       <Shape
         key={ key }
         path={ path }
-        points={ this.props.points }
+        points={ this.reducePathPoints(path) }
         onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
-        onPointMouseDown={ this.handlePointMouseDown }
-        isDragging={ this.state.isDragging }
-        draggedPoint={ this.state.draggedPoint }
-        x={ this.state.x }
-        y={ this.state.y } />
+        onPointMouseDown={ this.handlePointMouseDown } />
     )
   };
 
