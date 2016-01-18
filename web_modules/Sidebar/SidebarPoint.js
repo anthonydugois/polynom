@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
-import inRange from "lodash/inRange"
 import Button from "Button"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
@@ -80,11 +79,11 @@ class SidebarPoint extends Component {
       return 0
     }
 
-    if (inRange(n, max)) {
-      return n
+    if (n > max) {
+      return max
     }
 
-    return max
+    return n
   }
 
   handleCodeChange = (e) => {
