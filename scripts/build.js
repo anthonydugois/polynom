@@ -1,6 +1,5 @@
 import webpack from "webpack"
 import config from "../webpack.config"
-
 import colors from "chalk"
 import opn from "opn"
 import server from "./server"
