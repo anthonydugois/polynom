@@ -4,51 +4,29 @@ import { connect } from "react-redux"
 import Grid from "Grid"
 import Shape from "Shape"
 import "./styles"
-
-import {
-  createPoint,
-  activatePoint,
-  setPointX,
-  setPointY,
-  setPointParameters,
-} from "../../src/actions/points"
-
-function getStyles(props) {
-  const {
-    width,
-    height,
-  } = props.builder
-
-  return {
-    width,
-    height,
-  }
-}
+import * as pointsActions from "../../src/actions/points"
+import { activePathSelector } from "../../src/selectors/paths"
 
 const mapStateToProps = (state) => {
-  const { paths, pathsById } = state.paths
-  const activePathId = paths.filter((id) => pathsById[id].isActive)[0]
-
   return {
     builder: state.builder,
-    paths: state.paths,
-    activePath: pathsById[activePathId],
     points: state.points,
+    ...activePathSelector(state),
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onOverviewClick: (pathId, code, x, y, parameters) =>
-      dispatch(createPoint(pathId, code, x, y, parameters)),
+      dispatch(pointsActions.createPoint(pathId, code, x, y, parameters)),
     onPointClick: (pathId, pointId) =>
-      dispatch(activatePoint(pathId, pointId)),
+      dispatch(pointsActions.activatePoint(pathId, pointId)),
     onXPositionChange: (pointId, x) =>
-      dispatch(setPointX(pointId, x)),
+      dispatch(pointsActions.setPointX(pointId, x)),
     onYPositionChange: (pointId, y) =>
-      dispatch(setPointY(pointId, y)),
+      dispatch(pointsActions.setPointY(pointId, y)),
     onParametersChange: (pointId, parameters) =>
-      dispatch(setPointParameters(pointId, parameters)),
+      dispatch(pointsActions.setPointParameters(pointId, parameters)),
   }
 }
 
@@ -127,11 +105,10 @@ class Overview extends Component {
     this.props.onOverviewClick(activePath.id, "L", x, y, {})
   };
 
-  reducePathPoints = (path) => {
-    const { points } = this.props
+  reducePoints = (path) => {
     const { isDragging, draggedPoint, x, y } = this.state
     const pathPoints = path.points.reduce((acc, key) => {
-      return { ...acc, [key]: points[key] }
+      return { ...acc, [key]: this.props.points[key] }
     }, {})
 
     if (isDragging && path.points.indexOf(draggedPoint) > -1) {
@@ -143,27 +120,28 @@ class Overview extends Component {
   };
 
   renderShape = (key, index, paths) => {
-    const { pathsById } = this.props.paths
-    const path = pathsById[key]
+    const path = this.props.pathsById[key]
 
     return (
       <Shape
         key={ key }
         path={ path }
-        points={ this.reducePathPoints(path) }
+        points={ this.reducePoints(path) }
         onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
         onPointMouseDown={ this.handlePointMouseDown } />
     )
   };
 
   render() {
-    const { builder } = this.props
-    const { paths } = this.props.paths
+    const { builder, paths } = this.props
 
     return (
       <svg
         className="ad-Overview"
-        style={ getStyles(this.props) }
+        style={ {
+          width: builder.width,
+          height: builder.height,
+        } }
         onDoubleClick={ this.handleOverviewClick }>
         <Grid
           width={ builder.width }
@@ -183,8 +161,9 @@ Overview.propTypes = {
   onYPositionChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  paths: PropTypes.object.isRequired,
   points: PropTypes.object.isRequired,
+  paths: PropTypes.array.isRequired,
+  pathsById: PropTypes.object.isRequired,
   activePath: PropTypes.object.isRequired,
 }
 
