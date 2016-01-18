@@ -100,7 +100,7 @@ class Point extends Component {
       <g className={ cx("ad-Point", { "is-active": point.isActive }) }>
         { this.renderPoint(point) }
 
-        { /* If there is a Bezier curve: render anchors */ }
+        { /* if there is a Bezier curve, render anchors */ }
         { (code === "q") &&
             this.renderQuadraticAnchors(point, previousPoint) }
         { (code === "c" || code === "s") &&

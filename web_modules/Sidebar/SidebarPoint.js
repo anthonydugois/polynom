@@ -7,15 +7,8 @@ import Range from "Range"
 import Choices from "Choices"
 import Choice from "Choices/Choice"
 import Checkbox from "Checkbox"
-
-import {
-  setPointCode,
-  setPointX,
-  setPointY,
-  activatePoint,
-  setPointParameters,
-  removePoint,
-} from "../../src/actions/points"
+import * as pointsActions from "../../src/actions/points"
+import { activePointSelector } from "../../src/selectors/points"
 
 function getDefaultParameters(code, point, previousPoint) {
   const middleX = previousPoint.x + (point.x - previousPoint.x) / 2
@@ -69,39 +62,26 @@ function keepInRange(n, min, max) {
 }
 
 const mapStateToProps = (state) => {
-  const { builder, points } = state
-  const { paths, pathsById } = state.paths
-
-  const activePathId = paths.filter((id) => pathsById[id].isActive)[0]
-  const activePath = pathsById[activePathId]
-
-  const pointId = activePath.points.filter((id) => points[id].isActive)[0]
-  const index = activePath.points.indexOf(pointId)
-  const point = points[pointId]
-  const previousPoint = index > 0 ? points[activePath.points[index - 1]] : {}
-
   return {
-    builder,
-    activePath,
-    point,
-    previousPoint,
+    builder: state.builder,
+    ...activePointSelector(state),
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onCodeChange: (pointId, code, parameters) =>
-      dispatch(setPointCode(pointId, code, parameters)),
+      dispatch(pointsActions.setPointCode(pointId, code, parameters)),
     onXPositionChange: (pointId, x) =>
-      dispatch(setPointX(pointId, x)),
+      dispatch(pointsActions.setPointX(pointId, x)),
     onYPositionChange: (pointId, y) =>
-      dispatch(setPointY(pointId, y)),
+      dispatch(pointsActions.setPointY(pointId, y)),
     onActiveChange: (pathId, pointId) =>
-      dispatch(activatePoint(pathId, pointId)),
+      dispatch(pointsActions.activatePoint(pathId, pointId)),
     onParametersChange: (pointId, parameters) =>
-      dispatch(setPointParameters(pointId, parameters)),
+      dispatch(pointsActions.setPointParameters(pointId, parameters)),
     onRemoveClick: (pathId, pointId) =>
-      dispatch(removePoint(pathId, pointId)),
+      dispatch(pointsActions.removePoint(pathId, pointId)),
   }
 }
 

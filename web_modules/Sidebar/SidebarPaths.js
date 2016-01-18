@@ -2,16 +2,7 @@ import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import Button from "Button"
 import SidebarPath from "./SidebarPath"
-
-import {
-  createPath,
-  deletePath,
-  setActivePath,
-  setPathName,
-  setRelativePath,
-  setClosedPath,
-  setFilledPath,
-} from "../../src/actions/paths"
+import * as pathsActions from "../../src/actions/paths"
 
 const mapStateToProps = (state) => {
   const {
@@ -28,19 +19,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddClick: (x, y) =>
-      dispatch(createPath(x, y)),
+      dispatch(pathsActions.createPath(x, y)),
     onRemoveClick: (pathId) =>
-      dispatch(deletePath(pathId)),
+      dispatch(pathsActions.deletePath(pathId)),
     onNameChange: (pathId, name) =>
-      dispatch(setPathName(pathId, name)),
+      dispatch(pathsActions.setPathName(pathId, name)),
     onPathClick: (pathId) =>
-      dispatch(setActivePath(pathId)),
+      dispatch(pathsActions.setActivePath(pathId)),
     onRelativeChange: (pathId, isRelative) =>
-      dispatch(setRelativePath(pathId, isRelative)),
+      dispatch(pathsActions.setRelativePath(pathId, isRelative)),
     onClosedChange: (pathId, isClosed) =>
-      dispatch(setClosedPath(pathId, isClosed)),
+      dispatch(pathsActions.setClosedPath(pathId, isClosed)),
     onFilledChange: (pathId, isFilled) =>
-      dispatch(setFilledPath(pathId, isFilled)),
+      dispatch(pathsActions.setFilledPath(pathId, isFilled)),
   }
 }
 

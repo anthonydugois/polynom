@@ -3,9 +3,9 @@ import { findDOMNode } from "react-dom"
 import { connect } from "react-redux"
 import Grid from "Grid"
 import Shape from "Shape"
-import "./styles"
 import * as pointsActions from "../../src/actions/points"
 import { activePathSelector } from "../../src/selectors/paths"
+import "./styles"
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOverviewClick: (pathId, code, x, y, parameters) =>
+    onOverviewDblClick: (pathId, code, x, y, parameters) =>
       dispatch(pointsActions.createPoint(pathId, code, x, y, parameters)),
     onPointClick: (pathId, pointId) =>
       dispatch(pointsActions.activatePoint(pathId, pointId)),
@@ -34,8 +34,6 @@ class Overview extends Component {
   state = {
     isDragging: false,
     draggedPoint: null,
-    x: null,
-    y: null,
   };
 
   componentDidMount() {
@@ -68,23 +66,14 @@ class Overview extends Component {
     this.setState({
       isDragging: true,
       draggedPoint: key,
-      x: this.props.points[key].x,
-      y: this.props.points[key].y,
     })
   };
 
   handleMouseUp = (e) => {
     if (this.state.isDragging) {
-      const { draggedPoint, x, y } = this.state
-
-      this.props.onXPositionChange(this.state.draggedPoint, x)
-      this.props.onYPositionChange(this.state.draggedPoint, y)
-
       this.setState({
         isDragging: false,
         draggedPoint: null,
-        x: null,
-        y: null,
       })
     }
   };
@@ -94,39 +83,26 @@ class Overview extends Component {
       e.preventDefault()
 
       const { x, y } = this.getCoords(e)
-      this.setState({ x, y })
+
+      this.props.onXPositionChange(this.state.draggedPoint, x)
+      this.props.onYPositionChange(this.state.draggedPoint, y)
     }
   };
 
-  handleOverviewClick = (e) => {
-    const { activePath } = this.props
+  handleOverviewDblClick = (e) => {
     const { x, y } = this.getCoords(e)
 
-    this.props.onOverviewClick(activePath.id, "L", x, y, {})
+    this.props.onOverviewDblClick(this.props.activePath.id, "L", x, y, {})
   };
 
-  reducePoints = (path) => {
-    const { isDragging, draggedPoint, x, y } = this.state
-    const pathPoints = path.points.reduce((acc, key) => {
-      return { ...acc, [key]: this.props.points[key] }
-    }, {})
-
-    if (isDragging && path.points.indexOf(draggedPoint) > -1) {
-      pathPoints[draggedPoint].x = x
-      pathPoints[draggedPoint].y = y
-    }
-
-    return pathPoints
-  };
-
-  renderShape = (key, index, paths) => {
+  renderShape = (key) => {
     const path = this.props.pathsById[key]
 
     return (
       <Shape
         key={ key }
         path={ path }
-        points={ this.reducePoints(path) }
+        points={ this.props.points }
         onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
         onPointMouseDown={ this.handlePointMouseDown } />
     )
@@ -142,7 +118,7 @@ class Overview extends Component {
           width: builder.width,
           height: builder.height,
         } }
-        onDoubleClick={ this.handleOverviewClick }>
+        onDoubleClick={ this.handleOverviewDblClick }>
         <Grid
           width={ builder.width }
           height={ builder.height }
@@ -155,7 +131,7 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
-  onOverviewClick: PropTypes.func.isRequired,
+  onOverviewDblClick: PropTypes.func.isRequired,
   onPointClick: PropTypes.func.isRequired,
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
