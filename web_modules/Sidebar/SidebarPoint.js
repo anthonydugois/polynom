@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
+import inRange from "lodash/inRange"
 import Button from "Button"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
@@ -9,57 +10,6 @@ import Choice from "Choices/Choice"
 import Checkbox from "Checkbox"
 import * as pointsActions from "../../src/actions/points"
 import { activePointSelector } from "../../src/selectors/points"
-
-function getDefaultParameters(code, point, previousPoint) {
-  const middleX = previousPoint.x + (point.x - previousPoint.x) / 2
-  const middleY = previousPoint.y + (point.y - previousPoint.y) / 2
-
-  switch (code.toLowerCase()) {
-  case "q":
-    return {
-      x1: middleX,
-      y1: middleY,
-    }
-
-  case "c":
-    return {
-      x1: middleX,
-      y1: middleY,
-      x2: middleX,
-      y2: middleY,
-    }
-
-  case "s":
-    return {
-      x2: middleX,
-      y2: middleY,
-    }
-
-  case "a":
-    return {
-      rx: 50,
-      ry: 50,
-      xAxisRotation: 0,
-      largeArc: false,
-      sweep: false,
-    }
-
-  default:
-    return {}
-  }
-}
-
-function keepInRange(n, min, max) {
-  n = parseInt(n)
-
-  if (isNaN(n) || n < min) {
-    return min
-  } else if (n > max) {
-    return max
-  }
-
-  return n
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -78,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(pointsActions.setPointY(pointId, y)),
     onActiveChange: (pathId, pointId) =>
       dispatch(pointsActions.activatePoint(pathId, pointId)),
-    onParametersChange: (pointId, parameters) =>
+    onParamsChange: (pointId, parameters) =>
       dispatch(pointsActions.setPointParameters(pointId, parameters)),
     onRemoveClick: (pathId, pointId) =>
       dispatch(pointsActions.removePoint(pathId, pointId)),
@@ -86,113 +36,140 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class SidebarPoint extends Component {
+  getDefaultParameters(code, point, previousPoint) {
+    const middleX = previousPoint.x + (point.x - previousPoint.x) / 2
+    const middleY = previousPoint.y + (point.y - previousPoint.y) / 2
+
+    switch (code.toLowerCase()) {
+    case "q":
+      return {
+        x1: middleX,
+        y1: middleY,
+      }
+
+    case "c":
+      return {
+        x1: middleX,
+        y1: middleY,
+        x2: middleX,
+        y2: middleY,
+      }
+
+    case "s":
+      return {
+        x2: middleX,
+        y2: middleY,
+      }
+
+    case "a":
+      return {
+        rx: 50,
+        ry: 50,
+        xAxisRotation: 0,
+        largeArc: false,
+        sweep: false,
+      }
+
+    default:
+      return {}
+    }
+  }
+
+  inRange(n, max) {
+    if (isNaN(n) || n < 0) {
+      return 0
+    }
+
+    if (inRange(n, max)) {
+      return n
+    }
+
+    return max
+  }
+
   handleCodeChange = (e) => {
     const { point, previousPoint } = this.props
+    const code = e.target.value
+    const parameters = this.getDefaultParameters(code, point, previousPoint)
 
-    this.props.onCodeChange(
-      point.id,
-      e.target.value,
-      getDefaultParameters(e.target.value, point, previousPoint)
-    )
+    this.props.onCodeChange(point.id, code, parameters)
   };
 
   handleXPositionChange = (e) => {
     const { builder, point } = this.props
+    const x = this.inRange(parseInt(e.target.value), builder.width)
 
-    this.props.onXPositionChange(
-      point.id,
-      keepInRange(e.target.value, 0, builder.width)
-    )
+    this.props.onXPositionChange(point.id, x)
   };
 
   handleYPositionChange = (e) => {
     const { builder, point } = this.props
+    const y = this.inRange(parseInt(e.target.value), builder.height)
 
-    this.props.onYPositionChange(
-      point.id,
-      keepInRange(e.target.value, 0, builder.height)
-    )
+    this.props.onYPositionChange(point.id, y)
   };
 
   handleX1Change = (e) => {
     const { builder, point } = this.props
+    const x1 = this.inRange(parseInt(e.target.value), builder.width)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      x1: keepInRange(e.target.value, 0, builder.width),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, x1 })
   };
 
   handleY1Change = (e) => {
     const { builder, point } = this.props
+    const y1 = this.inRange(parseInt(e.target.value), builder.height)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      y1: keepInRange(e.target.value, 0, builder.height),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, y1 })
   };
 
   handleX2Change = (e) => {
     const { builder, point } = this.props
+    const x2 = this.inRange(parseInt(e.target.value), builder.width)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      x2: keepInRange(e.target.value, 0, builder.width),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, x2 })
   };
 
   handleY2Change = (e) => {
     const { builder, point } = this.props
+    const y2 = this.inRange(parseInt(e.target.value), builder.height)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      y2: keepInRange(e.target.value, 0, builder.height),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, y2 })
   };
 
   handleRXChange = (e) => {
     const { builder, point } = this.props
+    const rx = this.inRange(parseInt(e.target.value), builder.width)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      rx: keepInRange(e.target.value, 0, builder.width),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, rx })
   };
 
   handleRYChange = (e) => {
     const { builder, point } = this.props
+    const ry = this.inRange(parseInt(e.target.value), builder.height)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      ry: keepInRange(e.target.value, 0, builder.height),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, ry })
   };
 
   handleRotChange = (e) => {
     const { point } = this.props
+    const xAxisRotation = this.inRange(parseInt(e.target.value), 360)
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      xAxisRotation: keepInRange(e.target.value, 0, 360),
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, xAxisRotation })
   };
 
   handleLargeChange = (e) => {
     const { point } = this.props
+    const largeArc = e.target.checked
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      largeArc: e.target.checked,
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, largeArc })
   };
 
   handleSweepChange = (e) => {
     const { point } = this.props
+    const sweep = e.target.checked
 
-    this.props.onParametersChange(point.id, {
-      ...point.parameters,
-      sweep: e.target.checked,
-    })
+    this.props.onParamsChange(point.id, { ...point.parameters, sweep })
   };
 
   handleRemoveClick = (e) => {
@@ -486,7 +463,7 @@ SidebarPoint.propTypes = {
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
   onActiveChange: PropTypes.func.isRequired,
-  onParametersChange: PropTypes.func.isRequired,
+  onParamsChange: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
   activePath: PropTypes.object.isRequired,
