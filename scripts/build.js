@@ -18,6 +18,7 @@ if (__PROD__) {
 } else {
   server({
     __OUTPUT_DIR__,
+    __SERVER_URL__,
     __SERVER_PORT__,
     __SERVER_HOST__,
   }, (err) => {

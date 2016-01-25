@@ -1,17 +1,14 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
 const initialState = {
-  paths: [0],
-  pathsById: {
-    0: {
-      id: 0,
-      name: "Default",
-      isActive: true,
-      isClosed: false,
-      isRelative: false,
-      isFilled: false,
-      points: [0],
-    },
+  0: {
+    id: 0,
+    name: "Default",
+    isActive: true,
+    isClosed: false,
+    isRelative: false,
+    isFilled: false,
+    points: [0],
   },
 }
 
@@ -79,7 +76,7 @@ const path = (state, action) => {
   }
 }
 
-function pathsById(state, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
   case ActionTypes.ADD_PATH:
     return {
@@ -102,42 +99,6 @@ function pathsById(state, action) {
     return {
       ...state,
       [action.pathId]: path(state[action.pathId], action),
-    }
-
-  default:
-    return state
-  }
-}
-
-export default (state = initialState, action) => {
-  switch (action.type) {
-  case ActionTypes.ADD_PATH:
-    return {
-      ...state,
-      paths: [
-        ...state.paths.slice(0, action.insertAt),
-        action.pathId,
-        ...state.paths.slice(action.insertAt),
-      ],
-      pathsById: pathsById(state.pathsById, action),
-    }
-
-  case ActionTypes.REMOVE_PATH:
-    return {
-      ...state,
-      paths: state.paths.filter((id) => id !== action.pathId),
-    }
-
-  case ActionTypes.SET_PATH_NAME:
-  case ActionTypes.SET_ACTIVE_PATH:
-  case ActionTypes.SET_RELATIVE_PATH:
-  case ActionTypes.SET_CLOSED_PATH:
-  case ActionTypes.SET_FILLED_PATH:
-  case ActionTypes.ADD_POINT:
-  case ActionTypes.REMOVE_POINT:
-    return {
-      ...state,
-      pathsById: pathsById(state.pathsById, action),
     }
 
   default:

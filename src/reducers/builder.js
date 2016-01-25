@@ -8,6 +8,7 @@ const initialState = {
     snapToGrid: true,
     size: 50,
   },
+  paths: [0],
 }
 
 const grid = (state, action) => {
@@ -55,6 +56,22 @@ export default (state = initialState, action) => {
     return {
       ...state,
       grid: grid(state.grid, action),
+    }
+
+  case ActionTypes.ADD_PATH:
+    return {
+      ...state,
+      paths: [
+        ...state.paths.slice(0, action.insertAt),
+        action.pathId,
+        ...state.paths.slice(action.insertAt),
+      ],
+    }
+
+  case ActionTypes.REMOVE_PATH:
+    return {
+      ...state,
+      paths: state.paths.filter((id) => id !== action.pathId),
     }
 
   default:

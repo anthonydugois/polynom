@@ -1,27 +1,28 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { setActivePath } from "./paths"
 
+let newPointId = 0
 export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
-    const { paths, points } = getState()
-    const { pathsById } = paths
-    const pointId = Math.max(...Object.keys(points)) + 1
+    const { pathsById, pointsById } = getState()
 
     // determine the position of the point in the corresponding path
     const insertAt = pathsById[pathId].points.reduce((acc, key, index) => {
-      return points[key].isActive ? index + 1 : acc
+      return pointsById[key].isActive ? index + 1 : acc
     }, 0)
 
+    newPointId++
+
     // add a point to state
-    dispatch(addPoint(pathId, pointId, insertAt, code, x, y, parameters))
+    dispatch(addPoint(pathId, newPointId, insertAt, code, x, y, parameters))
     // activate the new point
-    dispatch(activatePoint(pathId, pointId))
+    dispatch(activatePoint(pathId, newPointId))
   }
 }
 
 export function activatePoint(pathId, pointId) {
   return (dispatch, getState) => {
-    const { pathsById } = getState().paths
+    const { pathsById } = getState()
 
     // when a user active a point, the system has to keep
     // the corresponding path active
@@ -40,7 +41,8 @@ function addPoint(pathId, pointId, insertAt, code, x, y, parameters) {
     pointId,
     insertAt,
     code,
-    x, y,
+    x,
+    y,
     parameters,
   }
 }

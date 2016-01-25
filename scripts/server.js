@@ -7,7 +7,7 @@ export default (options, callback) => {
     ...config,
     entry: [
       ...(config.entry || []),
-      `webpack-dev-server/client?${ __SERVER_URL__ }`,
+      `webpack-dev-server/client?${ options.__SERVER_URL__ }`,
       "webpack/hot/only-dev-server",
     ],
     plugins: [

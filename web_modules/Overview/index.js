@@ -4,14 +4,15 @@ import { connect } from "react-redux"
 import Grid from "Grid"
 import Shape from "Shape"
 import * as pointsActions from "../../src/actions/points"
-import { activePathSelector } from "../../src/selectors/paths"
+import { activePathsSelector } from "../../src/selectors/activePaths"
 import "./styles"
 
 const mapStateToProps = (state) => {
   return {
     builder: state.builder,
-    points: state.points,
-    ...activePathSelector(state),
+    pathsById: state.pathsById,
+    pointsById: state.pointsById,
+    activePaths: activePathsSelector(state),
   }
 }
 
@@ -92,7 +93,7 @@ class Overview extends Component {
   handleOverviewDblClick = (e) => {
     const { x, y } = this.getCoords(e)
 
-    this.props.onOverviewDblClick(this.props.activePath.id, "L", x, y, {})
+    this.props.onOverviewDblClick(this.props.activePaths[0], "L", x, y, {})
   };
 
   renderShape = (key) => {
@@ -102,14 +103,14 @@ class Overview extends Component {
       <Shape
         key={ key }
         path={ path }
-        points={ this.props.points }
+        pointsById={ this.props.pointsById }
         onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
         onPointMouseDown={ this.handlePointMouseDown } />
     )
   };
 
   render() {
-    const { builder, paths } = this.props
+    const { builder } = this.props
 
     return (
       <svg
@@ -124,7 +125,7 @@ class Overview extends Component {
           height={ builder.height }
           grid={ builder.grid } />
 
-        { paths.map(this.renderShape) }
+        { builder.paths.map(this.renderShape) }
       </svg>
     )
   }
@@ -137,10 +138,9 @@ Overview.propTypes = {
   onYPositionChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  points: PropTypes.object.isRequired,
-  paths: PropTypes.array.isRequired,
+  pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
-  activePath: PropTypes.object.isRequired,
+  activePaths: PropTypes.array.isRequired,
 }
 
 export default connect(
