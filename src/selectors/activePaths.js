@@ -7,8 +7,6 @@ export const activePathsSelector = createSelector(
   pathsSelector,
   pathsByIdSelector,
   (paths, pathsById) => {
-    const activePaths = paths.filter((id) => pathsById[id].isActive)
-
-    return activePaths
+    return paths.filter((id) => pathsById[id].isActive)
   }
 )

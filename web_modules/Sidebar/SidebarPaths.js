@@ -5,14 +5,9 @@ import SidebarPath from "./SidebarPath"
 import * as pathsActions from "../../src/actions/paths"
 
 const mapStateToProps = (state) => {
-  const {
-    builder,
-    paths,
-  } = state
-
   return {
-    builder,
-    paths,
+    builder: state.builder,
+    pathsById: state.pathsById,
   }
 }
 
@@ -42,15 +37,14 @@ class SidebarPaths extends Component {
     this.props.onAddClick(builder.width / 2, builder.height / 2)
   };
 
-  renderSidebarPath = (key, index, paths) => {
-    const { pathsById } = this.props.paths
-    const path = pathsById[key]
+  renderSidebarPath = (key, index, keys) => {
+    const path = this.props.pathsById[key]
 
     return (
       <SidebarPath
         key={ key }
         path={ path }
-        showRemoveButton={ paths.length > 1 }
+        showRemoveButton={ keys.length > 1 }
         onPathClick={ this.props.onPathClick }
         onRemoveClick={ this.props.onRemoveClick }
         onNameChange={ this.props.onNameChange }
@@ -61,12 +55,12 @@ class SidebarPaths extends Component {
   };
 
   render() {
-    const { paths } = this.props.paths
+    const { builder } = this.props
 
     return (
       <div className="ad-SidebarPaths">
         <div className="ad-SidebarPaths-module">
-          { paths.map(this.renderSidebarPath) }
+          { builder.paths.map(this.renderSidebarPath) }
         </div>
 
         <div className="ad-SidebarPaths-actions">
@@ -89,7 +83,7 @@ SidebarPaths.propTypes = {
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  paths: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
 }
 
 export default connect(

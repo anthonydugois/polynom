@@ -23,7 +23,7 @@ export function createPath(x, y) {
 export function deletePath(pathId) {
   return (dispatch, getState) => {
     const { builder, pathsById } = getState()
-    const index = paths.indexOf(pathId)
+    const index = builder.paths.indexOf(pathId)
 
     if (pathsById[pathId].isActive && index > -1) {
       const activatePathId = index === 0 ?
