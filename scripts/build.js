@@ -13,7 +13,7 @@ if (__PROD__) {
       throw err
     }
 
-    console.log(colors.green("\nBuild successfully completed"))
+    console.log(colors.green("\n✓ Build successfully completed"))
   })
 } else {
   server({
@@ -28,6 +28,6 @@ if (__PROD__) {
 
     opn(__SERVER_URL__)
 
-    console.log(colors.green(`\nServer started at ${ __SERVER_URL__ }`))
+    console.log(colors.green(`\n✓ Dev server started on ${ __SERVER_URL__ }`))
   })
 }

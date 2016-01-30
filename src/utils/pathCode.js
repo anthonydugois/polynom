@@ -1,9 +1,9 @@
 import { M, L, H, V, Q, T, C, S, A } from "./pointCodes"
 
-export default (path, points) => {
+export default (path, pointsById) => {
   const code = path.points.reduce((acc, key, index, keys) => {
-    const point = points[key]
-    const previousPoint = index > 0 && points[keys[index - 1]]
+    const point = pointsById[key]
+    const previousPoint = index > 0 && pointsById[keys[index - 1]]
 
     switch (point.code.toLowerCase()) {
     case "m":

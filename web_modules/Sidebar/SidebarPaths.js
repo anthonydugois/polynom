@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class SidebarPaths extends Component {
-  handleAddClick = (e) => {
+  handleAddClick = () => {
     const { builder } = this.props
 
     this.props.onAddClick(builder.width / 2, builder.height / 2)

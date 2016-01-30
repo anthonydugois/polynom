@@ -11,7 +11,7 @@ import Checkbox from "Checkbox"
 
 import * as pointsActions from "../../src/actions/points"
 
-import { activePathsSelector } from "../../src/selectors/activePaths"
+// import { activePathsSelector } from "../../src/selectors/activePaths"
 import {
   activePointsSelector,
   pointSelector,
@@ -183,7 +183,7 @@ class SidebarPoint extends Component {
     this.props.onParamsChange(point.id, { ...point.parameters, sweep })
   };
 
-  handleRemoveClick = (e) => {
+  handleRemoveClick = () => {
     /* const { activePath, point, previousPoint } = this.props
 
     // active the previous point

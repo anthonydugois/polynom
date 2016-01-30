@@ -3,11 +3,11 @@ import cx from "classnames"
 import "./styles"
 
 class Point extends Component {
-  handlePointClick = (e) => {
+  handlePointClick = () => {
     this.props.onPointClick()
   };
 
-  handlePointMouseDown = (e) => {
+  handlePointMouseDown = () => {
     this.props.onPointClick()
     this.props.onPointMouseDown(this.props.point.id)
   };
@@ -25,8 +25,8 @@ class Point extends Component {
   };
 
   renderQuadraticAnchors(point, previousPoint) {
-    const code = point.code.toLowerCase()
-    const prevCode = previousPoint.code.toLowerCase()
+    // const code = point.code.toLowerCase()
+    // const prevCode = previousPoint.code.toLowerCase()
 
     return (
       <g className="ad-Anchor">
@@ -55,7 +55,7 @@ class Point extends Component {
 
   renderCubicAnchors(point, previousPoint) {
     const code = point.code.toLowerCase()
-    const prevCode = previousPoint.code.toLowerCase()
+    // const prevCode = previousPoint.code.toLowerCase()
 
     return (
       <g className="ad-Anchor">
