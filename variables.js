@@ -1,3 +1,9 @@
+process.env.NODE_ENV = "development"
+
+if (process.argv.includes("production")) {
+  process.env.NODE_ENV = "production"
+}
+
 const __PROD__ = process.env.NODE_ENV === "production"
 const __DEV__ = !__PROD__
 const __OUTPUT_DIR__ = "dist"

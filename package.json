@@ -5,8 +5,8 @@
   "author": "Anthony Dugois <dev.anthonydugois@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "set NODE_ENV=development && npm run build",
-    "prod": "set NODE_ENV=production && npm run build",
+    "start": "npm run build",
+    "prod": "npm run build --production",
     "build": "babel-node scripts/build"
   },
   "devDependencies": {
