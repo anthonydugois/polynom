@@ -70,7 +70,7 @@ class Overview extends Component {
     })
   };
 
-  handleMouseUp = (e) => {
+  handleMouseUp = () => {
     if (this.state.isDragging) {
       this.setState({
         isDragging: false,

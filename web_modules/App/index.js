@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
 import Overview from "Overview"
 import Sidebar from "Sidebar"
 import "./styles"
@@ -13,7 +13,5 @@ class App extends Component {
     )
   }
 }
-
-App.propTypes = {}
 
 export default App
