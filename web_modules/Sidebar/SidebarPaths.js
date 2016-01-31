@@ -4,31 +4,38 @@ import Button from "Button"
 import SidebarPath from "./SidebarPath"
 import * as pathsActions from "../../src/actions/paths"
 
-const mapStateToProps = (state) => {
-  return {
-    builder: state.builder,
-    pathsById: state.pathsById,
-  }
-}
+const mapStateToProps = (state) => ({
+  builder: state.builder,
+  pathsById: state.pathsById,
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAddClick: (x, y) =>
-      dispatch(pathsActions.createPath(x, y)),
-    onRemoveClick: (pathId) =>
-      dispatch(pathsActions.deletePath(pathId)),
-    onNameChange: (pathId, name) =>
-      dispatch(pathsActions.setPathName(pathId, name)),
-    onPathClick: (pathId) =>
-      dispatch(pathsActions.setActivePath(pathId)),
-    onRelativeChange: (pathId, isRelative) =>
-      dispatch(pathsActions.setRelativePath(pathId, isRelative)),
-    onClosedChange: (pathId, isClosed) =>
-      dispatch(pathsActions.setClosedPath(pathId, isClosed)),
-    onFilledChange: (pathId, isFilled) =>
-      dispatch(pathsActions.setFilledPath(pathId, isFilled)),
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  onAddClick(x, y) {
+    dispatch(pathsActions.createPath(x, y))
+  },
+  onRemoveClick(pathId) {
+    dispatch(pathsActions.deletePath(pathId))
+  },
+  onNameChange(pathId, name) {
+    dispatch(pathsActions.setPathName(pathId, name))
+  },
+  onPathCtrlClick(pathId) {
+    dispatch(pathsActions.setActivePath(pathId, true))
+  },
+  onPathClick(pathId) {
+    dispatch(pathsActions.deactivatePaths())
+    dispatch(pathsActions.setActivePath(pathId, true))
+  },
+  onRelativeChange(pathId, isRelative) {
+    dispatch(pathsActions.setRelativePath(pathId, isRelative))
+  },
+  onClosedChange(pathId, isClosed) {
+    dispatch(pathsActions.setClosedPath(pathId, isClosed))
+  },
+  onFilledChange(pathId, isFilled) {
+    dispatch(pathsActions.setFilledPath(pathId, isFilled))
+  },
+})
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
@@ -45,6 +52,8 @@ class SidebarPaths extends Component {
         key={ key }
         path={ path }
         showRemoveButton={ keys.length > 1 }
+        keyActions={ this.props.keyActions }
+        onPathCtrlClick={ this.props.onPathCtrlClick }
         onPathClick={ this.props.onPathClick }
         onRemoveClick={ this.props.onRemoveClick }
         onNameChange={ this.props.onNameChange }
@@ -77,11 +86,13 @@ class SidebarPaths extends Component {
 SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
+  onPathCtrlClick: PropTypes.func.isRequired,
   onPathClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
+  keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
 }

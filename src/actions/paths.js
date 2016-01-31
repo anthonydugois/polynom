@@ -1,6 +1,20 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { createPoint } from "./points"
 
+export function deactivatePaths() {
+  return {
+    type: ActionTypes.DEACTIVATE_PATHS,
+  }
+}
+
+export function setActivePath(pathId, isActive) {
+  return {
+    type: ActionTypes.SET_ACTIVE_PATH,
+    pathId,
+    isActive,
+  }
+}
+
 let newPathId = 0
 export function createPath(x, y) {
   return (dispatch, getState) => {
@@ -13,10 +27,18 @@ export function createPath(x, y) {
 
     newPathId++
 
-    // add a path to state
+    // add a path to the state
     dispatch(addPath(newPathId, insertAt))
     // create the first point
     dispatch(createPoint(newPathId, "M", x, y, {}))
+  }
+}
+
+function addPath(pathId, insertAt) {
+  return {
+    type: ActionTypes.ADD_PATH,
+    pathId,
+    insertAt,
   }
 }
 
@@ -36,14 +58,6 @@ export function deletePath(pathId) {
   }
 }
 
-function addPath(pathId, insertAt) {
-  return {
-    type: ActionTypes.ADD_PATH,
-    pathId,
-    insertAt,
-  }
-}
-
 export function removePath(pathId) {
   return {
     type: ActionTypes.REMOVE_PATH,
@@ -56,13 +70,6 @@ export function setPathName(pathId, name) {
     type: ActionTypes.SET_PATH_NAME,
     pathId,
     name,
-  }
-}
-
-export function setActivePath(pathId) {
-  return {
-    type: ActionTypes.SET_ACTIVE_PATH,
-    pathId,
   }
 }
 

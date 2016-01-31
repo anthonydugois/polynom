@@ -10,7 +10,9 @@ import Checkbox from "Checkbox"
 
 class SidebarPath extends Component {
   handlePathClick = () => {
-    if (!this.props.path.isActive) {
+    if (this.props.keyActions.includes("HOLD_CTRL")) {
+      this.props.onPathCtrlClick(this.props.path.id)
+    } else {
       this.props.onPathClick(this.props.path.id)
     }
   };
@@ -95,12 +97,14 @@ class SidebarPath extends Component {
 }
 
 SidebarPath.propTypes = {
+  onPathCtrlClick: PropTypes.func.isRequired,
   onPathClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
+  keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
   showRemoveButton: PropTypes.bool.isRequired,
 }

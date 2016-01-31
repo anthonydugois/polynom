@@ -8,7 +8,7 @@ const initialState = {
     snapToGrid: true,
     size: 50,
   },
-  paths: [0],
+  paths: [0, 1],
 }
 
 const grid = (state, action) => {

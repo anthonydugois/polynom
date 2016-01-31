@@ -10,6 +10,15 @@ const initialState = {
     isRelative: false,
     parameters: {},
   },
+  1: {
+    id: 1,
+    code: "M",
+    x: 100,
+    y: 100,
+    isActive: false,
+    isRelative: false,
+    parameters: {},
+  },
 }
 
 const point = (state, action) => {
@@ -46,14 +55,10 @@ const point = (state, action) => {
     }
 
   case ActionTypes.DEACTIVATE_POINTS:
-    if (action.pointIds.indexOf(state.id) > -1) {
-      return {
-        ...state,
-        isActive: false,
-      }
+    return {
+      ...state,
+      isActive: false,
     }
-
-    return state
 
   case ActionTypes.SET_ACTIVE_POINT:
     return {

@@ -1,4 +1,5 @@
-import React from "react"
+import React, { Component, PropTypes } from "react"
+import mapActionsToKeys from "react-keybindings"
 import Button from "Button"
 import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
@@ -8,25 +9,37 @@ import SidebarPaths from "./SidebarPaths"
 import SidebarPoint from "./SidebarPoint"
 import "./styles"
 
-const Sidebar = () => (
-  <div className="ad-Sidebar">
-    <Tabs selected={ 0 }>
-      <TabList>
-        <Tab>
-          <Button
-            icon="paths"
-            type="tab">
-            Paths
-          </Button>
-        </Tab>
-      </TabList>
+class Sidebar extends Component {
+  render() {
+    return (
+      <div
+        tabIndex={ 1 }
+        className="ad-Sidebar">
+        <Tabs selected={ 0 }>
+          <TabList>
+            <Tab>
+              <Button
+                icon="paths"
+                type="tab">
+                Paths
+              </Button>
+            </Tab>
+          </TabList>
 
-      <TabPanel>
-        <SidebarPoint />
-        <SidebarPaths />
-      </TabPanel>
-    </Tabs>
-  </div>
-)
+          <TabPanel>
+            <SidebarPoint />
+            <SidebarPaths keyActions={ this.props.keyActions } />
+          </TabPanel>
+        </Tabs>
+      </div>
+    )
+  }
+}
 
-export default Sidebar
+Sidebar.propTypes = {
+  keyActions: PropTypes.array.isRequired,
+}
+
+export default mapActionsToKeys({
+  HOLD_CTRL: "ctrl",
+})(Sidebar)
