@@ -20,14 +20,14 @@ class Tabs extends Component {
     return React.cloneElement(child, {
       children: React.Children.map(child.props.children, (childTab) => {
         if (childTab.type.name === "Tab") {
-          const isActive = tab === this.state.selected
-          const onClick = this.handleClick(tab)
+          const _isActive = tab === this.state.selected
+          const _onClick = this.handleClick(tab)
 
           tab++
 
           return React.cloneElement(childTab, {
-            isActive,
-            onClick,
+            _isActive,
+            _onClick,
           })
         }
 
@@ -45,11 +45,11 @@ class Tabs extends Component {
       }
 
       if (child.type.name === "TabPanel") {
-        const isActive = panel === this.state.selected
+        const _isActive = panel === this.state.selected
 
         panel++
 
-        return React.cloneElement(child, { isActive })
+        return React.cloneElement(child, { _isActive })
       }
 
       return child

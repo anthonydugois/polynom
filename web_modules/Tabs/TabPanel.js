@@ -2,18 +2,18 @@ import React, { PropTypes } from "react"
 import cx from "classnames"
 
 const TabPanel = ({
-  isActive,
+  _isActive,
   children,
 }) => {
   return (
-    <div className={ cx("ad-TabPanel", { "is-active": isActive }) }>
+    <div className={ cx("ad-TabPanel", { "is-active": _isActive }) }>
       { children }
     </div>
   )
 }
 
 TabPanel.propTypes = {
-  isActive: PropTypes.bool,
+  _isActive: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
