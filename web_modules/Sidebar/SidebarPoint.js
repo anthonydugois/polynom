@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
-
 import Button from "Button"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
@@ -18,33 +17,35 @@ import {
   previousPointSelector,
 } from "../../src/selectors/activePoints"
 
-const mapStateToProps = (state) => {
-  return {
-    builder: state.builder,
-    // pointsById: state.pointsById,
-    // activePaths: activePathsSelector(state),
-    activePoints: activePointsSelector(state),
-    point: pointSelector(state),
-    previousPoint: previousPointSelector(state),
-  }
-}
+const mapStateToProps = (state) => ({
+  builder: state.builder,
+  // pointsById: state.pointsById,
+  // activePaths: activePathsSelector(state),
+  activePoints: activePointsSelector(state),
+  point: pointSelector(state),
+  previousPoint: previousPointSelector(state),
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onCodeChange: (pointId, code, parameters) =>
-      dispatch(pointsActions.setPointCode(pointId, code, parameters)),
-    onXPositionChange: (pointId, x) =>
-      dispatch(pointsActions.setPointX(pointId, x)),
-    onYPositionChange: (pointId, y) =>
-      dispatch(pointsActions.setPointY(pointId, y)),
-    onActiveChange: (pathId, pointId) =>
-      dispatch(pointsActions.activatePoint(pathId, pointId)),
-    onParamsChange: (pointId, parameters) =>
-      dispatch(pointsActions.setPointParameters(pointId, parameters)),
-    onRemoveClick: (pathId, pointId) =>
-      dispatch(pointsActions.removePoint(pathId, pointId)),
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  onCodeChange(pointId, code, parameters) {
+    dispatch(pointsActions.setPointCode(pointId, code, parameters))
+  },
+  onXPositionChange(pointId, x) {
+    dispatch(pointsActions.setPointX(pointId, x))
+  },
+  onYPositionChange(pointId, y) {
+    dispatch(pointsActions.setPointY(pointId, y))
+  },
+  onActiveChange(pathId, pointId) {
+    dispatch(pointsActions.activatePoint(pathId, pointId))
+  },
+  onParamsChange(pointId, parameters) {
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
+  },
+  onRemoveClick(pathId, pointId) {
+    dispatch(pointsActions.removePoint(pathId, pointId))
+  },
+})
 
 function inRange(n, max) {
   if (isNaN(n) || n < 0) {

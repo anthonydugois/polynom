@@ -3,33 +3,42 @@ import { findDOMNode } from "react-dom"
 import { connect } from "react-redux"
 import Grid from "Grid"
 import Shape from "Shape"
+import * as pathsActions from "../../src/actions/paths"
 import * as pointsActions from "../../src/actions/points"
 import { activePathsSelector } from "../../src/selectors/activePaths"
 import "./styles"
 
-const mapStateToProps = (state) => {
-  return {
-    builder: state.builder,
-    pathsById: state.pathsById,
-    pointsById: state.pointsById,
-    activePaths: activePathsSelector(state),
-  }
-}
+const mapStateToProps = (state) => ({
+  builder: state.builder,
+  pathsById: state.pathsById,
+  pointsById: state.pointsById,
+  activePaths: activePathsSelector(state),
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onOverviewDblClick: (pathId, code, x, y, parameters) =>
-      dispatch(pointsActions.createPoint(pathId, code, x, y, parameters)),
-    onPointClick: (pathId, pointId) =>
-      dispatch(pointsActions.activatePoint(pathId, pointId)),
-    onXPositionChange: (pointId, x) =>
-      dispatch(pointsActions.setPointX(pointId, x)),
-    onYPositionChange: (pointId, y) =>
-      dispatch(pointsActions.setPointY(pointId, y)),
-    onParametersChange: (pointId, parameters) =>
-      dispatch(pointsActions.setPointParameters(pointId, parameters)),
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  onOverviewDblClick(pathId, code, x, y, parameters) {
+    dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
+  },
+  onPointCtrlClick(pathId, pointId) {
+    dispatch(pathsActions.setActivePath(pathId, true))
+    dispatch(pointsActions.setActivePoint(pointId, true))
+  },
+  onPointClick(pathId, pointId) {
+    dispatch(pathsActions.deactivatePaths())
+    dispatch(pointsActions.deactivatePoints())
+    dispatch(pathsActions.setActivePath(pathId, true))
+    dispatch(pointsActions.setActivePoint(pointId, true))
+  },
+  onXPositionChange(pointId, x) {
+    dispatch(pointsActions.setPointX(pointId, x))
+  },
+  onYPositionChange(pointId, y) {
+    dispatch(pointsActions.setPointY(pointId, y))
+  },
+  onParametersChange(pointId, parameters) {
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
+  },
+})
 
 class Overview extends Component {
   state = {
@@ -104,7 +113,11 @@ class Overview extends Component {
         key={ key }
         path={ path }
         pointsById={ this.props.pointsById }
-        onPointClick={ (pointId) => this.props.onPointClick(path.id, pointId) }
+        keyActions={ this.props.keyActions }
+        onPointCtrlClick={ (pointId) =>
+          this.props.onPointCtrlClick(path.id, pointId) }
+        onPointClick={ (pointId) =>
+          this.props.onPointClick(path.id, pointId) }
         onPointMouseDown={ this.handlePointMouseDown } />
     )
   };
@@ -133,10 +146,12 @@ class Overview extends Component {
 
 Overview.propTypes = {
   onOverviewDblClick: PropTypes.func.isRequired,
+  onPointCtrlClick: PropTypes.func.isRequired,
   onPointClick: PropTypes.func.isRequired,
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
+  keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,

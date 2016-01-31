@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from "react"
-import mapActionsToKeys from "react-keybindings"
 import Button from "Button"
 import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
@@ -12,9 +11,7 @@ import "./styles"
 class Sidebar extends Component {
   render() {
     return (
-      <div
-        tabIndex={ 1 }
-        className="ad-Sidebar">
+      <div className="ad-Sidebar">
         <Tabs selected={ 0 }>
           <TabList>
             <Tab>
@@ -40,6 +37,4 @@ Sidebar.propTypes = {
   keyActions: PropTypes.array.isRequired,
 }
 
-export default mapActionsToKeys({
-  HOLD_CTRL: "ctrl",
-})(Sidebar)
+export default Sidebar

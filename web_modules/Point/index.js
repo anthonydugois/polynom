@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
+import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import "./styles"
 
 class Point extends Component {
   handlePointClick = () => {
-    this.props.onPointClick()
+    if (this.props.keyActions.includes(APP_CTRL)) {
+      this.props.onPointCtrlClick()
+    } else {
+      this.props.onPointClick()
+    }
   };
 
   handlePointMouseDown = () => {
-    this.props.onPointClick()
+    // this.handlePointClick()
     this.props.onPointMouseDown(this.props.point.id)
   };
 
@@ -111,8 +116,10 @@ class Point extends Component {
 }
 
 Point.propTypes = {
+  onPointCtrlClick: PropTypes.func.isRequired,
   onPointClick: PropTypes.func.isRequired,
   onPointMouseDown: PropTypes.func.isRequired,
+  keyActions: PropTypes.array.isRequired,
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object,
 }

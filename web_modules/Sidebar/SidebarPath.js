@@ -7,10 +7,11 @@ import ExpandPanel from "Expand/ExpandPanel"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
+import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 
 class SidebarPath extends Component {
   handlePathClick = () => {
-    if (this.props.keyActions.includes("HOLD_CTRL")) {
+    if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPathCtrlClick(this.props.path.id)
     } else {
       this.props.onPathClick(this.props.path.id)

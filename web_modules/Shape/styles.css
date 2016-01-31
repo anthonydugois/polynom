@@ -1,23 +1,11 @@
 @import url(App/config.css);
 
-.ad-Shape {
-  opacity: .6;
+.ad-Shape-path {
+  fill: none;
+  stroke: color(var(--ad-Color-prim) l(+15%));
+  stroke-width: 4px;
+  stroke-linecap: round;
 }
-.ad-Shape.is-active {
-  opacity: 1;
+.ad-Shape-path.is-filled {
+  fill: color(var(--ad-Color-prim) l(+15%));
 }
-  .ad-Shape-path {
-    fill: none;
-    stroke: color(var(--ad-Color-prim) l(+15%));
-    stroke-width: 4px;
-    stroke-linecap: round;
-  }
-  .ad-Shape-path.is-filled {
-    fill: color(var(--ad-Color-prim) l(+15%));
-  }
-  .ad-Shape-points {
-    /* opacity: 0; */
-  }
-  .ad-Shape.is-active .ad-Shape-points {
-    opacity: 1;
-  }
