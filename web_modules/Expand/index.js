@@ -2,27 +2,33 @@ import React, { Component, PropTypes } from "react"
 import "./styles.css"
 
 class Expand extends Component {
-  state = { isOpened: this.props.isOpened };
+  state = { _isOpened: this.props.isOpened };
 
-  handleClick(isOpened) {
-    return () => this.setState({ isOpened })
+  handleClick(_isOpened) {
+    return (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      this.setState({ _isOpened })
+    }
   }
 
   renderChildren(children) {
-    const { isOpened } = this.state
+    const { _isOpened } = this.state
 
     return React.Children.map(children, (child) => {
       if (child.type.name === "ExpandCaption") {
-        const onClick = this.handleClick(!isOpened)
+        const _onClick = this.handleClick(!_isOpened)
 
         return React.cloneElement(child, {
-          isOpened,
-          onClick,
+          _onClick,
+          _isOpened,
+          ...child.props,
         })
       }
 
       if (child.type.name === "ExpandPanel") {
-        return React.cloneElement(child, { isOpened })
+        return React.cloneElement(child, { _isOpened })
       }
 
       return child

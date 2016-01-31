@@ -23,7 +23,7 @@
     background: color(var(--ad-Color-prim) l(+10%));
     border-radius: 50%;
     transform: translateX(0);
-    transition: transform .2s, border .2s;
+    transition: transform .1s, border .1s;
   }
   .ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
     border-color: var(--ad-Color-sec);

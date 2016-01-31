@@ -47,11 +47,9 @@ class SidebarPath extends Component {
     const { path } = this.props
 
     return (
-      <div
-        className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }
-        onClick={ this.handlePathClick }>
+      <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
         <Expand>
-          <ExpandCaption>
+          <ExpandCaption onClick={ this.handlePathClick }>
             <div className="ad-SidebarPath-name">
               <input
                 type="text"

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import Button from "Button"
 import SidebarPath from "./SidebarPath"
 import * as pathsActions from "../../src/actions/paths"
+import * as pointsActions from "../../src/actions/points"
 
 const mapStateToProps = (state) => ({
   builder: state.builder,
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(pathsActions.setActivePath(pathId, true))
   },
   onPathClick(pathId) {
+    dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.deactivatePaths())
     dispatch(pathsActions.setActivePath(pathId, true))
   },

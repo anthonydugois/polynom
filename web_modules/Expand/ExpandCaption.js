@@ -2,16 +2,19 @@ import React, { PropTypes } from "react"
 import Button from "Button"
 
 const ExpandCaption = ({
-  isOpened,
-  onClick,
+  _onClick,
+  _isOpened,
   children,
+  ...props,
 }) => (
-  <div className="ad-ExpandCaption">
+  <div
+    className="ad-ExpandCaption"
+    { ...props }>
     <div className="ad-ExpandCaption-button">
       <Button
         type="expand"
-        icon={ isOpened ? "down" : "right" }
-        onClick={ onClick } />
+        icon={ _isOpened ? "down" : "right" }
+        onClick={ _onClick } />
     </div>
 
     <div className="ad-ExpandCaption-label">
@@ -21,8 +24,8 @@ const ExpandCaption = ({
 )
 
 ExpandCaption.propTypes = {
-  isOpened: PropTypes.bool,
-  onClick: PropTypes.func,
+  _onClick: PropTypes.func,
+  _isOpened: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
