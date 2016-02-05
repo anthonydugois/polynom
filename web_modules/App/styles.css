@@ -21,18 +21,10 @@ body {
   color: #000;
 }
 
-div,
-span {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-shrink: 0;
-  align-content: flex-start;
-}
-
 .ad-App {
   height: 100vh;
-  flex-direction: row;
+  display: flex;
+  outline: 0;
 }
 
 .ad-About {

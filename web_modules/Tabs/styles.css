@@ -2,7 +2,7 @@
 
 .ad-Tabs {
   height: 100%;
-  flex-direction: row;
+  display: flex;
 }
 
 .ad-TabList {
@@ -27,4 +27,5 @@
 }
 .ad-TabPanel.is-active {
   display: flex;
+  flex-direction: column;
 }

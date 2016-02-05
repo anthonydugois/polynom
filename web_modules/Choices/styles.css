@@ -1,7 +1,7 @@
 @import url(App/config.css);
 
 .ad-Choices {
-  flex-direction: row;
+  display: flex;
   align-items: center;
 }
 
@@ -26,10 +26,10 @@
     background: color(var(--ad-Color-prim) l(+15%));
   }
   .ad-Choice:first-of-type .ad-Choice-fake {
-    border-radius: 4px 0 0 4px;
+    border-radius: 2px 0 0 2px;
   }
   .ad-Choice:last-of-type .ad-Choice-fake {
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 2px 2px 0;
   }
   .ad-Choice-input:checked + .ad-Choice-fake {
     background: var(--ad-Color-sec);

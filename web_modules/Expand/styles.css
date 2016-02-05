@@ -1,14 +1,14 @@
 @import url(App/config.css);
 
 .ad-ExpandCaption {
-  flex-direction: row;
+  display: flex;
   align-items: center;
   padding: .75rem 1.5rem;
   background: color(var(--ad-Color-prim) l(-2%));
 }
   .ad-ExpandCaption-label {
     flex: 1;
-    flex-direction: row;
+    display: flex;
     align-items: center;
   }
 
@@ -18,4 +18,5 @@
 }
 .ad-ExpandPanel.is-opened {
   display: flex;
+  flex-direction: column;
 }
