@@ -27,10 +27,10 @@ export function createPath(x, y) {
 
     newPathId++
 
-    // add a path to the state
+    dispatch(deactivatePaths())
     dispatch(addPath(newPathId, insertAt))
-    // create the first point
     dispatch(createPoint(newPathId, "M", x, y, {}))
+    dispatch(setActivePath(newPathId, true))
   }
 }
 

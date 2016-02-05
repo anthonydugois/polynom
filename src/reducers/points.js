@@ -10,7 +10,7 @@ const initialState = {
     isRelative: false,
     parameters: {},
   },
-  1: {
+  /*1: {
     id: 1,
     code: "M",
     x: 100,
@@ -18,7 +18,7 @@ const initialState = {
     isActive: false,
     isRelative: false,
     parameters: {},
-  },
+  },*/
 }
 
 const point = (state, action) => {

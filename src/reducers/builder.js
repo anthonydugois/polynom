@@ -5,10 +5,10 @@ const initialState = {
   height: 800,
   grid: {
     isShown: true,
-    snapToGrid: true,
+    snapToGrid: false,
     size: 50,
   },
-  paths: [0, 1],
+  paths: [0],
 }
 
 const grid = (state, action) => {

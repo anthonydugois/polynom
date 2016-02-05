@@ -26,8 +26,9 @@ export function createPoint(pathId, code, x, y, parameters) {
 
     newPointId++
 
+    dispatch(deactivatePoints())
     dispatch(addPoint(pathId, newPointId, insertAt, code, x, y, parameters))
-    dispatch(setActivePoint(pathId, newPointId))
+    dispatch(setActivePoint(newPointId, true))
   }
 }
 

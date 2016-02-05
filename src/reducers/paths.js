@@ -10,7 +10,7 @@ const initialState = {
     isFilled: false,
     points: [0],
   },
-  1: {
+  /*1: {
     id: 1,
     name: "Default 2",
     isActive: false,
@@ -18,7 +18,7 @@ const initialState = {
     isRelative: false,
     isFilled: false,
     points: [1],
-  },
+  },*/
 }
 
 const path = (state, action) => {
