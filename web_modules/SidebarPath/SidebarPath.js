@@ -8,39 +8,40 @@ import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import "./styles"
 
 class SidebarPath extends Component {
   handlePathClick = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
-      this.props.onPathCtrlClick(this.props.path.id)
+      this.props.onPathCtrlClick()
     } else {
-      this.props.onPathClick(this.props.path.id)
+      this.props.onPathClick()
     }
   };
 
   handleRemoveClick = (e) => {
     e.stopPropagation()
-    this.props.onRemoveClick(this.props.path.id)
+    this.props.onRemoveClick()
   };
 
   handleNameChange = (e) => {
     const value = e.target.value
 
     if (value.trim() !== "") {
-      this.props.onNameChange(this.props.path.id, value)
+      this.props.onNameChange(value)
     }
   };
 
   handleRelativeChange = (e) => {
-    this.props.onRelativeChange(this.props.path.id, e.target.checked)
+    this.props.onRelativeChange(e.target.checked)
   };
 
   handleClosedChange = (e) => {
-    this.props.onClosedChange(this.props.path.id, e.target.checked)
+    this.props.onClosedChange(e.target.checked)
   };
 
   handleFilledChange = (e) => {
-    this.props.onFilledChange(this.props.path.id, e.target.checked)
+    this.props.onFilledChange(e.target.checked)
   };
 
   render() {

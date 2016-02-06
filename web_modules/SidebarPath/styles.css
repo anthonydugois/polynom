@@ -1,0 +1,27 @@
+@import url(App/config.css);
+
+.ad-SidebarPath {
+  border-left: 3px solid color(var(--ad-Color-prim) l(-8%));
+}
+.ad-SidebarPath.is-active {
+  border-color: var(--ad-Color-sec);
+}
+  .ad-SidebarPath-name {
+    flex: 1;
+    flex-direction: row;
+    padding: 0 .5rem;
+  }
+    .ad-SidebarPath-input {
+      width: 100%;
+      padding: .25rem .5rem;
+      background: none;
+      border: none;
+      border-radius: 2px;
+      font-family: inherit;
+      font-size: .8rem;
+      color: #fff;
+    }
+    .ad-SidebarPath-input:focus {
+      outline: 0;
+      background: color(var(--ad-Color-prim) l(-5%));
+    }

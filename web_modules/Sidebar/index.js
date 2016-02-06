@@ -4,8 +4,8 @@ import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
 import Tab from "Tabs/Tab"
 import TabPanel from "Tabs/TabPanel"
-import SidebarPaths from "./SidebarPaths"
-import SidebarPoint from "./SidebarPoint"
+import SidebarPaths from "SidebarPaths"
+import SidebarPoint from "SidebarPoint"
 import "./styles"
 
 class Sidebar extends Component {

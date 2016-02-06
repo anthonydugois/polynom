@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from "react"
-import { connect } from "react-redux"
 import Button from "Button"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
@@ -7,45 +6,7 @@ import Range from "Range"
 import Choices from "Choices"
 import Choice from "Choices/Choice"
 import Checkbox from "Checkbox"
-
-import * as pointsActions from "../../src/actions/points"
-
-// import { activePathsSelector } from "../../src/selectors/activePaths"
-import {
-  activePointsSelector,
-  pointSelector,
-  previousPointSelector,
-} from "../../src/selectors/activePoints"
-
-const mapStateToProps = (state) => ({
-  builder: state.builder,
-  // pointsById: state.pointsById,
-  // activePaths: activePathsSelector(state),
-  activePoints: activePointsSelector(state),
-  point: pointSelector(state),
-  previousPoint: previousPointSelector(state),
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  onCodeChange(pointId, code, parameters) {
-    dispatch(pointsActions.setPointCode(pointId, code, parameters))
-  },
-  onXPositionChange(pointId, x) {
-    dispatch(pointsActions.setPointX(pointId, x))
-  },
-  onYPositionChange(pointId, y) {
-    dispatch(pointsActions.setPointY(pointId, y))
-  },
-  onActiveChange(pathId, pointId) {
-    dispatch(pointsActions.activatePoint(pathId, pointId))
-  },
-  onParamsChange(pointId, parameters) {
-    dispatch(pointsActions.setPointParameters(pointId, parameters))
-  },
-  onRemoveClick(pathId, pointId) {
-    dispatch(pointsActions.removePoint(pathId, pointId))
-  },
-})
+import "./styles"
 
 function inRange(n, max) {
   if (isNaN(n) || n < 0) {
@@ -496,7 +457,4 @@ SidebarPoint.propTypes = {
   previousPoint: PropTypes.object,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SidebarPoint)
+export default SidebarPoint
