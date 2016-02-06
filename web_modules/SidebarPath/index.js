@@ -9,8 +9,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onRemoveClick() {
     dispatch(pathsActions.deletePath(ownProps.path.id))
   },
-  onPathCtrlClick() {
-    dispatch(pathsActions.setActivePath(ownProps.path.id, true))
+  onPathCtrlClick(isActive) {
+    dispatch(pathsActions.setActivePath(ownProps.path.id, isActive))
   },
   onPathClick() {
     dispatch(pointsActions.deactivatePoints())

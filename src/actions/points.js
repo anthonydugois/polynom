@@ -45,11 +45,10 @@ function addPoint(pathId, pointId, insertAt, code, x, y, parameters) {
   }
 }
 
-export function removePoint(pathId, pointId) {
+export function removePoints(pointIds) {
   return {
-    type: ActionTypes.REMOVE_POINT,
-    pathId,
-    pointId,
+    type: ActionTypes.REMOVE_POINTS,
+    pointIds,
   }
 }
 

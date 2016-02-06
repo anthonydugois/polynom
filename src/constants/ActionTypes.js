@@ -26,7 +26,7 @@ export const SET_FILLED_PATH = "SET_FILLED_PATH"
  */
 
 export const ADD_POINT = "ADD_POINT"
-export const REMOVE_POINT = "REMOVE_POINT"
+export const REMOVE_POINTS = "REMOVE_POINTS"
 export const SET_POINT_CODE = "SET_POINT_CODE"
 export const DEACTIVATE_POINTS = "DEACTIVATE_POINTS"
 export const SET_ACTIVE_POINT = "SET_ACTIVE_POINT"

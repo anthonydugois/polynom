@@ -146,12 +146,7 @@ class SidebarPoint extends Component {
   };
 
   handleRemoveClick = () => {
-    /* const { activePath, point, previousPoint } = this.props
-
-    // active the previous point
-    this.props.onActiveChange(activePath.id, previousPoint.id)
-    // then remove the point
-    this.props.onRemoveClick(activePath.id, point.id) */
+    this.props.onRemoveClick(this.props.activePoints)
   };
 
   render() {
@@ -429,14 +424,12 @@ class SidebarPoint extends Component {
         ) }
 
         <div className="ad-SidebarPoint-actions">
-          { prevCode && (
-            <Button
-              type="delete"
-              icon="delete"
-              onClick={ this.handleRemoveClick }>
-              Remove point
-            </Button>
-          ) }
+          <Button
+            type="delete"
+            icon="delete"
+            onClick={ this.handleRemoveClick }>
+            Remove point
+          </Button>
         </div>
       </div>
     )
@@ -451,7 +444,6 @@ SidebarPoint.propTypes = {
   onParamsChange: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
-  // pointsById: PropTypes.object.isRequired,
   activePoints: PropTypes.array.isRequired,
   point: PropTypes.object,
   previousPoint: PropTypes.object,

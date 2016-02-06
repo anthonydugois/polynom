@@ -10,15 +10,6 @@ const initialState = {
     isFilled: false,
     points: [0],
   },
-  /*1: {
-    id: 1,
-    name: "Default 2",
-    isActive: false,
-    isClosed: false,
-    isRelative: false,
-    isFilled: false,
-    points: [1],
-  },*/
 }
 
 const path = (state, action) => {
@@ -80,10 +71,10 @@ const path = (state, action) => {
       ],
     }
 
-  case ActionTypes.REMOVE_POINT:
+  case ActionTypes.REMOVE_POINTS:
     return {
       ...state,
-      points: state.points.filter((id) => id !== action.pointId),
+      points: state.points.filter((id) => !action.pointIds.includes(id)),
     }
 
   default:
@@ -100,6 +91,7 @@ export default (state = initialState, action) => {
     }
 
   case ActionTypes.DEACTIVATE_PATHS:
+  case ActionTypes.REMOVE_POINTS:
     return Object.keys(state).reduce((acc, key) => ({
       ...acc,
       [key]: path(state[key], action),
@@ -111,7 +103,6 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_CLOSED_PATH:
   case ActionTypes.SET_FILLED_PATH:
   case ActionTypes.ADD_POINT:
-  case ActionTypes.REMOVE_POINT:
     return {
       ...state,
       [action.pathId]: path(state[action.pathId], action),

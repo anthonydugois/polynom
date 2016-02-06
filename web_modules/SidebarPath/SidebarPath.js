@@ -13,7 +13,7 @@ import "./styles"
 class SidebarPath extends Component {
   handlePathClick = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
-      this.props.onPathCtrlClick()
+      this.props.onPathCtrlClick(!this.props.path.isActive)
     } else {
       this.props.onPathClick()
     }
