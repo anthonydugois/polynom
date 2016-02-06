@@ -1,5 +1,5 @@
 if (__PROD__) {
-  module.exports = require("./prod")
+  module.exports = require("./Root.prod")
 } else {
-  module.exports = require("./dev")
+  module.exports = require("./Root.dev")
 }
