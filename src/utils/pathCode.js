@@ -7,33 +7,33 @@ export default (path, pointsById) => {
 
     switch (point.code.toLowerCase()) {
     case "m":
-      return [...acc, ...M(point, previousPoint, path.isClosed)]
+      return [...acc, ...M(path, point, previousPoint)]
 
     case "l":
       if (point.y === previousPoint.y) {
-        return [...acc, ...H(point, previousPoint)]
+        return [...acc, ...H(path, point, previousPoint)]
       }
 
       if (point.x === previousPoint.x) {
-        return [...acc, ...V(point, previousPoint)]
+        return [...acc, ...V(path, point, previousPoint)]
       }
 
-      return [...acc, ...L(point, previousPoint)]
+      return [...acc, ...L(path, point, previousPoint)]
 
     case "q":
-      return [...acc, ...Q(point, previousPoint)]
+      return [...acc, ...Q(path, point, previousPoint)]
 
     case "t":
-      return [...acc, ...T(point, previousPoint)]
+      return [...acc, ...T(path, point, previousPoint)]
 
     case "c":
-      return [...acc, ...C(point, previousPoint)]
+      return [...acc, ...C(path, point, previousPoint)]
 
     case "s":
-      return [...acc, ...S(point, previousPoint)]
+      return [...acc, ...S(path, point, previousPoint)]
 
     case "a":
-      return [...acc, ...A(point, previousPoint)]
+      return [...acc, ...A(path, point, previousPoint)]
 
     default:
       return []
