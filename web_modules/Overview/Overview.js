@@ -69,9 +69,11 @@ class Overview extends Component {
   };
 
   handleOverviewDblClick = (e) => {
+    const { pathsById, activePaths } = this.props
+    const path = pathsById[activePaths[0]]
     const { x, y } = this.getCoords(e)
 
-    this.props.onOverviewDblClick(this.props.activePaths[0], "L", x, y)
+    this.props.onOverviewDblClick(path.id, "L", x, y)
   };
 
   renderShape = (key) => {

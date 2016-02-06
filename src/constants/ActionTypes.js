@@ -13,7 +13,7 @@ export const SET_GRID_SIZE = "SET_GRID_SIZE"
  */
 
 export const ADD_PATH = "ADD_PATH"
-export const REMOVE_PATH = "REMOVE_PATH"
+export const REMOVE_PATHS = "REMOVE_PATHS"
 export const SET_PATH_NAME = "SET_PATH_NAME"
 export const DEACTIVATE_PATHS = "DEACTIVATE_PATHS"
 export const SET_ACTIVE_PATH = "SET_ACTIVE_PATH"

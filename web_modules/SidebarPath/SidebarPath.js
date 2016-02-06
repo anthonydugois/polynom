@@ -60,12 +60,10 @@ class SidebarPath extends Component {
             </div>
 
             <div className="ad-SidebarPath-actions">
-              { this.props.showRemoveButton && (
-                <Button
-                  type="expand"
-                  icon="close"
-                  onClick={ this.handleRemoveClick } />
-              ) }
+              <Button
+                type="expand"
+                icon="close"
+                onClick={ this.handleRemoveClick } />
             </div>
           </ExpandCaption>
 
@@ -106,7 +104,6 @@ SidebarPath.propTypes = {
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
-  showRemoveButton: PropTypes.bool.isRequired,
 }
 
 export default SidebarPath

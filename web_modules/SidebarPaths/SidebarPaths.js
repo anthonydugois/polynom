@@ -10,14 +10,13 @@ class SidebarPaths extends Component {
     this.props.onAddClick(width / 2, height / 2)
   };
 
-  renderSidebarPath = (key, index, keys) => {
+  renderSidebarPath = (key) => {
     const path = this.props.pathsById[key]
 
     return (
       <SidebarPath
         key={ key }
         path={ path }
-        showRemoveButton={ keys.length > 1 }
         keyActions={ this.props.keyActions } />
     )
   };

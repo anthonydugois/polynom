@@ -68,10 +68,10 @@ export default (state = initialState, action) => {
       ],
     }
 
-  case ActionTypes.REMOVE_PATH:
+  case ActionTypes.REMOVE_PATHS:
     return {
       ...state,
-      paths: state.paths.filter((id) => id !== action.pathId),
+      paths: state.paths.filter((id) => !action.pathIds.includes(id)),
     }
 
   default:

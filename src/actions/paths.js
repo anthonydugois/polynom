@@ -42,26 +42,10 @@ function addPath(pathId, insertAt) {
   }
 }
 
-export function deletePath(pathId) {
-  return (dispatch, getState) => {
-    const { builder, pathsById } = getState()
-    const index = builder.paths.indexOf(pathId)
-
-    if (pathsById[pathId].isActive && index > -1) {
-      const activatePathId = index === 0 ?
-        builder.paths[index + 1] : builder.paths[index - 1]
-
-      dispatch(setActivePath(activatePathId))
-    }
-
-    dispatch(removePath(pathId))
-  }
-}
-
-export function removePath(pathId) {
+export function removePaths(pathIds) {
   return {
-    type: ActionTypes.REMOVE_PATH,
-    pathId,
+    type: ActionTypes.REMOVE_PATHS,
+    pathIds,
   }
 }
 

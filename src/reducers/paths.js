@@ -74,7 +74,9 @@ const path = (state, action) => {
   case ActionTypes.REMOVE_POINTS:
     return {
       ...state,
-      points: state.points.filter((id) => !action.pointIds.includes(id)),
+      points: state.points.filter((id, index) => {
+        return !(index !== 0 && action.pointIds.includes(id))
+      }),
     }
 
   default:

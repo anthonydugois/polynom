@@ -152,22 +152,18 @@ class SidebarPoint extends Component {
   render() {
     const {
       builder,
+      gridStep,
       activePoints,
       point,
       previousPoint,
     } = this.props
 
-    const step = builder.grid.snapToGrid ? builder.grid.size : 1
-    let code, prevCode
-
-    if (activePoints.length === 1) {
-      code = point.code.toLowerCase()
-      prevCode = previousPoint && previousPoint.code.toLowerCase()
-    }
+    const code = point && point.code.toLowerCase()
+    const prevCode = previousPoint && previousPoint.code.toLowerCase()
 
     return (
       <div className="ad-SidebarPoint">
-        { activePoints.length === 1 && (
+        { code && (
           <div className="ad-SidebarPoint-module">
             { /* Point general settings */ }
 
@@ -237,7 +233,7 @@ class SidebarPoint extends Component {
                 <Range
                   min={ 0 }
                   max={ builder.width }
-                  step={ step }
+                  step={ gridStep }
                   value={ point.x }
                   onChange={ this.handleXPositionChange } />
               </Setting>
@@ -248,7 +244,7 @@ class SidebarPoint extends Component {
                 <Range
                   min={ 0 }
                   max={ builder.height }
-                  step={ step }
+                  step={ gridStep }
                   value={ point.y }
                   onChange={ this.handleYPositionChange } />
               </Setting>
@@ -262,7 +258,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.width }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.x1 }
                     onChange={ this.handleX1Change } />
                 </Setting>
@@ -275,7 +271,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.height }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.y1 }
                     onChange={ this.handleY1Change } />
                 </Setting>
@@ -290,7 +286,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.width }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.x1 }
                     onChange={ this.handleX1Change } />
                 </Setting>
@@ -303,7 +299,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.height }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.y1 }
                     onChange={ this.handleY1Change } />
                 </Setting>
@@ -316,7 +312,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.width }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.x2 }
                     onChange={ this.handleX2Change } />
                 </Setting>
@@ -329,7 +325,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.height }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.y2 }
                     onChange={ this.handleY2Change } />
                 </Setting>
@@ -344,7 +340,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.width }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.x2 }
                     onChange={ this.handleX2Change } />
                 </Setting>
@@ -357,7 +353,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.height }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.y2 }
                     onChange={ this.handleY2Change } />
                 </Setting>
@@ -372,7 +368,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.width }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.rx }
                     onChange={ this.handleRXChange } />
                 </Setting>
@@ -385,7 +381,7 @@ class SidebarPoint extends Component {
                   <Range
                     min={ 0 }
                     max={ builder.height }
-                    step={ step }
+                    step={ gridStep }
                     value={ point.parameters.ry }
                     onChange={ this.handleRYChange } />
                 </Setting>
@@ -424,12 +420,14 @@ class SidebarPoint extends Component {
         ) }
 
         <div className="ad-SidebarPoint-actions">
-          <Button
-            type="delete"
-            icon="delete"
-            onClick={ this.handleRemoveClick }>
-            Remove point
-          </Button>
+          { (prevCode || activePoints.length > 1) && (
+            <Button
+              type="delete"
+              icon="delete"
+              onClick={ this.handleRemoveClick }>
+              Remove point
+            </Button>
+          ) }
         </div>
       </div>
     )
@@ -444,6 +442,7 @@ SidebarPoint.propTypes = {
   onParamsChange: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
+  gridStep: PropTypes.number.isRequired,
   activePoints: PropTypes.array.isRequired,
   point: PropTypes.object,
   previousPoint: PropTypes.object,

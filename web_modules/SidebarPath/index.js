@@ -7,7 +7,7 @@ const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onRemoveClick() {
-    dispatch(pathsActions.deletePath(ownProps.path.id))
+    dispatch(pathsActions.removePaths([ownProps.path.id]))
   },
   onPathCtrlClick(isActive) {
     dispatch(pathsActions.setActivePath(ownProps.path.id, isActive))

@@ -9,6 +9,7 @@ import SidebarPoint from "./SidebarPoint"
 
 const mapStateToProps = (state) => ({
   builder: state.builder,
+  gridStep: state.builder.grid.snapToGrid ? state.builder.grid.size : 1,
   activePoints: activePointsSelector(state),
   point: pointSelector(state),
   previousPoint: previousPointSelector(state),
