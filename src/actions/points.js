@@ -18,11 +18,12 @@ let newPointId = 0
 export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
     const { pathsById, pointsById } = getState()
+    const path = pathsById[pathId]
 
     // determine the position of the point in the corresponding path
-    const insertAt = pathsById[pathId].points.reduce((acc, key, index) => {
+    const insertAt = path.points.reduce((acc, key, index) => {
       return pointsById[key].isActive ? index + 1 : acc
-    }, 0)
+    }, path.points.length)
 
     newPointId++
 
@@ -61,19 +62,19 @@ export function setPointCode(pointId, code, parameters) {
   }
 }
 
-export function setPointX(pointId, x) {
+export function setPointsX(pointIds, dx) {
   return {
-    type: ActionTypes.SET_POINT_X,
-    pointId,
-    x,
+    type: ActionTypes.SET_POINTS_X,
+    pointIds,
+    dx,
   }
 }
 
-export function setPointY(pointId, y) {
+export function setPointsY(pointIds, dy) {
   return {
-    type: ActionTypes.SET_POINT_Y,
-    pointId,
-    y,
+    type: ActionTypes.SET_POINTS_Y,
+    pointIds,
+    dy,
   }
 }
 

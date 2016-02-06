@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
-import Button from "Button"
 import Expand from "Expand"
 import ExpandCaption from "Expand/ExpandCaption"
 import ExpandPanel from "Expand/ExpandPanel"
@@ -17,11 +16,6 @@ class SidebarPath extends Component {
     } else {
       this.props.onPathClick()
     }
-  };
-
-  handleRemoveClick = (e) => {
-    e.stopPropagation()
-    this.props.onRemoveClick()
   };
 
   handleNameChange = (e) => {
@@ -60,10 +54,7 @@ class SidebarPath extends Component {
             </div>
 
             <div className="ad-SidebarPath-actions">
-              <Button
-                type="expand"
-                icon="close"
-                onClick={ this.handleRemoveClick } />
+              { /* add some actions here */ }
             </div>
           </ExpandCaption>
 
@@ -97,7 +88,6 @@ class SidebarPath extends Component {
 SidebarPath.propTypes = {
   onPathCtrlClick: PropTypes.func.isRequired,
   onPathClick: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,

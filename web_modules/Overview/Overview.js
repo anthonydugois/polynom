@@ -10,10 +10,12 @@ function getStyles(props) {
 }
 
 class Overview extends Component {
-  state = {
-    isDragging: false,
-    draggedPoint: null,
-  };
+  constructor(props) {
+    super(props)
+
+    this.isDragging = false
+    this.coords = [0, 0]
+  }
 
   componentDidMount() {
     document.addEventListener("mousemove", this.handleMouseMove)
@@ -38,42 +40,45 @@ class Overview extends Component {
       y = grid.size * Math.round(y / grid.size)
     }
 
-    return { x, y }
+    return [x, y]
   };
 
-  handlePointMouseDown = (key) => {
-    this.setState({
-      isDragging: true,
-      draggedPoint: key,
-    })
+  handlePointMouseDown = (e) => {
+    this.isDragging = true
+    this.coords = this.getCoords(e)
   };
 
-  handleMouseUp = () => {
-    if (this.state.isDragging) {
-      this.setState({
-        isDragging: false,
-        draggedPoint: null,
-      })
+  handleMouseUp = (e) => {
+    if (this.isDragging) {
+      this.isDragging = false
+      this.coords = this.getCoords(e)
     }
   };
 
   handleMouseMove = (e) => {
-    if (this.state.isDragging) {
+    if (this.isDragging) {
       e.preventDefault()
 
-      const { x, y } = this.getCoords(e)
+      const coords = this.getCoords(e)
+      const dx = coords[0] - this.coords[0]
+      const dy = coords[1] - this.coords[1]
 
-      this.props.onXPositionChange(this.state.draggedPoint, x)
-      this.props.onYPositionChange(this.state.draggedPoint, y)
+      this.props.onXPositionChange(this.props.activePoints, dx)
+      this.props.onYPositionChange(this.props.activePoints, dy)
+
+      this.coords = coords
     }
   };
 
   handleOverviewDblClick = (e) => {
     const { pathsById, activePaths } = this.props
-    const path = pathsById[activePaths[0]]
-    const { x, y } = this.getCoords(e)
 
-    this.props.onOverviewDblClick(path.id, "L", x, y)
+    if (activePaths.length > 0) {
+      const path = pathsById[activePaths[0]]
+      const [x, y] = this.getCoords(e)
+
+      this.props.onOverviewDblClick(path.id, "L", x, y)
+    }
   };
 
   renderShape = (key) => {
@@ -117,6 +122,7 @@ Overview.propTypes = {
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
+  activePoints: PropTypes.array.isRequired,
 }
 
 export default Overview

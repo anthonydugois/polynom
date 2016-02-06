@@ -12,8 +12,8 @@ class Point extends Component {
     }
   };
 
-  handlePointMouseDown = () => {
-    this.props.onPointMouseDown(this.props.point.id)
+  handlePointMouseDown = (e) => {
+    this.props.onPointMouseDown(e)
   };
 
   renderPoint = (point) => {

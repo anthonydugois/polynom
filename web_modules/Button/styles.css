@@ -1,7 +1,8 @@
 @import url(App/config.css);
 
 .ad-Button {
-  padding: .8rem 1.4rem;
+  height: 2.5rem;
+  padding: 0 1rem;
   background: var(--ad-Color-sec);
   border: none;
   border-radius: 2px;
@@ -53,6 +54,7 @@
     }
 
 .ad-Button--expand {
+  height: auto;
   padding: .2rem;
   background: color(#fff a(.05));
   font-size: .8rem;
@@ -64,19 +66,11 @@
 }
 
 .ad-Button--delete {
-  background: color(var(--ad-Color-prim) l(+10%));
+  background: none;
 }
 .ad-Button--delete:focus,
 .ad-Button--delete:hover {
-  background: var(--ad-Color-del);
-}
-
-.ad-Button--secondary {
-  background: color(var(--ad-Color-prim) l(+10%));
-}
-.ad-Button--secondary:focus,
-.ad-Button--secondary:hover {
-  background: color(var(--ad-Color-prim) l(+15%));
+  background: color(var(--ad-Color-prim) l(+5%));
 }
 
 .ad-ButtonFile-file {

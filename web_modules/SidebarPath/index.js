@@ -6,9 +6,6 @@ import SidebarPath from "./SidebarPath"
 const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRemoveClick() {
-    dispatch(pathsActions.removePaths([ownProps.path.id]))
-  },
   onPathCtrlClick(isActive) {
     dispatch(pathsActions.setActivePath(ownProps.path.id, isActive))
   },

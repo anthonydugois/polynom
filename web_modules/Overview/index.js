@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import * as pointsActions from "../../src/actions/points"
 import { activePathsSelector } from "../../src/selectors/activePaths"
+import { activePointsSelector } from "../../src/selectors/activePoints"
 import Overview from "./Overview"
 
 const mapStateToProps = (state) => ({
@@ -8,17 +9,18 @@ const mapStateToProps = (state) => ({
   pathsById: state.pathsById,
   pointsById: state.pointsById,
   activePaths: activePathsSelector(state),
+  activePoints: activePointsSelector(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   onOverviewDblClick(pathId, code, x, y, parameters = {}) {
     dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
   },
-  onXPositionChange(pointId, x) {
-    dispatch(pointsActions.setPointX(pointId, x))
+  onXPositionChange(pointIds, dx) {
+    dispatch(pointsActions.setPointsX(pointIds, dx))
   },
-  onYPositionChange(pointId, y) {
-    dispatch(pointsActions.setPointY(pointId, y))
+  onYPositionChange(pointIds, dy) {
+    dispatch(pointsActions.setPointsY(pointIds, dy))
   },
 })
 

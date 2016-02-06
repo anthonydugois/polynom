@@ -424,9 +424,7 @@ class SidebarPoint extends Component {
             <Button
               type="delete"
               icon="delete"
-              onClick={ this.handleRemoveClick }>
-              Remove point
-            </Button>
+              onClick={ this.handleRemoveClick } />
           ) }
         </div>
       </div>

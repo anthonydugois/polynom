@@ -33,16 +33,16 @@ const point = (state, action) => {
       parameters: action.parameters,
     }
 
-  case ActionTypes.SET_POINT_X:
+  case ActionTypes.SET_POINTS_X:
     return {
       ...state,
-      x: action.x,
+      x: state.x + action.dx,
     }
 
-  case ActionTypes.SET_POINT_Y:
+  case ActionTypes.SET_POINTS_Y:
     return {
       ...state,
-      y: action.y,
+      y: state.y + action.dy,
     }
 
   case ActionTypes.DEACTIVATE_POINTS:
@@ -82,9 +82,15 @@ export default (state = initialState, action) => {
       [key]: point(state[key], action),
     }), {})
 
+  case ActionTypes.SET_POINTS_X:
+  case ActionTypes.SET_POINTS_Y:
+    return Object.keys(state).reduce((acc, key) => ({
+      ...acc,
+      [key]: action.pointIds.includes(state[key].id) ?
+        point(state[key], action) : state[key],
+    }), {})
+
   case ActionTypes.SET_POINT_CODE:
-  case ActionTypes.SET_POINT_X:
-  case ActionTypes.SET_POINT_Y:
   case ActionTypes.SET_ACTIVE_POINT:
   case ActionTypes.SET_POINT_PARAMETERS:
     return {
