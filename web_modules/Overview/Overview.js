@@ -59,14 +59,14 @@ class Overview extends Component {
     if (this.isDragging) {
       e.preventDefault()
 
-      const coords = this.getCoords(e)
-      const dx = coords[0] - this.coords[0]
-      const dy = coords[1] - this.coords[1]
+      const current = this.getCoords(e)
+      const dx = current[0] - this.coords[0]
+      const dy = current[1] - this.coords[1]
 
-      this.props.onXPositionChange(this.props.activePoints, dx)
-      this.props.onYPositionChange(this.props.activePoints, dy)
+      this.props.onXPositionsChange(this.props.activePoints, dx)
+      this.props.onYPositionsChange(this.props.activePoints, dy)
 
-      this.coords = coords
+      this.coords = current
     }
   };
 
@@ -115,8 +115,8 @@ class Overview extends Component {
 
 Overview.propTypes = {
   onOverviewDblClick: PropTypes.func.isRequired,
-  onXPositionChange: PropTypes.func.isRequired,
-  onYPositionChange: PropTypes.func.isRequired,
+  onXPositionsChange: PropTypes.func.isRequired,
+  onYPositionsChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,

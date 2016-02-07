@@ -62,6 +62,22 @@ export function setPointCode(pointId, code, parameters) {
   }
 }
 
+export function setPointX(pointId, x) {
+  return {
+    type: ActionTypes.SET_POINT_X,
+    pointId,
+    x,
+  }
+}
+
+export function setPointY(pointId, y) {
+  return {
+    type: ActionTypes.SET_POINT_Y,
+    pointId,
+    y,
+  }
+}
+
 export function setPointsX(pointIds, dx) {
   return {
     type: ActionTypes.SET_POINTS_X,

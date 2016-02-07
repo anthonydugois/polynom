@@ -29,9 +29,6 @@ class Point extends Component {
   };
 
   renderQuadraticAnchors(point, previousPoint) {
-    // const code = point.code.toLowerCase()
-    // const prevCode = previousPoint.code.toLowerCase()
-
     return (
       <g className="ad-Anchor">
         <line
@@ -59,7 +56,6 @@ class Point extends Component {
 
   renderCubicAnchors(point, previousPoint) {
     const code = point.code.toLowerCase()
-    // const prevCode = previousPoint.code.toLowerCase()
 
     return (
       <g className="ad-Anchor">

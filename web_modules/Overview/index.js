@@ -16,10 +16,10 @@ const mapDispatchToProps = (dispatch) => ({
   onOverviewDblClick(pathId, code, x, y, parameters = {}) {
     dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
   },
-  onXPositionChange(pointIds, dx) {
+  onXPositionsChange(pointIds, dx) {
     dispatch(pointsActions.setPointsX(pointIds, dx))
   },
-  onYPositionChange(pointIds, dy) {
+  onYPositionsChange(pointIds, dy) {
     dispatch(pointsActions.setPointsY(pointIds, dy))
   },
 })

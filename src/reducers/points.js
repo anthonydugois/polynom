@@ -33,6 +33,20 @@ const point = (state, action) => {
       parameters: action.parameters,
     }
 
+  // set position of only one point
+  case ActionTypes.SET_POINT_X:
+    return {
+      ...state,
+      x: action.x,
+    }
+
+  case ActionTypes.SET_POINT_Y:
+    return {
+      ...state,
+      y: action.y,
+    }
+
+  // set position of multiple points
   case ActionTypes.SET_POINTS_X:
     return {
       ...state,
@@ -90,6 +104,8 @@ export default (state = initialState, action) => {
         point(state[key], action) : state[key],
     }), {})
 
+  case ActionTypes.SET_POINT_X:
+  case ActionTypes.SET_POINT_Y:
   case ActionTypes.SET_POINT_CODE:
   case ActionTypes.SET_ACTIVE_POINT:
   case ActionTypes.SET_POINT_PARAMETERS:
