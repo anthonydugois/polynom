@@ -4,29 +4,26 @@ import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import "./styles"
 
 class Point extends Component {
-  handlePointClick = () => {
-    if (this.props.keyActions.includes(APP_CTRL)) {
-      this.props.onPointCtrlClick()
-    } else {
-      this.props.onPointClick()
-    }
-  };
-
   handlePointMouseDown = (e) => {
+    if (this.props.keyActions.includes(APP_CTRL)) {
+      this.props.onPointAddActive()
+    } else {
+      this.props.onPointActive()
+    }
+
     this.props.onPointMouseDown(e)
   };
 
-  renderPoint = (point) => {
+  renderPoint(point) {
     return (
       <circle
         className="ad-Point-circle"
         cx={ point.x }
         cy={ point.y }
         r={ 6 }
-        onClick={ this.handlePointClick }
         onMouseDown={ this.handlePointMouseDown } />
     )
-  };
+  }
 
   renderQuadraticAnchors(point, previousPoint) {
     return (
@@ -100,7 +97,7 @@ class Point extends Component {
       <g className={ cx("ad-Point", { "is-active": point.isActive }) }>
         { this.renderPoint(point) }
 
-        { /* if there is a Bezier curve, render anchors */ }
+        { /* If there is a Bezier curve, render anchors */ }
         { (code === "q") &&
             this.renderQuadraticAnchors(point, previousPoint) }
         { (code === "c" || code === "s") &&
@@ -111,8 +108,8 @@ class Point extends Component {
 }
 
 Point.propTypes = {
-  onPointCtrlClick: PropTypes.func.isRequired,
-  onPointClick: PropTypes.func.isRequired,
+  onPointAddActive: PropTypes.func.isRequired,
+  onPointActive: PropTypes.func.isRequired,
   onPointMouseDown: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,

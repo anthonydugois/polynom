@@ -9,14 +9,10 @@ export const activePointsSelector = createSelector(
   pointsByIdSelector,
   activePathsSelector,
   (pathsById, pointsById, activePaths) => {
-    const activePoints = activePaths.reduce((acc, key) => {
-      return [
-        ...acc,
-        ...pathsById[key].points.filter((id) => pointsById[id].isActive),
-      ]
-    }, [])
-
-    return activePoints
+    return activePaths.reduce((acc, key) => [
+      ...acc,
+      ...pathsById[key].points.filter((id) => pointsById[id].isActive),
+    ], [])
   }
 )
 

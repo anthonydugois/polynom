@@ -6,11 +6,11 @@ import Point from "./Point"
 const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onPointCtrlClick() {
+  onPointAddActive() {
     dispatch(pathsActions.setActivePath(ownProps.path.id, true))
     dispatch(pointsActions.setActivePoint(ownProps.point.id, true))
   },
-  onPointClick() {
+  onPointActive() {
     dispatch(pathsActions.deactivatePaths())
     dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.setActivePath(ownProps.path.id, true))
