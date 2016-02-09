@@ -1,18 +1,13 @@
 @import url(App/config.css);
 
-.ad-Point-circle {
+.ad-Point-main {
   cursor: pointer;
-  fill: #fff;
-  stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 4px;
+  fill: color(var(--ad-Color-prim) l(+15%));
   transition: fill .2s;
 }
-.ad-Point-circle:hover,
-.ad-Point.is-active .ad-Point-circle {
+.ad-Point-main:hover,
+.ad-Point.is-active .ad-Point-main {
   fill: var(--ad-Color-sec);
-}
-.ad-Point-circle.is-first {
-  stroke: var(--ad-Color-sec);
 }
 
 .ad-Anchor {
@@ -23,12 +18,10 @@
 }
   .ad-Anchor-point {
     cursor: pointer;
-    fill: #fff;
-    stroke: color(var(--ad-Color-prim) l(+35%));
-    stroke-width: 3px;
+    fill: var(--ad-Color-sec);
   }
   .ad-Anchor-line {
-    stroke: color(var(--ad-Color-prim) l(+35%));
+    stroke: var(--ad-Color-sec);
     stroke-width: 1px;
-    stroke-dasharray: 10 10;
+    stroke-dasharray: 8 8;
   }

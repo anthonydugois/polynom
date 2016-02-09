@@ -3,7 +3,7 @@
 .ad-Shape-path {
   fill: none;
   stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 4px;
+  stroke-width: 2px;
   stroke-linecap: round;
 }
 .ad-Shape-path.is-filled {

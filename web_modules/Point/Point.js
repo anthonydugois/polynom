@@ -15,12 +15,15 @@ class Point extends Component {
   };
 
   renderPoint(point) {
+    const [w, h] = [10, 10]
+
     return (
-      <circle
-        className="ad-Point-circle"
-        cx={ point.x }
-        cy={ point.y }
-        r={ 6 }
+      <rect
+        className="ad-Point-main"
+        x={ point.x - w / 2 }
+        y={ point.y - h / 2 }
+        width={ w }
+        height={ h }
         onMouseDown={ this.handlePointMouseDown } />
     )
   }
