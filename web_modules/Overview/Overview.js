@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import Grid from "Grid"
 import Shape from "Shape"
+import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
 function getStyles(props) {
@@ -15,6 +16,8 @@ class Overview extends Component {
 
     this.isDragging = false
     this.coords = [0, 0]
+    this.draggedPoint = null
+    this.draggedObject = null
   }
 
   componentDidMount() {
@@ -43,9 +46,11 @@ class Overview extends Component {
     return [x, y]
   };
 
-  handlePointMouseDown = (e) => {
+  handleMouseDown = (e, draggedPoint, draggedObject) => {
     this.isDragging = true
     this.coords = this.getCoords(e)
+    this.draggedPoint = draggedPoint
+    this.draggedObject = draggedObject
   };
 
   handleMouseUp = (e) => {
@@ -59,16 +64,37 @@ class Overview extends Component {
     if (this.isDragging) {
       e.preventDefault()
 
-      const current = this.getCoords(e)
-      const dx = current[0] - this.coords[0]
-      const dy = current[1] - this.coords[1]
+      const coords = this.getCoords(e)
 
-      this.props.onXPositionsChange(this.props.activePoints, dx)
-      this.props.onYPositionsChange(this.props.activePoints, dy)
+      switch (this.draggedObject) {
+      case ObjectTypes.POINT_MAIN:
+        this.movePoints(coords)
+        break
 
-      this.coords = current
+      case ObjectTypes.POINT_ANCHOR_QUAD:
+        this.moveAnchorsQuad(coords)
+        break
+      }
     }
   };
+
+  movePoints(coords) {
+    const { activePoints } = this.props
+    const dx = coords[0] - this.coords[0]
+    const dy = coords[1] - this.coords[1]
+
+    this.coords = coords
+
+    this.props.onXPositionsChange(activePoints, dx)
+    this.props.onYPositionsChange(activePoints, dy)
+  }
+
+  moveAnchorsQuad(coords) {
+    this.props.onParametersChange(this.draggedPoint, {
+      x1: coords[0],
+      y1: coords[1],
+    })
+  }
 
   handleOverviewDblClick = (e) => {
     const { pathsById, activePaths } = this.props
@@ -90,7 +116,7 @@ class Overview extends Component {
         path={ path }
         pointsById={ this.props.pointsById }
         keyActions={ this.props.keyActions }
-        onPointMouseDown={ this.handlePointMouseDown } />
+        onMouseDown={ this.handleMouseDown } />
     )
   };
 
@@ -117,6 +143,7 @@ Overview.propTypes = {
   onOverviewDblClick: PropTypes.func.isRequired,
   onXPositionsChange: PropTypes.func.isRequired,
   onYPositionsChange: PropTypes.func.isRequired,
+  onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,

@@ -1,17 +1,26 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
 class Point extends Component {
-  handlePointMouseDown = (e) => {
+  handlePointMouseDown = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPointAddActive()
     } else {
       this.props.onPointActive()
     }
+  };
 
-    this.props.onPointMouseDown(e)
+  handleMainMouseDown = (e) => {
+    const { point } = this.props
+    this.props.onMouseDown(e, point.id, ObjectTypes.POINT_MAIN)
+  };
+
+  handleAnchorQuadMouseDown = (e) => {
+    const { point } = this.props
+    this.props.onMouseDown(e, point.id, ObjectTypes.POINT_ANCHOR_QUAD)
   };
 
   renderPoint(point) {
@@ -24,7 +33,7 @@ class Point extends Component {
         y={ point.y - h / 2 }
         width={ w }
         height={ h }
-        onMouseDown={ this.handlePointMouseDown } />
+        onMouseDown={ this.handleMainMouseDown } />
     )
   }
 
@@ -49,7 +58,8 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x1 }
           cy={ point.parameters.y1 }
-          r={ 4 } />
+          r={ 4 }
+          onMouseDown={ this.handleAnchorQuadMouseDown } />
       </g>
     )
   }
@@ -97,7 +107,9 @@ class Point extends Component {
     const code = point.code.toLowerCase()
 
     return (
-      <g className={ cx("ad-Point", { "is-active": point.isActive }) }>
+      <g
+        className={ cx("ad-Point", { "is-active": point.isActive }) }
+        onMouseDown={ this.handlePointMouseDown }>
         { this.renderPoint(point) }
 
         { /* If there is a Bezier curve, render anchors */ }
@@ -113,7 +125,7 @@ class Point extends Component {
 Point.propTypes = {
   onPointAddActive: PropTypes.func.isRequired,
   onPointActive: PropTypes.func.isRequired,
-  onPointMouseDown: PropTypes.func.isRequired,
+  onMouseDown: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
   point: PropTypes.object.isRequired,

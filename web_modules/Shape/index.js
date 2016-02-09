@@ -16,7 +16,7 @@ class Shape extends Component {
         point={ point }
         previousPoint={ index > 0 ? pointsById[keys[index - 1]] : null }
         keyActions={ this.props.keyActions }
-        onPointMouseDown={ this.props.onPointMouseDown } />
+        onMouseDown={ this.props.onMouseDown } />
     )
   };
 
@@ -38,7 +38,7 @@ class Shape extends Component {
 }
 
 Shape.propTypes = {
-  onPointMouseDown: PropTypes.func.isRequired,
+  onMouseDown: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,

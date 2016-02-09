@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
   onYPositionsChange(pointIds, dy) {
     dispatch(pointsActions.setPointsY(pointIds, dy))
   },
+  onParametersChange(pointId, parameters) {
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
+  },
 })
 
 export default connect(
