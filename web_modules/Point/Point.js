@@ -14,13 +14,15 @@ class Point extends Component {
   };
 
   handleMainMouseDown = (e) => {
-    const { point } = this.props
-    this.props.onMouseDown(e, point.id, ObjectTypes.POINT_MAIN)
+    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_MAIN)
   };
 
-  handleAnchorQuadMouseDown = (e) => {
-    const { point } = this.props
-    this.props.onMouseDown(e, point.id, ObjectTypes.POINT_ANCHOR_QUAD)
+  handleFirstAnchorMouseDown = (e) => {
+    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_1)
+  };
+
+  handleSecondAnchorMouseDown = (e) => {
+    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_2)
   };
 
   renderPoint(point) {
@@ -59,7 +61,7 @@ class Point extends Component {
           cx={ point.parameters.x1 }
           cy={ point.parameters.y1 }
           r={ 4 }
-          onMouseDown={ this.handleAnchorQuadMouseDown } />
+          onMouseDown={ this.handleFirstAnchorMouseDown } />
       </g>
     )
   }
@@ -90,14 +92,16 @@ class Point extends Component {
             className="ad-Anchor-point"
             cx={ point.parameters.x1 }
             cy={ point.parameters.y1 }
-            r={ 4 } />
+            r={ 4 }
+            onMouseDown={ this.handleFirstAnchorMouseDown } />
         ) }
 
         <circle
           className="ad-Anchor-point"
           cx={ point.parameters.x2 }
           cy={ point.parameters.y2 }
-          r={ 4 } />
+          r={ 4 }
+          onMouseDown={ this.handleSecondAnchorMouseDown } />
       </g>
     )
   }

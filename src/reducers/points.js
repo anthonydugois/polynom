@@ -84,7 +84,10 @@ const point = (state, action) => {
   case ActionTypes.SET_POINT_PARAMETERS:
     return {
       ...state,
-      parameters: action.parameters,
+      parameters: {
+        ...state.parameters,
+        ...action.parameters,
+      },
     }
 
   default:

@@ -71,8 +71,12 @@ class Overview extends Component {
         this.movePoints(coords)
         break
 
-      case ObjectTypes.POINT_ANCHOR_QUAD:
-        this.moveAnchorsQuad(coords)
+      case ObjectTypes.POINT_ANCHOR_1:
+        this.moveFirstAnchor(coords)
+        break
+
+      case ObjectTypes.POINT_ANCHOR_2:
+        this.moveSecondAnchor(coords)
         break
       }
     }
@@ -89,10 +93,17 @@ class Overview extends Component {
     this.props.onYPositionsChange(activePoints, dy)
   }
 
-  moveAnchorsQuad(coords) {
+  moveFirstAnchor(coords) {
     this.props.onParametersChange(this.draggedPoint, {
       x1: coords[0],
       y1: coords[1],
+    })
+  }
+
+  moveSecondAnchor(coords) {
+    this.props.onParametersChange(this.draggedPoint, {
+      x2: coords[0],
+      y2: coords[1],
     })
   }
 
