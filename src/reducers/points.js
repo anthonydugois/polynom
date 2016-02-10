@@ -51,12 +51,22 @@ const point = (state, action) => {
     return {
       ...state,
       x: state.x + action.dx,
+      parameters: {
+        ...state.parameters,
+        ...(state.parameters.x1 ? { x1: state.parameters.x1 + action.dx } : {}),
+        ...(state.parameters.x2 ? { x2: state.parameters.x2 + action.dx } : {}),
+      },
     }
 
   case ActionTypes.SET_POINTS_Y:
     return {
       ...state,
       y: state.y + action.dy,
+      parameters: {
+        ...state.parameters,
+        ...(state.parameters.y1 ? { y1: state.parameters.y1 + action.dy } : {}),
+        ...(state.parameters.y2 ? { y2: state.parameters.y2 + action.dy } : {}),
+      },
     }
 
   case ActionTypes.DEACTIVATE_POINTS:
