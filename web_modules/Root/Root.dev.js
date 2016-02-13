@@ -11,7 +11,7 @@ class Root extends Component {
       <Provider store={ store }>
         <div>
           <App />
-          <DevTools />
+          { <DevTools /> }
         </div>
       </Provider>
     )

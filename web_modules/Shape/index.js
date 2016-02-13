@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import Point from "Point"
 import pathCode from "../../src/utils/pathCode"
+import boundingBox from "svg-path-bounding-box"
 import "./styles"
 
 class Shape extends Component {
@@ -22,12 +23,23 @@ class Shape extends Component {
 
   render() {
     const { path, pointsById } = this.props
+    const code = pathCode(path, pointsById)
+    const { minX, minY, width, height } = boundingBox(code)
 
     return (
-      <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
+      <g className="ad-Shape">
+        { path.isActive && (
+          <rect
+            className="ad-Shape-rect"
+            x={ minX }
+            y={ minY }
+            width={ width }
+            height={ height } />
+        ) }
+
         <path
           className={ cx("ad-Shape-path", { "is-filled": path.isFilled }) }
-          d={ pathCode(path, pointsById) } />
+          d={ code } />
 
         <g className="ad-Shape-points">
           { path.points.map(this.renderPoint) }
