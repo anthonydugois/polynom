@@ -14,7 +14,7 @@ class Point extends Component {
   };
 
   handleMainMouseDown = (e) => {
-    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_MAIN)
+    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT)
   };
 
   handleFirstAnchorMouseDown = (e) => {

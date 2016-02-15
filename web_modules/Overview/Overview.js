@@ -67,7 +67,8 @@ class Overview extends Component {
       const coords = this.getCoords(e)
 
       switch (this.draggedObject) {
-      case ObjectTypes.POINT_MAIN:
+      case ObjectTypes.PATH:
+      case ObjectTypes.POINT:
         this.movePoints(coords)
         break
 

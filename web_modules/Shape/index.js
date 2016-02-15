@@ -37,7 +37,9 @@ class Shape extends Component {
             height={ height } />
         ) }
 
-        <Path path={ path } />
+        <Path
+          path={ path }
+          onMouseDown={ this.props.onMouseDown } />
 
         <g className="ad-Shape-points">
           { path.points.map(this.renderPoint) }
