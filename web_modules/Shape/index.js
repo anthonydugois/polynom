@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import Point from "Point"
-import pathCode from "../../src/utils/pathCode"
+import { pathCode } from "../../src/utils"
 import boundingBox from "svg-path-bounding-box"
 import "./styles"
 

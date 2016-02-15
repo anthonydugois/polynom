@@ -1,9 +1,7 @@
 import React, { PropTypes } from "react"
 import "./styles"
 
-const Choices = ({
-  children,
-}) => (
+const Choices = ({ children }) => (
   <div className="ad-Choices">
     { children }
   </div>

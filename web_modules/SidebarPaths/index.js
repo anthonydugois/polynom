@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
-import * as pathsActions from "../../src/actions/paths"
-import { activePathsSelector } from "../../src/selectors/activePaths"
+import { pathsActions } from "../../src/actions"
+import { activePathsSelector } from "../../src/selectors"
 import SidebarPaths from "./SidebarPaths"
 
 const mapStateToProps = (state) => ({

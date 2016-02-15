@@ -3,37 +3,7 @@ import * as ActionTypes from "../constants/ActionTypes"
 const initialState = {
   width: 1000,
   height: 800,
-  grid: {
-    isShown: true,
-    snapToGrid: false,
-    size: 50,
-  },
   paths: [0],
-}
-
-const grid = (state, action) => {
-  switch (action.type) {
-  case ActionTypes.SET_GRID_SHOWN:
-    return {
-      ...state,
-      isShown: action.isShown,
-    }
-
-  case ActionTypes.SET_GRID_SNAP:
-    return {
-      ...state,
-      snapToGrid: action.snapToGrid,
-    }
-
-  case ActionTypes.SET_GRID_SIZE:
-    return {
-      ...state,
-      size: action.size,
-    }
-
-  default:
-    return state
-  }
 }
 
 export default (state = initialState, action) => {
@@ -48,14 +18,6 @@ export default (state = initialState, action) => {
     return {
       ...state,
       height: action.height,
-    }
-
-  case ActionTypes.SET_GRID_SHOWN:
-  case ActionTypes.SET_GRID_SNAP:
-  case ActionTypes.SET_GRID_SIZE:
-    return {
-      ...state,
-      grid: grid(state.grid, action),
     }
 
   case ActionTypes.ADD_PATH:

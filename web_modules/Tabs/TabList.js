@@ -1,8 +1,6 @@
 import React, { PropTypes } from "react"
 
-const TabList = ({
-  children,
-}) => (
+const TabList = ({ children }) => (
   <ul className="ad-TabList">
     { children }
   </ul>

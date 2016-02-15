@@ -1,11 +1,11 @@
 import { connect } from "react-redux"
-import * as pointsActions from "../../src/actions/points"
-import { activePathsSelector } from "../../src/selectors/activePaths"
-import { activePointsSelector } from "../../src/selectors/activePoints"
+import { pointsActions } from "../../src/actions"
+import { activePathsSelector, activePointsSelector } from "../../src/selectors"
 import Overview from "./Overview"
 
 const mapStateToProps = (state) => ({
   builder: state.builder,
+  grid: state.grid,
   pathsById: state.pathsById,
   pointsById: state.pointsById,
   activePaths: activePathsSelector(state),

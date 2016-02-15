@@ -31,7 +31,7 @@ class Overview extends Component {
   }
 
   getCoords = (e) => {
-    const { grid } = this.props.builder
+    const { grid } = this.props
     const { left, top } = findDOMNode(this).getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
@@ -132,7 +132,7 @@ class Overview extends Component {
   };
 
   render() {
-    const { builder } = this.props
+    const { builder, grid } = this.props
 
     return (
       <svg
@@ -142,7 +142,7 @@ class Overview extends Component {
         <Grid
           width={ builder.width }
           height={ builder.height }
-          grid={ builder.grid } />
+          grid={ grid } />
 
         { builder.paths.map(this.renderShape) }
       </svg>
@@ -157,6 +157,7 @@ Overview.propTypes = {
   onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
+  grid: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,

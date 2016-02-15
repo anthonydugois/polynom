@@ -1,8 +1,6 @@
 import React, { PropTypes } from "react"
 
-const Settings = ({
-  children,
-}) => (
+const Settings = ({ children }) => (
   <div className="ad-Settings">
     { children }
   </div>

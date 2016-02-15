@@ -1,6 +1,5 @@
 import { connect } from "react-redux"
-import * as pathsActions from "../../src/actions/paths"
-import * as pointsActions from "../../src/actions/points"
+import { pathsActions, pointsActions } from "../../src/actions"
 import Point from "./Point"
 
 const mapStateToProps = (state) => state

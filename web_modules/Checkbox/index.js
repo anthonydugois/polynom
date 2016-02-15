@@ -1,9 +1,7 @@
 import React from "react"
 import "./styles"
 
-const Checkbox = ({
-  ...props,
-}) => (
+const Checkbox = (props) => (
   <label className="ad-Checkbox">
     <input
       className="ad-Checkbox-input"
