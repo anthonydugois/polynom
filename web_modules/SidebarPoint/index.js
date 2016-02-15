@@ -26,9 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
   onYPositionChange(pointId, y) {
     dispatch(pointsActions.setPointY(pointId, y))
   },
-  onActiveChange(pathId, pointId) {
-    dispatch(pointsActions.activatePoint(pathId, pointId))
-  },
   onParamsChange(pointId, parameters) {
     dispatch(pointsActions.setPointParameters(pointId, parameters))
   },

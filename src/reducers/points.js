@@ -75,7 +75,7 @@ const point = (state, action) => {
       isActive: false,
     }
 
-  case ActionTypes.SET_ACTIVE_POINT:
+  case ActionTypes.SET_ACTIVE_POINTS:
     return {
       ...state,
       isActive: action.isActive,
@@ -109,6 +109,7 @@ export default (state = initialState, action) => {
       [key]: point(state[key], action),
     }), {})
 
+  case ActionTypes.SET_ACTIVE_POINTS:
   case ActionTypes.SET_POINTS_X:
   case ActionTypes.SET_POINTS_Y:
     return Object.keys(state).reduce((acc, key) => ({
@@ -120,7 +121,6 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_POINT_X:
   case ActionTypes.SET_POINT_Y:
   case ActionTypes.SET_POINT_CODE:
-  case ActionTypes.SET_ACTIVE_POINT:
   case ActionTypes.SET_POINT_PARAMETERS:
     return {
       ...state,

@@ -100,7 +100,6 @@ SidebarPoint.propTypes = {
   onCodeChange: PropTypes.func.isRequired,
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
-  onActiveChange: PropTypes.func.isRequired,
   onParamsChange: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,

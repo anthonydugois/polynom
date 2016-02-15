@@ -7,10 +7,10 @@ export function deactivatePaths() {
   }
 }
 
-export function setActivePath(pathId, isActive) {
+export function setActivePaths(pathIds, isActive) {
   return {
-    type: ActionTypes.SET_ACTIVE_PATH,
-    pathId,
+    type: ActionTypes.SET_ACTIVE_PATHS,
+    pathIds,
     isActive,
   }
 }
@@ -30,7 +30,7 @@ export function createPath(x, y) {
     dispatch(deactivatePaths())
     dispatch(addPath(newPathId, insertAt))
     dispatch(createPoint(newPathId, "M", x, y, {}))
-    dispatch(setActivePath(newPathId, true))
+    dispatch(setActivePaths([newPathId], true))
   }
 }
 

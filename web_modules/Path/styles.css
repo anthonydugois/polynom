@@ -1,0 +1,11 @@
+@import url(App/config.css);
+
+.ad-Path {
+  fill: none;
+  stroke: color(var(--ad-Color-prim) l(+15%));
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+.ad-Path.is-filled {
+  fill: color(var(--ad-Color-prim) l(+15%));
+}

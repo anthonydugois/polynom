@@ -6,12 +6,14 @@ const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onPathCtrlClick(isActive) {
-    dispatch(pathsActions.setActivePath(ownProps.path.id, isActive))
+    dispatch(pathsActions.setActivePaths([ownProps.path.id], isActive))
+    dispatch(pointsActions.setActivePoints(ownProps.path.points, isActive))
   },
   onPathClick() {
     dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.deactivatePaths())
-    dispatch(pathsActions.setActivePath(ownProps.path.id, true))
+    dispatch(pathsActions.setActivePaths([ownProps.path.id], true))
+    dispatch(pointsActions.setActivePoints(ownProps.path.points, true))
   },
   onNameChange(name) {
     dispatch(pathsActions.setPathName(ownProps.path.id, name))

@@ -6,10 +6,10 @@ export function deactivatePoints() {
   }
 }
 
-export function setActivePoint(pointId, isActive) {
+export function setActivePoints(pointIds, isActive) {
   return {
-    type: ActionTypes.SET_ACTIVE_POINT,
-    pointId,
+    type: ActionTypes.SET_ACTIVE_POINTS,
+    pointIds,
     isActive,
   }
 }
@@ -29,7 +29,7 @@ export function createPoint(pathId, code, x, y, parameters) {
 
     dispatch(deactivatePoints())
     dispatch(addPoint(pathId, newPointId, insertAt, code, x, y, parameters))
-    dispatch(setActivePoint(newPointId, true))
+    dispatch(setActivePoints([newPointId], true))
   }
 }
 

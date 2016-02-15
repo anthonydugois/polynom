@@ -37,7 +37,7 @@ const path = (state, action) => {
       name: action.name,
     }
 
-  case ActionTypes.SET_ACTIVE_PATH:
+  case ActionTypes.SET_ACTIVE_PATHS:
     return {
       ...state,
       isActive: action.isActive,
@@ -91,6 +91,13 @@ export default (state = initialState, action) => {
       ...state,
       [action.pathId]: path(undefined, action),
     }
+
+  case ActionTypes.SET_ACTIVE_PATHS:
+    return Object.keys(state).reduce((acc, key) => ({
+      ...acc,
+      [key]: action.pathIds.includes(state[key].id) ?
+        path(state[key], action) : state[key],
+    }), {})
 
   case ActionTypes.DEACTIVATE_PATHS:
   case ActionTypes.REMOVE_POINTS:

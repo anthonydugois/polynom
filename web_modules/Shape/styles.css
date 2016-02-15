@@ -1,14 +1,5 @@
 @import url(App/config.css);
 
-.ad-Shape-path {
-  fill: none;
-  stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 2px;
-  stroke-linecap: round;
-}
-.ad-Shape-path.is-filled {
-  fill: color(var(--ad-Color-prim) l(+15%));
-}
 .ad-Shape-rect {
   fill: none;
   stroke: var(--ad-Color-sec);
