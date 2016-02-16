@@ -7,6 +7,8 @@ import { pathCode } from "../../src/utils"
 import "./styles"
 
 class Path extends Component {
+  handleClick = (e) => e.stopPropagation();
+
   handleMouseDown = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPathAddActive()
@@ -27,6 +29,7 @@ class Path extends Component {
     return (
       <g
         className={ cx("ad-Path", { "is-filled": path.isFilled }) }
+        onClick={ this.handleClick }
         onMouseDown={ this.handleMouseDown }>
         { path.isActive && (
           <rect

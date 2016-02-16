@@ -64,7 +64,7 @@ class SidebarPath extends Component {
           <ExpandPanel>
             <Settings>
               <Setting>
-                <Textarea defaultValue={ d } />
+                <Textarea value={ d } />
               </Setting>
             </Settings>
 

@@ -10,10 +10,6 @@ class SidebarPaths extends Component {
     this.props.onAddClick(width / 2, height / 2)
   };
 
-  handleRemoveClick = () => {
-    this.props.onRemoveClick(this.props.activePaths)
-  };
-
   renderSidebarPath = (key) => {
     const path = this.props.pathsById[key]
 
@@ -26,7 +22,7 @@ class SidebarPaths extends Component {
   };
 
   render() {
-    const { builder, activePaths } = this.props
+    const { builder } = this.props
 
     return (
       <div className="ad-SidebarPaths">
@@ -38,13 +34,6 @@ class SidebarPaths extends Component {
           <Button onClick={ this.handleAddClick }>
             New path
           </Button>
-
-          { activePaths.length > 0 && (
-            <Button
-              type="delete"
-              icon="delete"
-              onClick={ this.handleRemoveClick } />
-          ) }
         </div>
       </div>
     )
@@ -53,11 +42,9 @@ class SidebarPaths extends Component {
 
 SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
-  activePaths: PropTypes.array.isRequired,
 }
 
 export default SidebarPaths

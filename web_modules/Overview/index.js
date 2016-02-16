@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { pointsActions } from "../../src/actions"
+import { pathsActions, pointsActions } from "../../src/actions"
 import { activePathsSelector, activePointsSelector } from "../../src/selectors"
 import Overview from "./Overview"
 
@@ -13,7 +13,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onOverviewDblClick(pathId, code, x, y, parameters = {}) {
+  onOverviewCreatePath(x, y) {
+    dispatch(pathsActions.createPath(x, y))
+  },
+  onOverviewCreatePoint(pathId, code, x, y, parameters = {}) {
     dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
   },
   onXPositionsChange(pointIds, dx) {

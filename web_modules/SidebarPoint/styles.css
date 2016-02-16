@@ -8,6 +8,7 @@
   .ad-SidebarPoint-module {
     flex: 1;
     overflow: auto;
+    padding: .5rem 0;
   }
   .ad-SidebarPoint-actions {
     display: flex;

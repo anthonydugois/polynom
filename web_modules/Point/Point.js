@@ -5,7 +5,9 @@ import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
 class Point extends Component {
-  handlePointMouseDown = () => {
+  handleClick = (e) => e.stopPropagation();
+
+  handleMouseDown = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPointAddActive()
     } else {
@@ -113,7 +115,8 @@ class Point extends Component {
     return (
       <g
         className={ cx("ad-Point", { "is-active": point.isActive }) }
-        onMouseDown={ this.handlePointMouseDown }>
+        onClick={ this.handleClick }
+        onMouseDown={ this.handleMouseDown }>
         { this.renderPoint(point) }
 
         { /* If there is a Bezier curve, render anchors */ }

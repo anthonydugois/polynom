@@ -4,12 +4,6 @@
   display: flex;
   padding: 1rem 1.5rem;
 }
-.ad-Settings:first-of-type {
-  padding-top: 1.5rem;
-}
-.ad-Settings:last-of-type {
-  padding-bottom: 1.5rem;
-}
 
 .ad-Setting {
   flex: 1;

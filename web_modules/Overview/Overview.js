@@ -108,14 +108,16 @@ class Overview extends Component {
     })
   }
 
-  handleOverviewDblClick = (e) => {
+  handleOverviewClick = (e) => {
     const { pathsById, activePaths } = this.props
+    const [x, y] = this.getCoords(e)
 
-    if (activePaths.length > 0) {
+    if (activePaths.length === 1) {
       const path = pathsById[activePaths[0]]
-      const [x, y] = this.getCoords(e)
 
-      this.props.onOverviewDblClick(path.id, "L", x, y)
+      this.props.onOverviewCreatePoint(path.id, "L", x, y)
+    } else {
+      this.props.onOverviewCreatePath(x, y)
     }
   };
 
@@ -139,7 +141,7 @@ class Overview extends Component {
       <svg
         className="ad-Overview"
         style={ getStyles(this.props) }
-        onDoubleClick={ this.handleOverviewDblClick }>
+        onClick={ this.handleOverviewClick }>
         <Grid
           width={ builder.width }
           height={ builder.height }
@@ -152,7 +154,8 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
-  onOverviewDblClick: PropTypes.func.isRequired,
+  onOverviewCreatePath: PropTypes.func.isRequired,
+  onOverviewCreatePoint: PropTypes.func.isRequired,
   onXPositionsChange: PropTypes.func.isRequired,
   onYPositionsChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
