@@ -5,11 +5,11 @@ import SidebarPath from "./SidebarPath"
 const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onPathCtrlClick(isActive) {
-    dispatch(pathsActions.setActivePaths([ownProps.path.id], isActive))
-    dispatch(pointsActions.setActivePoints(ownProps.path.points, isActive))
+  onPathAddActive() {
+    dispatch(pathsActions.setActivePaths([ownProps.path.id], true))
+    dispatch(pointsActions.setActivePoints(ownProps.path.points, true))
   },
-  onPathClick() {
+  onPathActive() {
     dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.deactivatePaths())
     dispatch(pathsActions.setActivePaths([ownProps.path.id], true))

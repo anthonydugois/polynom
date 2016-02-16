@@ -39,6 +39,7 @@ class Shape extends Component {
 
         <Path
           path={ path }
+          keyActions={ this.props.keyActions }
           onMouseDown={ this.props.onMouseDown } />
 
         <g className="ad-Shape-points">

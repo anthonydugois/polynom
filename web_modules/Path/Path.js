@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
+import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
 import "./styles"
 
 class Path extends Component {
   handleMouseDown = () => {
-    this.props.onPathClick()
+    if (this.props.keyActions.includes(APP_CTRL)) {
+      this.props.onPathAddActive()
+    } else {
+      this.props.onPathActive()
+    }
   };
 
   handlePathMouseDown = (e) => {
@@ -30,9 +35,11 @@ class Path extends Component {
 }
 
 Path.propTypes = {
-  onPathClick: PropTypes.func.isRequired,
+  onPathAddActive: PropTypes.func.isRequired,
+  onPathActive: PropTypes.func.isRequired,
   path: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
+  keyActions: PropTypes.array.isRequired,
   onMouseDown: PropTypes.func.isRequired,
 }
 

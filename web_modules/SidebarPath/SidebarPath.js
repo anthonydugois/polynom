@@ -11,12 +11,10 @@ import "./styles"
 
 class SidebarPath extends Component {
   handlePathClick = () => {
-    const { keyActions, path } = this.props
-
-    if (keyActions.includes(APP_CTRL)) {
-      this.props.onPathCtrlClick(!path.isActive)
+    if (this.props.keyActions.includes(APP_CTRL)) {
+      this.props.onPathAddActive()
     } else {
-      this.props.onPathClick()
+      this.props.onPathActive()
     }
   };
 
@@ -88,8 +86,8 @@ class SidebarPath extends Component {
 }
 
 SidebarPath.propTypes = {
-  onPathCtrlClick: PropTypes.func.isRequired,
-  onPathClick: PropTypes.func.isRequired,
+  onPathAddActive: PropTypes.func.isRequired,
+  onPathActive: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
