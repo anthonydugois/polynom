@@ -1,5 +1,6 @@
 import { connect } from "react-redux"
 import { pathsActions, pointsActions } from "../../src/actions"
+import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
 const mapStateToProps = (state) => state
@@ -17,6 +18,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   onNameChange(name) {
     dispatch(pathsActions.setPathName(ownProps.path.id, name))
+  },
+  onPathCodeChange(d) {
+    dispatch(pointsActions.removePoints(ownProps.path.points))
+
+    parsePathCode(d).forEach((point) => {
+      dispatch(pointsActions.createPoint(ownProps.path.id, ...point))
+    })
   },
   onRelativeChange(isRelative) {
     dispatch(pathsActions.setRelativePath(ownProps.path.id, isRelative))

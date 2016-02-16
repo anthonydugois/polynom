@@ -56,7 +56,7 @@ export function deletePoints(pointIds) {
   }
 }
 
-function removePoints(pointIds) {
+export function removePoints(pointIds) {
   return {
     type: ActionTypes.REMOVE_POINTS,
     pointIds,

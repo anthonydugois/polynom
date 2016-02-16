@@ -29,6 +29,10 @@ class SidebarPath extends Component {
     }
   };
 
+  handleBlur = (e) => {
+    this.props.onPathCodeChange(e.target.value)
+  };
+
   handleRelativeChange = (e) => {
     this.props.onRelativeChange(e.target.checked)
   };
@@ -64,7 +68,9 @@ class SidebarPath extends Component {
           <ExpandPanel>
             <Settings>
               <Setting>
-                <Textarea value={ d } />
+                <Textarea
+                  defaultValue={ d }
+                  onBlur={ this.handleBlur } />
               </Setting>
             </Settings>
 
@@ -98,6 +104,7 @@ SidebarPath.propTypes = {
   onPathAddActive: PropTypes.func.isRequired,
   onPathActive: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
+  onPathCodeChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
