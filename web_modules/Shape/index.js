@@ -28,6 +28,11 @@ class Shape extends Component {
 
     return (
       <g className="ad-Shape">
+        <Path
+          path={ path }
+          keyActions={ this.props.keyActions }
+          onMouseDown={ this.props.onMouseDown } />
+  
         { path.isActive && (
           <rect
             className="ad-Shape-rect"
@@ -36,11 +41,6 @@ class Shape extends Component {
             width={ width }
             height={ height } />
         ) }
-
-        <Path
-          path={ path }
-          keyActions={ this.props.keyActions }
-          onMouseDown={ this.props.onMouseDown } />
 
         <g className="ad-Shape-points">
           { path.points.map(this.renderPoint) }
