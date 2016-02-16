@@ -75,23 +75,24 @@ function ensurePathsIntegrity(pointIds) {
         if (pointIds.includes(pointId)) {
           const point = pointsById[pointId]
           const pointCode = point.code.toLowerCase()
-          const nextPoint = pointsById[points[index + 1]]
-          const nextPointCode = nextPoint.code.toLowerCase()
 
-          if (pointCode === "m" && index === 0 && points.length <= 1) {
+          if (points.length > 1) {
+            const nextPoint = pointsById[points[index + 1]]
+            const nextPointCode = nextPoint.code.toLowerCase()
+
+            if (
+              (pointCode === "m" && index === 0)
+              || (pointCode === "q" && nextPointCode === "t")
+              || (pointCode === "c" && nextPointCode === "s")
+            ) {
+              dispatch(setPointCode(
+                nextPoint.id,
+                point.code,
+                point.parameters
+              ))
+            }
+          } else if (pointCode === "m" && index === 0) {
             dispatch(removePaths([pathId]))
-          }
-
-          if (
-            (pointCode === "m" && index === 0 && points.length > 1)
-            || (pointCode === "q" && nextPointCode === "t")
-            || (pointCode === "c" && nextPointCode === "s")
-          ) {
-            dispatch(setPointCode(
-              nextPoint.id,
-              point.code,
-              point.parameters
-            ))
           }
         }
       })
