@@ -1,13 +1,12 @@
 import React from "react"
 import "./styles"
 
-const Text = ({
-  ...props,
-}) => (
+const Text = (props) => (
   <input
     type="text"
-    className="ad-Text"
     { ...props } />
 )
+
+Text.defaultProps = { className: "ad-Text" }
 
 export default Text

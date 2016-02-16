@@ -1,11 +1,15 @@
 @import url(App/config.css);
 
+.ad-Checkbox {
+  display: block;
+  padding: 4px 0;
+}
 .ad-Checkbox-input {
   display: none;
 }
 .ad-Checkbox-fake {
   position: relative;
-  height: 14px;
+  height: 10px;
   width: 32px;
   cursor: pointer;
   background: color(var(--ad-Color-prim) l(+10%));
@@ -15,7 +19,7 @@
     content: "";
     display: block;
     position: absolute;
-    top: -2px;
+    top: -4px;
     left: 0;
     height: 18px;
     width: 18px;

@@ -29,6 +29,11 @@ export default {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style", "css!postcss"),
       },
+      // workaround to import Snap.svg as a module
+      {
+        test: require.resolve("snapsvg"),
+        loader: "imports?this=>window,fix=>module.exports=0",
+      },
     ],
   },
 

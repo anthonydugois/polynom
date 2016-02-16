@@ -1,7 +1,1 @@
 @import url(App/config.css);
-
-.ad-Shape-rect {
-  fill: none;
-  stroke: var(--ad-Color-sec);
-  stroke-width: 1px;
-}

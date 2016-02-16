@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
+import Snap from "snapsvg"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
@@ -21,11 +22,21 @@ class Path extends Component {
   render() {
     const { path, pointsById } = this.props
     const d = pathCode(path, pointsById)
+    const { x, y, width, height } = Snap.path.getBBox(d)
 
     return (
       <g
         className={ cx("ad-Path", { "is-filled": path.isFilled }) }
         onMouseDown={ this.handleMouseDown }>
+        { path.isActive && (
+          <rect
+            className="ad-Path-bbox"
+            x={ x }
+            y={ y }
+            width={ width }
+            height={ height } />
+        ) }
+
         <path
           d={ d }
           onMouseDown={ this.handlePathMouseDown } />

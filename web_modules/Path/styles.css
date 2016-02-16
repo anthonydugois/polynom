@@ -9,3 +9,8 @@
 .ad-Path.is-filled {
   fill: color(var(--ad-Color-prim) l(+15%));
 }
+  .ad-Path-bbox {
+    fill: none;
+    stroke: var(--ad-Color-sec);
+    stroke-width: 1px;
+  }

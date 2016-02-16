@@ -3,28 +3,28 @@
 .ad-Text {
   height: 1.25rem;
   width: 2rem;
+  background: none;
   text-align: center;
 }
 .ad-Textarea {
-  height: 5rem;
+  height: 6rem;
   width: 100%;
   padding: .8rem 1rem;
   resize: none;
+  background: color(var(--ad-Color-prim) l(+5%));
   line-height: 1.6;
 }
 .ad-Text,
 .ad-Textarea {
-  background: none;
   border: none;
   border-radius: 2px;
   transition: background .2s;
-  font-family: inherit;
-  font-weight: bold;
+  font-family: "Fira Mono", monospace;
   font-size: .65rem;
   color: #fff;
 }
 .ad-Text:focus,
 .ad-Textarea:focus {
   outline: 0;
-  background: color(var(--ad-Color-prim) l(+15%));
+  background: color(var(--ad-Color-prim) l(+10%));
 }

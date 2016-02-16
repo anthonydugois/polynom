@@ -6,7 +6,10 @@ import ExpandPanel from "Expand/ExpandPanel"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
+import Text from "Text"
+import Textarea from "Text/Textarea"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import { pathCode } from "../../src/utils"
 import "./styles"
 
 class SidebarPath extends Component {
@@ -39,15 +42,15 @@ class SidebarPath extends Component {
   };
 
   render() {
-    const { path } = this.props
+    const { path, pointsById } = this.props
+    const d = pathCode(path, pointsById)
 
     return (
       <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
         <Expand>
           <ExpandCaption onClick={ this.handlePathClick }>
             <div className="ad-SidebarPath-name">
-              <input
-                type="text"
+              <Text
                 className="ad-SidebarPath-input"
                 value={ path.name }
                 onChange={ this.handleNameChange } />
@@ -59,6 +62,12 @@ class SidebarPath extends Component {
           </ExpandCaption>
 
           <ExpandPanel>
+            <Settings>
+              <Setting>
+                <Textarea defaultValue={ d } />
+              </Setting>
+            </Settings>
+
             <Settings>
               <Setting label="Relative">
                 <Checkbox
@@ -94,6 +103,7 @@ SidebarPath.propTypes = {
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
 }
 
 export default SidebarPath
