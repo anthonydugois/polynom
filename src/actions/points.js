@@ -1,4 +1,6 @@
 import * as ActionTypes from "../constants/ActionTypes"
+import { activePathsSelector } from "../selectors"
+import { removePaths } from "./paths"
 
 export function deactivatePoints() {
   return {
@@ -21,9 +23,10 @@ export function createPoint(pathId, code, x, y, parameters) {
     const path = pathsById[pathId]
 
     // determine the position of the point in the corresponding path
-    const insertAt = path.points.reduce((acc, key, index) => {
-      return pointsById[key].isActive ? index + 1 : acc
-    }, path.points.length)
+    const insertAt = path.points.reduce(
+      (acc, key, index) => pointsById[key].isActive ? index + 1 : acc,
+      path.points.length
+    )
 
     newPointId++
 
@@ -46,10 +49,53 @@ function addPoint(pathId, pointId, insertAt, code, x, y, parameters) {
   }
 }
 
-export function removePoints(pointIds) {
+export function deletePoints(pointIds) {
+  return (dispatch) => {
+    dispatch(ensurePathsIntegrity(pointIds))
+    dispatch(removePoints(pointIds))
+  }
+}
+
+function removePoints(pointIds) {
   return {
     type: ActionTypes.REMOVE_POINTS,
     pointIds,
+  }
+}
+
+// could be improved ?
+function ensurePathsIntegrity(pointIds) {
+  return (dispatch, getState) => {
+    const state = getState()
+    const activePaths = activePathsSelector(state)
+    const { pathsById, pointsById } = state
+
+    activePaths.forEach((pathId) => {
+      pathsById[pathId].points.forEach((pointId, index, points) => {
+        if (pointIds.includes(pointId)) {
+          const point = pointsById[pointId]
+          const pointCode = point.code.toLowerCase()
+          const nextPoint = pointsById[points[index + 1]]
+          const nextPointCode = nextPoint.code.toLowerCase()
+
+          if (pointCode === "m" && index === 0 && points.length <= 1) {
+            dispatch(removePaths([pathId]))
+          }
+
+          if (
+            (pointCode === "m" && index === 0 && points.length > 1)
+            || (pointCode === "q" && nextPointCode === "t")
+            || (pointCode === "c" && nextPointCode === "s")
+          ) {
+            dispatch(setPointCode(
+              nextPoint.id,
+              point.code,
+              point.parameters
+            ))
+          }
+        }
+      })
+    })
   }
 }
 

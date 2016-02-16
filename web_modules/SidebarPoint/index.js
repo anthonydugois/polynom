@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(pointsActions.setPointParameters(pointId, parameters))
   },
   onRemoveClick(pointIds) {
-    dispatch(pointsActions.removePoints(pointIds))
+    dispatch(pointsActions.deletePoints(pointIds))
   },
 })
 
