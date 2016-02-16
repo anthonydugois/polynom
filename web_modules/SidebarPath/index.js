@@ -20,9 +20,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(pathsActions.setPathName(ownProps.path.id, name))
   },
   onPathCodeChange(d) {
+    const { isClosed, points } = parsePathCode(d)
+
+    dispatch(pathsActions.setClosedPath(ownProps.path.id, isClosed))
     dispatch(pointsActions.removePoints(ownProps.path.points))
 
-    parsePathCode(d).forEach((point) => {
+    points.forEach((point) => {
       dispatch(pointsActions.createPoint(ownProps.path.id, ...point))
     })
   },

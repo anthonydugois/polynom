@@ -1,58 +1,160 @@
 import Snap from "snapsvg"
 
-function getPoint(segment) {
-  const code = segment[0]
-  const x = segment[segment.length - 2]
-  const y = segment[segment.length - 1]
-  const point = [code, x, y]
-
-  switch (code.toLowerCase()) {
-  case "m":
-  case "l":
-  case "t":
-    return [...point, {}]
-
-  case "q":
-    return [
-      ...point,
-      {
-        x1: segment[1],
-        y1: segment[2],
-      },
-    ]
-
-  case "c":
-    return [
-      ...point,
-      {
-        x1: segment[1],
-        y1: segment[2],
-        x2: segment[3],
-        y2: segment[4],
-      },
-    ]
-
-  case "s":
-    return [
-      ...point,
-      {
-        x2: segment[1],
-        y2: segment[2],
-      },
-    ]
-
-  case "a":
-    return [
-      ...point,
-      {
-        rx: segment[1],
-        ry: segment[2],
-        xAxisRotation: segment[3],
-        largeArc: segment[4],
-        sweep: segment[5],
-      },
-    ]
-  }
+function isRelative(segment) {
+  return segment[0] === segment[0].toLowerCase()
 }
 
-export default (d) => Snap.parsePathString(d).map(getPoint)
+function M(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    segment[0],
+    (relative && point) ? segment[1] + point[1] : segment[1],
+    (relative && point) ? segment[2] + point[2] : segment[2],
+    {},
+  ]
+}
+
+function L(segment, point) {
+  return M(segment, point)
+}
+
+function H(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    relative ? "l" : "L",
+    relative ? segment[1] + point[1] : segment[1],
+    point[2],
+    {},
+  ]
+}
+
+function V(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    relative ? "l" : "L",
+    point[1],
+    relative ? segment[1] + point[2] : segment[1],
+    {},
+  ]
+}
+
+function Q(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    segment[0],
+    relative ? segment[3] + point[1] : segment[3],
+    relative ? segment[4] + point[2] : segment[4],
+    {
+      x1: relative ? segment[1] + point[1] : segment[1],
+      y1: relative ? segment[2] + point[2] : segment[2],
+    },
+  ]
+}
+
+function T(segment, point) {
+  return M(segment, point)
+}
+
+function C(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    segment[0],
+    relative ? segment[5] + point[1] : segment[5],
+    relative ? segment[6] + point[2] : segment[6],
+    {
+      x1: relative ? segment[1] + point[1] : segment[1],
+      y1: relative ? segment[2] + point[2] : segment[2],
+      x2: relative ? segment[3] + point[1] : segment[3],
+      y2: relative ? segment[4] + point[2] : segment[4],
+    },
+  ]
+}
+
+function S(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    segment[0],
+    relative ? segment[3] + point[1] : segment[3],
+    relative ? segment[4] + point[2] : segment[4],
+    {
+      x2: relative ? segment[1] + point[1] : segment[1],
+      y2: relative ? segment[2] + point[2] : segment[2],
+    },
+  ]
+}
+
+function A(segment, point) {
+  const relative = isRelative(segment)
+
+  return [
+    segment[0],
+    relative ? segment[6] + point[1] : segment[6],
+    relative ? segment[7] + point[2] : segment[7],
+    {
+      rx: segment[1],
+      ry: segment[2],
+      xAxisRotation: segment[3],
+      largeArc: segment[4],
+      sweep: segment[5],
+    },
+  ]
+}
+
+function getPoints(d) {
+  const points = []
+
+  Snap.parsePathString(d).forEach((segment) => {
+    const point = points.length > 0 && points[points.length - 1]
+
+    switch (segment[0].toLowerCase()) {
+    case "m":
+      points.push(M(segment, point))
+      break
+
+    case "l":
+      points.push(L(segment, point))
+      break
+
+    case "h":
+      points.push(H(segment, point))
+      break
+
+    case "v":
+      points.push(V(segment, point))
+      break
+
+    case "q":
+      points.push(Q(segment, point))
+      break
+
+    case "t":
+      points.push(T(segment, point))
+      break
+
+    case "c":
+      points.push(C(segment, point))
+      break
+
+    case "s":
+      points.push(S(segment, point))
+      break
+
+    case "a":
+      points.push(A(segment, point))
+      break
+    }
+  })
+
+  return points
+}
+
+export default (d) => ({
+  isClosed: !!d.match(/z/gi),
+  points: getPoints(d),
+})
