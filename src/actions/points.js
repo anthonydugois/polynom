@@ -40,7 +40,6 @@ export function deletePoints(pointIds) {
   }
 }
 
-// could be improved ?
 function ensurePathsIntegrity(pointIds) {
   return (dispatch, getState) => {
     const state = getState()
@@ -48,31 +47,30 @@ function ensurePathsIntegrity(pointIds) {
     const { pathsById, pointsById } = state
 
     activePaths.forEach((pathId) => {
-      const { points } = pathsById[pathId]
+      const path = pathsById[pathId]
+      // get remaining points
+      const points = path.points.filter((key) => !pointIds.includes(key))
 
-      if (points.every((key) => pointIds.includes(key))) {
-        dispatch(removePaths([pathId]))
-      } else {
+      if (points.length !== 0) {
         points.forEach((key, index, keys) => {
-          if (pointIds.includes(key)) {
-            const point = pointsById[key]
-            const pointCode = point.code.toLowerCase()
+          const point = pointsById[key]
+          const code = point.code.toLowerCase()
+          const previous = index > 0 && pointsById[keys[index - 1]]
+          const previousCode = index > 0 && previous.code.toLowerCase()
 
-            if (index + 1 < keys.length) {
-              const nextPoint = pointsById[keys[index + 1]]
-              const nextPointCode = nextPoint.code.toLowerCase()
-
-              if (
-                (pointCode === "m" && index === 0)
-                || (pointCode === "q" && nextPointCode === "t")
-                || (pointCode === "c" && nextPointCode === "s")
-              ) {
-                dispatch(setPointCode(nextPoint.id, point.code))
-                dispatch(setPointParameters(nextPoint.id, point.parameters))
-              }
-            }
+          if (index === 0 && code !== "m") {
+            dispatch(setPointCode(point.id, point.isRelative ? "m" : "M"))
+            dispatch(setPointParameters(point.id, {}))
+          } else if (
+            (code === "t" && !["q", "t"].includes(previousCode))
+            || (code === "s" && !["c", "s"].includes(previousCode))
+          ) {
+            dispatch(setPointCode(point.id, point.isRelative ? "l" : "L"))
+            dispatch(setPointParameters(point.id, {}))
           }
         })
+      } else {
+        dispatch(removePaths([path.id]))
       }
     })
   }
