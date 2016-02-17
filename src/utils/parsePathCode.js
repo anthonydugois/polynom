@@ -147,5 +147,6 @@ function getPoints(d) {
 
 export default (d) => ({
   isClosed: !!d.match(/z/gi),
+  isRelative: !!d.match(/(m|l|h|v|q|t|c|s|a)/g),
   points: getPoints(d),
 })

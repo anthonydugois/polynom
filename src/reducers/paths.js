@@ -18,7 +18,7 @@ const path = (state, action) => {
     return {
       id: action.pathId,
       name: `Path ${ action.pathId }`,
-      isActive: false,
+      isActive: true,
       isClosed: false,
       isRelative: false,
       isFilled: false,

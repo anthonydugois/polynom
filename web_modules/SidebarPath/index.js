@@ -5,38 +5,39 @@ import SidebarPath from "./SidebarPath"
 
 const mapStateToProps = (state) => state
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { path }) => ({
   onPathAddActive() {
-    dispatch(pathsActions.setActivePaths([ownProps.path.id], true))
-    dispatch(pointsActions.setActivePoints(ownProps.path.points, true))
+    dispatch(pathsActions.setActivePaths([path.id], true))
+    dispatch(pointsActions.setActivePoints(path.points, true))
   },
   onPathActive() {
     dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.deactivatePaths())
-    dispatch(pathsActions.setActivePaths([ownProps.path.id], true))
-    dispatch(pointsActions.setActivePoints(ownProps.path.points, true))
+    dispatch(pathsActions.setActivePaths([path.id], true))
+    dispatch(pointsActions.setActivePoints(path.points, true))
   },
   onNameChange(name) {
-    dispatch(pathsActions.setPathName(ownProps.path.id, name))
+    dispatch(pathsActions.setPathName(path.id, name))
   },
   onPathCodeChange(d) {
-    const { isClosed, points } = parsePathCode(d)
+    const { isClosed, isRelative, points } = parsePathCode(d)
 
-    dispatch(pathsActions.setClosedPath(ownProps.path.id, isClosed))
-    dispatch(pointsActions.removePoints(ownProps.path.points))
+    dispatch(pathsActions.setClosedPath(path.id, isClosed))
+    dispatch(pathsActions.setRelativePath(path.id, isRelative))
 
-    /*points.forEach((point) => {
-      dispatch(pointsActions.createPoint(ownProps.path.id, ...point))
-    })*/
+    dispatch(pointsActions.deactivatePoints())
+    dispatch(pointsActions.removePoints(path.points))
+
+    points.forEach((p) => dispatch(pointsActions.createPoint(path.id, ...p)))
   },
   onRelativeChange(isRelative) {
-    dispatch(pathsActions.setRelativePath(ownProps.path.id, isRelative))
+    dispatch(pathsActions.setRelativePath(path.id, isRelative))
   },
   onClosedChange(isClosed) {
-    dispatch(pathsActions.setClosedPath(ownProps.path.id, isClosed))
+    dispatch(pathsActions.setClosedPath(path.id, isClosed))
   },
   onFilledChange(isFilled) {
-    dispatch(pathsActions.setFilledPath(ownProps.path.id, isFilled))
+    dispatch(pathsActions.setFilledPath(path.id, isFilled))
   },
 })
 

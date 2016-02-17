@@ -115,7 +115,7 @@ class Overview extends Component {
     if (activePaths.length === 1) {
       const path = pathsById[activePaths[0]]
 
-      this.props.onOverviewCreatePoint(path.id, "L", x, y)
+      this.props.onOverviewCreatePoint(path.id, "L", x, y, {})
     } else {
       this.props.onOverviewCreatePath(x, y)
     }

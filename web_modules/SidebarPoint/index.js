@@ -17,8 +17,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onCodeChange(pointId, code, parameters) {
-    dispatch(pointsActions.setPointCode(pointId, code, parameters))
+  onCodeChange(pointId, code) {
+    dispatch(pointsActions.setPointCode(pointId, code))
   },
   onXPositionChange(pointId, x) {
     dispatch(pointsActions.setPointX(pointId, x))

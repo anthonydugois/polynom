@@ -20,7 +20,7 @@ const point = (state, action) => {
       code: action.code,
       x: action.x,
       y: action.y,
-      isActive: false,
+      isActive: true,
       isRelative: action.code === action.code.toLowerCase(),
       parameters: action.parameters,
     }
@@ -30,7 +30,6 @@ const point = (state, action) => {
       ...state,
       code: action.code,
       isRelative: action.code === action.code.toLowerCase(),
-      parameters: action.parameters,
     }
 
   // set position of only one point
