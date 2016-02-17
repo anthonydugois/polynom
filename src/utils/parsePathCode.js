@@ -114,40 +114,31 @@ function getPoints(d) {
 
     switch (segment[0].toLowerCase()) {
     case "m":
-      points.push(M(segment, point))
-      break
+      return points.push(M(segment, point))
 
     case "l":
-      points.push(L(segment, point))
-      break
+      return points.push(L(segment, point))
 
     case "h":
-      points.push(H(segment, point))
-      break
+      return points.push(H(segment, point))
 
     case "v":
-      points.push(V(segment, point))
-      break
+      return points.push(V(segment, point))
 
     case "q":
-      points.push(Q(segment, point))
-      break
+      return points.push(Q(segment, point))
 
     case "t":
-      points.push(T(segment, point))
-      break
+      return points.push(T(segment, point))
 
     case "c":
-      points.push(C(segment, point))
-      break
+      return points.push(C(segment, point))
 
     case "s":
-      points.push(S(segment, point))
-      break
+      return points.push(S(segment, point))
 
     case "a":
-      points.push(A(segment, point))
-      break
+      return points.push(A(segment, point))
     }
   })
 

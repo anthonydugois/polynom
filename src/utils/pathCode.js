@@ -3,37 +3,37 @@ import { M, L, H, V, Q, T, C, S, A } from "./pointCodes"
 export default (path, pointsById) => {
   const code = path.points.reduce((acc, key, index, keys) => {
     const point = pointsById[key]
-    const previousPoint = index > 0 && pointsById[keys[index - 1]]
+    const previous = index > 0 && pointsById[keys[index - 1]]
 
     switch (point.code.toLowerCase()) {
     case "m":
-      return [...acc, ...M(path, point, previousPoint)]
+      return [...acc, ...M(path, point, previous)]
 
     case "l":
-      if (point.y === previousPoint.y) {
-        return [...acc, ...H(path, point, previousPoint)]
+      if (point.y === previous.y) {
+        return [...acc, ...H(path, point, previous)]
       }
 
-      if (point.x === previousPoint.x) {
-        return [...acc, ...V(path, point, previousPoint)]
+      if (point.x === previous.x) {
+        return [...acc, ...V(path, point, previous)]
       }
 
-      return [...acc, ...L(path, point, previousPoint)]
+      return [...acc, ...L(path, point, previous)]
 
     case "q":
-      return [...acc, ...Q(path, point, previousPoint)]
+      return [...acc, ...Q(path, point, previous)]
 
     case "t":
-      return [...acc, ...T(path, point, previousPoint)]
+      return [...acc, ...T(path, point, previous)]
 
     case "c":
-      return [...acc, ...C(path, point, previousPoint)]
+      return [...acc, ...C(path, point, previous)]
 
     case "s":
-      return [...acc, ...S(path, point, previousPoint)]
+      return [...acc, ...S(path, point, previous)]
 
     case "a":
-      return [...acc, ...A(path, point, previousPoint)]
+      return [...acc, ...A(path, point, previous)]
 
     default:
       return []

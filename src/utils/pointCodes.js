@@ -1,107 +1,111 @@
+function isRelative(path, point) {
+  return path.isRelative || point.isRelative
+}
+
 function code(path, point, str) {
-  return path.isRelative || point.isRelative ?
-    str.toLowerCase() : str.toUpperCase()
+  return isRelative(path, point) ? str.toLowerCase() : str.toUpperCase()
 }
 
-function x(path, point, previousPoint) {
-  return previousPoint && (path.isRelative || point.isRelative) ?
-    point.x - previousPoint.x : point.x
+function x(path, point, previous) {
+  return previous && isRelative(path, point) ? point.x - previous.x : point.x
 }
 
-function y(path, point, previousPoint) {
-  return previousPoint && (path.isRelative || point.isRelative) ?
-    point.y - previousPoint.y : point.y
+function y(path, point, previous) {
+  return previous && isRelative(path, point) ? point.y - previous.y : point.y
 }
 
-function getPointPosition(path, point, previousPoint) {
+function x1(path, point, previous) {
+  return isRelative(path, point) ?
+    point.parameters.x1 - previous.x : point.parameters.x1
+}
+
+function y1(path, point, previous) {
+  return isRelative(path, point) ?
+    point.parameters.y1 - previous.y : point.parameters.y1
+}
+
+function x2(path, point, previous) {
+  return isRelative(path, point) ?
+    point.parameters.x2 - previous.x : point.parameters.x2
+}
+
+function y2(path, point, previous) {
+  return isRelative(path, point) ?
+    point.parameters.y2 - previous.y : point.parameters.y2
+}
+
+export function M(path, point, previous = false) {
   return [
-    x(path, point, previousPoint),
-    y(path, point, previousPoint),
-  ]
-}
-
-function getFirstAnchorPosition(path, point, previousPoint) {
-  return path.isRelative || point.isRelative ? [
-    point.parameters.x1 - previousPoint.x,
-    point.parameters.y1 - previousPoint.y,
-  ] : [
-    point.parameters.x1,
-    point.parameters.y1,
-  ]
-}
-
-function getSecondAnchorPosition(path, point, previousPoint) {
-  return path.isRelative || point.isRelative ? [
-    point.parameters.x2 - previousPoint.x,
-    point.parameters.y2 - previousPoint.y,
-  ] : [
-    point.parameters.x2,
-    point.parameters.y2,
-  ]
-}
-
-export function M(path, point, previousPoint = false) {
-  return [
-    ...(previousPoint && path.isClosed ? ["z"] : []),
+    ...previous && path.isClosed && ["z"],
     code(path, point, "m"),
-    getPointPosition(path, point, previousPoint),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function L(path, point, previousPoint) {
+export function L(path, point, previous) {
   return [
     code(path, point, "l"),
-    getPointPosition(path, point, previousPoint),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function H(path, point, previousPoint) {
+export function H(path, point, previous) {
   return [
     code(path, point, "h"),
-    x(path, point, previousPoint),
+    x(path, point, previous),
   ]
 }
 
-export function V(path, point, previousPoint) {
+export function V(path, point, previous) {
   return [
     code(path, point, "v"),
-    y(path, point, previousPoint),
+    y(path, point, previous),
   ]
 }
 
-export function Q(path, point, previousPoint) {
+export function Q(path, point, previous) {
   return [
     code(path, point, "q"),
-    getFirstAnchorPosition(path, point, previousPoint),
-    getPointPosition(path, point, previousPoint),
+    x1(path, point, previous),
+    y1(path, point, previous),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function T(path, point, previousPoint) {
+export function T(path, point, previous) {
   return [
     code(path, point, "t"),
-    getPointPosition(path, point, previousPoint),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function C(path, point, previousPoint) {
+export function C(path, point, previous) {
   return [
     code(path, point, "c"),
-    getFirstAnchorPosition(path, point, previousPoint),
-    getSecondAnchorPosition(path, point, previousPoint),
-    getPointPosition(path, point, previousPoint),
+    x1(path, point, previous),
+    y1(path, point, previous),
+    x2(path, point, previous),
+    y2(path, point, previous),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function S(path, point, previousPoint) {
+export function S(path, point, previous) {
   return [
     code(path, point, "s"),
-    getSecondAnchorPosition(path, point, previousPoint),
-    getPointPosition(path, point, previousPoint),
+    x2(path, point, previous),
+    y2(path, point, previous),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
 
-export function A(path, point, previousPoint) {
+export function A(path, point, previous) {
   return [
     code(path, point, "a"),
     point.parameters.rx,
@@ -109,6 +113,7 @@ export function A(path, point, previousPoint) {
     point.parameters.xAxisRotation,
     point.parameters.largeArc ? 1 : 0,
     point.parameters.sweep ? 1 : 0,
-    getPointPosition(path, point, previousPoint),
+    x(path, point, previous),
+    y(path, point, previous),
   ]
 }
