@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import Grid from "Grid"
 import Shape from "Shape"
+import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
@@ -109,15 +110,19 @@ class Overview extends Component {
   }
 
   handleOverviewClick = (e) => {
-    const { pathsById, activePaths } = this.props
-    const [x, y] = this.getCoords(e)
+    if (this.props.keyActions.includes(APP_CTRL)) {
+      const { pathsById, activePaths } = this.props
+      const [x, y] = this.getCoords(e)
 
-    if (activePaths.length === 1) {
-      const path = pathsById[activePaths[0]]
+      if (activePaths.length === 1) {
+        const path = pathsById[activePaths[0]]
 
-      this.props.onOverviewCreatePoint(path.id, "L", x, y, {})
+        this.props.onOverviewCreatePoint(path.id, "L", x, y, {})
+      } else {
+        this.props.onOverviewCreatePath(x, y)
+      }
     } else {
-      this.props.onOverviewCreatePath(x, y)
+      this.props.onOverviewDeactivate()
     }
   };
 
@@ -156,6 +161,7 @@ class Overview extends Component {
 Overview.propTypes = {
   onOverviewCreatePath: PropTypes.func.isRequired,
   onOverviewCreatePoint: PropTypes.func.isRequired,
+  onOverviewDeactivate: PropTypes.func.isRequired,
   onXPositionsChange: PropTypes.func.isRequired,
   onYPositionsChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,

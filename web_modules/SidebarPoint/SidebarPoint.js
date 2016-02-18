@@ -17,6 +17,7 @@ class SidebarPoint extends Component {
     const {
       builder,
       gridStep,
+      activePoints,
       point,
       previousPoint,
     } = this.props
@@ -84,10 +85,12 @@ class SidebarPoint extends Component {
         ) }
 
         <div className="ad-SidebarPoint-actions">
-          <Button
-            type="delete"
-            icon="delete"
-            onClick={ this.handleRemoveClick } />
+          { activePoints.length > 0 && (
+            <Button
+              type="delete"
+              icon="delete"
+              onClick={ this.handleRemoveClick } />
+          ) }
         </div>
       </div>
     )

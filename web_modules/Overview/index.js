@@ -19,6 +19,10 @@ const mapDispatchToProps = (dispatch) => ({
   onOverviewCreatePoint(pathId, code, x, y, parameters) {
     dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
   },
+  onOverviewDeactivate() {
+    dispatch(pathsActions.deactivatePaths())
+    dispatch(pointsActions.deactivatePoints())
+  },
   onXPositionsChange(pointIds, dx) {
     dispatch(pointsActions.setPointsX(pointIds, dx))
   },
