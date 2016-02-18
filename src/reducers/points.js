@@ -7,7 +7,6 @@ const initialState = {
     x: 50,
     y: 50,
     isActive: true,
-    isRelative: false,
     parameters: {},
   },
 }
@@ -21,7 +20,6 @@ const point = (state, action) => {
       x: action.x,
       y: action.y,
       isActive: true,
-      isRelative: action.code === action.code.toLowerCase(),
       parameters: action.parameters,
     }
 
@@ -29,7 +27,6 @@ const point = (state, action) => {
     return {
       ...state,
       code: action.code,
-      isRelative: action.code === action.code.toLowerCase(),
     }
 
   // set position of only one point
@@ -46,14 +43,15 @@ const point = (state, action) => {
     }
 
   // set position of multiple points
+  // update anchors at the same time
   case ActionTypes.SET_POINTS_X:
     return {
       ...state,
       x: state.x + action.dx,
       parameters: {
         ...state.parameters,
-        ...(state.parameters.x1 ? { x1: state.parameters.x1 + action.dx } : {}),
-        ...(state.parameters.x2 ? { x2: state.parameters.x2 + action.dx } : {}),
+        ...state.parameters.x1 && { x1: state.parameters.x1 + action.dx },
+        ...state.parameters.x2 && { x2: state.parameters.x2 + action.dx },
       },
     }
 
@@ -63,8 +61,8 @@ const point = (state, action) => {
       y: state.y + action.dy,
       parameters: {
         ...state.parameters,
-        ...(state.parameters.y1 ? { y1: state.parameters.y1 + action.dy } : {}),
-        ...(state.parameters.y2 ? { y2: state.parameters.y2 + action.dy } : {}),
+        ...state.parameters.y1 && { y1: state.parameters.y1 + action.dy },
+        ...state.parameters.y2 && { y2: state.parameters.y2 + action.dy },
       },
     }
 

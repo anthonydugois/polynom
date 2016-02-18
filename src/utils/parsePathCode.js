@@ -8,22 +8,29 @@ function M(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    segment[0],
-    (relative && point) ? segment[1] + point[1] : segment[1],
-    (relative && point) ? segment[2] + point[2] : segment[2],
+    "M",
+    relative && point ? segment[1] + point[1] : segment[1],
+    relative && point ? segment[2] + point[2] : segment[2],
     {},
   ]
 }
 
 function L(segment, point) {
-  return M(segment, point)
+  const relative = isRelative(segment)
+
+  return [
+    "L",
+    relative && point ? segment[1] + point[1] : segment[1],
+    relative && point ? segment[2] + point[2] : segment[2],
+    {},
+  ]
 }
 
 function H(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    relative ? "l" : "L",
+    "L",
     relative ? segment[1] + point[1] : segment[1],
     point[2],
     {},
@@ -34,7 +41,7 @@ function V(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    relative ? "l" : "L",
+    "L",
     point[1],
     relative ? segment[1] + point[2] : segment[1],
     {},
@@ -45,7 +52,7 @@ function Q(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    segment[0],
+    "Q",
     relative ? segment[3] + point[1] : segment[3],
     relative ? segment[4] + point[2] : segment[4],
     {
@@ -56,14 +63,21 @@ function Q(segment, point) {
 }
 
 function T(segment, point) {
-  return M(segment, point)
+  const relative = isRelative(segment)
+
+  return [
+    "T",
+    relative && point ? segment[1] + point[1] : segment[1],
+    relative && point ? segment[2] + point[2] : segment[2],
+    {},
+  ]
 }
 
 function C(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    segment[0],
+    "C",
     relative ? segment[5] + point[1] : segment[5],
     relative ? segment[6] + point[2] : segment[6],
     {
@@ -79,7 +93,7 @@ function S(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    segment[0],
+    "S",
     relative ? segment[3] + point[1] : segment[3],
     relative ? segment[4] + point[2] : segment[4],
     {
@@ -93,7 +107,7 @@ function A(segment, point) {
   const relative = isRelative(segment)
 
   return [
-    segment[0],
+    "A",
     relative ? segment[6] + point[1] : segment[6],
     relative ? segment[7] + point[2] : segment[7],
     {

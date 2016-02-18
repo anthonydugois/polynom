@@ -1,36 +1,32 @@
-function isRelative(path, point) {
-  return path.isRelative || point.isRelative
-}
-
 function code(path, point, str) {
-  return isRelative(path, point) ? str.toLowerCase() : str.toUpperCase()
+  return path.isRelative ? str.toLowerCase() : str.toUpperCase()
 }
 
 function x(path, point, previous) {
-  return previous && isRelative(path, point) ? point.x - previous.x : point.x
+  return previous && path.isRelative ? point.x - previous.x : point.x
 }
 
 function y(path, point, previous) {
-  return previous && isRelative(path, point) ? point.y - previous.y : point.y
+  return previous && path.isRelative ? point.y - previous.y : point.y
 }
 
 function x1(path, point, previous) {
-  return isRelative(path, point) ?
+  return path.isRelative ?
     point.parameters.x1 - previous.x : point.parameters.x1
 }
 
 function y1(path, point, previous) {
-  return isRelative(path, point) ?
+  return path.isRelative ?
     point.parameters.y1 - previous.y : point.parameters.y1
 }
 
 function x2(path, point, previous) {
-  return isRelative(path, point) ?
+  return path.isRelative ?
     point.parameters.x2 - previous.x : point.parameters.x2
 }
 
 function y2(path, point, previous) {
-  return isRelative(path, point) ?
+  return path.isRelative ?
     point.parameters.y2 - previous.y : point.parameters.y2
 }
 

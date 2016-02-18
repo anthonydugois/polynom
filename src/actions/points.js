@@ -59,13 +59,13 @@ function ensurePathsIntegrity(pointIds) {
           const previousCode = index > 0 && previous.code.toLowerCase()
 
           if (index === 0 && code !== "m") {
-            dispatch(setPointCode(point.id, point.isRelative ? "m" : "M"))
+            dispatch(setPointCode(point.id, "M"))
             dispatch(setPointParameters(point.id, {}))
           } else if (
             (code === "t" && !["q", "t"].includes(previousCode))
             || (code === "s" && !["c", "s"].includes(previousCode))
           ) {
-            dispatch(setPointCode(point.id, point.isRelative ? "l" : "L"))
+            dispatch(setPointCode(point.id, "L"))
             dispatch(setPointParameters(point.id, {}))
           }
         })
