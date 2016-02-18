@@ -13,6 +13,11 @@ import { pathCode } from "../../src/utils"
 import "./styles"
 
 class SidebarPath extends Component {
+  state = {
+    isFocused: false,
+    d: null,
+  };
+
   handlePathClick = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPathAddActive()
@@ -29,8 +34,25 @@ class SidebarPath extends Component {
     }
   };
 
+  handleChange = (e) => {
+    this.setState({ d: e.target.value })
+  };
+
+  handleFocus = (e) => {
+    this.d = e.target.value
+
+    this.setState({
+      isFocused: true,
+      d: this.d,
+    })
+  };
+
   handleBlur = (e) => {
-    this.props.onPathCodeChange(e.target.value)
+    this.setState({ isFocused: false })
+
+    if (this.d !== e.target.value) {
+      this.props.onPathCodeChange(e.target.value)
+    }
   };
 
   handleRelativeChange = (e) => {
@@ -69,7 +91,9 @@ class SidebarPath extends Component {
             <Settings>
               <Setting>
                 <Textarea
-                  defaultValue={ d }
+                  value={ this.state.isFocused ? this.state.d : d }
+                  onChange={ this.handleChange }
+                  onFocus={ this.handleFocus }
                   onBlur={ this.handleBlur } />
               </Setting>
             </Settings>
