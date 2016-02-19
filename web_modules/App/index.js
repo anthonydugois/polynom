@@ -10,10 +10,15 @@ import {
 import "./styles"
 
 class App extends Component {
+  componentDidMount() {
+    this.refs.app.focus()
+  }
+
   render() {
     return (
       <div
-        tabIndex={ 1 }
+        ref="app"
+        tabIndex={ 0 }
         className="ad-App">
         <Sidebar { ...this.props } />
         <Overview { ...this.props } />
