@@ -1,14 +1,1 @@
 @import url(App/config.css);
-
-.ad-SidebarPoint {
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-}
-  .ad-SidebarPoint-module {
-    flex: 1;
-    overflow: auto;
-  }
-  .ad-SidebarPoint-actions {
-    display: flex;
-  }

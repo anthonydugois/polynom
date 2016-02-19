@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from "react"
 import Button from "Button"
+import SidebarPanel from "Sidebar/SidebarPanel"
+import SidebarModule from "Sidebar/SidebarModule"
+import SidebarActions from "Sidebar/SidebarActions"
 import SidebarPath from "SidebarPath"
 import "./styles"
 
@@ -8,6 +11,10 @@ class SidebarPaths extends Component {
     const { width, height } = this.props.builder
 
     this.props.onAddClick(width / 2, height / 2)
+  };
+
+  handleRemoveClick = () => {
+    this.props.onRemoveClick(this.props.activePaths)
   };
 
   renderSidebarPath = (key) => {
@@ -22,29 +29,38 @@ class SidebarPaths extends Component {
   };
 
   render() {
-    const { builder } = this.props
+    const { builder, activePaths } = this.props
 
     return (
-      <div className="ad-SidebarPaths">
-        <div className="ad-SidebarPaths-module">
+      <SidebarPanel>
+        <SidebarModule>
           { builder.paths.map(this.renderSidebarPath) }
-        </div>
+        </SidebarModule>
 
-        <div className="ad-SidebarPaths-actions">
+        <SidebarActions>
           <Button onClick={ this.handleAddClick }>
             New path
           </Button>
-        </div>
-      </div>
+
+          { activePaths.length > 0 && (
+            <Button
+              icon="delete"
+              type="delete"
+              onClick={ this.handleRemoveClick } />
+          ) }
+        </SidebarActions>
+      </SidebarPanel>
     )
   }
 }
 
 SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   builder: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
+  activePaths: PropTypes.array.isRequired,
 }
 
 export default SidebarPaths

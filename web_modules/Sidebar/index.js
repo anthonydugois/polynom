@@ -21,12 +21,29 @@ class Sidebar extends Component {
                 Paths
               </Button>
             </Tab>
+            <Tab>
+              <Button
+                icon="point"
+                type="tab">
+                Point
+              </Button>
+            </Tab>
+            <Tab>
+              <Button
+                icon="settings"
+                type="tab">
+                Settings
+              </Button>
+            </Tab>
           </TabList>
 
           <TabPanel>
-            <SidebarPoint />
-            <SidebarPaths keyActions={ this.props.keyActions } />
+            <SidebarPaths { ...this.props } />
           </TabPanel>
+          <TabPanel>
+            <SidebarPoint { ...this.props } />
+          </TabPanel>
+          <TabPanel></TabPanel>
         </Tabs>
       </div>
     )

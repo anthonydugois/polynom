@@ -2,7 +2,7 @@
 
 .ad-Button {
   height: 2.5rem;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
   background: var(--ad-Color-sec);
   border: none;
   border-radius: 2px;
@@ -66,6 +66,7 @@
 }
 
 .ad-Button--delete {
+  margin-left: auto;
   background: color(var(--ad-Color-prim) l(+5%));
 }
 .ad-Button--delete:focus,

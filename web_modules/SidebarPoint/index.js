@@ -29,9 +29,6 @@ const mapDispatchToProps = (dispatch) => ({
   onParamsChange(pointId, parameters) {
     dispatch(pointsActions.setPointParameters(pointId, parameters))
   },
-  onRemoveClick(pointIds) {
-    dispatch(pointsActions.deletePoints(pointIds))
-  },
 })
 
 export default connect(

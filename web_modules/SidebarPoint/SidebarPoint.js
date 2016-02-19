@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
-import Button from "Button"
+import SidebarPanel from "Sidebar/SidebarPanel"
+import SidebarModule from "Sidebar/SidebarModule"
 import SidebarPointCode from "./SidebarPointCode"
 import SidebarPointPosition from "./SidebarPointPosition"
 import SidebarPointQ from "./SidebarPointQ"
@@ -17,7 +18,6 @@ class SidebarPoint extends Component {
     const {
       builder,
       gridStep,
-      activePoints,
       point,
       previousPoint,
     } = this.props
@@ -26,9 +26,9 @@ class SidebarPoint extends Component {
     const prevCode = previousPoint && previousPoint.code.toLowerCase()
 
     return (
-      <div className="ad-SidebarPoint">
+      <SidebarPanel>
         { code && (
-          <div className="ad-SidebarPoint-module">
+          <SidebarModule>
             { /* Point code */ }
             { prevCode && (
               <SidebarPointCode
@@ -81,18 +81,9 @@ class SidebarPoint extends Component {
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
             ) }
-          </div>
+          </SidebarModule>
         ) }
-
-        <div className="ad-SidebarPoint-actions">
-          { activePoints.length > 0 && (
-            <Button
-              type="delete"
-              icon="delete"
-              onClick={ this.handleRemoveClick } />
-          ) }
-        </div>
-      </div>
+      </SidebarPanel>
     )
   }
 }
@@ -102,7 +93,6 @@ SidebarPoint.propTypes = {
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
   onParamsChange: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
   builder: PropTypes.object.isRequired,
   gridStep: PropTypes.number.isRequired,
   activePoints: PropTypes.array.isRequired,
