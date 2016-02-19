@@ -1,6 +1,7 @@
 @import url(App/config.css);
 
 .ad-SidebarPath {
+  user-select: none;
   border-left: 3px solid color(var(--ad-Color-prim) l(-8%));
 }
 .ad-SidebarPath.is-active {

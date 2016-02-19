@@ -8,7 +8,7 @@ import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
 import Text from "Text"
 import Textarea from "Text/Textarea"
-import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
 import "./styles"
 
@@ -19,8 +19,29 @@ class SidebarPath extends Component {
   };
 
   handlePathClick = () => {
-    if (this.props.keyActions.includes(APP_CTRL)) {
+    const {
+      keyActions,
+      path,
+      builder,
+      pathsById,
+      activePaths,
+    } = this.props
+
+    if (keyActions.includes(APP_CTRL)) {
       this.props.onPathAddActive()
+    } else if (keyActions.includes(APP_SHIFT)) {
+      const pathIndex = builder.paths.indexOf(path.id)
+      const activePathIndex = builder.paths.indexOf(activePaths[0])
+      const pathIds = pathIndex < activePathIndex ?
+        builder.paths.slice(pathIndex, activePathIndex + 1) :
+        builder.paths.slice(activePathIndex, pathIndex + 1)
+
+      const pointIds = pathIds.reduce((acc, key) => [
+        ...acc,
+        ...pathsById[key].points,
+      ], [])
+
+      this.props.onPathsActive(pathIds, pointIds)
     } else {
       this.props.onPathActive()
     }
@@ -127,6 +148,7 @@ class SidebarPath extends Component {
 SidebarPath.propTypes = {
   onPathAddActive: PropTypes.func.isRequired,
   onPathActive: PropTypes.func.isRequired,
+  onPathsActive: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onPathCodeChange: PropTypes.func.isRequired,
   onRelativeChange: PropTypes.func.isRequired,
@@ -134,7 +156,10 @@ SidebarPath.propTypes = {
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
+  builder: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
+  activePaths: PropTypes.array.isRequired,
 }
 
 export default SidebarPath

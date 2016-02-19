@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import Grid from "Grid"
 import Shape from "Shape"
-import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import { APP_CTRL, OVERVIEW_DEL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
@@ -109,7 +109,7 @@ class Overview extends Component {
     })
   }
 
-  handleOverviewClick = (e) => {
+  handleClick = (e) => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       const { pathsById, activePaths } = this.props
       const [x, y] = this.getCoords(e)
@@ -123,6 +123,15 @@ class Overview extends Component {
       }
     } else {
       this.props.onOverviewDeactivate()
+    }
+  };
+
+  handleKeyDown = (e) => {
+    const { keyActions, activePoints } = this.props
+
+    if (keyActions.includes(OVERVIEW_DEL) && activePoints.length > 0) {
+      e.preventDefault()
+      this.props.onOverviewDelete(activePoints)
     }
   };
 
@@ -144,9 +153,11 @@ class Overview extends Component {
 
     return (
       <svg
+        tabIndex={ 1 }
         className="ad-Overview"
         style={ getStyles(this.props) }
-        onClick={ this.handleOverviewClick }>
+        onClick={ this.handleClick }
+        onKeyDown={ this.handleKeyDown }>
         <Grid
           width={ builder.width }
           height={ builder.height }
@@ -162,6 +173,7 @@ Overview.propTypes = {
   onOverviewCreatePath: PropTypes.func.isRequired,
   onOverviewCreatePoint: PropTypes.func.isRequired,
   onOverviewDeactivate: PropTypes.func.isRequired,
+  onOverviewDelete: PropTypes.func.isRequired,
   onXPositionsChange: PropTypes.func.isRequired,
   onYPositionsChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,

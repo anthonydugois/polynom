@@ -5,3 +5,6 @@
   background: #fff;
   border-radius: 4px;
 }
+.ad-Overview:focus {
+  outline: 0;
+}

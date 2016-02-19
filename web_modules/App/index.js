@@ -2,7 +2,11 @@ import React, { Component, PropTypes } from "react"
 import mapActionsToKeys from "react-keybindings"
 import Overview from "Overview"
 import Sidebar from "Sidebar"
-import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import {
+  APP_CTRL,
+  APP_SHIFT,
+  OVERVIEW_DEL,
+} from "../../src/constants/KeyActionTypes"
 import "./styles"
 
 class App extends Component {
@@ -24,4 +28,6 @@ App.propTypes = {
 
 export default mapActionsToKeys({
   [APP_CTRL]: "ctrl",
+  [APP_SHIFT]: "shift",
+  [OVERVIEW_DEL]: "delete",
 })(App)

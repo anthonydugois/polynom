@@ -56,21 +56,21 @@
 .ad-Button--expand {
   height: auto;
   padding: .2rem;
-  background: color(#fff a(.05));
+  background: color(var(--ad-Color-prim) l(+5%));
   font-size: .8rem;
   color: #fff;
 }
 .ad-Button--expand:focus,
 .ad-Button--expand:hover {
-  background: color(#fff a(.15));
+  background: color(var(--ad-Color-prim) l(+10%));
 }
 
 .ad-Button--delete {
-  background: none;
+  background: color(var(--ad-Color-prim) l(+5%));
 }
 .ad-Button--delete:focus,
 .ad-Button--delete:hover {
-  background: color(var(--ad-Color-prim) l(+5%));
+  background: color(var(--ad-Color-prim) l(+10%));
 }
 
 .ad-ButtonFile-file {

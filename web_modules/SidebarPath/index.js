@@ -1,9 +1,15 @@
 import { connect } from "react-redux"
 import { pathsActions, pointsActions } from "../../src/actions"
+import { activePathsSelector } from "../../src/selectors"
 import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => ({
+  builder: state.builder,
+  pathsById: state.pathsById,
+  pointsById: state.pointsById,
+  activePaths: activePathsSelector(state),
+})
 
 const mapDispatchToProps = (dispatch, { path }) => ({
   onPathAddActive() {
@@ -15,6 +21,10 @@ const mapDispatchToProps = (dispatch, { path }) => ({
     dispatch(pathsActions.deactivatePaths())
     dispatch(pathsActions.setActivePaths([path.id], true))
     dispatch(pointsActions.setActivePoints(path.points, true))
+  },
+  onPathsActive(pathIds, pointIds) {
+    dispatch(pathsActions.setActivePaths(pathIds, true))
+    dispatch(pointsActions.setActivePoints(pointIds, true))
   },
   onNameChange(name) {
     dispatch(pathsActions.setPathName(path.id, name))

@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(pathsActions.deactivatePaths())
     dispatch(pointsActions.deactivatePoints())
   },
+  onOverviewDelete(pointIds) {
+    dispatch(pointsActions.deletePoints(pointIds))
+  },
   onXPositionsChange(pointIds, dx) {
     dispatch(pointsActions.setPointsX(pointIds, dx))
   },
