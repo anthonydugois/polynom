@@ -3,31 +3,33 @@ function code(path, point, str) {
 }
 
 function x(path, point, previous) {
-  return previous && path.isRelative ? point.x - previous.x : point.x
+  return +(previous && path.isRelative ?
+    point.x - previous.x : point.x).toFixed(3)
 }
 
 function y(path, point, previous) {
-  return previous && path.isRelative ? point.y - previous.y : point.y
+  return +(previous && path.isRelative ?
+    point.y - previous.y : point.y).toFixed(3)
 }
 
 function x1(path, point, previous) {
-  return path.isRelative ?
-    point.parameters.x1 - previous.x : point.parameters.x1
+  return +(path.isRelative ?
+    point.parameters.x1 - previous.x : point.parameters.x1).toFixed(3)
 }
 
 function y1(path, point, previous) {
-  return path.isRelative ?
-    point.parameters.y1 - previous.y : point.parameters.y1
+  return +(path.isRelative ?
+    point.parameters.y1 - previous.y : point.parameters.y1).toFixed(3)
 }
 
 function x2(path, point, previous) {
-  return path.isRelative ?
-    point.parameters.x2 - previous.x : point.parameters.x2
+  return +(path.isRelative ?
+    point.parameters.x2 - previous.x : point.parameters.x2).toFixed(3)
 }
 
 function y2(path, point, previous) {
-  return path.isRelative ?
-    point.parameters.y2 - previous.y : point.parameters.y2
+  return +(path.isRelative ?
+    point.parameters.y2 - previous.y : point.parameters.y2).toFixed(3)
 }
 
 export function M(path, point, previous = false) {

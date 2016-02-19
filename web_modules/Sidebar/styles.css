@@ -7,7 +7,7 @@
   background: var(--ad-Color-prim);
 }
   .ad-Sidebar ::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
   .ad-Sidebar ::-webkit-scrollbar-thumb {
     border-radius: 1rem;
