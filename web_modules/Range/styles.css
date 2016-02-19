@@ -13,7 +13,7 @@ input[type=range]::-moz-focus-outer {
 }
   .ad-Range-input {
     width: 100%;
-    height: 6px;
+    height: 8px;
     margin: 0;
     margin-right: .5rem;
     border-radius: 30px;
@@ -39,8 +39,8 @@ input[type=range]::-moz-focus-outer {
   .ad-Range-input::-webkit-slider-thumb {
     -webkit-appearance: none;
     box-sizing: border-box;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border: 4px solid #fff;
     background: color(var(--ad-Color-prim) l(+10%));
     border-radius: 50%;

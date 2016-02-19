@@ -15,6 +15,7 @@
 .ad-ExpandPanel {
   flex: 1;
   display: none;
+  padding: .75rem 0;
 }
 .ad-ExpandPanel.is-opened {
   display: flex;
