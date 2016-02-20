@@ -1,8 +1,12 @@
 /**
- * Builder
+ * Projects
  */
-export const SET_WIDTH = "SET_WIDTH"
-export const SET_HEIGHT = "SET_HEIGHT"
+export const ADD_PROJECT = "ADD_PROJECT"
+export const REMOVE_PROJECT = "REMOVE_PROJECT"
+export const SET_PROJECT_NAME = "SET_PROJECT_NAME"
+export const SET_PROJECT_OPENED = "SET_PROJECT_OPENED"
+export const SET_PROJECT_WIDTH = "SET_PROJECT_WIDTH"
+export const SET_PROJECT_HEIGHT = "SET_PROJECT_HEIGHT"
 
 /**
  * Grid
