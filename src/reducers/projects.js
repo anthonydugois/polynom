@@ -4,6 +4,7 @@ const initialState = {
   0: {
     id: 0,
     name: "hello.svg",
+    isOpened: true,
     width: 1000,
     height: 800,
     paths: [0],
@@ -12,6 +13,18 @@ const initialState = {
 
 const project = (state, action) => {
   switch (action.type) {
+  case ActionTypes.OPEN_PROJECT:
+    return {
+      ...state,
+      isOpened: true,
+    }
+
+  case ActionTypes.CLOSE_PROJECTS:
+    return {
+      ...state,
+      isOpened: false,
+    }
+
   case ActionTypes.SET_PROJECT_NAME:
     return {
       ...state,
@@ -53,6 +66,7 @@ const project = (state, action) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case ActionTypes.OPEN_PROJECT:
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:
@@ -62,6 +76,7 @@ export default (state = initialState, action) => {
       [action.projectId]: project(state[action.projectId], action),
     }
 
+  case ActionTypes.CLOSE_PROJECTS:
   case ActionTypes.REMOVE_PATHS:
     return Object.keys(state).reduce((acc, key) => ({
       ...acc,

@@ -1,5 +1,18 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
+export function openProject(projectId) {
+  return {
+    type: ActionTypes.OPEN_PROJECT,
+    projectId,
+  }
+}
+
+export function closeProjects() {
+  return {
+    type: ActionTypes.CLOSE_PROJECTS,
+  }
+}
+
 export function setName(projectId, name) {
   return {
     type: ActionTypes.SET_PROJECT_NAME,
