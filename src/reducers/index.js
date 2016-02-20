@@ -1,12 +1,12 @@
 import { combineReducers } from "redux"
-import projects from "./projects"
 import grid from "./grid"
+import projectsById from "./projects"
 import pathsById from "./paths"
 import pointsById from "./points"
 
 const rootReducer = combineReducers({
-  projects,
   grid,
+  projectsById,
   pathsById,
   pointsById,
 })

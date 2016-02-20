@@ -3,10 +3,11 @@ import { createPoint } from "./points"
 
 let newPathId = 0
 
-function addPath(insertAt) {
+function addPath(projectId, insertAt) {
   return {
     type: ActionTypes.ADD_PATH,
     pathId: ++newPathId,
+    projectId,
     insertAt,
   }
 }
