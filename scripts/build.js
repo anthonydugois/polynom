@@ -1,8 +1,8 @@
 import webpack from "webpack"
-import config from "../webpack.config"
-import colors from "chalk"
+import webpackDevServer from "webpack-dev-server"
+import color from "chalk"
 import opn from "opn"
-import server from "./server"
+import config from "../webpack.config"
 import { defineVariables } from "../variables"
 
 defineVariables()
@@ -13,21 +13,22 @@ if (__PROD__) {
       throw err
     }
 
-    console.log(colors.green("\n✓ Build successfully completed"))
+    console.log(color.green("\n✓ Build successfully completed"))
   })
 } else {
-  server({
-    __OUTPUT_DIR__,
-    __SERVER_URL__,
-    __SERVER_PORT__,
-    __SERVER_HOST__,
-  }, (err) => {
+  const server = new webpackDevServer(webpack(config), {
+    publicPath: config.output.publicPath,
+    historyApiFallback: true,
+    hot: true,
+  })
+
+  server.listen(__SERVER_PORT__, __SERVER_HOST__, (err) => {
     if (err) {
       throw err
     }
 
     opn(__SERVER_URL__)
 
-    console.log(colors.green(`\n✓ Dev server started on ${ __SERVER_URL__ }`))
+    console.log(color.green(`\n✓ Dev server started on ${ __SERVER_URL__ }`))
   })
 }

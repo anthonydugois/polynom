@@ -6,7 +6,14 @@ import variables, { defineVariables } from "./variables"
 defineVariables()
 
 export default {
-  entry: ["./src/index.js"],
+  entry: [
+    ...__DEV__ && [
+      `webpack-dev-server/client?${ __SERVER_URL__ }`,
+      "webpack/hot/dev-server",
+    ],
+
+    "./src/index.js",
+  ],
 
   output: {
     path: path.join(__dirname, __OUTPUT_DIR__),
@@ -25,10 +32,12 @@ export default {
         exclude: /node_modules/,
         loaders: ["babel", "eslint"],
       },
+
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style", "css!postcss"),
       },
+
       // workaround to import Snap.svg as a module
       {
         test: require.resolve("snapsvg"),
@@ -44,10 +53,12 @@ export default {
     ...__PROD__ && [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
+        compress: { warnings: false },
       })
+    ],
+
+    ...__DEV__ && [
+      new webpack.HotModuleReplacementPlugin(),
     ],
   ],
 

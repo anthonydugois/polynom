@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import mapActionsToKeys from "react-keybindings"
-import Overview from "Overview"
-import Sidebar from "Sidebar"
+//import Overview from "Overview"
+//import Sidebar from "Sidebar"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import "./styles"
 
@@ -16,8 +16,9 @@ class App extends Component {
         ref="app"
         tabIndex={ 0 }
         className="ad-App">
-        <Sidebar { ...this.props } />
-        <Overview { ...this.props } />
+        { this.props.children }
+        { /* <Sidebar { ...this.props } />
+        <Overview { ...this.props } /> */ }
       </div>
     )
   }

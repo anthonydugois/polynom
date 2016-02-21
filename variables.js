@@ -1,6 +1,6 @@
 process.env.NODE_ENV = "development"
 
-if (process.argv.includes("production")) {
+if (process.argv.includes("--production")) {
   process.env.NODE_ENV = "production"
 }
 

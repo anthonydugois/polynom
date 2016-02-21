@@ -23,6 +23,7 @@ input[type=range]::-moz-focus-outer {
     outline: 0;
     background: color(var(--ad-Color-prim) l(+15%));
   }
+
   /* Track */
   .ad-Range-input::-webkit-slider-runnable-track {
     -webkit-appearance: none;
@@ -35,6 +36,7 @@ input[type=range]::-moz-focus-outer {
   .ad-Range-input::-ms-track {
     background: none;
   }
+
   /* Thumb */
   .ad-Range-input::-webkit-slider-thumb {
     -webkit-appearance: none;

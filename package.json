@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build",
-    "prod": "npm run build --production",
+    "prod": "npm run build -- --production",
     "build": "babel-node scripts/build",
     "lint": "eslint .",
     "test": "npm run lint"
@@ -75,6 +75,12 @@
     "parser": "babel-eslint"
   },
   "stylelint": {
-    "extends": "stylelint-config-standard"
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "function-url-quotes": "none",
+      "number-leading-zero": "never",
+      "rule-non-nested-empty-line-before": null,
+      "indentation": null
+    }
   }
 }
