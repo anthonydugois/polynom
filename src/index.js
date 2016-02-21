@@ -1,9 +1,12 @@
 import React from "react"
 import { render } from "react-dom"
+import { Provider } from "react-redux"
 import store from "./store"
-import Root from "Root"
+import routes from "./routes"
 
 render(
-  <Root store={ store() } />,
+  <Provider store={ store() }>
+    { routes }
+  </Provider>,
   document.querySelector("#root")
 )

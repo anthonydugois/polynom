@@ -1,4 +1,8 @@
 export {
+  openedProject,
+} from "./openedProject"
+
+export {
   activePathsSelector,
 } from "./activePaths"
 
