@@ -20,7 +20,7 @@ if (__PROD__) {
     publicPath: config.output.publicPath,
     historyApiFallback: true,
     hot: true,
-    quiet: true,
+    noInfo: true,
   })
 
   server.listen(__SERVER_PORT__, __SERVER_HOST__, (err) => {

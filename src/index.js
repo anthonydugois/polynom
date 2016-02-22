@@ -1,15 +1,15 @@
 import React from "react"
 import { render } from "react-dom"
-import { Provider } from "react-redux"
 import { Router, browserHistory } from "react-router"
+import Root from "Root"
 import store from "./store"
 import routes from "./routes"
 
 render(
-  <Provider store={ store() }>
+  <Root store={ store() }>
     <Router
       history={ browserHistory }
       routes={ routes } />
-  </Provider>,
+  </Root>,
   document.querySelector("#root")
 )
