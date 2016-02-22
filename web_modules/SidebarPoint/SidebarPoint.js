@@ -16,7 +16,7 @@ class SidebarPoint extends Component {
 
   render() {
     const {
-      builder,
+      project,
       gridStep,
       point,
       previousPoint,
@@ -40,7 +40,7 @@ class SidebarPoint extends Component {
 
             { /* Point position */ }
             <SidebarPointPosition
-              builder={ builder }
+              project={ project }
               gridStep={ gridStep }
               point={ point }
               onXPositionChange={ this.props.onXPositionChange }
@@ -49,7 +49,7 @@ class SidebarPoint extends Component {
             { /* Quadratic curve settings */ }
             { code === "q" && (
               <SidebarPointQ
-                builder={ builder }
+                project={ project }
                 gridStep={ gridStep }
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
@@ -58,7 +58,7 @@ class SidebarPoint extends Component {
             { /* Cubic curve settings */ }
             { code === "c" && (
               <SidebarPointC
-                builder={ builder }
+                project={ project }
                 gridStep={ gridStep }
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
@@ -67,7 +67,7 @@ class SidebarPoint extends Component {
             { /* Smooth cubic curve settings */ }
             { code === "s" && (
               <SidebarPointS
-                builder={ builder }
+                project={ project }
                 gridStep={ gridStep }
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
@@ -76,7 +76,7 @@ class SidebarPoint extends Component {
             { /* Arc settings */ }
             { code === "a" && (
               <SidebarPointA
-                builder={ builder }
+                project={ project }
                 gridStep={ gridStep }
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
@@ -93,7 +93,7 @@ SidebarPoint.propTypes = {
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
   onParamsChange: PropTypes.func.isRequired,
-  builder: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   gridStep: PropTypes.number.isRequired,
   activePoints: PropTypes.array.isRequired,
   point: PropTypes.object,

@@ -1,10 +1,10 @@
 import { createSelector } from "reselect"
+import { projectSelector } from "./project"
 
-const pathsSelector = (state) => state.builder.paths
 const pathsByIdSelector = (state) => state.pathsById
 
 export const activePathsSelector = createSelector(
-  pathsSelector,
+  projectSelector,
   pathsByIdSelector,
-  (paths, pathsById) => paths.filter((id) => pathsById[id].isActive)
+  (project, pathsById) => project.paths.filter((id) => pathsById[id].isActive)
 )

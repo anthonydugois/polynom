@@ -1,53 +1,52 @@
 import { connect } from "react-redux"
 import { pathsActions, pointsActions } from "../../src/actions"
-import { activePathsSelector } from "../../src/selectors"
 import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
-const mapStateToProps = (state) => ({
-  builder: state.builder,
+const mapStateToProps = (state, props) => ({
   pathsById: state.pathsById,
   pointsById: state.pointsById,
-  activePaths: activePathsSelector(state),
+  ...props,
 })
 
-const mapDispatchToProps = (dispatch, { path }) => ({
+const mapDispatchToProps = (dispatch, props) => ({
   onPathAddActive() {
-    dispatch(pathsActions.setActivePaths([path.id], true))
-    dispatch(pointsActions.setActivePoints(path.points, true))
+    dispatch(pathsActions.setActivePaths([props.path.id], true))
+    dispatch(pointsActions.setActivePoints(props.path.points, true))
   },
   onPathActive() {
     dispatch(pointsActions.deactivatePoints())
     dispatch(pathsActions.deactivatePaths())
-    dispatch(pathsActions.setActivePaths([path.id], true))
-    dispatch(pointsActions.setActivePoints(path.points, true))
+    dispatch(pathsActions.setActivePaths([props.path.id], true))
+    dispatch(pointsActions.setActivePoints(props.path.points, true))
   },
   onPathsActive(pathIds, pointIds) {
     dispatch(pathsActions.setActivePaths(pathIds, true))
     dispatch(pointsActions.setActivePoints(pointIds, true))
   },
   onNameChange(name) {
-    dispatch(pathsActions.setPathName(path.id, name))
+    dispatch(pathsActions.setPathName(props.path.id, name))
   },
   onPathCodeChange(d) {
     const { isClosed, isRelative, points } = parsePathCode(d)
 
-    dispatch(pathsActions.setClosedPath(path.id, isClosed))
-    dispatch(pathsActions.setRelativePath(path.id, isRelative))
+    dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
+    dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
 
     dispatch(pointsActions.deactivatePoints())
-    dispatch(pointsActions.removePoints(path.points))
+    dispatch(pointsActions.removePoints(props.path.points))
 
-    points.forEach((p) => dispatch(pointsActions.createPoint(path.id, ...p)))
+    points.forEach((p) =>
+      dispatch(pointsActions.createPoint(props.path.id, ...p)))
   },
   onRelativeChange(isRelative) {
-    dispatch(pathsActions.setRelativePath(path.id, isRelative))
+    dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
   },
   onClosedChange(isClosed) {
-    dispatch(pathsActions.setClosedPath(path.id, isClosed))
+    dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
   },
   onFilledChange(isFilled) {
-    dispatch(pathsActions.setFilledPath(path.id, isFilled))
+    dispatch(pathsActions.setFilledPath(props.path.id, isFilled))
   },
 })
 

@@ -7,7 +7,7 @@ import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
 function getStyles(props) {
-  const { width, height } = props.builder
+  const { width, height } = props.project
   return { width, height }
 }
 
@@ -149,7 +149,7 @@ class Overview extends Component {
   };
 
   render() {
-    const { builder, grid } = this.props
+    const { project, grid } = this.props
 
     return (
       <svg
@@ -159,11 +159,11 @@ class Overview extends Component {
         onClick={ this.handleClick }
         onKeyDown={ this.handleKeyDown }>
         <Grid
-          width={ builder.width }
-          height={ builder.height }
+          width={ project.width }
+          height={ project.height }
           grid={ grid } />
 
-        { builder.paths.map(this.renderShape) }
+        { project.paths.map(this.renderShape) }
       </svg>
     )
   }
@@ -178,7 +178,7 @@ Overview.propTypes = {
   onYPositionsChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  builder: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   grid: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,

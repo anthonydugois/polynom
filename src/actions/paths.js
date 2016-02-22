@@ -12,18 +12,18 @@ function addPath(projectId, insertAt) {
   }
 }
 
-export function createPath(x, y) {
+export function createPath(projectId, x, y) {
   return (dispatch, getState) => {
-    const { builder, pathsById } = getState()
+    const { projectsById, pathsById } = getState()
 
     // determine the position of the new path
-    const insertAt = builder.paths.reduce(
+    const insertAt = projectsById[projectId].paths.reduce(
       (acc, key, index) => pathsById[key].isActive ? index + 1 : acc,
       0
     )
 
     dispatch(deactivatePaths())
-    dispatch(addPath(insertAt))
+    dispatch(addPath(projectId, insertAt))
     dispatch(createPoint(newPathId, "M", x, y, {}))
   }
 }

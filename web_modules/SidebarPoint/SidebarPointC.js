@@ -6,35 +6,35 @@ import inRange from "../../src/utils/inRange"
 
 class SidebarPointC extends Component {
   handleX1Change = (e) => {
-    const { builder, point } = this.props
-    const x1 = inRange(parseInt(e.target.value), builder.width)
+    const { project, point } = this.props
+    const x1 = inRange(parseInt(e.target.value), project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, x1 })
   };
 
   handleY1Change = (e) => {
-    const { builder, point } = this.props
-    const y1 = inRange(parseInt(e.target.value), builder.height)
+    const { project, point } = this.props
+    const y1 = inRange(parseInt(e.target.value), project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, y1 })
   };
 
   handleX2Change = (e) => {
-    const { builder, point } = this.props
-    const x2 = inRange(parseInt(e.target.value), builder.width)
+    const { project, point } = this.props
+    const x2 = inRange(parseInt(e.target.value), project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, x2 })
   };
 
   handleY2Change = (e) => {
-    const { builder, point } = this.props
-    const y2 = inRange(parseInt(e.target.value), builder.height)
+    const { project, point } = this.props
+    const y2 = inRange(parseInt(e.target.value), project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, y2 })
   };
 
   render() {
-    const { builder, gridStep, point } = this.props
+    const { project, gridStep, point } = this.props
 
     return (
       <div>
@@ -42,7 +42,7 @@ class SidebarPointC extends Component {
           <Setting label="First anchor X position">
             <Range
               min={ 0 }
-              max={ builder.width }
+              max={ project.width }
               step={ gridStep }
               value={ point.parameters.x1 }
               onChange={ this.handleX1Change } />
@@ -53,7 +53,7 @@ class SidebarPointC extends Component {
           <Setting label="First anchor Y position">
             <Range
               min={ 0 }
-              max={ builder.height }
+              max={ project.height }
               step={ gridStep }
               value={ point.parameters.y1 }
               onChange={ this.handleY1Change } />
@@ -64,7 +64,7 @@ class SidebarPointC extends Component {
           <Setting label="Second anchor X position">
             <Range
               min={ 0 }
-              max={ builder.width }
+              max={ project.width }
               step={ gridStep }
               value={ point.parameters.x2 }
               onChange={ this.handleX2Change } />
@@ -75,7 +75,7 @@ class SidebarPointC extends Component {
           <Setting label="Second anchor Y position">
             <Range
               min={ 0 }
-              max={ builder.height }
+              max={ project.height }
               step={ gridStep }
               value={ point.parameters.y2 }
               onChange={ this.handleY2Change } />
@@ -88,7 +88,7 @@ class SidebarPointC extends Component {
 
 SidebarPointC.propTypes = {
   onParamsChange: PropTypes.func.isRequired,
-  builder: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   gridStep: PropTypes.number.isRequired,
   point: PropTypes.object.isRequired,
 }

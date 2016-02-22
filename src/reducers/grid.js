@@ -2,8 +2,8 @@ import * as ActionTypes from "../constants/ActionTypes"
 
 const initialState = {
   isShown: true,
-  snapToGrid: true,
-  size: 10,
+  snapToGrid: false,
+  size: 50,
 }
 
 export default (state = initialState, action) => {

@@ -22,7 +22,7 @@ class SidebarPath extends Component {
     const {
       keyActions,
       path,
-      builder,
+      project,
       pathsById,
       activePaths,
     } = this.props
@@ -30,11 +30,11 @@ class SidebarPath extends Component {
     if (keyActions.includes(APP_CTRL)) {
       this.props.onPathAddActive()
     } else if (keyActions.includes(APP_SHIFT)) {
-      const pathIndex = builder.paths.indexOf(path.id)
-      const activePathIndex = builder.paths.indexOf(activePaths[0])
+      const pathIndex = project.paths.indexOf(path.id)
+      const activePathIndex = project.paths.indexOf(activePaths[0])
       const pathIds = pathIndex < activePathIndex ?
-        builder.paths.slice(pathIndex, activePathIndex + 1) :
-        builder.paths.slice(activePathIndex, pathIndex + 1)
+        project.paths.slice(pathIndex, activePathIndex + 1) :
+        project.paths.slice(activePathIndex, pathIndex + 1)
 
       const pointIds = pathIds.reduce((acc, key) => [
         ...acc,
@@ -155,10 +155,10 @@ SidebarPath.propTypes = {
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  path: PropTypes.object.isRequired,
-  builder: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
+  path: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
 }
 

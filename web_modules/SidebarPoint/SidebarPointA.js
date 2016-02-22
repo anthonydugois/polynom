@@ -7,15 +7,15 @@ import inRange from "../../src/utils/inRange"
 
 class SidebarPointA extends Component {
   handleRXChange = (e) => {
-    const { builder, point } = this.props
-    const rx = inRange(parseInt(e.target.value), builder.width)
+    const { project, point } = this.props
+    const rx = inRange(parseInt(e.target.value), project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, rx })
   };
 
   handleRYChange = (e) => {
-    const { builder, point } = this.props
-    const ry = inRange(parseInt(e.target.value), builder.height)
+    const { project, point } = this.props
+    const ry = inRange(parseInt(e.target.value), project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, ry })
   };
@@ -42,7 +42,7 @@ class SidebarPointA extends Component {
   };
 
   render() {
-    const { builder, gridStep, point } = this.props
+    const { project, gridStep, point } = this.props
 
     return (
       <div>
@@ -50,7 +50,7 @@ class SidebarPointA extends Component {
           <Setting label="X Radius">
             <Range
               min={ 0 }
-              max={ builder.width }
+              max={ project.width }
               step={ gridStep }
               value={ point.parameters.rx }
               onChange={ this.handleRXChange } />
@@ -61,7 +61,7 @@ class SidebarPointA extends Component {
           <Setting label="Y Radius">
             <Range
               min={ 0 }
-              max={ builder.height }
+              max={ project.height }
               step={ gridStep }
               value={ point.parameters.ry }
               onChange={ this.handleRYChange } />
@@ -99,7 +99,7 @@ class SidebarPointA extends Component {
 
 SidebarPointA.propTypes = {
   onParamsChange: PropTypes.func.isRequired,
-  builder: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   gridStep: PropTypes.number.isRequired,
   point: PropTypes.object.isRequired,
 }

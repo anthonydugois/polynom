@@ -1,19 +1,14 @@
 import { connect } from "react-redux"
 import { pointsActions } from "../../src/actions"
-import {
-  activePointsSelector,
-  pointSelector,
-  previousPointSelector,
-  gridStepSelector,
-} from "../../src/selectors"
+import * as selectors from "../../src/selectors"
 import SidebarPoint from "./SidebarPoint"
 
-const mapStateToProps = (state) => ({
-  builder: state.builder,
-  gridStep: gridStepSelector(state),
-  activePoints: activePointsSelector(state),
-  point: pointSelector(state),
-  previousPoint: previousPointSelector(state),
+const mapStateToProps = (state, props) => ({
+  project: selectors.projectSelector(state, props),
+  gridStep: selectors.gridStepSelector(state, props),
+  activePoints: selectors.activePointsSelector(state, props),
+  point: selectors.pointSelector(state, props),
+  previousPoint: selectors.previousPointSelector(state, props),
 })
 
 const mapDispatchToProps = (dispatch) => ({

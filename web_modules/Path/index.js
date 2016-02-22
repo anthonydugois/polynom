@@ -4,16 +4,16 @@ import Path from "./Path"
 
 const mapStateToProps = (state) => state
 
-const mapDispatchToProps = (dispatch, { path }) => ({
+const mapDispatchToProps = (dispatch, props) => ({
   onPathAddActive() {
-    dispatch(pathsActions.setActivePaths([path.id], true))
-    dispatch(pointsActions.setActivePoints(path.points, true))
+    dispatch(pathsActions.setActivePaths([props.path.id], true))
+    dispatch(pointsActions.setActivePoints(props.path.points, true))
   },
   onPathActive() {
     dispatch(pathsActions.deactivatePaths())
     dispatch(pointsActions.deactivatePoints())
-    dispatch(pathsActions.setActivePaths([path.id], true))
-    dispatch(pointsActions.setActivePoints(path.points, true))
+    dispatch(pathsActions.setActivePaths([props.path.id], true))
+    dispatch(pointsActions.setActivePoints(props.path.points, true))
   },
 })
 

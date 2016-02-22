@@ -1,5 +1,4 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { activePathsSelector } from "../selectors"
 import { removePaths } from "./paths"
 
 let newPointId = 0
@@ -42,11 +41,9 @@ export function deletePoints(pointIds) {
 
 function ensurePathsIntegrity(pointIds) {
   return (dispatch, getState) => {
-    const state = getState()
-    const activePaths = activePathsSelector(state)
-    const { pathsById, pointsById } = state
+    const { pathsById, pointsById } = getState()
 
-    activePaths.forEach((pathId) => {
+    Object.keys(pathsById).forEach((pathId) => {
       const path = pathsById[pathId]
       // get remaining points
       const points = path.points.filter((key) => !pointIds.includes(key))

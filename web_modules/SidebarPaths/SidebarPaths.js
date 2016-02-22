@@ -8,7 +8,7 @@ import "./styles"
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
-    const { width, height } = this.props.builder
+    const { width, height } = this.props.project
 
     this.props.onAddClick(width / 2, height / 2)
   };
@@ -18,23 +18,25 @@ class SidebarPaths extends Component {
   };
 
   renderSidebarPath = (key) => {
-    const path = this.props.pathsById[key]
+    const { pathsById, project, activePaths } = this.props
 
     return (
       <SidebarPath
         key={ key }
-        path={ path }
+        project={ project }
+        activePaths={ activePaths }
+        path={ pathsById[key] }
         keyActions={ this.props.keyActions } />
     )
   };
 
   render() {
-    const { builder, activePaths } = this.props
+    const { project, activePaths } = this.props
 
     return (
       <SidebarPanel>
         <SidebarModule>
-          { builder.paths.map(this.renderSidebarPath) }
+          { project.paths.map(this.renderSidebarPath) }
         </SidebarModule>
 
         <SidebarActions>
@@ -58,8 +60,8 @@ SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  builder: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
 }
 

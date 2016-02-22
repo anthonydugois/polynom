@@ -6,21 +6,21 @@ import inRange from "../../src/utils/inRange"
 
 class SidebarPointPosition extends Component {
   handleXPositionChange = (e) => {
-    const { builder, point } = this.props
-    const x = inRange(parseInt(e.target.value), builder.width)
+    const { project, point } = this.props
+    const x = inRange(parseInt(e.target.value), project.width)
 
     this.props.onXPositionChange(point.id, x)
   };
 
   handleYPositionChange = (e) => {
-    const { builder, point } = this.props
-    const y = inRange(parseInt(e.target.value), builder.height)
+    const { project, point } = this.props
+    const y = inRange(parseInt(e.target.value), project.height)
 
     this.props.onYPositionChange(point.id, y)
   };
 
   render() {
-    const { builder, gridStep, point } = this.props
+    const { project, gridStep, point } = this.props
 
     return (
       <div>
@@ -28,7 +28,7 @@ class SidebarPointPosition extends Component {
           <Setting label="Point X position">
             <Range
               min={ 0 }
-              max={ builder.width }
+              max={ project.width }
               step={ gridStep }
               value={ point.x }
               onChange={ this.handleXPositionChange } />
@@ -39,7 +39,7 @@ class SidebarPointPosition extends Component {
           <Setting label="Point Y position">
             <Range
               min={ 0 }
-              max={ builder.height }
+              max={ project.height }
               step={ gridStep }
               value={ point.y }
               onChange={ this.handleYPositionChange } />
@@ -53,7 +53,7 @@ class SidebarPointPosition extends Component {
 SidebarPointPosition.propTypes = {
   onXPositionChange: PropTypes.func.isRequired,
   onYPositionChange: PropTypes.func.isRequired,
-  builder: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
   gridStep: PropTypes.number.isRequired,
   point: PropTypes.object.isRequired,
 }

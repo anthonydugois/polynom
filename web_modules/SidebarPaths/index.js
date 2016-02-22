@@ -1,17 +1,17 @@
 import { connect } from "react-redux"
 import { pathsActions } from "../../src/actions"
-import { activePathsSelector } from "../../src/selectors"
+import * as selectors from "../../src/selectors"
 import SidebarPaths from "./SidebarPaths"
 
-const mapStateToProps = (state) => ({
-  builder: state.builder,
+const mapStateToProps = (state, props) => ({
   pathsById: state.pathsById,
-  activePaths: activePathsSelector(state),
+  project: selectors.projectSelector(state, props),
+  activePaths: selectors.activePathsSelector(state, props),
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, props) => ({
   onAddClick(x, y) {
-    dispatch(pathsActions.createPath(x, y))
+    dispatch(pathsActions.createPath(props.params.projectId, x, y))
   },
   onRemoveClick(pathIds) {
     dispatch(pathsActions.removePaths(pathIds))
