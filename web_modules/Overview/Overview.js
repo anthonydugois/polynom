@@ -91,8 +91,13 @@ class Overview extends Component {
 
     this.coords = coords
 
-    this.props.onXPositionsChange(activePoints, dx)
-    this.props.onYPositionsChange(activePoints, dy)
+    if (dx !== 0) {
+      this.props.onXPositionsChange(activePoints, dx)
+    }
+
+    if (dy !== 0) {
+      this.props.onYPositionsChange(activePoints, dy)
+    }
   }
 
   moveFirstAnchor(coords) {
