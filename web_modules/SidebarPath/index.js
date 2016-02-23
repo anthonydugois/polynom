@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pointsActions.deactivatePoints())
     dispatch(pointsActions.removePoints(props.path.points))
 
-    points.forEach((p) =>
-      dispatch(pointsActions.createPoint(props.path.id, ...p)))
+    points.forEach((point) =>
+      dispatch(pointsActions.createPoint(props.path.id, ...point)))
   },
   onRelativeChange(isRelative) {
     dispatch(pathsActions.setRelativePath(props.path.id, isRelative))

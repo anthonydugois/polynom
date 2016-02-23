@@ -155,11 +155,11 @@ SidebarPath.propTypes = {
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  pathsById: PropTypes.object.isRequired,
-  pointsById: PropTypes.object.isRequired,
   path: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
+  pathsById: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
 }
 
 export default SidebarPath
