@@ -18,15 +18,20 @@ class SidebarPaths extends Component {
   };
 
   renderSidebarPath = (key) => {
-    const { pathsById, project, activePaths } = this.props
+    const {
+      keyActions,
+      pathsById,
+      project,
+      activePaths,
+    } = this.props
 
     return (
       <SidebarPath
         key={ key }
+        keyActions={ keyActions }
         project={ project }
         activePaths={ activePaths }
-        path={ pathsById[key] }
-        keyActions={ this.props.keyActions } />
+        path={ pathsById[key] } />
     )
   };
 

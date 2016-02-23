@@ -25,6 +25,7 @@ class Project extends Component {
 
 Project.propTypes = {
   keyActions: PropTypes.array.isRequired,
+  project: PropTypes.object.isRequired,
 }
 
 export default mapActionsToKeys({

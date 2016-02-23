@@ -114,7 +114,7 @@ class Overview extends Component {
     })
   }
 
-  handleClick = (e) => {
+  handleOverviewMouseDown = (e) => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       const { pathsById, activePaths } = this.props
       const [x, y] = this.getCoords(e)
@@ -161,7 +161,7 @@ class Overview extends Component {
         tabIndex={ 1 }
         className="ad-Overview"
         style={ getStyles(this.props) }
-        onClick={ this.handleClick }
+        onMouseDown={ this.handleOverviewMouseDown }
         onKeyDown={ this.handleKeyDown }>
         <Grid project={ project } />
 

@@ -6,7 +6,6 @@ import Overview from "./Overview"
 const mapStateToProps = (state, props) => ({
   pathsById: state.pathsById,
   pointsById: state.pointsById,
-  project: selectors.projectSelector(state, props),
   activePaths: selectors.activePathsSelector(state, props),
   activePoints: selectors.activePointsSelector(state, props),
 })

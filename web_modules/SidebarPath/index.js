@@ -3,10 +3,9 @@ import { pathsActions, pointsActions } from "../../src/actions"
 import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   pathsById: state.pathsById,
   pointsById: state.pointsById,
-  ...props,
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

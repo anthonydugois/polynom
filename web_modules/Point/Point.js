@@ -5,9 +5,9 @@ import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import "./styles"
 
 class Point extends Component {
-  handleClick = (e) => e.stopPropagation();
+  handleMouseDown = (e) => {
+    e.stopPropagation()
 
-  handleMouseDown = () => {
     if (this.props.keyActions.includes(APP_CTRL)) {
       this.props.onPointAddActive()
     } else {
@@ -115,7 +115,6 @@ class Point extends Component {
     return (
       <g
         className={ cx("ad-Point", { "is-active": point.isActive }) }
-        onClick={ this.handleClick }
         onMouseDown={ this.handleMouseDown }>
         { this.renderPoint(point) }
 

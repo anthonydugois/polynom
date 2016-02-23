@@ -5,7 +5,6 @@ import SidebarPaths from "./SidebarPaths"
 
 const mapStateToProps = (state, props) => ({
   pathsById: state.pathsById,
-  project: selectors.projectSelector(state, props),
   activePaths: selectors.activePathsSelector(state, props),
 })
 

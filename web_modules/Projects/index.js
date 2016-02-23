@@ -1,13 +1,13 @@
-import React, { Component } from "react"
+import { connect } from "react-redux"
+import Projects from "./Projects"
 
-class Projects extends Component {
-  render() {
-    return (
-      <div />
-    )
-  }
-}
+const mapStateToProps = (state) => ({
+  projectsById: state.projectsById,
+})
 
-Projects.propTypes = {}
+//const mapDispatchToProps = (dispatch) => ({})
 
-export default Projects
+export default connect(
+  mapStateToProps,
+  //mapDispatchToProps,
+)(Projects)
