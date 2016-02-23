@@ -1,18 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
-export function openProject(projectId) {
-  return {
-    type: ActionTypes.OPEN_PROJECT,
-    projectId,
-  }
-}
-
-export function closeProjects() {
-  return {
-    type: ActionTypes.CLOSE_PROJECTS,
-  }
-}
-
 export function setName(projectId, name) {
   return {
     type: ActionTypes.SET_PROJECT_NAME,
@@ -34,5 +21,29 @@ export function setHeight(projectId, height) {
     type: ActionTypes.SET_PROJECT_HEIGHT,
     projectId,
     height,
+  }
+}
+
+export function setGridShow(projectId, gridShow) {
+  return {
+    type: ActionTypes.SET_GRID_SHOW,
+    projectId,
+    gridShow,
+  }
+}
+
+export function setGridSnap(projectId, gridSnap) {
+  return {
+    type: ActionTypes.SET_GRID_SNAP,
+    projectId,
+    gridSnap,
+  }
+}
+
+export function setGridSize(projectId, gridSize) {
+  return {
+    type: ActionTypes.SET_GRID_SIZE,
+    projectId,
+    gridSize,
   }
 }

@@ -2,38 +2,34 @@ import React, { PropTypes } from "react"
 import cx from "classnames"
 import "./styles"
 
-const Grid = ({
-  width,
-  height,
-  grid,
-}) => {
+const Grid = ({ project }) => {
   const verticalLines = []
   const horizontalLines = []
 
-  for (let i = 1 ; i < width / grid.size ; i++) {
+  for (let i = 1 ; i < project.width / project.gridSize ; i++) {
     verticalLines.push(
       <line
         key={ i }
-        x1={ i * grid.size }
+        x1={ i * project.gridSize }
         y1={ 0 }
-        x2={ i * grid.size }
-        y2={ height } />
+        x2={ i * project.gridSize }
+        y2={ project.height } />
     )
   }
 
-  for (let i = 1 ; i < height / grid.size ; i++) {
+  for (let i = 1 ; i < project.height / project.gridSize ; i++) {
     horizontalLines.push(
       <line
         key={ i }
         x1={ 0 }
-        y1={ i * grid.size }
-        x2={ width }
-        y2={ i * grid.size } />
+        y1={ i * project.gridSize }
+        x2={ project.width }
+        y2={ i * project.gridSize } />
     )
   }
 
   return (
-    <g className={ cx("ad-Grid", { "is-shown": grid.isShown }) }>
+    <g className={ cx("ad-Grid", { "is-shown": project.gridShow }) }>
       { verticalLines }
       { horizontalLines }
     </g>
@@ -41,13 +37,7 @@ const Grid = ({
 }
 
 Grid.propTypes = {
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  grid: PropTypes.shape({
-    isShown: PropTypes.bool.isRequired,
-    snapToGrid: PropTypes.bool.isRequired,
-    size: PropTypes.number.isRequired,
-  }).isRequired,
+  project: PropTypes.object.isRequired,
 }
 
 export default Grid

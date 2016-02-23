@@ -1,5 +1,6 @@
 export {
   projectSelector,
+  projectGridStepSelector,
 } from "./project"
 
 export {
@@ -11,7 +12,3 @@ export {
   pointSelector,
   previousPointSelector,
 } from "./activePoints"
-
-export {
-  gridStepSelector,
-} from "./gridStep"

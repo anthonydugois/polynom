@@ -4,7 +4,6 @@ import * as selectors from "../../src/selectors"
 import Overview from "./Overview"
 
 const mapStateToProps = (state, props) => ({
-  grid: state.grid,
   pathsById: state.pathsById,
   pointsById: state.pointsById,
   project: selectors.projectSelector(state, props),

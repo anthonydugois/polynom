@@ -3,16 +3,10 @@
  */
 export const ADD_PROJECT = "ADD_PROJECT"
 export const REMOVE_PROJECT = "REMOVE_PROJECT"
-export const OPEN_PROJECT = "OPEN_PROJECT"
-export const CLOSE_PROJECTS = "CLOSE_PROJECTS"
 export const SET_PROJECT_NAME = "SET_PROJECT_NAME"
 export const SET_PROJECT_WIDTH = "SET_PROJECT_WIDTH"
 export const SET_PROJECT_HEIGHT = "SET_PROJECT_HEIGHT"
-
-/**
- * Grid
- */
-export const SET_GRID_SHOWN = "SET_GRID_SHOWN"
+export const SET_GRID_SHOW = "SET_GRID_SHOW"
 export const SET_GRID_SNAP = "SET_GRID_SNAP"
 export const SET_GRID_SIZE = "SET_GRID_SIZE"
 

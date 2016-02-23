@@ -32,16 +32,16 @@ class Overview extends Component {
   }
 
   getCoords = (e) => {
-    const { grid } = this.props
+    const { project } = this.props
     const { left, top } = findDOMNode(this).getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
     let y = Math.round(e.clientY - top)
 
     // grid snaping
-    if (grid.snapToGrid) {
-      x = grid.size * Math.round(x / grid.size)
-      y = grid.size * Math.round(y / grid.size)
+    if (project.gridSnap) {
+      x = project.gridSize * Math.round(x / project.gridSize)
+      y = project.gridSize * Math.round(y / project.gridSize)
     }
 
     return [x, y]
@@ -149,7 +149,7 @@ class Overview extends Component {
   };
 
   render() {
-    const { project, grid } = this.props
+    const { project } = this.props
 
     return (
       <svg
@@ -158,10 +158,7 @@ class Overview extends Component {
         style={ getStyles(this.props) }
         onClick={ this.handleClick }
         onKeyDown={ this.handleKeyDown }>
-        <Grid
-          width={ project.width }
-          height={ project.height }
-          grid={ grid } />
+        <Grid project={ project } />
 
         { project.paths.map(this.renderShape) }
       </svg>
@@ -179,7 +176,6 @@ Overview.propTypes = {
   onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
-  grid: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
