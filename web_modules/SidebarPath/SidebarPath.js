@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import { DragSource, DropTarget } from "react-dnd"
+import { getEmptyImage } from "react-dnd-html5-backend"
 import cx from "classnames"
 import Expand from "Expand"
 import ExpandCaption from "Expand/ExpandCaption"
@@ -10,6 +11,7 @@ import Setting from "Settings/Setting"
 import Checkbox from "Checkbox"
 import Text from "Text"
 import Textarea from "Text/Textarea"
+import Icon from "Icon"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
 import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
@@ -20,6 +22,12 @@ class SidebarPath extends Component {
     isFocused: false,
     d: null,
   };
+
+  componentDidMount() {
+    this.props.connectDragPreview(getEmptyImage(), {
+      captureDraggingState: true,
+    })
+  }
 
   handlePathClick = () => {
     const {
@@ -100,35 +108,44 @@ class SidebarPath extends Component {
       pointsById,
       connectDragSource,
       connectDropTarget,
+      isDragging,
     } = this.props
 
-    const d = pathCode(path, pointsById)
-
-    return (
-      <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
+    return connectDropTarget(
+      <div
+        className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }
+        style={ {
+          opacity: isDragging ? 0 : 1,
+        } }>
         <Expand>
           <ExpandCaption onClick={ this.handlePathClick }>
-            { connectDragSource(connectDropTarget(
-              <div>
-                <div className="ad-SidebarPath-name">
-                  <Text
-                    className="ad-SidebarPath-input"
-                    value={ path.name }
-                    onChange={ this.handleNameChange } />
-                </div>
-
-                <div className="ad-SidebarPath-actions">
-                  { /* add some actions here */ }
-                </div>
+            <div className="ad-SidebarPathCaption">
+              <div className="ad-SidebarPath-name">
+                <Text
+                  className="ad-SidebarPath-input"
+                  value={ path.name }
+                  onChange={ this.handleNameChange } />
               </div>
-            )) }
+
+              <div className="ad-SidebarPath-actions">
+                { connectDragSource(
+                  <div className="ad-SidebarPath-reorder">
+                    <Icon name="reorder" />
+                  </div>
+                ) }
+              </div>
+            </div>
           </ExpandCaption>
 
           <ExpandPanel>
             <Settings>
               <Setting>
                 <Textarea
-                  value={ this.state.isFocused ? this.state.d : d }
+                  value={
+                    this.state.isFocused ?
+                      this.state.d :
+                      pathCode(path, pointsById)
+                  }
                   onChange={ this.handleChange }
                   onFocus={ this.handleFocus }
                   onBlur={ this.handleBlur } />
@@ -179,9 +196,17 @@ SidebarPath.propTypes = {
   pointsById: PropTypes.object.isRequired,
 }
 
-const target = {
+const sidebarPathTarget = {
+  /*hover(props, monitor, component) {
+    const { top, bottom } = findDOMNode(component).getBoundingClientRect()
+    const { y } = monitor.getClientOffset()
+    const isOver = monitor.isOver()
+    const middle = (bottom - top) / 2
+    const position = y - top
+  },*/
   drop(props, monitor, component) {
-    const { projectId, pathId, index } = monitor.getItem()
+    const { project, path } = monitor.getItem()
+    const index = project.paths.indexOf(path.id)
     const hoveredIndex = props.project.paths.indexOf(props.path.id)
 
     if (index === hoveredIndex) {
@@ -194,37 +219,41 @@ const target = {
     const position = y - top
 
     if (index < hoveredIndex && position < middle) {
-      return
+      return props.onPathMove(project.id, hoveredIndex - 1, path.id)
     }
 
     if (index > hoveredIndex && position > middle) {
-      return
+      return props.onPathMove(project.id, hoveredIndex + 1, path.id)
     }
 
-    props.onPathMove(projectId, hoveredIndex, pathId)
+    return props.onPathMove(project.id, hoveredIndex, path.id)
   },
 }
 
-const source = {
-  beginDrag(props) {
+const sidebarPathSource = {
+  beginDrag(props, monitor, component) {
     return {
-      projectId: props.project.id,
-      pathId: props.path.id,
-      index: props.project.paths.indexOf(props.path.id),
+      project: props.project,
+      path: props.path,
+      boundingRect: findDOMNode(component).getBoundingClientRect(),
     }
   },
 }
 
 export default DropTarget(
   SIDEBAR_PATH,
-  target,
-  (connect) => ({
+  sidebarPathTarget,
+  (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
+    currentOffset: monitor.getClientOffset(),
+    isOver: monitor.isOver(),
   })
 )(DragSource(
   SIDEBAR_PATH,
-  source,
-  (connect) => ({
+  sidebarPathSource,
+  (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
   }),
 )(SidebarPath))

@@ -11,7 +11,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   onAddClick(x, y) {
-    dispatch(pathsActions.createPath(props.params.projectId, x, y))
+    dispatch(pathsActions.createPath(props.project.id, x, y))
   },
   onRemoveClick(pathIds) {
     dispatch(pathsActions.removePaths(pathIds))

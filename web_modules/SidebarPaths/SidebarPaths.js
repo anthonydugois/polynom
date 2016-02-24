@@ -6,6 +6,7 @@ import SidebarPanel from "Sidebar/SidebarPanel"
 import SidebarModule from "Sidebar/SidebarModule"
 import SidebarActions from "Sidebar/SidebarActions"
 import SidebarPath from "SidebarPath"
+import SidebarPathsLayer from "./SidebarPathsLayer"
 import "./styles"
 
 class SidebarPaths extends Component {
@@ -46,6 +47,8 @@ class SidebarPaths extends Component {
       <SidebarPanel>
         <SidebarModule>
           { project.paths.map(this.renderSidebarPath) }
+
+          <SidebarPathsLayer />
         </SidebarModule>
 
         <SidebarActions>
@@ -69,8 +72,8 @@ SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  pathsById: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,
 }

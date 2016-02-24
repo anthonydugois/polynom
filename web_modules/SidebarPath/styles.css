@@ -7,22 +7,32 @@
 .ad-SidebarPath.is-active {
   border-color: var(--ad-Color-sec);
 }
+
+.ad-SidebarPathCaption {
+  display: flex;
+  align-items: center;
+}
   .ad-SidebarPath-name {
     flex: 1;
-    flex-direction: row;
-    padding: 0 .5rem;
+    padding: 0 1rem;
+    font-size: .8rem;
+    color: color(var(--ad-Color-prim) l(+75%));
   }
     .ad-SidebarPath-input {
       width: 100%;
-      padding: .25rem .5rem;
       background: none;
       border: none;
-      border-radius: 2px;
+      outline: 0;
       font-family: inherit;
-      font-size: .8rem;
-      color: #fff;
+      font-size: 1em;
+      color: currentColor;
     }
     .ad-SidebarPath-input:focus {
-      outline: 0;
-      background: color(var(--ad-Color-prim) l(-5%));
+      color: #fff;
     }
+
+  .ad-SidebarPath-reorder {
+    cursor: grab;
+    font-size: 1.25rem;
+    color: color(var(--ad-Color-prim) l(+10%));
+  }

@@ -7,7 +7,7 @@ const initialState = {
     width: 1000,
     height: 800,
     gridShow: true,
-    gridSnap: true,
+    gridSnap: false,
     gridSize: 50,
     paths: [0],
   },
