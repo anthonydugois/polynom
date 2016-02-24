@@ -51,7 +51,7 @@ const project = (state, action) => {
       gridSize: action.gridSize,
     }
 
-  case ActionTypes.ADD_PATH:
+  case ActionTypes.INSERT_PATH:
     return {
       ...state,
       paths: [
@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:
-  case ActionTypes.ADD_PATH:
+  case ActionTypes.INSERT_PATH:
     return {
       ...state,
       [action.projectId]: project(state[action.projectId], action),

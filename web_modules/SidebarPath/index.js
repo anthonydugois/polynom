@@ -23,6 +23,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pathsActions.setActivePaths(pathIds, true))
     dispatch(pointsActions.setActivePoints(pointIds, true))
   },
+  onPathMove(projectId, insertAt, pathId) {
+    dispatch(pathsActions.removePaths([pathId]))
+    dispatch(pathsActions.insertPath(projectId, insertAt, pathId))
+  },
   onNameChange(name) {
     dispatch(pathsActions.setPathName(props.path.id, name))
   },

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from "react"
+import { DragDropContext } from "react-dnd"
+import HTML5Backend from "react-dnd-html5-backend"
 import Button from "Button"
 import SidebarPanel from "Sidebar/SidebarPanel"
 import SidebarModule from "Sidebar/SidebarModule"
@@ -70,4 +72,4 @@ SidebarPaths.propTypes = {
   activePaths: PropTypes.array.isRequired,
 }
 
-export default SidebarPaths
+export default DragDropContext(HTML5Backend)(SidebarPaths)

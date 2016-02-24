@@ -4,11 +4,24 @@ import { createPoint } from "./points"
 let newPathId = 0
 
 function addPath(projectId, insertAt) {
+  return (dispatch) => {
+    const pathId = ++newPathId
+
+    dispatch({
+      type: ActionTypes.ADD_PATH,
+      pathId,
+    })
+
+    dispatch(insertPath(projectId, insertAt, pathId))
+  }
+}
+
+export function insertPath(projectId, insertAt, pathId) {
   return {
-    type: ActionTypes.ADD_PATH,
-    pathId: ++newPathId,
+    type: ActionTypes.INSERT_PATH,
     projectId,
     insertAt,
+    pathId,
   }
 }
 

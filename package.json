@@ -45,6 +45,8 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "react": "^0.14.7",
+    "react-dnd": "^2.1.2",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^0.14.7",
     "react-keybindings": "^1.0.8",
     "react-redux": "^4.4.0",
