@@ -4,15 +4,28 @@ import { removePaths } from "./paths"
 let newPointId = 0
 
 function addPoint(pathId, insertAt, code, x, y, parameters) {
+  return (dispatch) => {
+    const pointId = ++newPointId
+
+    dispatch({
+      type: ActionTypes.ADD_POINT,
+      pointId,
+      code,
+      x,
+      y,
+      parameters,
+    })
+
+    dispatch(insertPoint(pathId, insertAt, pointId))
+  }
+}
+
+export function insertPoint(pathId, insertAt, pointId) {
   return {
-    type: ActionTypes.ADD_POINT,
-    pointId: ++newPointId,
+    type: ActionTypes.INSERT_POINT,
     pathId,
     insertAt,
-    code,
-    x,
-    y,
-    parameters,
+    pointId,
   }
 }
 
@@ -21,14 +34,18 @@ export function createPoint(pathId, code, x, y, parameters) {
     const { pathsById, pointsById } = getState()
     const path = pathsById[pathId]
 
-    // determine the position of the point in the corresponding path
-    const insertAt = path.points.reduce(
-      (acc, key, index) => pointsById[key].isActive ? index + 1 : acc,
-      path.points.length
-    )
+    const activePoints = path.points.filter((key) => pointsById[key].isActive)
+    const insertAt = path.points.indexOf(activePoints[activePoints.length - 1])
 
-    dispatch(deactivatePoints())
-    dispatch(addPoint(pathId, insertAt, code, x, y, parameters))
+    dispatch(setActivePoints(activePoints, false))
+    dispatch(addPoint(
+      pathId,
+      insertAt > -1 ? insertAt + 1 : 0,
+      code,
+      x,
+      y,
+      parameters
+    ))
   }
 }
 
@@ -77,12 +94,6 @@ export function removePoints(pointIds) {
   return {
     type: ActionTypes.REMOVE_POINTS,
     pointIds,
-  }
-}
-
-export function deactivatePoints() {
-  return {
-    type: ActionTypes.DEACTIVATE_POINTS,
   }
 }
 

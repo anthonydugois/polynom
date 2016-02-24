@@ -6,29 +6,55 @@ import "./styles"
 
 class Shape extends Component {
   renderPoint = (key, index, keys) => {
-    const { path, pointsById } = this.props
-    const point = pointsById[key]
+    const {
+      onActivate,
+      onDeactivate,
+      keyActions,
+      path,
+      pointsById,
+      activePaths,
+      activePoints,
+      onMouseDown,
+    } = this.props
 
     return (
       <Point
         key={ key }
+        onActivate={ onActivate }
+        onDeactivate={ onDeactivate }
+        keyActions={ keyActions }
+        activePaths={ activePaths }
+        activePoints={ activePoints }
         path={ path }
-        point={ point }
+        point={ pointsById[key] }
         previousPoint={ index > 0 ? pointsById[keys[index - 1]] : null }
-        keyActions={ this.props.keyActions }
-        onMouseDown={ this.props.onMouseDown } />
+        onMouseDown={ onMouseDown } />
     )
   };
 
   render() {
-    const { path } = this.props
+    const {
+      onActivate,
+      onDeactivate,
+      keyActions,
+      path,
+      pointsById,
+      activePaths,
+      activePoints,
+      onMouseDown,
+    } = this.props
 
     return (
       <g className="ad-Shape">
         <Path
+          onActivate={ onActivate }
+          onDeactivate={ onDeactivate }
+          keyActions={ keyActions }
           path={ path }
-          keyActions={ this.props.keyActions }
-          onMouseDown={ this.props.onMouseDown } />
+          pointsById={ pointsById }
+          activePaths={ activePaths }
+          activePoints={ activePoints }
+          onMouseDown={ onMouseDown } />
 
         <g className={ cx("ad-Shape-points", { "is-shown": path.isActive }) }>
           { path.points.map(this.renderPoint) }
@@ -39,10 +65,14 @@ class Shape extends Component {
 }
 
 Shape.propTypes = {
-  onMouseDown: PropTypes.func.isRequired,
+  onActivate: PropTypes.func.isRequired,
+  onDeactivate: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
+  activePaths: PropTypes.array.isRequired,
+  activePoints: PropTypes.array.isRequired,
+  onMouseDown: PropTypes.func.isRequired,
 }
 
 export default Shape

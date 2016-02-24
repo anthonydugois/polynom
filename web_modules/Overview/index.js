@@ -11,15 +11,19 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
+  onActivate(pathIds, pointIds) {
+    dispatch(pathsActions.setActivePaths(pathIds, true))
+    dispatch(pointsActions.setActivePoints(pointIds, true))
+  },
+  onDeactivate(pathIds, pointIds) {
+    dispatch(pathsActions.setActivePaths(pathIds, false))
+    dispatch(pointsActions.setActivePoints(pointIds, false))
+  },
   onOverviewCreatePath(x, y) {
-    dispatch(pathsActions.createPath(props.params.projectId, x, y))
+    dispatch(pathsActions.createPath(props.project.id, x, y))
   },
   onOverviewCreatePoint(pathId, code, x, y, parameters) {
     dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
-  },
-  onOverviewDeactivate() {
-    dispatch(pathsActions.deactivatePaths())
-    dispatch(pointsActions.deactivatePoints())
   },
   onOverviewDelete(pointIds) {
     dispatch(pointsActions.deletePoints(pointIds))

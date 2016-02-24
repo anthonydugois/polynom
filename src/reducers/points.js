@@ -66,12 +66,6 @@ const point = (state, action) => {
       },
     }
 
-  case ActionTypes.DEACTIVATE_POINTS:
-    return {
-      ...state,
-      isActive: false,
-    }
-
   case ActionTypes.SET_ACTIVE_POINTS:
     return {
       ...state,
@@ -99,12 +93,6 @@ export default (state = initialState, action) => {
       ...state,
       [action.pointId]: point(undefined, action),
     }
-
-  case ActionTypes.DEACTIVATE_POINTS:
-    return Object.keys(state).reduce((acc, key) => ({
-      ...acc,
-      [key]: point(state[key], action),
-    }), {})
 
   case ActionTypes.SET_ACTIVE_POINTS:
   case ActionTypes.SET_POINTS_X:

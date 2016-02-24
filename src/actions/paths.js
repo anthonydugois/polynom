@@ -28,22 +28,14 @@ export function insertPath(projectId, insertAt, pathId) {
 export function createPath(projectId, x, y) {
   return (dispatch, getState) => {
     const { projectsById, pathsById } = getState()
+    const project = projectsById[projectId]
 
-    // determine the position of the new path
-    const insertAt = projectsById[projectId].paths.reduce(
-      (acc, key, index) => pathsById[key].isActive ? index + 1 : acc,
-      0
-    )
+    const activePaths = project.paths.filter((key) => pathsById[key].isActive)
+    const insertAt = project.paths.indexOf(activePaths[activePaths.length - 1])
 
-    dispatch(deactivatePaths())
-    dispatch(addPath(projectId, insertAt))
+    dispatch(setActivePaths(activePaths, false))
+    dispatch(addPath(projectId, insertAt > -1 ? insertAt + 1 : 0))
     dispatch(createPoint(newPathId, "M", x, y, {}))
-  }
-}
-
-export function deactivatePaths() {
-  return {
-    type: ActionTypes.DEACTIVATE_PATHS,
   }
 }
 

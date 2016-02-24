@@ -25,12 +25,6 @@ const path = (state, action) => {
       points: [],
     }
 
-  case ActionTypes.DEACTIVATE_PATHS:
-    return {
-      ...state,
-      isActive: false,
-    }
-
   case ActionTypes.SET_PATH_NAME:
     return {
       ...state,
@@ -61,7 +55,7 @@ const path = (state, action) => {
       isFilled: action.isFilled,
     }
 
-  case ActionTypes.ADD_POINT:
+  case ActionTypes.INSERT_POINT:
     return {
       ...state,
       points: [
@@ -97,7 +91,6 @@ export default (state = initialState, action) => {
         path(state[key], action) : state[key],
     }), {})
 
-  case ActionTypes.DEACTIVATE_PATHS:
   case ActionTypes.REMOVE_POINTS:
     return Object.keys(state).reduce((acc, key) => ({
       ...acc,
@@ -109,7 +102,7 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:
   case ActionTypes.SET_FILLED_PATH:
-  case ActionTypes.ADD_POINT:
+  case ActionTypes.INSERT_POINT:
     return {
       ...state,
       [action.pathId]: path(state[action.pathId], action),

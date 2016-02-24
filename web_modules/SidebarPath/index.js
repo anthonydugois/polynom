@@ -9,19 +9,13 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-  onPathAddActive() {
-    dispatch(pathsActions.setActivePaths([props.path.id], true))
-    dispatch(pointsActions.setActivePoints(props.path.points, true))
-  },
-  onPathActive() {
-    dispatch(pointsActions.deactivatePoints())
-    dispatch(pathsActions.deactivatePaths())
-    dispatch(pathsActions.setActivePaths([props.path.id], true))
-    dispatch(pointsActions.setActivePoints(props.path.points, true))
-  },
-  onPathsActive(pathIds, pointIds) {
+  onActivate(pathIds, pointIds) {
     dispatch(pathsActions.setActivePaths(pathIds, true))
     dispatch(pointsActions.setActivePoints(pointIds, true))
+  },
+  onDeactivate(pathIds, pointIds) {
+    dispatch(pathsActions.setActivePaths(pathIds, false))
+    dispatch(pointsActions.setActivePoints(pointIds, false))
   },
   onPathMove(projectId, insertAt, pathId) {
     dispatch(pathsActions.removePaths([pathId]))
@@ -35,8 +29,6 @@ const mapDispatchToProps = (dispatch, props) => ({
 
     dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
     dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
-
-    dispatch(pointsActions.deactivatePoints())
     dispatch(pointsActions.removePoints(props.path.points))
 
     points.forEach((point) =>

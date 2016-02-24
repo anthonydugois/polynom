@@ -25,6 +25,7 @@ class SidebarPaths extends Component {
       pathsById,
       project,
       activePaths,
+      activePoints,
     } = this.props
 
     return (
@@ -32,8 +33,9 @@ class SidebarPaths extends Component {
         key={ key }
         keyActions={ keyActions }
         project={ project }
+        path={ pathsById[key] }
         activePaths={ activePaths }
-        path={ pathsById[key] } />
+        activePoints={ activePoints } />
     )
   };
 
@@ -70,6 +72,7 @@ SidebarPaths.propTypes = {
   pathsById: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
+  activePoints: PropTypes.array.isRequired,
 }
 
 export default DragDropContext(HTML5Backend)(SidebarPaths)

@@ -115,8 +115,9 @@ class Overview extends Component {
   }
 
   handleOverviewMouseDown = (e) => {
+    const { pathsById, activePaths, activePoints } = this.props
+
     if (this.props.keyActions.includes(APP_CTRL)) {
-      const { pathsById, activePaths } = this.props
       const [x, y] = this.getCoords(e)
 
       if (activePaths.length === 1) {
@@ -127,7 +128,7 @@ class Overview extends Component {
         this.props.onOverviewCreatePath(x, y)
       }
     } else {
-      this.props.onOverviewDeactivate()
+      this.props.onDeactivate(activePaths, activePoints)
     }
   };
 
@@ -141,14 +142,26 @@ class Overview extends Component {
   };
 
   renderShape = (key) => {
-    const path = this.props.pathsById[key]
+    const {
+      onActivate,
+      onDeactivate,
+      keyActions,
+      pathsById,
+      pointsById,
+      activePaths,
+      activePoints,
+    } = this.props
 
     return (
       <Shape
         key={ key }
-        path={ path }
-        pointsById={ this.props.pointsById }
-        keyActions={ this.props.keyActions }
+        onActivate={ onActivate }
+        onDeactivate={ onDeactivate }
+        keyActions={ keyActions }
+        path={ pathsById[key] }
+        pointsById={ pointsById }
+        activePaths={ activePaths }
+        activePoints={ activePoints }
         onMouseDown={ this.handleMouseDown } />
     )
   };
@@ -172,9 +185,10 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
+  onActivate: PropTypes.func.isRequired,
+  onDeactivate: PropTypes.func.isRequired,
   onOverviewCreatePath: PropTypes.func.isRequired,
   onOverviewCreatePoint: PropTypes.func.isRequired,
-  onOverviewDeactivate: PropTypes.func.isRequired,
   onOverviewDelete: PropTypes.func.isRequired,
   onXPositionsChange: PropTypes.func.isRequired,
   onYPositionsChange: PropTypes.func.isRequired,

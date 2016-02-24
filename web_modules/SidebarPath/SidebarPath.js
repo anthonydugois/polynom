@@ -24,15 +24,18 @@ class SidebarPath extends Component {
   handlePathClick = () => {
     const {
       keyActions,
-      path,
       project,
-      pathsById,
+      path,
       activePaths,
+      activePoints,
+      pathsById,
     } = this.props
 
-    if (keyActions.includes(APP_CTRL)) {
-      this.props.onPathAddActive()
-    } else if (keyActions.includes(APP_SHIFT)) {
+    if (!keyActions.includes(APP_CTRL)) {
+      this.props.onDeactivate(activePaths, activePoints)
+    }
+
+    if (keyActions.includes(APP_SHIFT)) {
       const pathIndex = project.paths.indexOf(path.id)
       const activePathIndex = project.paths.indexOf(activePaths[0])
       const pathIds = pathIndex < activePathIndex ?
@@ -44,9 +47,9 @@ class SidebarPath extends Component {
         ...pathsById[key].points,
       ], [])
 
-      this.props.onPathsActive(pathIds, pointIds)
+      this.props.onActivate(pathIds, pointIds)
     } else {
-      this.props.onPathActive()
+      this.props.onActivate([path.id], path.points)
     }
   };
 
@@ -101,20 +104,24 @@ class SidebarPath extends Component {
 
     const d = pathCode(path, pointsById)
 
-    return connectDragSource(connectDropTarget(
+    return (
       <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
         <Expand>
           <ExpandCaption onClick={ this.handlePathClick }>
-            <div className="ad-SidebarPath-name">
-              <Text
-                className="ad-SidebarPath-input"
-                value={ path.name }
-                onChange={ this.handleNameChange } />
-            </div>
+            { connectDragSource(connectDropTarget(
+              <div>
+                <div className="ad-SidebarPath-name">
+                  <Text
+                    className="ad-SidebarPath-input"
+                    value={ path.name }
+                    onChange={ this.handleNameChange } />
+                </div>
 
-            <div className="ad-SidebarPath-actions">
-              { /* add some actions here */ }
-            </div>
+                <div className="ad-SidebarPath-actions">
+                  { /* add some actions here */ }
+                </div>
+              </div>
+            )) }
           </ExpandCaption>
 
           <ExpandPanel>
@@ -150,14 +157,13 @@ class SidebarPath extends Component {
           </ExpandPanel>
         </Expand>
       </div>
-    ))
+    )
   }
 }
 
 SidebarPath.propTypes = {
-  onPathAddActive: PropTypes.func.isRequired,
-  onPathActive: PropTypes.func.isRequired,
-  onPathsActive: PropTypes.func.isRequired,
+  onActivate: PropTypes.func.isRequired,
+  onDeactivate: PropTypes.func.isRequired,
   onPathMove: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onPathCodeChange: PropTypes.func.isRequired,
@@ -165,9 +171,10 @@ SidebarPath.propTypes = {
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
-  path: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
+  path: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
+  activePoints: PropTypes.array.isRequired,
   pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
 }
@@ -195,8 +202,6 @@ const target = {
     }
 
     props.onPathMove(projectId, hoveredIndex, pathId)
-
-    monitor.getItem().index = hoveredIndex
   },
 }
 
@@ -213,15 +218,13 @@ const source = {
 export default DropTarget(
   SIDEBAR_PATH,
   target,
-  (connect, monitor) => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
   })
 )(DragSource(
   SIDEBAR_PATH,
   source,
-  (connect, monitor) => ({
+  (connect) => ({
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
   }),
 )(SidebarPath))
