@@ -1,5 +1,18 @@
-if (__PROD__) {
-  module.exports = require("./store.prod")
-} else {
-  module.exports = require("./store.dev")
+import { createStore, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
+import reducers from "../reducers"
+
+const middlewares = [thunk]
+
+if (__DEV__) {
+  const createLogger = require("redux-logger")
+  const logger = createLogger()
+
+  middlewares.push(logger)
 }
+
+export default (initialState) => createStore(
+  reducers,
+  initialState,
+  applyMiddleware(...middlewares)
+)
