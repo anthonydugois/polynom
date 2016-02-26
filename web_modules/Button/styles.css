@@ -16,7 +16,7 @@
 .ad-Button:focus,
 .ad-Button:hover {
   outline: 0;
-  background: color(var(--ad-Color-sec) l(+10%));
+  background: color(var(--ad-Color-sec) l(+4%));
 }
   .ad-Button-content {
     display: flex;
@@ -25,21 +25,20 @@
   }
     .ad-Button-text {
       text-transform: uppercase;
-      font-weight: bold;
-      font-size: .65rem;
-      letter-spacing: .01rem;
+      font-size: .7rem;
+      letter-spacing: .025rem;
     }
     .ad-Icon + .ad-Button-text {
-      margin-left: .2rem;
+      margin-left: .25rem;
     }
 
 .ad-Button--tab {
   width: 100%;
   height: 100%;
-  padding: 0;
   border-radius: 0;
   background: none;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
+  color: inherit;
 }
 .ad-Button--tab:focus,
 .ad-Button--tab:hover {
@@ -49,24 +48,20 @@
 .ad-Button--expand {
   height: auto;
   padding: .2rem;
-  background: color(var(--ad-Color-prim) l(+5%));
+  background: color(var(--ad-Color-prim) l(+2%));
   font-size: .8rem;
   color: #fff;
 }
 .ad-Button--expand:focus,
 .ad-Button--expand:hover {
-  background: color(var(--ad-Color-prim) l(+10%));
+  background: color(var(--ad-Color-prim) l(+6%));
 }
 
 .ad-Button--delete {
   margin-left: auto;
-  background: color(var(--ad-Color-prim) l(+5%));
+  background: color(var(--ad-Color-prim) l(+2%));
 }
 .ad-Button--delete:focus,
 .ad-Button--delete:hover {
-  background: color(var(--ad-Color-prim) l(+10%));
-}
-
-.ad-ButtonFile-file {
-  display: none;
+  background: color(var(--ad-Color-prim) l(+6%));
 }

@@ -14,5 +14,5 @@
     text-transform: uppercase;
     font-size: .65rem;
     letter-spacing: .02rem;
-    color: color(var(--ad-Color-prim) l(+60%));
+    color: color(var(--ad-Color-prim) l(+75%));
   }

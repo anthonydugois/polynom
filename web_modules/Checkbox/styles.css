@@ -12,24 +12,24 @@
   height: 10px;
   width: 32px;
   cursor: pointer;
-  background: color(var(--ad-Color-prim) l(+10%));
+  background: color(var(--ad-Color-prim) l(+6%));
   border-radius: 5rem;
 }
   .ad-Checkbox-fake::after {
     content: "";
     display: block;
     position: absolute;
-    top: -4px;
+    top: -3px;
     left: 0;
-    height: 18px;
-    width: 18px;
+    height: 16px;
+    width: 16px;
     border: 4px solid #fff;
-    background: color(var(--ad-Color-prim) l(+10%));
+    background: color(var(--ad-Color-prim) l(+6%));
     border-radius: 50%;
     transform: translateX(0);
     transition: transform .1s, border .1s;
   }
   .ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
     border-color: var(--ad-Color-sec);
-    transform: translateX(14px);
+    transform: translateX(16px);
   }

@@ -27,7 +27,7 @@ class SidebarPoint extends Component {
 
     return (
       <SidebarPanel>
-        { code && (
+        { code ? (
           <SidebarModule>
             { /* Point code */ }
             { prevCode && (
@@ -81,6 +81,10 @@ class SidebarPoint extends Component {
                 point={ point }
                 onParamsChange={ this.props.onParamsChange } />
             ) }
+          </SidebarModule>
+        ) : (
+          <SidebarModule>
+            <div>No point</div>
           </SidebarModule>
         ) }
       </SidebarPanel>

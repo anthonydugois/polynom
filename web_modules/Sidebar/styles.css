@@ -1,6 +1,8 @@
 @import url(App/config.css);
 
 .ad-Sidebar {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   height: 100%;
   width: 20rem;
@@ -10,14 +12,38 @@
     width: 4px;
   }
   .ad-Sidebar ::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
-    background: color(var(--ad-Color-prim) l(+20%));
+    background: color(var(--ad-Color-prim) l(+8%));
+  }
+  .ad-Sidebar-head {
+    padding: 1.5rem;
+  }
+    .ad-Sidebar-input {
+      outline: 0;
+      width: 100%;
+      border: none;
+      background: none;
+      transition: color .2s;
+      font-weight: 300;
+      font-family: inherit;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    .ad-Sidebar-input:focus,
+    .ad-Sidebar-input:hover {
+      color: color(var(--ad-Color-prim) l(+60%));
+    }
+
+  .ad-Sidebar-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
 .ad-SidebarPanel {
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  background: color(var(--ad-Color-prim) l(-2%));
 }
 
 .ad-SidebarModule {

@@ -16,23 +16,26 @@
     flex: 1;
     padding: 0 1rem;
     font-size: .8rem;
-    color: color(var(--ad-Color-prim) l(+75%));
+    color: #fff;
   }
     .ad-SidebarPath-input {
-      width: 100%;
-      background: none;
-      border: none;
       outline: 0;
+      width: 100%;
+      border: none;
+      background: none;
+      transition: color .2s;
+      font-weight: 300;
       font-family: inherit;
       font-size: 1em;
       color: currentColor;
     }
-    .ad-SidebarPath-input:focus {
-      color: #fff;
+    .ad-SidebarPath-input:focus,
+    .ad-SidebarPath-input:hover {
+      color: color(var(--ad-Color-prim) l(+60%));
     }
 
   .ad-SidebarPath-reorder {
     cursor: grab;
     font-size: 1.25rem;
-    color: color(var(--ad-Color-prim) l(+10%));
+    color: color(var(--ad-Color-prim) l(+12%));
   }

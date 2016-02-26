@@ -12,8 +12,8 @@
     display: none;
   }
   .ad-Choice-fake {
-    padding: .75rem 0;
-    background: color(var(--ad-Color-prim) l(+10%));
+    padding: 1rem 0;
+    background: color(var(--ad-Color-prim) l(+6%));
     transition: background .2s;
     cursor: pointer;
     text-align: center;
@@ -23,7 +23,7 @@
     color: #fff;
   }
   .ad-Choice-fake:hover {
-    background: color(var(--ad-Color-prim) l(+15%));
+    background: color(var(--ad-Color-prim) l(+12%));
   }
   .ad-Choice:first-of-type .ad-Choice-fake {
     border-radius: 2px 0 0 2px;

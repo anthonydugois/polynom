@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
 import "./styles"
 
 class App extends Component {
@@ -11,6 +11,11 @@ class App extends Component {
   }
 }
 
-App.propTypes = {}
+App.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]),
+}
 
 export default App
