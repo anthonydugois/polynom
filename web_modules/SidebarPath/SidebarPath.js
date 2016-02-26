@@ -109,6 +109,7 @@ class SidebarPath extends Component {
       connectDragSource,
       connectDropTarget,
       isDragging,
+      isOver,
     } = this.props
 
     return connectDropTarget(
@@ -116,6 +117,7 @@ class SidebarPath extends Component {
         className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }
         style={ {
           opacity: isDragging ? 0 : 1,
+          border: isOver && "2px solid red",
         } }>
         <Expand>
           <ExpandCaption onClick={ this.handlePathClick }>
@@ -141,11 +143,9 @@ class SidebarPath extends Component {
             <Settings>
               <Setting>
                 <Textarea
-                  value={
-                    this.state.isFocused ?
-                      this.state.d :
-                      pathCode(path, pointsById)
-                  }
+                  value={ this.state.isFocused ?
+                    this.state.d :
+                    pathCode(path, pointsById) }
                   onChange={ this.handleChange }
                   onFocus={ this.handleFocus }
                   onBlur={ this.handleBlur } />
@@ -197,13 +197,6 @@ SidebarPath.propTypes = {
 }
 
 const sidebarPathTarget = {
-  /*hover(props, monitor, component) {
-    const { top, bottom } = findDOMNode(component).getBoundingClientRect()
-    const { y } = monitor.getClientOffset()
-    const isOver = monitor.isOver()
-    const middle = (bottom - top) / 2
-    const position = y - top
-  },*/
   drop(props, monitor, component) {
     const { project, path } = monitor.getItem()
     const index = project.paths.indexOf(path.id)
@@ -245,7 +238,6 @@ export default DropTarget(
   sidebarPathTarget,
   (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
-    currentOffset: monitor.getClientOffset(),
     isOver: monitor.isOver(),
   })
 )(DragSource(

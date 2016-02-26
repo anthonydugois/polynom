@@ -6,7 +6,10 @@ const middlewares = [thunk]
 
 if (__DEV__) {
   const createLogger = require("redux-logger")
-  const logger = createLogger()
+  const logger = createLogger({
+    duration: true,
+    timestamp: false,
+  })
 
   middlewares.push(logger)
 }

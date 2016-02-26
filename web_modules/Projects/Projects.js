@@ -1,12 +1,31 @@
 import React, { Component, PropTypes } from "react"
+import { Link } from "react-router"
 import "./styles"
 
 class Projects extends Component {
-  render() {
-    // const { projectsById } = this.props
+  renderProject = (key) => {
+    const project = this.props.projectsById[key]
 
     return (
-      <div />
+      <div
+        key={ key }
+        className="ad-Projects-item">
+        <Link to={ `/projects/${ project.id }` }>
+          { project.name }
+        </Link>
+      </div>
+    )
+  };
+
+  render() {
+    const { projectsById } = this.props
+
+    return (
+      <div className="ad-Projects">
+        <div className="ad-Projects-list">
+          { Object.keys(projectsById).map(this.renderProject) }
+        </div>
+      </div>
     )
   }
 }

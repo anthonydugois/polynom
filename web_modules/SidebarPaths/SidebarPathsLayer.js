@@ -15,7 +15,6 @@ function getStyles(props) {
 
   return {
     width: boundingRect.width,
-    height: boundingRect.height,
     transform,
     WebkitTransform: transform,
   }

@@ -15,6 +15,18 @@ const initialState = {
 
 const project = (state, action) => {
   switch (action.type) {
+  case ActionTypes.ADD_PROJECT:
+    return {
+      id: action.projectId,
+      name: action.name,
+      width: action.width,
+      height: action.height,
+      gridShow: true,
+      gridSnap: false,
+      gridSize: 50,
+      paths: [],
+    }
+
   case ActionTypes.SET_PROJECT_NAME:
     return {
       ...state,
@@ -74,6 +86,27 @@ const project = (state, action) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case ActionTypes.ADD_PROJECT:
+    return {
+      ...state,
+      [action.projectId]: project(undefined, action),
+    }
+
+  case ActionTypes.REMOVE_PROJECT:
+    return Object.keys(state).reduce(
+      (acc, key) => {
+        if (action.projectId === state[key].id) {
+          return acc
+        }
+
+        return {
+          ...acc,
+          [key]: state[key],
+        }
+      },
+      {}
+    )
+
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:
@@ -84,10 +117,13 @@ export default (state = initialState, action) => {
     }
 
   case ActionTypes.REMOVE_PATHS:
-    return Object.keys(state).reduce((acc, key) => ({
-      ...acc,
-      [key]: project(state[key], action),
-    }), {})
+    return Object.keys(state).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: project(state[key], action),
+      }),
+      {}
+    )
 
   default:
     return state
