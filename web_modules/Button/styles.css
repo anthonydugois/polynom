@@ -30,7 +30,7 @@
       letter-spacing: .01rem;
     }
     .ad-Icon + .ad-Button-text {
-      margin-left: .4rem;
+      margin-left: .2rem;
     }
 
 .ad-Button--tab {
@@ -39,19 +39,12 @@
   padding: 0;
   border-radius: 0;
   background: none;
-  font-size: 1.6rem;
+  font-size: 1.25rem;
 }
 .ad-Button--tab:focus,
 .ad-Button--tab:hover {
   background: none;
 }
-  .ad-Button--tab .ad-Button-content {
-    flex-direction: column;
-  }
-    .ad-Button--tab .ad-Icon + .ad-Button-text {
-      margin-left: 0;
-      margin-top: .4rem;
-    }
 
 .ad-Button--expand {
   height: auto;

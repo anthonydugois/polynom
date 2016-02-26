@@ -3,7 +3,7 @@
 .ad-Sidebar {
   overflow: hidden;
   height: 100%;
-  width: 25rem;
+  width: 20rem;
   background: var(--ad-Color-prim);
 }
   .ad-Sidebar ::-webkit-scrollbar {

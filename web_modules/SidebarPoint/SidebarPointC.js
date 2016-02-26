@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react"
 import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Range from "Range"
+import SidebarPointParameter from "./SidebarPointParameter"
 import inRange from "../../src/utils/inRange"
 
 class SidebarPointC extends Component {
@@ -37,7 +38,7 @@ class SidebarPointC extends Component {
     const { project, gridStep, point } = this.props
 
     return (
-      <div>
+      <SidebarPointParameter>
         <Settings>
           <Setting label="First anchor X position">
             <Range
@@ -81,7 +82,7 @@ class SidebarPointC extends Component {
               onChange={ this.handleY2Change } />
           </Setting>
         </Settings>
-      </div>
+      </SidebarPointParameter>
     )
   }
 }

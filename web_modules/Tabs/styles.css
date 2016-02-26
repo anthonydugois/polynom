@@ -3,18 +3,21 @@
 .ad-Tabs {
   height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 .ad-TabList {
+  height: 3.5rem;
+  display: flex;
   margin: 0;
   padding: 0;
-  width: 5rem;
   list-style: none;
   background: color(var(--ad-Color-prim) l(-5%));
 }
 
 .ad-Tab {
-  height: 5rem;
+  height: 100%;
+  flex: 1;
 }
 .ad-Tab.is-active {
   background: var(--ad-Color-sec);

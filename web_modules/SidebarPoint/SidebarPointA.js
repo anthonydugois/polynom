@@ -3,6 +3,7 @@ import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Range from "Range"
 import Checkbox from "Checkbox"
+import SidebarPointParameter from "./SidebarPointParameter"
 import inRange from "../../src/utils/inRange"
 
 class SidebarPointA extends Component {
@@ -45,7 +46,7 @@ class SidebarPointA extends Component {
     const { project, gridStep, point } = this.props
 
     return (
-      <div>
+      <SidebarPointParameter>
         <Settings>
           <Setting label="X Radius">
             <Range
@@ -92,7 +93,7 @@ class SidebarPointA extends Component {
               onChange={ this.handleSweepChange } />
           </Setting>
         </Settings>
-      </div>
+      </SidebarPointParameter>
     )
   }
 }

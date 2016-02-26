@@ -3,6 +3,7 @@ import Settings from "Settings"
 import Setting from "Settings/Setting"
 import Choices from "Choices"
 import Choice from "Choices/Choice"
+import SidebarPointParameter from "./SidebarPointParameter"
 import { getDefaultParameters } from "../../src/utils"
 
 class SidebarPointCode extends Component {
@@ -21,64 +22,66 @@ class SidebarPointCode extends Component {
     const prevCode = previousPoint && previousPoint.code.toLowerCase()
 
     return (
-      <Settings>
-        <Setting>
-          <Choices>
-            <Choice
-              value="M"
-              checked={ code === "m" }
-              onChange={ this.handleCodeChange }>
-              M
-            </Choice>
-
-            <Choice
-              value="L"
-              checked={ code === "l" }
-              onChange={ this.handleCodeChange }>
-              L
-            </Choice>
-
-            <Choice
-              value="Q"
-              checked={ code === "q" }
-              onChange={ this.handleCodeChange }>
-              Q
-            </Choice>
-
-            { (prevCode === "q" || prevCode === "t") && (
+      <SidebarPointParameter>
+        <Settings>
+          <Setting>
+            <Choices>
               <Choice
-                value="T"
-                checked={ code === "t" }
+                value="M"
+                checked={ code === "m" }
                 onChange={ this.handleCodeChange }>
-                T
+                M
               </Choice>
-            ) }
 
-            <Choice
-              value="C"
-              checked={ code === "c" }
-              onChange={ this.handleCodeChange }>
-              C
-            </Choice>
-
-            { (prevCode === "c" || prevCode === "s") && (
               <Choice
-                value="S"
-                checked={ code === "s" }
+                value="L"
+                checked={ code === "l" }
                 onChange={ this.handleCodeChange }>
-                S
+                L
               </Choice>
-            ) }
 
-            <Choice
-              value="A"
-              checked={ code === "a" }
-              onChange={ this.handleCodeChange }>
-              A
-            </Choice>
-          </Choices>
-        </Setting>
-      </Settings>
+              <Choice
+                value="Q"
+                checked={ code === "q" }
+                onChange={ this.handleCodeChange }>
+                Q
+              </Choice>
+
+              { (prevCode === "q" || prevCode === "t") && (
+                <Choice
+                  value="T"
+                  checked={ code === "t" }
+                  onChange={ this.handleCodeChange }>
+                  T
+                </Choice>
+              ) }
+
+              <Choice
+                value="C"
+                checked={ code === "c" }
+                onChange={ this.handleCodeChange }>
+                C
+              </Choice>
+
+              { (prevCode === "c" || prevCode === "s") && (
+                <Choice
+                  value="S"
+                  checked={ code === "s" }
+                  onChange={ this.handleCodeChange }>
+                  S
+                </Choice>
+              ) }
+
+              <Choice
+                value="A"
+                checked={ code === "a" }
+                onChange={ this.handleCodeChange }>
+                A
+              </Choice>
+            </Choices>
+          </Setting>
+        </Settings>
+      </SidebarPointParameter>
     )
   }
 }

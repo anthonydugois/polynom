@@ -3,12 +3,6 @@
 .ad-Settings {
   display: flex;
 }
-.ad-Settings:first-child {
-  padding-top: .75rem;
-}
-.ad-Settings:last-child {
-  padding-bottom: .75rem;
-}
 
 .ad-Setting {
   flex: 1;
