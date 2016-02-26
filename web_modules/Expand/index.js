@@ -36,9 +36,13 @@ class Expand extends Component {
   }
 
   render() {
+    const { children, ...props } = this.props
+
     return (
-      <div className="ad-Expand">
-        { this.renderChildren(this.props.children) }
+      <div
+        className="ad-Expand"
+        { ...props }>
+        { this.renderChildren(children) }
       </div>
     )
   }

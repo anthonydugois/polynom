@@ -1,0 +1,39 @@
+@import url(App/config.css);
+
+.ad-Hint {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 1.5rem;
+  border-radius: 2px;
+  border: 2px solid color(var(--ad-Color-prim) l(+6%));
+}
+.ad-Hint--column {
+  flex-direction: column;
+}
+  .ad-Hint-icon {
+    padding-right: 1rem;
+    font-size: 2rem;
+    color: #fff;
+  }
+  .ad-Hint--column .ad-Hint-icon {
+    padding: 0;
+    padding-bottom: .5rem;
+  }
+  .ad-Hint-content {
+    flex: 1;
+  }
+  .ad-Hint--column .ad-Hint-content {
+    text-align: center;
+  }
+    .ad-Hint-title {
+      line-height: 1.6;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .ad-Hint-message {
+      line-height: 1.6;
+      font-size: .8rem;
+      color: color(var(--ad-Color-prim) l(+60%));
+    }

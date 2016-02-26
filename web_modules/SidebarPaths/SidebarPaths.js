@@ -1,13 +1,15 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import { DragDropContext } from "react-dnd"
 import HTML5Backend from "react-dnd-html5-backend"
+import Hint from "Hint"
 import Button from "Button"
 import SidebarPanel from "Sidebar/SidebarPanel"
 import SidebarModule from "Sidebar/SidebarModule"
 import SidebarActions from "Sidebar/SidebarActions"
 import SidebarPath from "SidebarPath"
 import SidebarPathsLayer from "./SidebarPathsLayer"
-import "./styles"
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
@@ -41,15 +43,27 @@ class SidebarPaths extends Component {
   };
 
   render() {
-    const { project, activePaths } = this.props
+    const {
+      project,
+      activePaths,
+    } = this.props
 
     return (
       <SidebarPanel>
-        <SidebarModule>
-          { project.paths.map(this.renderSidebarPath) }
-
-          <SidebarPathsLayer />
-        </SidebarModule>
+        { project.paths.length > 0 ? (
+          <SidebarModule>
+            { project.paths.map(this.renderSidebarPath) }
+            <SidebarPathsLayer />
+          </SidebarModule>
+        ) : (
+          <SidebarModule>
+            <Hint
+              icon="paths"
+              title="No path">
+              There is no path in this project. Create the first one!
+            </Hint>
+          </SidebarModule>
+        ) }
 
         <SidebarActions>
           <Button onClick={ this.handleAddClick }>

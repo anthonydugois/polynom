@@ -34,7 +34,9 @@ function getIcon(name) {
       17-24q34-56 12-64-14-6-72 52z`
 
   case "point":
-    return `M256 256h512v512h-512v-512z`
+    return `M640 384v-256h86v86h170v84h-170v86h-86zM896 554h-426v-84h426v84z
+      M298 384h86v256h-86v-86h-170v-84h170v-86zM554 896h-84v-256h84v86h342v84
+      h-342v86zM128 214h426v84h-426v-84zM128 726h256v84h-256v-84z`
 
   case "settings":
     return `M640 384v-256h86v86h170v84h-170v86h-86zM896 554h-426v-84h426v84z

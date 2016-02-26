@@ -113,12 +113,11 @@ class SidebarPath extends Component {
     } = this.props
 
     return connectDropTarget(
-      <div
-        className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }
-        style={ {
-          opacity: isDragging ? 0 : 1,
-          border: isOver && "2px solid red",
-        } }>
+      <div className={ cx("ad-SidebarPath", {
+        "is-active": path.isActive,
+        "is-hidden": isDragging,
+        "is-hovered": isOver,
+      }) }>
         <Expand>
           <ExpandCaption onClick={ this.handlePathClick }>
             <div className="ad-SidebarPathCaption">

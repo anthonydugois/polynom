@@ -1,4 +1,7 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
+import Hint from "Hint"
 import SidebarPanel from "Sidebar/SidebarPanel"
 import SidebarModule from "Sidebar/SidebarModule"
 import SidebarPointCode from "./SidebarPointCode"
@@ -7,7 +10,6 @@ import SidebarPointQ from "./SidebarPointQ"
 import SidebarPointC from "./SidebarPointC"
 import SidebarPointS from "./SidebarPointS"
 import SidebarPointA from "./SidebarPointA"
-import "./styles"
 
 class SidebarPoint extends Component {
   handleRemoveClick = () => {
@@ -18,6 +20,7 @@ class SidebarPoint extends Component {
     const {
       project,
       gridStep,
+      activePoints,
       point,
       previousPoint,
     } = this.props
@@ -27,7 +30,7 @@ class SidebarPoint extends Component {
 
     return (
       <SidebarPanel>
-        { code ? (
+        { activePoints.length === 1 ? (
           <SidebarModule>
             { /* Point code */ }
             { prevCode && (
@@ -84,7 +87,11 @@ class SidebarPoint extends Component {
           </SidebarModule>
         ) : (
           <SidebarModule>
-            <div>No point</div>
+            <Hint
+              icon="point"
+              title="No selected point">
+              Select one or several points to edit their parameters.
+            </Hint>
           </SidebarModule>
         ) }
       </SidebarPanel>

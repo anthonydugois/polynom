@@ -7,6 +7,9 @@
 .ad-SidebarPath.is-active {
   border-color: var(--ad-Color-sec);
 }
+.ad-SidebarPath.is-hidden {
+  opacity: .2;
+}
 
 .ad-SidebarPathCaption {
   display: flex;
