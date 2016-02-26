@@ -2,7 +2,7 @@
 
 .ad-SidebarPath {
   user-select: none;
-  border-left: 3px solid color(var(--ad-Color-prim) l(-8%));
+  border-left: 3px solid color(var(--ad-Color-prim) l(-10%));
 }
 .ad-SidebarPath.is-active {
   border-color: var(--ad-Color-sec);

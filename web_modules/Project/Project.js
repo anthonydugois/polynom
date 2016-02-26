@@ -17,7 +17,10 @@ class Project extends Component {
         tabIndex={ 0 }
         className="ad-Project">
         <Sidebar { ...this.props } />
-        <Overview { ...this.props } />
+
+        <div className="ad-Project-overview">
+          <Overview { ...this.props } />
+        </div>
       </div>
     )
   }

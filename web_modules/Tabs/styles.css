@@ -12,7 +12,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  background: color(var(--ad-Color-prim) l(-5%));
+  background: color(var(--ad-Color-prim) l(-4%));
 }
 
 .ad-Tab {
