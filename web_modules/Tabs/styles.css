@@ -8,6 +8,7 @@
 
 .ad-TabList {
   height: 3.5rem;
+  flex-shrink: 0;
   display: flex;
   margin: 0;
   padding: 0;

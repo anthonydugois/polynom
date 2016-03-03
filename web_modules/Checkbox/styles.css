@@ -9,8 +9,8 @@
 }
 .ad-Checkbox-fake {
   position: relative;
-  height: 10px;
-  width: 32px;
+  height: 8px;
+  width: 28px;
   cursor: pointer;
   background: color(var(--ad-Color-prim) l(+6%));
   border-radius: 5rem;
@@ -19,7 +19,7 @@
     content: "";
     display: block;
     position: absolute;
-    top: -3px;
+    top: -4px;
     left: 0;
     height: 16px;
     width: 16px;
@@ -31,5 +31,5 @@
   }
   .ad-Checkbox-input:checked + .ad-Checkbox-fake::after {
     border-color: var(--ad-Color-sec);
-    transform: translateX(16px);
+    transform: translateX(14px);
   }
