@@ -1,11 +1,13 @@
 import React, { PropTypes } from "react"
-import cx from "classnames"
 
 const ExpandPanel = ({
   _isOpened,
   children,
+  ...props,
 }) => (
-  <div className={ cx("ad-ExpandPanel", { "is-opened": _isOpened }) }>
+  <div
+    style={{ display: !_isOpened && "none" }}
+    { ...props }>
     { children }
   </div>
 )

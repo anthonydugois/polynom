@@ -3,7 +3,6 @@
 .ad-Sidebar {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 20rem;
   background: var(--ad-Color-prim);
 }

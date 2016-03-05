@@ -8,18 +8,12 @@ const ExpandCaption = ({
   children,
   ...props,
 }) => (
-  <div
-    className="ad-ExpandCaption"
-    { ...props }>
-    <div className="ad-ExpandCaption-button">
-      <ButtonExpand onClick={ _onClick }>
-        <Icon name={ _isOpened ? "down" : "right" } />
-      </ButtonExpand>
-    </div>
+  <div { ...props }>
+    <ButtonExpand onClick={ _onClick }>
+      <Icon name={ _isOpened ? "down" : "right" } />
+    </ButtonExpand>
 
-    <div className="ad-ExpandCaption-label">
-      { children }
-    </div>
+    { children }
   </div>
 )
 

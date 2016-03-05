@@ -32,7 +32,7 @@ class SidebarPathsLayer extends Component {
         <div
           className="ad-SidebarPath"
           style={ getStyles(this.props) }>
-          <ExpandCaption>
+          <ExpandCaption className="ad-SidebarPathExpand-caption">
             <div className="ad-SidebarPath-caption">
               <div className="ad-SidebarPath-name">
                 { item.path.name }

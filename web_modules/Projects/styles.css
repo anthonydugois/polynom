@@ -1,1 +1,5 @@
 @import url(App/config.css);
+
+.ad-Projects {
+  flex: 1;
+}

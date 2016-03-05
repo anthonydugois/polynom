@@ -3,7 +3,7 @@ import * as ActionTypes from "../constants/ActionTypes"
 const initialState = {
   0: {
     id: 0,
-    name: "hello.svg",
+    name: "Untitled",
     createdAt: new Date(),
     updatedAt: null,
     width: 1000,

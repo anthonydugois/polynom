@@ -116,8 +116,10 @@ class SidebarPath extends Component {
         "is-hidden": isDragging,
         "is-hovered": isOver,
       }) }>
-        <Expand>
-          <ExpandCaption onClick={ this.handlePathClick }>
+        <Expand className="ad-SidebarPathExpand">
+          <ExpandCaption
+            className="ad-SidebarPathExpand-caption"
+            onClick={ this.handlePathClick }>
             <div className="ad-SidebarPathCaption">
               <div className="ad-SidebarPath-name">
                 <Text
@@ -136,7 +138,7 @@ class SidebarPath extends Component {
             </div>
           </ExpandCaption>
 
-          <ExpandPanel>
+          <ExpandPanel className="ad-SidebarPathExpand-panel">
             <Settings>
               <Setting>
                 <Textarea
