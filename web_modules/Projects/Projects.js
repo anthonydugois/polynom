@@ -2,6 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import { Link } from "react-router"
+import Date from "Date"
 
 class Projects extends Component {
   renderProject = (key) => {
@@ -13,6 +14,7 @@ class Projects extends Component {
         className="ad-Projects-item">
         <Link to={ `/projects/${ project.id }` }>
           { project.name }
+          <Date date={ project.createdAt } />
         </Link>
       </div>
     )

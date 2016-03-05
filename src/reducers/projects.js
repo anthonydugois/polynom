@@ -4,6 +4,8 @@ const initialState = {
   0: {
     id: 0,
     name: "hello.svg",
+    createdAt: new Date(),
+    updatedAt: null,
     width: 1000,
     height: 800,
     gridShow: true,
