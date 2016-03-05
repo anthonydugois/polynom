@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from "react"
 import "./styles.css"
+
+import React, { Component, PropTypes } from "react"
 
 class Expand extends Component {
   state = { _isOpened: this.props.isOpened };

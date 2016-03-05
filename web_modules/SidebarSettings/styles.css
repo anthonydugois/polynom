@@ -1,17 +1,22 @@
 @import url(App/config.css);
 
-.ad-SidebarSettings-input {
-  outline: 0;
-  width: 100%;
-  border: none;
-  background: none;
-  transition: color .2s;
-  font-weight: 300;
-  font-family: inherit;
-  font-size: 1.5rem;
-  color: #fff;
+.ad-SidebarSettings {
+  display: flex;
+  align-items: center;
 }
-.ad-SidebarSettings-input:focus,
-.ad-SidebarSettings-input:hover {
-  color: color(var(--ad-Color-prim) l(+60%));
-}
+  .ad-SidebarSettings-input {
+    outline: 0;
+    width: 100%;
+    flex: 1;
+    border: none;
+    background: none;
+    transition: color .2s;
+    font-weight: 300;
+    font-family: inherit;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  .ad-SidebarSettings-input:focus,
+  .ad-SidebarSettings-input:hover {
+    color: color(var(--ad-Color-prim) l(+60%));
+  }

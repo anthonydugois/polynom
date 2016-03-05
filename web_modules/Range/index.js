@@ -1,6 +1,7 @@
+import "./styles"
+
 import React, { PropTypes } from "react"
 import Text from "Text"
-import "./styles"
 
 const Range = ({
   value,

@@ -15,7 +15,7 @@
     background: color(var(--ad-Color-prim) l(+8%));
   }
   .ad-Sidebar-head {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
   .ad-Sidebar-tabs {
     flex: 1;

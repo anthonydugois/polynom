@@ -1,67 +1,81 @@
 @import url(App/config.css);
 
-.ad-Button {
-  height: 2.5rem;
-  padding: 0 1.25rem;
-  background: var(--ad-Color-sec);
+.ad-ButtonReset {
+  display: block;
+  margin: 0;
+  padding: 0;
   border: none;
-  border-radius: 2px;
+  background: none;
+  border-radius: none;
   cursor: pointer;
-  transition: background .2s;
+  outline: 0;
   text-decoration: none;
   font-family: inherit;
   font-size: 1rem;
-  color: #fff;
-}
-.ad-Button:focus,
-.ad-Button:hover {
-  outline: 0;
-  background: color(var(--ad-Color-sec) l(+4%));
-}
-  .ad-Button-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-    .ad-Button-text {
-      text-transform: uppercase;
-      font-size: .7rem;
-      letter-spacing: .025rem;
-    }
-    .ad-Icon + .ad-Button-text {
-      margin-left: .25rem;
-    }
-
-.ad-Button--tab {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  background: none;
-  font-size: 1.05rem;
   color: inherit;
 }
-.ad-Button--tab:focus,
-.ad-Button--tab:hover {
-  background: none;
+
+.ad-ButtonCircle {
+  border-radius: 50%;
+  background: var(--ad-Color-sec);
+  color: #fff;
 }
 
-.ad-Button--expand {
-  height: auto;
+.ad-Button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: .7em;
+  letter-spacing: .025rem;
+}
+  .ad-Button-content > .ad-Icon {
+    font-size: 1.5em;
+  }
+  .ad-Button-content > .ad-Icon + * {
+    margin-left: .25rem;
+  }
+
+.ad-ButtonPrimary {
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  background: var(--ad-Color-sec);
+  border-radius: 2px;
+  transition: background .2s;
+  color: #fff;
+}
+.ad-ButtonPrimary:focus,
+.ad-ButtonPrimary:hover {
+  background: color(var(--ad-Color-sec) l(+4%));
+}
+
+.ad-ButtonTab {
+  width: 100%;
+  height: 100%;
+}
+
+.ad-ButtonExpand {
   padding: .2rem;
   background: color(var(--ad-Color-prim) l(+2%));
+  border-radius: 2px;
   font-size: .8rem;
   color: #fff;
 }
-.ad-Button--expand:focus,
-.ad-Button--expand:hover {
+.ad-ButtonExpand:focus,
+.ad-ButtonExpand:hover {
   background: color(var(--ad-Color-prim) l(+6%));
 }
 
-.ad-Button--delete {
+.ad-ButtonDelete {
+  height: 2.5rem;
   margin-left: auto;
+  padding: 0 1.25rem;
   background: color(var(--ad-Color-prim) l(+2%));
+  border-radius: 2px;
+  transition: background .2s;
+  color: #fff;
 }
-.ad-Button--delete:focus,
-.ad-Button--delete:hover {
+.ad-ButtonDelete:focus,
+.ad-ButtonDelete:hover {
   background: color(var(--ad-Color-prim) l(+6%));
 }

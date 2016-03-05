@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react"
-import Button from "Button"
+import { ButtonExpand } from "Button"
+import Icon from "Icon"
 
 const ExpandCaption = ({
   _onClick,
@@ -11,10 +12,9 @@ const ExpandCaption = ({
     className="ad-ExpandCaption"
     { ...props }>
     <div className="ad-ExpandCaption-button">
-      <Button
-        type="expand"
-        icon={ _isOpened ? "down" : "right" }
-        onClick={ _onClick } />
+      <ButtonExpand onClick={ _onClick }>
+        <Icon name={ _isOpened ? "down" : "right" } />
+      </ButtonExpand>
     </div>
 
     <div className="ad-ExpandCaption-label">

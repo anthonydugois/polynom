@@ -1,7 +1,8 @@
 import "./styles"
 
 import React, { PropTypes } from "react"
-import Button from "Button"
+import { ButtonTab } from "Button"
+import Icon from "Icon"
 import Tabs from "Tabs"
 import TabList from "Tabs/TabList"
 import Tab from "Tabs/Tab"
@@ -20,18 +21,16 @@ const Sidebar = (props) => (
       <Tabs selected={ 0 }>
         <TabList>
           <Tab>
-            <Button
-              icon="paths"
-              type="tab">
+            <ButtonTab>
+              <Icon name="paths" />
               Paths
-            </Button>
+            </ButtonTab>
           </Tab>
           <Tab>
-            <Button
-              icon="point"
-              type="tab">
+            <ButtonTab>
+              <Icon name="point" />
               Point
-            </Button>
+            </ButtonTab>
           </Tab>
         </TabList>
 

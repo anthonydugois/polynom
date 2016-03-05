@@ -2,6 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import Text from "Text"
+import ButtonCircle from "Button/ButtonCircle"
 
 class SidebarSettings extends Component {
   handleNameChange = (e) => {
@@ -21,6 +22,10 @@ class SidebarSettings extends Component {
           className="ad-SidebarSettings-input"
           value={ project.name }
           onChange={ this.handleNameChange } />
+
+        <ButtonCircle size="3rem">
+          Save
+        </ButtonCircle>
       </div>
     )
   }
