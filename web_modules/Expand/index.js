@@ -5,6 +5,21 @@ import React, { Component, PropTypes } from "react"
 class Expand extends Component {
   state = { _isOpened: this.props.isOpened };
 
+  componentDidMount() {
+    document.addEventListener("click", this.close, true)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.close, true)
+  }
+
+  close = (e) => {
+    if (this.props.documentPropagation && this.state._isOpened) {
+      e.stopPropagation()
+      this.setState({ _isOpened: false })
+    }
+  };
+
   handleClick(_isOpened) {
     return (e) => {
       e.preventDefault()
@@ -47,10 +62,14 @@ class Expand extends Component {
   }
 }
 
-Expand.defaultProps = { isOpened: false }
+Expand.defaultProps = {
+  isOpened: false,
+  documentPropagation: false,
+}
 
 Expand.propTypes = {
   isOpened: PropTypes.bool,
+  documentPropagation: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,

@@ -10,19 +10,23 @@ import NavbarExpand from "./NavbarExpand"
 
 const Navbar = () => (
   <nav className="ad-Navbar">
-    <Link to="/">
+    <Link
+      className="ad-Navbar-logo"
+      to="/">
       Polynom
     </Link>
 
     <NavbarList>
       <NavbarItem>
-        <Expand>
+        <Expand
+          className="ad-NavbarItemExpand"
+          documentPropagation={ true }>
           <ExpandCaption>
             <NavbarExpand>
               File
             </NavbarExpand>
           </ExpandCaption>
-          <ExpandPanel>
+          <ExpandPanel className="ad-NavbarItemExpand-panel">
             File links
           </ExpandPanel>
         </Expand>

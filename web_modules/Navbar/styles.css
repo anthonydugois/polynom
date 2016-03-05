@@ -1,5 +1,39 @@
 @import url(App/config.css);
 
 .ad-Navbar {
+  display: flex;
+  align-items: center;
   background: color(var(--ad-Color-prim) l(-8%));
 }
+  .ad-Navbar-logo {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+  }
+
+.ad-NavbarList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ad-Navbar > .ad-NavbarList {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.ad-NavbarLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: red;
+}
+
+.ad-NavbarItemExpand {
+  position: relative;
+}
+  .ad-NavbarItemExpand-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
