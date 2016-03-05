@@ -3,7 +3,6 @@
 .ad-Sidebar {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   height: 100%;
   width: 20rem;
   background: var(--ad-Color-prim);
@@ -15,7 +14,7 @@
     background: color(var(--ad-Color-prim) l(+8%));
   }
   .ad-Sidebar-head {
-    padding: 2rem 1.5rem;
+    padding: 0 1.5rem;
   }
   .ad-Sidebar-tabs {
     flex: 1;

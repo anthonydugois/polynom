@@ -3,23 +3,24 @@ import "./styles"
 import React, { PropTypes } from "react"
 import cx from "classnames"
 
-function getStyles(props) {
-  const { size } = props
-
+function getStyles(size, style) {
   return {
     height: size,
+    ...style,
   }
 }
 
 const Button = ({
+  size,
   className,
+  style,
   children,
   ...props,
 }) => (
   <button
     type="button"
     className={ cx("ad-ButtonReset", "ad-Button", ...className) }
-    style={ getStyles(props) }
+    style={ getStyles(size, style) }
     { ...props }>
     <div className="ad-Button-content">
       { children }
@@ -28,11 +29,11 @@ const Button = ({
 )
 
 Button.propTypes = {
-  className: PropTypes.array,
   size: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
+  className: PropTypes.array,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,

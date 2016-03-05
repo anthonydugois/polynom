@@ -72,13 +72,12 @@ class SidebarPaths extends Component {
           </ButtonPrimary>
 
           { activePaths.length > 0 && (
-            <div style={{ marginLeft: "auto" }}>
-              <ButtonDelete
-                size="2.5rem"
-                onClick={ this.handleRemoveClick }>
-                <Icon name="delete" />
-              </ButtonDelete>
-            </div>
+            <ButtonDelete
+              size="2.5rem"
+              style={{ marginLeft: "auto" }}
+              onClick={ this.handleRemoveClick }>
+              <Icon name="delete" />
+            </ButtonDelete>
           ) }
         </SidebarActions>
       </SidebarPanel>

@@ -3,6 +3,7 @@ import "./styles"
 import React, { Component, PropTypes } from "react"
 import Text from "Text"
 import { ButtonCircle } from "Button"
+import Icon from "Icon"
 
 class SidebarSettings extends Component {
   handleNameChange = (e) => {
@@ -23,9 +24,11 @@ class SidebarSettings extends Component {
           value={ project.name }
           onChange={ this.handleNameChange } />
 
-        <ButtonCircle size="3rem">
-          Save
-        </ButtonCircle>
+        <div className="ad-SidebarSetting-action">
+          <ButtonCircle size="3rem">
+            <Icon name="check" />
+          </ButtonCircle>
+        </div>
       </div>
     )
   }

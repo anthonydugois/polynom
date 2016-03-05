@@ -1,22 +1,23 @@
 import React, { PropTypes } from "react"
 import Button from "Button"
 
-function getStyles(props) {
-  const { size } = props
-
+function getStyles(size, style) {
   return {
     width: size,
     height: size,
+    ...style,
   }
 }
 
 const ButtonCircle = ({
+  size,
+  style,
   children,
   ...props,
 }) => (
   <Button
     className={ ["ad-ButtonCircle"] }
-    style={ getStyles(props) }
+    style={ getStyles(size, style) }
     { ...props }>
     { children }
   </Button>

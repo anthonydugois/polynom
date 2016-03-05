@@ -47,6 +47,9 @@ function getIcon(name) {
   case "reorder":
     return `M170 640v-86h684v86h-684zM854 384v86h-684v-86h684z`
 
+  case "check":
+    return `M384 690l452-452 60 60-512 512-238-238 60-60z`
+
   default:
     return ""
   }

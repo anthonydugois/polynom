@@ -2,7 +2,7 @@
 
 .ad-Point-main {
   cursor: pointer;
-  fill: color(var(--ad-Color-prim) l(+15%));
+  fill: color(var(--ad-Color-prim) l(+10%));
   transition: fill .2s;
 }
 .ad-Point-main:hover,

@@ -2,7 +2,7 @@
 
 .ad-Grid {
   fill: none;
-  stroke: color(var(--ad-Color-prim) l(+75%));
+  stroke: color(var(--ad-Color-prim) l(+70%));
   stroke-width: 1px;
   opacity: 0;
 }
