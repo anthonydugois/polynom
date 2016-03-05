@@ -3,6 +3,9 @@ import "./styles"
 import React from "react"
 import { Link } from "react-router"
 import Expand, { ExpandCaption, ExpandPanel } from "Expand"
+import NavbarList from "./NavbarList"
+import NavbarItem from "./NavbarItem"
+import NavbarLink from "./NavbarLink"
 import NavbarExpand from "./NavbarExpand"
 
 const Navbar = () => (
@@ -11,8 +14,8 @@ const Navbar = () => (
       Polynom
     </Link>
 
-    <ul className="ad-Navbar-list">
-      <li className="ad-Navbar-item">
+    <NavbarList>
+      <NavbarItem>
         <Expand>
           <ExpandCaption>
             <NavbarExpand>
@@ -20,11 +23,17 @@ const Navbar = () => (
             </NavbarExpand>
           </ExpandCaption>
           <ExpandPanel>
-            Hello world
+            File links
           </ExpandPanel>
         </Expand>
-      </li>
-    </ul>
+      </NavbarItem>
+
+      <NavbarItem>
+        <NavbarLink to="/about">
+          About
+        </NavbarLink>
+      </NavbarItem>
+    </NavbarList>
   </nav>
 )
 
