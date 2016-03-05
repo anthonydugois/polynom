@@ -1,5 +1,6 @@
-import React, { PropTypes } from "react"
 import "./styles"
+
+import React, { PropTypes } from "react"
 
 function getIcon(name) {
   switch (name) {

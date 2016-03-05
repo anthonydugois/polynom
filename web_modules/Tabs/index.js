@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from "react"
 import "./styles"
+
+import React, { Component, PropTypes } from "react"
 
 class Tabs extends Component {
   state = { selected: this.props.selected };
@@ -73,4 +74,7 @@ Tabs.propTypes = {
   ]).isRequired,
 }
 
+export Tab from "./Tab"
+export TabList from "./TabList"
+export TabPanel from "./TabPanel"
 export default Tabs

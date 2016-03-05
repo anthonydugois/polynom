@@ -1,21 +1,18 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import { DragSource, DropTarget } from "react-dnd"
 import { getEmptyImage } from "react-dnd-html5-backend"
 import cx from "classnames"
-import Expand from "Expand"
-import ExpandCaption from "Expand/ExpandCaption"
-import ExpandPanel from "Expand/ExpandPanel"
-import Settings from "Settings"
-import Setting from "Settings/Setting"
+import Expand, { ExpandCaption, ExpandPanel } from "Expand"
+import Settings, { Setting } from "Settings"
+import Text, { Textarea } from "Text"
 import Checkbox from "Checkbox"
-import Text from "Text"
-import Textarea from "Text/Textarea"
 import Icon from "Icon"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
 import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
-import "./styles"
 
 class SidebarPath extends Component {
   state = {

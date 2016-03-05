@@ -1,5 +1,6 @@
-import React, { PropTypes } from "react"
 import "./styles"
+
+import React, { PropTypes } from "react"
 
 const Choices = ({ children }) => (
   <div className="ad-Choices">
@@ -14,4 +15,5 @@ Choices.propTypes = {
   ]),
 }
 
+export Choice from "./Choice"
 export default Choices

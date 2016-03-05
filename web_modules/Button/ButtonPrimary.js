@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react"
-import Button from "./Button"
+import Button from "Button"
 
 const ButtonPrimary = ({
   children,

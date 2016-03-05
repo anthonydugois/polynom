@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from "react"
-import Settings from "Settings"
-import Setting from "Settings/Setting"
+import Settings, { Setting } from "Settings"
 import Range from "Range"
 import Checkbox from "Checkbox"
 import SidebarPointParameter from "./SidebarPointParameter"

@@ -1,10 +1,11 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import Grid from "Grid"
 import Shape from "Shape"
 import { APP_CTRL, OVERVIEW_DEL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
-import "./styles"
 
 function getStyles(props) {
   const { width, height } = props.project

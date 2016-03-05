@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from "react"
-import Settings from "Settings"
-import Setting from "Settings/Setting"
-import Choices from "Choices"
-import Choice from "Choices/Choice"
+import Settings, { Setting } from "Settings"
+import Choices, { Choice } from "Choices"
 import SidebarPointParameter from "./SidebarPointParameter"
 import { getDefaultParameters } from "../../src/utils"
 

@@ -1,5 +1,6 @@
-import React from "react"
 import "./styles"
+
+import React from "react"
 
 const Textarea = (props) => (
   <textarea { ...props } />

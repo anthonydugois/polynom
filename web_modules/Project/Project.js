@@ -1,9 +1,10 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import mapActionsToKeys from "react-keybindings"
 import Sidebar from "Sidebar"
 import Overview from "Overview"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
-import "./styles"
 
 class Project extends Component {
   componentDidMount() {

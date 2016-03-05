@@ -1,6 +1,7 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import { Link } from "react-router"
-import "./styles"
 
 class Projects extends Component {
   renderProject = (key) => {

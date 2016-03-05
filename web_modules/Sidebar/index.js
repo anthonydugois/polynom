@@ -3,10 +3,7 @@ import "./styles"
 import React, { PropTypes } from "react"
 import { ButtonTab } from "Button"
 import Icon from "Icon"
-import Tabs from "Tabs"
-import TabList from "Tabs/TabList"
-import Tab from "Tabs/Tab"
-import TabPanel from "Tabs/TabPanel"
+import Tabs, { Tab, TabList, TabPanel } from "Tabs"
 import SidebarSettings from "SidebarSettings"
 import SidebarPaths from "SidebarPaths"
 import SidebarPoint from "SidebarPoint"
@@ -50,4 +47,7 @@ Sidebar.propTypes = {
   project: PropTypes.object.isRequired,
 }
 
+export SidebarActions from "./SidebarActions"
+export SidebarModule from "./SidebarModule"
+export SidebarPanel from "./SidebarPanel"
 export default Sidebar

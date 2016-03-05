@@ -1,6 +1,7 @@
+import "./styles"
+
 import React, { PropTypes } from "react"
 import cx from "classnames"
-import "./styles"
 
 const Grid = ({ project }) => {
   const verticalLines = []

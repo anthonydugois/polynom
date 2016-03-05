@@ -15,12 +15,6 @@
   color: inherit;
 }
 
-.ad-ButtonCircle {
-  border-radius: 50%;
-  background: var(--ad-Color-sec);
-  color: #fff;
-}
-
 .ad-Button-content {
   display: flex;
   align-items: center;
@@ -36,17 +30,34 @@
     margin-left: .25rem;
   }
 
-.ad-ButtonPrimary {
-  height: 2.5rem;
-  padding: 0 1.25rem;
+.ad-ButtonCircle {
+  border-radius: 50%;
   background: var(--ad-Color-sec);
+  color: #fff;
+}
+
+.ad-ButtonPrimary,
+.ad-ButtonDelete {
+  padding: 0 1.2rem;
   border-radius: 2px;
   transition: background .2s;
   color: #fff;
 }
+
+.ad-ButtonPrimary {
+  background: var(--ad-Color-sec);
+}
 .ad-ButtonPrimary:focus,
 .ad-ButtonPrimary:hover {
   background: color(var(--ad-Color-sec) l(+4%));
+}
+
+.ad-ButtonDelete {
+  background: color(var(--ad-Color-prim) l(+2%));
+}
+.ad-ButtonDelete:focus,
+.ad-ButtonDelete:hover {
+  background: color(var(--ad-Color-prim) l(+6%));
 }
 
 .ad-ButtonTab {
@@ -63,19 +74,5 @@
 }
 .ad-ButtonExpand:focus,
 .ad-ButtonExpand:hover {
-  background: color(var(--ad-Color-prim) l(+6%));
-}
-
-.ad-ButtonDelete {
-  height: 2.5rem;
-  margin-left: auto;
-  padding: 0 1.25rem;
-  background: color(var(--ad-Color-prim) l(+2%));
-  border-radius: 2px;
-  transition: background .2s;
-  color: #fff;
-}
-.ad-ButtonDelete:focus,
-.ad-ButtonDelete:hover {
   background: color(var(--ad-Color-prim) l(+6%));
 }

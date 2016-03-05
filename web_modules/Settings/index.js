@@ -1,3 +1,5 @@
+import "./styles"
+
 import React, { PropTypes } from "react"
 
 const Settings = ({ children }) => (
@@ -13,4 +15,5 @@ Settings.propTypes = {
   ]).isRequired,
 }
 
+export Setting from "./Setting"
 export default Settings

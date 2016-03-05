@@ -1,8 +1,9 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
-import "./styles"
 
 class Point extends Component {
   handleMouseDown = (e) => {

@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from "react"
 import "./styles"
+
+import React, { Component, PropTypes } from "react"
 
 class App extends Component {
   render() {

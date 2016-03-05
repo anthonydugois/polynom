@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from "react"
-import Settings from "Settings"
-import Setting from "Settings/Setting"
+import Settings, { Setting } from "Settings"
 import Range from "Range"
 import SidebarPointParameter from "./SidebarPointParameter"
 import inRange from "../../src/utils/inRange"

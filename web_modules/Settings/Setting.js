@@ -1,5 +1,3 @@
-import "./styles"
-
 import React, { PropTypes } from "react"
 
 const Setting = ({

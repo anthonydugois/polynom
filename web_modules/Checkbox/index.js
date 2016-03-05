@@ -1,5 +1,6 @@
-import React from "react"
 import "./styles"
+
+import React from "react"
 
 const Checkbox = (props) => (
   <label className="ad-Checkbox">

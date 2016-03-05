@@ -1,8 +1,9 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import Point from "Point"
 import Path from "Path"
-import "./styles"
 
 class Shape extends Component {
   renderPoint = (key, index, keys) => {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { DragLayer } from "react-dnd"
-import ExpandCaption from "Expand/ExpandCaption"
+import { ExpandCaption } from "Expand"
 
 function getStyles(props) {
   const { item, currentOffset } = props

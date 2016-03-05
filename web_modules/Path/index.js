@@ -1,10 +1,11 @@
+import "./styles"
+
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import Snap from "snapsvg"
 import { APP_CTRL } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
-import "./styles"
 
 class Path extends Component {
   handleMouseDown = (e) => {

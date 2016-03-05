@@ -59,4 +59,6 @@ Expand.propTypes = {
   ]),
 }
 
+export ExpandCaption from "./ExpandCaption"
+export ExpandPanel from "./ExpandPanel"
 export default Expand
