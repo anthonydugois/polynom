@@ -69,6 +69,7 @@
   padding: .2rem;
   background: color(var(--ad-Color-prim) l(+2%));
   border-radius: 2px;
+  transition: background .2s;
   font-size: .8rem;
   color: #fff;
 }

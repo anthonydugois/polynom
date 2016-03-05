@@ -101,6 +101,7 @@ class SidebarPath extends Component {
 
   render() {
     const {
+      project,
       path,
       pointsById,
       connectDragSource,
@@ -126,7 +127,7 @@ class SidebarPath extends Component {
               </div>
 
               <div className="ad-SidebarPath-actions">
-                { connectDragSource(
+                { project.paths.length > 1 && connectDragSource(
                   <div className="ad-SidebarPath-reorder">
                     <Icon name="reorder" />
                   </div>
