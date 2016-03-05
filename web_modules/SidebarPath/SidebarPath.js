@@ -10,6 +10,7 @@ import Settings, { Setting } from "Settings"
 import Text, { Textarea } from "Text"
 import Checkbox from "Checkbox"
 import Icon from "Icon"
+import SidebarPathExpand from "./SidebarPathExpand"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
 import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
@@ -120,6 +121,8 @@ class SidebarPath extends Component {
           <ExpandCaption
             className="ad-SidebarPathExpand-caption"
             onClick={ this.handlePathClick }>
+            <SidebarPathExpand />
+
             <div className="ad-SidebarPathCaption">
               <div className="ad-SidebarPath-name">
                 <Text

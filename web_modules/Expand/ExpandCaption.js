@@ -1,6 +1,4 @@
 import React, { PropTypes } from "react"
-import { ButtonExpand } from "Button"
-import Icon from "Icon"
 
 const ExpandCaption = ({
   _onClick,
@@ -9,11 +7,11 @@ const ExpandCaption = ({
   ...props,
 }) => (
   <div { ...props }>
-    <ButtonExpand onClick={ _onClick }>
-      <Icon name={ _isOpened ? "down" : "right" } />
-    </ButtonExpand>
-
-    { children }
+    { React.Children.map(children, (child) => React.cloneElement(child, {
+      _onClick,
+      _isOpened,
+      ...child.props,
+    })) }
   </div>
 )
 
