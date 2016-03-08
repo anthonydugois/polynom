@@ -5,7 +5,7 @@ import { findDOMNode } from "react-dom"
 import { DragSource, DropTarget } from "react-dnd"
 import { getEmptyImage } from "react-dnd-html5-backend"
 import cx from "classnames"
-import Expand, { ExpandCaption, ExpandPanel } from "Expand"
+import Expand, { ExpandPanel } from "Expand"
 import Settings, { Setting } from "Settings"
 import Text, { Textarea } from "Text"
 import Checkbox from "Checkbox"
@@ -117,31 +117,26 @@ class SidebarPath extends Component {
         "is-hidden": isDragging,
         "is-hovered": isOver,
       }) }>
-        <Expand className="ad-SidebarPathExpand">
-          <ExpandCaption
-            className="ad-SidebarPathExpand-caption"
-            onClick={ this.handlePathClick }>
-            <SidebarPathExpand />
-
-            <div className="ad-SidebarPathCaption">
-              <div className="ad-SidebarPath-name">
-                <Text
-                  className="ad-SidebarPath-input"
-                  value={ path.name }
-                  onChange={ this.handleNameChange } />
-              </div>
-
-              <div className="ad-SidebarPath-actions">
-                { project.paths.length > 1 && connectDragSource(
-                  <div className="ad-SidebarPath-reorder">
-                    <Icon name="reorder" />
-                  </div>
-                ) }
-              </div>
+        <Expand>
+          <SidebarPathExpand
+            onClick={ this.handlePathClick }
+            isExpandHandler>
+            <div className="ad-SidebarPath-name">
+              <Text
+                className="ad-SidebarPath-input"
+                value={ path.name }
+                onChange={ this.handleNameChange } />
             </div>
-          </ExpandCaption>
+            <div className="ad-SidebarPath-actions">
+              { project.paths.length > 1 && connectDragSource(
+                <div className="ad-SidebarPath-reorder">
+                  <Icon name="reorder" />
+                </div>
+              ) }
+            </div>
+          </SidebarPathExpand>
 
-          <ExpandPanel className="ad-SidebarPathExpand-panel">
+          <ExpandPanel>
             <Settings>
               <Setting>
                 <Textarea

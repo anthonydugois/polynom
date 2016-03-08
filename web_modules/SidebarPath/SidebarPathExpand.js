@@ -3,15 +3,22 @@ import { ButtonExpand } from "Button"
 import Icon from "Icon"
 
 const SidebarPathExpand = ({
-  _onClick,
+  _onExpandClick,
   _isOpened,
+  children,
   ...props,
 }) => (
-  <ButtonExpand
-    onClick={ _onClick }
+  <div
+    className="ad-SidebarPathExpand"
     { ...props }>
-    <Icon name={ _isOpened ? "down" : "right" } />
-  </ButtonExpand>
+    <ButtonExpand onClick={ _onExpandClick }>
+      <Icon name={ _isOpened ? "down" : "right" } />
+    </ButtonExpand>
+    
+    <div className="ad-SidebarPathExpand-caption">
+      { children }
+    </div>
+  </div>
 )
 
 export default SidebarPathExpand

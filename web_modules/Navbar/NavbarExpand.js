@@ -2,12 +2,12 @@ import React from "react"
 import NavbarLink from "./NavbarLink"
 
 const NavbarExpand = ({
-  _onClick,
+  _onExpandClick,
   children,
   ...props,
 }) => (
   <NavbarLink
-    onClick={ _onClick }
+    onClick={ _onExpandClick }
     { ...props }>
     { children }
   </NavbarLink>

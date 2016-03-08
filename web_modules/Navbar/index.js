@@ -2,7 +2,7 @@ import "./styles"
 
 import React from "react"
 import { Link } from "react-router"
-import Expand, { ExpandCaption, ExpandPanel } from "Expand"
+import Expand, { ExpandPanel } from "Expand"
 import NavbarList from "./NavbarList"
 import NavbarItem from "./NavbarItem"
 import NavbarLink from "./NavbarLink"
@@ -18,15 +18,11 @@ const Navbar = () => (
 
     <NavbarList>
       <NavbarItem>
-        <Expand
-          className="ad-NavbarItemExpand"
-          documentPropagation={ true }>
-          <ExpandCaption>
-            <NavbarExpand>
-              File
-            </NavbarExpand>
-          </ExpandCaption>
-          <ExpandPanel className="ad-NavbarItemExpand-panel">
+        <Expand documentPropagation>
+          <NavbarExpand isExpandHandler>
+            File
+          </NavbarExpand>
+          <ExpandPanel>
             File links
           </ExpandPanel>
         </Expand>

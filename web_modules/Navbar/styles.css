@@ -16,7 +16,6 @@
   padding: 0;
   list-style: none;
 }
-
 .ad-Navbar > .ad-NavbarList {
   flex: 1;
   display: flex;
@@ -29,10 +28,10 @@
   color: red;
 }
 
-.ad-NavbarItemExpand {
+.ad-NavbarItem {
   position: relative;
 }
-  .ad-NavbarItemExpand-panel {
+  .ad-NavbarItem .ad-ExpandPanel {
     position: absolute;
     top: 100%;
     left: 0;

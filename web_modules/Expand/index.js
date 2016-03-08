@@ -16,6 +16,7 @@ class Expand extends Component {
   close = (e) => {
     if (this.props.documentPropagation && this.state._isOpened) {
       e.stopPropagation()
+
       this.setState({ _isOpened: false })
     }
   };
@@ -33,11 +34,11 @@ class Expand extends Component {
     const { _isOpened } = this.state
 
     return React.Children.map(children, (child) => {
-      if (child.type.name === "ExpandCaption") {
-        const _onClick = this.handleClick(!_isOpened)
+      if (child.props.isExpandHandler) {
+        const _onExpandClick = this.handleClick(!_isOpened)
 
         return React.cloneElement(child, {
-          _onClick,
+          _onExpandClick,
           _isOpened,
           ...child.props,
         })
@@ -76,6 +77,5 @@ Expand.propTypes = {
   ]),
 }
 
-export ExpandCaption from "./ExpandCaption"
 export ExpandPanel from "./ExpandPanel"
 export default Expand
