@@ -2,10 +2,6 @@
 
 .ad-SidebarPath {
   user-select: none;
-  border-left: 3px solid color(var(--ad-Color-prim) l(-10%));
-}
-.ad-SidebarPath.is-active {
-  border-color: var(--ad-Color-sec);
 }
 .ad-SidebarPath.is-hidden {
   opacity: .2;
@@ -16,6 +12,9 @@
   align-items: center;
   padding: 1rem 1.5rem;
   background: color(var(--ad-Color-prim) l(-4%));
+}
+.ad-SidebarPath.is-active .ad-SidebarPathExpand {
+  background: color(var(--ad-Color-prim) l(-6%));
 }
   .ad-SidebarPathExpand-caption {
     flex: 1;

@@ -11,6 +11,7 @@ const initialState = {
     gridShow: true,
     gridSnap: false,
     gridSize: 50,
+    pointsCodeShow: true,
     paths: [0],
   },
 }

@@ -17,11 +17,11 @@ class Project extends Component {
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
         className="ad-Project">
-        <Sidebar { ...this.props } />
-
         <div className="ad-Project-overview">
           <Overview { ...this.props } />
         </div>
+
+        <Sidebar { ...this.props } />
       </div>
     )
   }

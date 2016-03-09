@@ -10,6 +10,7 @@ class Shape extends Component {
     const {
       onActivate,
       onDeactivate,
+      project,
       keyActions,
       path,
       pointsById,
@@ -23,6 +24,7 @@ class Shape extends Component {
         key={ key }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
+        project={ project }
         keyActions={ keyActions }
         activePaths={ activePaths }
         activePoints={ activePoints }

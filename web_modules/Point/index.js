@@ -2,7 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
-import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 
 class Point extends Component {
@@ -17,7 +17,7 @@ class Point extends Component {
       point,
     } = this.props
 
-    if (!keyActions.includes(APP_CTRL)) {
+    if (!keyActions.includes(APP_SHIFT)) {
       this.props.onDeactivate(activePaths, activePoints)
     }
 
@@ -38,15 +38,29 @@ class Point extends Component {
 
   renderPoint(point) {
     const [w, h] = [10, 10]
+    const { project } = this.props
 
     return (
-      <rect
-        className="ad-Point-main"
-        x={ point.x - w / 2 }
-        y={ point.y - h / 2 }
-        width={ w }
-        height={ h }
-        onMouseDown={ this.handleMainMouseDown } />
+      <g className="ad-MainPoint">
+        { project.pointsCodeShow && (
+          <text
+            className="ad-MainPoint-code"
+            x={ point.x }
+            y={ point.y }
+            dy={ -h }
+            dx={ w }>
+            { `${ point.code } (${ point.x }, ${ point.y })` }
+          </text>
+        ) }
+
+        <rect
+          className="ad-MainPoint-coords"
+          x={ point.x - w / 2 }
+          y={ point.y - h / 2 }
+          width={ w }
+          height={ h }
+          onMouseDown={ this.handleMainMouseDown } />
+      </g>
     )
   }
 
@@ -140,6 +154,7 @@ class Point extends Component {
 Point.propTypes = {
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired,
   keyActions: PropTypes.array.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,

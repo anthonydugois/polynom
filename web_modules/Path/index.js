@@ -3,7 +3,7 @@ import "./styles"
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import Snap from "snapsvg"
-import { APP_CTRL } from "../../src/constants/KeyActionTypes"
+import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
 
@@ -17,7 +17,7 @@ class Path extends Component {
       activePoints,
     } = this.props
 
-    if (!this.props.keyActions.includes(APP_CTRL)) {
+    if (!this.props.keyActions.includes(APP_SHIFT)) {
       this.props.onDeactivate(activePaths, activePoints)
     }
 

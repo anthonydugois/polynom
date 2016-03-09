@@ -1,12 +1,22 @@
 @import url(App/config.css);
 
-.ad-Point-main {
-  cursor: pointer;
-  fill: color(var(--ad-Color-prim) l(+10%));
+.ad-MainPoint-code,
+.ad-MainPoint-coords {
   transition: fill .2s;
 }
-.ad-Point-main:hover,
-.ad-Point.is-active .ad-Point-main {
+.ad-MainPoint-code {
+  cursor: default;
+  fill: color(var(--ad-Color-prim) l(+50%));
+  text-anchor: start;
+  font-family: "Fira Mono", monospace;
+  font-size: .7rem;
+}
+.ad-MainPoint-coords {
+  cursor: pointer;
+  fill: color(var(--ad-Color-prim) l(+10%));
+}
+.ad-Point.is-active .ad-MainPoint-code,
+.ad-Point.is-active .ad-MainPoint-coords {
   fill: var(--ad-Color-sec);
 }
 

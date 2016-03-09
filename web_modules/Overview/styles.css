@@ -4,4 +4,5 @@
   display: block;
   background: #fff;
   outline: 0;
+  user-select: none;
 }

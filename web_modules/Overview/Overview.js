@@ -55,10 +55,9 @@ class Overview extends Component {
     this.draggedObject = draggedObject
   };
 
-  handleMouseUp = (e) => {
+  handleMouseUp = () => {
     if (this.isDragging) {
       this.isDragging = false
-      this.coords = this.getCoords(e)
     }
   };
 
@@ -71,22 +70,19 @@ class Overview extends Component {
       switch (this.draggedObject) {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
-        this.movePoints(coords)
-        break
+        return this.movePoints(coords)
 
       case ObjectTypes.POINT_ANCHOR_1:
-        this.moveFirstAnchor(coords)
-        break
+        return this.moveFirstAnchor(coords)
 
       case ObjectTypes.POINT_ANCHOR_2:
-        this.moveSecondAnchor(coords)
-        break
+        return this.moveSecondAnchor(coords)
       }
     }
   };
 
   movePoints(coords) {
-    const { activePoints } = this.props
+    const { activePoints, keyActions } = this.props
     const dx = coords[0] - this.coords[0]
     const dy = coords[1] - this.coords[1]
 
@@ -147,6 +143,7 @@ class Overview extends Component {
       onActivate,
       onDeactivate,
       keyActions,
+      project,
       pathsById,
       pointsById,
       activePaths,
@@ -158,6 +155,7 @@ class Overview extends Component {
         key={ key }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
+        project={ project }
         keyActions={ keyActions }
         path={ pathsById[key] }
         pointsById={ pointsById }

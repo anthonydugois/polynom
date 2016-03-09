@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { DragLayer } from "react-dnd"
-import { ExpandCaption } from "Expand"
+import SidebarPathExpand from "SidebarPath/SidebarPathExpand"
 
 function getStyles(props) {
   const { item, currentOffset } = props
@@ -11,7 +11,7 @@ function getStyles(props) {
 
   const { y } = currentOffset
   const { boundingRect } = item
-  const transform = `translate(${ boundingRect.left + 20 }px, ${ y }px)`
+  const transform = `translate(${ boundingRect.left - 20 }px, ${ y }px)`
 
   return {
     width: boundingRect.width,
@@ -32,13 +32,11 @@ class SidebarPathsLayer extends Component {
         <div
           className="ad-SidebarPath"
           style={ getStyles(this.props) }>
-          <ExpandCaption className="ad-SidebarPathExpand-caption">
-            <div className="ad-SidebarPath-caption">
-              <div className="ad-SidebarPath-name">
-                { item.path.name }
-              </div>
+          <SidebarPathExpand>
+            <div className="ad-SidebarPath-name">
+              { item.path.name }
             </div>
-          </ExpandCaption>
+          </SidebarPathExpand>
         </div>
       </div>
     )
