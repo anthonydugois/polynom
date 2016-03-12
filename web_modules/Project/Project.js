@@ -17,10 +17,7 @@ class Project extends Component {
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
         className="ad-Project">
-        <div className="ad-Project-overview">
-          <Overview { ...this.props } />
-        </div>
-
+        <Overview { ...this.props } />
         <Sidebar { ...this.props } />
       </div>
     )
@@ -37,4 +34,8 @@ export default mapActionsToKeys({
   [KeyActionTypes.APP_SHIFT]: "shift",
   [KeyActionTypes.SIDEBAR_DEL]: "delete",
   [KeyActionTypes.OVERVIEW_DEL]: "delete",
+  [KeyActionTypes.OVERVIEW_UP]: "up",
+  [KeyActionTypes.OVERVIEW_DOWN]: "down",
+  [KeyActionTypes.OVERVIEW_LEFT]: "left",
+  [KeyActionTypes.OVERVIEW_RIGHT]: "right",
 })(Project)

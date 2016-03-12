@@ -5,10 +5,3 @@
   display: flex;
   outline: 0;
 }
-  .ad-Project-overview {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: color(var(--ad-Color-prim) l(-8%));
-  }

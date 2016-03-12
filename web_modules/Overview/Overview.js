@@ -1,10 +1,9 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
-import { findDOMNode } from "react-dom"
 import Grid from "Grid"
 import Shape from "Shape"
-import { APP_CTRL, OVERVIEW_DEL } from "../../src/constants/KeyActionTypes"
+import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 
 function getStyles(props) {
@@ -16,11 +15,14 @@ class Overview extends Component {
   constructor(props) {
     super(props)
 
-    this.isDragging = false
-    this.coords = [0, 0]
     this.draggedPoint = null
     this.draggedObject = null
   }
+
+  state = {
+    isDragging: false,
+    coords: [0, 0],
+  };
 
   componentDidMount() {
     document.addEventListener("mousemove", this.handleMouseMove)
@@ -34,7 +36,7 @@ class Overview extends Component {
 
   getCoords = (e) => {
     const { project } = this.props
-    const { left, top } = findDOMNode(this).getBoundingClientRect()
+    const { left, top } = this.svg.getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
     let y = Math.round(e.clientY - top)
@@ -49,28 +51,34 @@ class Overview extends Component {
   };
 
   handleMouseDown = (e, draggedPoint, draggedObject) => {
-    this.isDragging = true
-    this.coords = this.getCoords(e)
     this.draggedPoint = draggedPoint
     this.draggedObject = draggedObject
+
+    this.setState({
+      coords: this.getCoords(e),
+      isDragging: true,
+    })
   };
 
   handleMouseUp = () => {
-    if (this.isDragging) {
-      this.isDragging = false
+    if (this.state.isDragging) {
+      this.setState({ isDragging: false })
     }
   };
 
   handleMouseMove = (e) => {
-    if (this.isDragging) {
-      e.preventDefault()
+    const coords = this.getCoords(e)
 
-      const coords = this.getCoords(e)
+    if (this.state.isDragging) {
+      e.preventDefault()
 
       switch (this.draggedObject) {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
-        return this.movePoints(coords)
+        return this.movePoints(
+          coords[0] - this.state.coords[0],
+          coords[1] - this.state.coords[1]
+        )
 
       case ObjectTypes.POINT_ANCHOR_1:
         return this.moveFirstAnchor(coords)
@@ -79,62 +87,80 @@ class Overview extends Component {
         return this.moveSecondAnchor(coords)
       }
     }
+
+    this.setState({ coords })
   };
 
-  movePoints(coords) {
-    const { activePoints, keyActions } = this.props
-    const dx = coords[0] - this.coords[0]
-    const dy = coords[1] - this.coords[1]
-
-    this.coords = coords
-
+  movePoints(dx, dy) {
     if (dx !== 0) {
-      this.props.onXPositionsChange(activePoints, dx)
+      this.props.onXPositionsChange(this.props.activePoints, dx)
     }
 
     if (dy !== 0) {
-      this.props.onYPositionsChange(activePoints, dy)
+      this.props.onYPositionsChange(this.props.activePoints, dy)
     }
   }
 
-  moveFirstAnchor(coords) {
-    this.props.onParametersChange(this.draggedPoint, {
-      x1: coords[0],
-      y1: coords[1],
-    })
+  moveFirstAnchor([x1, y1]) {
+    this.props.onParametersChange(this.draggedPoint, { x1, y1 })
   }
 
-  moveSecondAnchor(coords) {
-    this.props.onParametersChange(this.draggedPoint, {
-      x2: coords[0],
-      y2: coords[1],
-    })
+  moveSecondAnchor([x2, y2]) {
+    this.props.onParametersChange(this.draggedPoint, { x2, y2 })
   }
 
   handleOverviewMouseDown = (e) => {
-    const { pathsById, activePaths, activePoints } = this.props
+    const {
+      keyActions,
+      activePaths,
+      activePoints,
+    } = this.props
 
-    if (this.props.keyActions.includes(APP_CTRL)) {
+    if (keyActions.includes(KeyActionTypes.APP_CTRL)) {
       const [x, y] = this.getCoords(e)
 
       if (activePaths.length === 1) {
-        const path = pathsById[activePaths[0]]
-
-        this.props.onOverviewCreatePoint(path.id, "L", x, y, {})
+        this.props.onOverviewCreatePoint(activePaths[0], "L", x, y, {})
       } else {
         this.props.onOverviewCreatePath(x, y)
       }
-    } else {
+    } else if (activePaths.length > 0 || activePoints.length > 0) {
       this.props.onDeactivate(activePaths, activePoints)
     }
   };
 
   handleKeyDown = (e) => {
-    const { keyActions, activePoints } = this.props
+    const {
+      keyActions,
+      project,
+      activePoints,
+    } = this.props
 
-    if (keyActions.includes(OVERVIEW_DEL) && activePoints.length > 0) {
-      e.preventDefault()
-      this.props.onOverviewDelete(activePoints)
+    if (activePoints.length > 0) {
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_DEL)) {
+        e.preventDefault()
+        this.props.onOverviewDelete(activePoints)
+      }
+
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
+        e.preventDefault()
+        this.movePoints(0, -project.keyboardIncrement)
+      }
+
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
+        e.preventDefault()
+        this.movePoints(0, project.keyboardIncrement)
+      }
+
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
+        e.preventDefault()
+        this.movePoints(-project.keyboardIncrement, 0)
+      }
+
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
+        e.preventDefault()
+        this.movePoints(project.keyboardIncrement, 0)
+      }
     }
   };
 
@@ -167,18 +193,28 @@ class Overview extends Component {
 
   render() {
     const { project } = this.props
+    const [x, y] = this.state.coords
 
     return (
-      <svg
-        tabIndex={ 1 }
-        className="ad-Overview"
-        style={ getStyles(this.props) }
-        onMouseDown={ this.handleOverviewMouseDown }
-        onKeyDown={ this.handleKeyDown }>
-        <Grid project={ project } />
+      <div className="ad-Overview">
+        <svg
+          ref={ (svg) => this.svg = svg }
+          tabIndex={ 1 }
+          className="ad-Overview-svg"
+          style={ getStyles(this.props) }
+          onMouseDown={ this.handleOverviewMouseDown }
+          onKeyDown={ this.handleKeyDown }>
+          <Grid project={ project } />
 
-        { project.paths.map(this.renderShape) }
-      </svg>
+          { project.paths.map(this.renderShape) }
+        </svg>
+
+        <ul className="ad-Overview-infos">
+          <li className="ad-Overview-info">
+            { `x: ${ x }, y: ${ y }` }
+          </li>
+        </ul>
+      </div>
     )
   }
 }

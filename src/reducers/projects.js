@@ -12,6 +12,7 @@ const initialState = {
     gridSnap: false,
     gridSize: 50,
     pointsCodeShow: true,
+    keyboardIncrement: 1,
     paths: [0],
   },
 }

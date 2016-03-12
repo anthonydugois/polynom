@@ -1,8 +1,28 @@
 @import url(App/config.css);
 
 .ad-Overview {
-  display: block;
-  background: #fff;
-  outline: 0;
-  user-select: none;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: color(var(--ad-Color-prim) l(-8%));
 }
+  .ad-Overview-svg {
+    display: block;
+    background: #fff;
+    outline: 0;
+    user-select: none;
+  }
+  .ad-Overview-infos {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1rem 2rem;
+    padding: 0;
+    list-style: none;
+  }
+    .ad-Overview-info {
+      font-size: .8rem;
+      color: #fff;
+    }
