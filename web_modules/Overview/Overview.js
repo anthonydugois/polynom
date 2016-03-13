@@ -75,16 +75,19 @@ class Overview extends Component {
       switch (this.draggedObject) {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
-        return this.movePoints(
+        this.movePoints(
           coords[0] - this.state.coords[0],
           coords[1] - this.state.coords[1]
         )
+        break
 
       case ObjectTypes.POINT_ANCHOR_1:
-        return this.moveFirstAnchor(coords)
+        this.moveFirstAnchor(coords)
+        break
 
       case ObjectTypes.POINT_ANCHOR_2:
-        return this.moveSecondAnchor(coords)
+        this.moveSecondAnchor(coords)
+        break
       }
     }
 
