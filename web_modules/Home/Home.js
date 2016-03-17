@@ -12,15 +12,20 @@ const Home = ({
 }) => (
   <div className="ad-Home">
     <div className="ad-Home-head">
-      <Container>
+      <Container className="ad-Home-brand">
         <Link
           to="/"
-          className="ad-Home-brand">
+          className="ad-Home-logo">
           <Icon name="polynom" />
-          <span className="ad-Home-brandname">Polynom</span>
         </Link>
-        <div className="ad-Home-lead">
-          Create and edit SVG paths easily directly in your browser.
+
+        <div className="ad-Home-brandcontent">
+          <h1 className="ad-Home-title">
+            Polynom
+          </h1>
+          <div className="ad-Home-lead">
+            Create and edit SVG paths easily directly in your browser.
+          </div>
         </div>
       </Container>
     </div>

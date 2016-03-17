@@ -1,5 +1,37 @@
 @import url(App/config.css);
 
 .ad-Projects {
-  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.ad-ProjectItem {
+  position: relative;
+  width: 25%;
+  height: 20rem;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+}
+  .ad-ProjectItem-overview {
+    height: 75%;
+    background: var(--ad-Color-prim);
+    border-radius: 2px 2px 0 0;
+  }
+  .ad-ProjectItem-content {
+    height: 25%;
+    background: #fff;
+    border-radius: 0 0 2px 2px;
+  }
+    .ad-ProjectItem-name {
+      text-decoration: none;
+      color: var(--ad-Color-prim);
+    }
+      .ad-ProjectItem-name::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }

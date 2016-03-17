@@ -10,27 +10,31 @@
     background: var(--ad-Color-prim);
   }
     .ad-Home-brand {
-      display: inline-flex;
-      vertical-align: middle;
-      text-decoration: none;
-      line-height: 3.4rem;
-      font-size: 3rem;
-      color: #fff;
+      display: flex;
+      align-items: flex-start;
     }
-      .ad-Home-brandname {
-        margin-left: 1rem;
-        font-family: "Fira Sans", sans-serif;
-        font-size: 2rem;
-        font-weight: 300;
+      .ad-Home-logo {
+        font-size: 3rem;
+        color: #fff;
       }
-
-    .ad-Home-lead {
-      margin-top: 1rem;
-      font-family: "Fira Sans", sans-serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      color: color(var(--ad-Color-prim) l(+50%));
-    }
+      .ad-Home-brandcontent {
+        margin-left: 1rem;
+        color: #fff;
+      }
+        .ad-Home-title {
+          padding: 0;
+          margin: 0;
+          font-family: "Fira Sans", sans-serif;
+          font-size: 2.2rem;
+          font-weight: 300;
+        }
+        .ad-Home-lead {
+          margin-top: .5rem;
+          font-family: "Fira Sans", sans-serif;
+          font-size: 1.6rem;
+          font-weight: 300;
+          color: color(var(--ad-Color-prim) l(+60%));
+        }
 
   .ad-Home-body {
     flex: 1;
@@ -44,14 +48,15 @@
         display: flex;
         flex-direction: column;
         width: 12rem;
-        padding: 0;
+        padding: .5rem 0;
         margin: 0;
         list-style: none;
       }
         .ad-Home-action {
-          margin-bottom: .5rem;
+          margin-bottom: 1rem;
         }
 
       .ad-Home-projects {
+        flex: 1;
         margin-left: 2rem;
       }

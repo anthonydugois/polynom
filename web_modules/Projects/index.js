@@ -11,11 +11,26 @@ class Projects extends Component {
     return (
       <div
         key={ key }
-        className="ad-Projects-item">
-        <Link to={ `/projects/${ project.id }` }>
-          { project.name }
-          <DateTime datetime={ project.createdAt } />
-        </Link>
+        className="ad-ProjectItem">
+        <div className="ad-ProjectItem-overview">
+          <div className="ad-ProjectItem-open">Open</div>
+        </div>
+
+        <div className="ad-ProjectItem-content">
+          <Link
+            className="ad-ProjectItem-name"
+            to={ `/projects/${ project.id }` }>
+            { project.name }
+          </Link>
+
+          <div className="ad-ProjectItem-datetime">
+            <DateTime datetime={ project.createdAt } />
+          </div>
+
+          <div className="ad-ProjectItem-actions">
+            ...
+          </div>
+        </div>
       </div>
     )
   };
@@ -25,9 +40,7 @@ class Projects extends Component {
 
     return (
       <div className="ad-Projects">
-        <div className="ad-Projects-list">
-          { Object.keys(projectsById).map(this.renderProject) }
-        </div>
+        { Object.keys(projectsById).map(this.renderProject) }
       </div>
     )
   }
