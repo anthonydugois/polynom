@@ -117,7 +117,7 @@ class SidebarPath extends Component {
         "is-hidden": isDragging,
         "is-hovered": isOver,
       }) }>
-        <Expand isOpened={ path.id === 0 }>
+        <Expand>
           <SidebarPathExpand
             onClick={ this.handlePathClick }
             isExpandHandler>
