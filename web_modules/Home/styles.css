@@ -1,0 +1,57 @@
+@import url(App/config.css);
+
+.ad-Home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+  .ad-Home-head {
+    padding: 4rem 0;
+    background: var(--ad-Color-prim);
+  }
+    .ad-Home-brand {
+      display: inline-flex;
+      vertical-align: middle;
+      text-decoration: none;
+      line-height: 3.4rem;
+      font-size: 3rem;
+      color: #fff;
+    }
+      .ad-Home-brandname {
+        margin-left: 1rem;
+        font-family: "Fira Sans", sans-serif;
+        font-size: 2rem;
+        font-weight: 300;
+      }
+
+    .ad-Home-lead {
+      margin-top: 1rem;
+      font-family: "Fira Sans", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: color(var(--ad-Color-prim) l(+50%));
+    }
+
+  .ad-Home-body {
+    flex: 1;
+    padding: 4rem 0;
+    background: color(var(--ad-Color-prim) l(-4%));
+  }
+    .ad-Home-content {
+      display: flex;
+    }
+      .ad-Home-actions {
+        display: flex;
+        flex-direction: column;
+        width: 12rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+        .ad-Home-action {
+          margin-bottom: .5rem;
+        }
+
+      .ad-Home-projects {
+        margin-left: 2rem;
+      }

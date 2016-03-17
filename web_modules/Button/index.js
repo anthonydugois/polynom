@@ -1,26 +1,23 @@
 import "./styles"
 
-import React, { PropTypes } from "react"
+import React from "react"
 import cx from "classnames"
 
-function getStyles(size, style) {
-  return {
-    height: size,
-    ...style,
-  }
-}
-
 const Button = ({
-  size,
   className,
+  size,
+  type,
   style,
   children,
   ...props,
 }) => (
   <button
     type="button"
-    className={ cx("ad-ButtonReset", "ad-Button", ...className) }
-    style={ getStyles(size, style) }
+    className={ cx("ad-ButtonReset", "ad-Button", className, type) }
+    style={{
+      height: size,
+      ...style,
+    }}
     { ...props }>
     <div className="ad-Button-content">
       { children }
@@ -28,22 +25,6 @@ const Button = ({
   </button>
 )
 
-Button.propTypes = {
-  size: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  className: PropTypes.array,
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.element,
-    PropTypes.string,
-  ]),
-}
+export ButtonRounded from "./ButtonRounded"
 
-export ButtonPrimary from "./ButtonPrimary"
-export ButtonDelete from "./ButtonDelete"
-export ButtonExpand from "./ButtonExpand"
-export ButtonCircle from "./ButtonCircle"
-export ButtonTab from "./ButtonTab"
 export default Button
