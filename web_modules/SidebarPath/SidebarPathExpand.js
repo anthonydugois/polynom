@@ -14,7 +14,7 @@ const SidebarPathExpand = ({
     <ButtonExpand onClick={ _onExpandClick }>
       <Icon name={ _isOpened ? "down" : "right" } />
     </ButtonExpand>
-    
+
     <div className="ad-SidebarPathExpand-caption">
       { children }
     </div>

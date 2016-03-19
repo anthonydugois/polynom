@@ -1,28 +1,22 @@
 import "./styles"
 
 import React, { PropTypes } from "react"
-import { ButtonTab } from "Button"
 import Icon from "Icon"
-import Tabs, { Tab, TabList, TabPanel } from "Tabs"
+import Tabs, { TabList, TabPanel } from "Tabs"
 import SidebarPaths from "SidebarPaths"
 import SidebarPoint from "SidebarPoint"
+import SidebarTab from "./SidebarTab"
 
 const Sidebar = (props) => (
   <div className="ad-Sidebar">
     <Tabs selected={ 0 }>
       <TabList>
-        <Tab>
-          <ButtonTab>
-            <Icon name="paths" />
-            Paths
-          </ButtonTab>
-        </Tab>
-        <Tab>
-          <ButtonTab>
-            <Icon name="point" />
-            Point
-          </ButtonTab>
-        </Tab>
+        <SidebarTab isTabHandler>
+          <Icon name="paths" />
+        </SidebarTab>
+        <SidebarTab isTabHandler>
+          <Icon name="point" />
+        </SidebarTab>
       </TabList>
 
       <TabPanel>

@@ -26,5 +26,7 @@ const Button = ({
 )
 
 export ButtonRounded from "./ButtonRounded"
+export ButtonTab from "./ButtonTab"
+export ButtonExpand from "./ButtonExpand"
 
 export default Button

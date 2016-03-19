@@ -20,7 +20,7 @@ class Tabs extends Component {
 
     return React.cloneElement(child, {
       children: React.Children.map(child.props.children, (childTab) => {
-        if (childTab.type.name === "Tab") {
+        if (childTab.props.isTabHandler) {
           const _isActive = tab === this.state.selected
           const _onClick = this.handleClick(tab)
 
@@ -59,7 +59,7 @@ class Tabs extends Component {
 
   render() {
     return (
-      <div className="ad-Tabs">
+      <div { ...this.props }>
         { this.renderChildren(this.props.children) }
       </div>
     )
@@ -74,7 +74,7 @@ Tabs.propTypes = {
   ]).isRequired,
 }
 
-export Tab from "./Tab"
 export TabList from "./TabList"
 export TabPanel from "./TabPanel"
+
 export default Tabs

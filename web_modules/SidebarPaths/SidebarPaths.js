@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from "react"
 import { DragDropContext } from "react-dnd"
 import HTML5Backend from "react-dnd-html5-backend"
 import { SidebarActions, SidebarPanel, SidebarModule } from "Sidebar"
-import { ButtonPrimary, ButtonDelete } from "Button"
+import Button from "Button"
 import Hint from "Hint"
 import Icon from "Icon"
 import SidebarPath from "SidebarPath"
@@ -65,19 +65,18 @@ class SidebarPaths extends Component {
         ) }
 
         <SidebarActions>
-          <ButtonPrimary
-            size="2.5rem"
+          <Button
+            size="3rem"
             onClick={ this.handleAddClick }>
-            New path
-          </ButtonPrimary>
+            New
+          </Button>
 
           { activePaths.length > 0 && (
-            <ButtonDelete
-              size="2.5rem"
-              style={{ marginLeft: "auto" }}
+            <Button
+              size="3rem"
               onClick={ this.handleRemoveClick }>
               <Icon name="delete" />
-            </ButtonDelete>
+            </Button>
           ) }
         </SidebarActions>
       </SidebarPanel>

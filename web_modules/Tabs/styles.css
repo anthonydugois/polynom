@@ -1,6 +1,6 @@
 @import url(App/config.css);
 
-.ad-Tabs {
+/* .ad-Tabs {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -49,4 +49,4 @@
 .ad-TabPanel.is-active {
   display: flex;
   flex-direction: column;
-}
+} */
