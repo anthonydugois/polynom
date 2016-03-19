@@ -1,5 +1,5 @@
 import React from "react"
-import { ButtonExpand } from "Button"
+import { ButtonSquare } from "Button"
 import Icon from "Icon"
 
 const SidebarPathExpand = ({
@@ -11,9 +11,11 @@ const SidebarPathExpand = ({
   <div
     className="ad-SidebarPathExpand"
     { ...props }>
-    <ButtonExpand onClick={ _onExpandClick }>
+    <ButtonSquare
+      size="1.5rem"
+      onClick={ _onExpandClick }>
       <Icon name={ _isOpened ? "down" : "right" } />
-    </ButtonExpand>
+    </ButtonSquare>
 
     <div className="ad-SidebarPathExpand-caption">
       { children }

@@ -2,6 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import mapActionsToKeys from "react-keybindings"
+import Navbar from "Navbar"
 import Sidebar from "Sidebar"
 import Overview from "Overview"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
@@ -17,8 +18,13 @@ class Project extends Component {
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
         className="ad-Project">
-        <Overview { ...this.props } />
-        <Sidebar { ...this.props } />
+        <div className="ad-Project-navbar">
+          <Navbar />
+        </div>
+        <div className="ad-Project-layout">
+          <Overview { ...this.props } />
+          <Sidebar { ...this.props } />
+        </div>
       </div>
     )
   }

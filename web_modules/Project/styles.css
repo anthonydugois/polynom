@@ -1,6 +1,12 @@
 @import url(App/config.css);
 
 .ad-Project {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   outline: 0;
 }
+  .ad-Project-layout {
+    flex: 1;
+    display: flex;
+  }

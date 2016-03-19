@@ -3,6 +3,7 @@ import "./styles"
 import React from "react"
 import { Link } from "react-router"
 import Expand, { ExpandPanel } from "Expand"
+import Icon from "Icon"
 import NavbarList from "./NavbarList"
 import NavbarItem from "./NavbarItem"
 import NavbarLink from "./NavbarLink"
@@ -13,7 +14,7 @@ const Navbar = () => (
     <Link
       className="ad-Navbar-logo"
       to="/">
-      Polynom
+      <Icon name="polynom" />
     </Link>
 
     <NavbarList>

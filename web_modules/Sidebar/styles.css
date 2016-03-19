@@ -3,7 +3,7 @@
 .ad-Sidebar {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 25rem;
   background: var(--ad-Color-prim);
 }
   .ad-Sidebar ::-webkit-scrollbar {
@@ -12,10 +12,15 @@
   .ad-Sidebar ::-webkit-scrollbar-thumb {
     background: color(var(--ad-Color-prim) l(+8%));
   }
-  .ad-Sidebar-head {
-    padding: 0 1.5rem;
+
+.ad-SidebarTabs {
+  flex: 1;
+  display: flex;
+}
+  .ad-SidebarTabs .ad-TabList {
+    background: color(var(--ad-Color-prim) l(+4%));
   }
-  .ad-Sidebar-tabs {
+  .ad-SidebarTabs .ad-TabPanel {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -25,7 +30,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: color(var(--ad-Color-prim) l(-2%));
 }
 
 .ad-SidebarModule {

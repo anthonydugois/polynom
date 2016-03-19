@@ -9,7 +9,9 @@ import SidebarTab from "./SidebarTab"
 
 const Sidebar = (props) => (
   <div className="ad-Sidebar">
-    <Tabs selected={ 0 }>
+    <Tabs
+      className="ad-SidebarTabs"
+      selected={ 0 }>
       <TabList>
         <SidebarTab isTabHandler>
           <Icon name="paths" />

@@ -1,13 +1,16 @@
 import React from "react"
-import { ButtonTab } from "Button"
+import { ButtonSquare } from "Button"
 
 const SidebarTab = ({
-  _onClick,
+  _onTabClick,
   children,
 }) => (
-  <ButtonTab onClick={ _onClick }>
+  <ButtonSquare
+    size="3.5rem"
+    style={{ fontSize: ".8rem" }}
+    onClick={ _onTabClick }>
     { children }
-  </ButtonTab>
+  </ButtonSquare>
 )
 
 export default SidebarTab

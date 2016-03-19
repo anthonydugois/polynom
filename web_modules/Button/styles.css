@@ -18,9 +18,7 @@
 
 .ad-Button {
   width: 100%;
-  padding: 1rem;
   background: color(var(--ad-Color-prim) l(-6%));
-  border-radius: 2px;
   transition: background .2s;
   text-transform: uppercase;
   line-height: 1.4;

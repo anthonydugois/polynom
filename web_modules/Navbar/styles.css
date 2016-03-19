@@ -1,13 +1,14 @@
 @import url(App/config.css);
 
 .ad-Navbar {
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
-  background: color(var(--ad-Color-prim) l(-8%));
+  background: var(--ad-Color-prim);
 }
   .ad-Navbar-logo {
     text-decoration: none;
-    font-weight: bold;
+    font-size: 2rem;
     color: #fff;
   }
 
