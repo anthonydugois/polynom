@@ -14,10 +14,23 @@
   flex-direction: column;
 }
   .ad-ProjectItem-overview {
+    position: relative;
     height: 75%;
-    background: var(--ad-Color-prim);
+    background: color(var(--ad-Color-prim) l(-6%));
     border-radius: 2px 2px 0 0;
   }
+    .ad-ProjectItem-open {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-transform: uppercase;
+      font-family: "Fira Sans", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .1rem;
+      color: #fff;
+    }
+
   .ad-ProjectItem-content {
     height: 25%;
     background: #fff;
