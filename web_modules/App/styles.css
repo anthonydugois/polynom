@@ -20,9 +20,3 @@ body {
   font-size: 100%;
   color: #000;
 }
-
-.ad-App {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}

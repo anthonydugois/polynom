@@ -1,62 +1,104 @@
 @import url(App/config.css);
 
-.ad-Home {
+.ad-HomeHead {
+  padding: 6rem 0;
+  background: var(--ad-Color-prim);
+}
+  .ad-HomeHead-container {
+    display: flex;
+    align-items: flex-start;
+  }
+    .ad-HomeHead-logo {
+      font-size: 3rem;
+      color: #fff;
+    }
+    .ad-HomeHead-brand {
+      margin-left: 1rem;
+      color: #fff;
+    }
+      .ad-HomeHead-title {
+        padding: 0;
+        margin: 0;
+        font-family: "Fira Sans", sans-serif;
+        font-size: 2.2rem;
+        font-weight: 300;
+      }
+      .ad-HomeHead-lead {
+        margin-top: .5rem;
+        font-family: "Fira Sans", sans-serif;
+        font-size: 1.6rem;
+        font-weight: 300;
+        color: color(var(--ad-Color-prim) l(+60%));
+      }
+
+.ad-HomeBody {
+  padding: 4rem 0;
+  background: color(var(--ad-Color-prim) l(-4%));
+}
+  .ad-HomeBody-container {
+    display: flex;
+  }
+
+.ad-HomeActions {
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
+  padding: .5rem 0;
+  margin: 0;
+  list-style: none;
+}
+
+.ad-HomeAction {
+  margin-bottom: 1rem;
+}
+
+.ad-HomeProjects {
   flex: 1;
+  margin-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ad-HomeProject {
+  position: relative;
+  width: 25%;
+  height: 20rem;
+  padding: .5rem;
   display: flex;
   flex-direction: column;
 }
-  .ad-Home-head {
-    padding: 6rem 0;
-    background: var(--ad-Color-prim);
+  .ad-HomeProject-overview {
+    position: relative;
+    height: 75%;
+    background: color(var(--ad-Color-prim) l(-6%));
+    border-radius: 2px 2px 0 0;
   }
-    .ad-Home-brand {
-      display: flex;
-      align-items: flex-start;
+    .ad-HomeProject-open {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-transform: uppercase;
+      font-family: "Fira Sans", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .1rem;
+      color: #fff;
     }
-      .ad-Home-logo {
-        font-size: 3rem;
-        color: #fff;
-      }
-      .ad-Home-brandcontent {
-        margin-left: 1rem;
-        color: #fff;
-      }
-        .ad-Home-title {
-          padding: 0;
-          margin: 0;
-          font-family: "Fira Sans", sans-serif;
-          font-size: 2.2rem;
-          font-weight: 300;
-        }
-        .ad-Home-lead {
-          margin-top: .5rem;
-          font-family: "Fira Sans", sans-serif;
-          font-size: 1.6rem;
-          font-weight: 300;
-          color: color(var(--ad-Color-prim) l(+60%));
-        }
 
-  .ad-Home-body {
-    flex: 1;
-    padding: 4rem 0;
-    background: color(var(--ad-Color-prim) l(-4%));
+  .ad-HomeProject-content {
+    height: 25%;
+    background: #fff;
+    border-radius: 0 0 2px 2px;
   }
-    .ad-Home-content {
-      display: flex;
+    .ad-HomeProject-name {
+      text-decoration: none;
+      color: var(--ad-Color-prim);
     }
-      .ad-Home-actions {
-        display: flex;
-        flex-direction: column;
-        width: 12rem;
-        padding: .5rem 0;
-        margin: 0;
-        list-style: none;
-      }
-        .ad-Home-action {
-          margin-bottom: 1rem;
-        }
-
-      .ad-Home-projects {
-        flex: 1;
-        margin-left: 2rem;
+      .ad-HomeProject-name::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
       }

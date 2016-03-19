@@ -1,7 +1,6 @@
 @import url(App/config.css);
 
 .ad-Project {
-  flex: 1;
   display: flex;
   outline: 0;
 }

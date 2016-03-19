@@ -16,4 +16,5 @@ Choices.propTypes = {
 }
 
 export Choice from "./Choice"
+
 export default Choices
