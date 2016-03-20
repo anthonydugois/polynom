@@ -38,6 +38,16 @@
 .ad-Button.primary:hover {
   background: color(var(--ad-Color-sec) l(-8%));
 }
+.ad-Button.expand {
+  background: none;
+}
+.ad-Button.expand:focus,
+.ad-Button.expand:hover {
+  background: color(var(--ad-Color-prim) l(-6%));
+}
+.ad-Button.expand.active {
+  background: var(--ad-Color-sec);
+}
   .ad-Button-content {
     display: flex;
     align-items: center;
