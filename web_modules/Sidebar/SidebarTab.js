@@ -7,12 +7,12 @@ const SidebarTab = ({
   children,
 }) => (
   <ButtonSquare
-    size="3.5rem"
+    size="3rem"
     type={{
       "expand": true,
       "active": _isActive,
     }}
-    style={{ fontSize: ".8rem" }}
+    style={{ fontSize: ".75rem" }}
     onClick={ _onTabClick }>
     { children }
   </ButtonSquare>

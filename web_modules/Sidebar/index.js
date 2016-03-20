@@ -20,10 +20,10 @@ const Sidebar = (props) => (
           <Icon name="point" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <Icon name="settings" />
+          <Icon name="history" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <Icon name="history" />
+          <Icon name="settings" />
         </SidebarTab>
       </TabList>
 

@@ -6,12 +6,13 @@
   width: 25rem;
   background: var(--ad-Color-prim);
 }
-  .ad-Sidebar ::-webkit-scrollbar {
+
+  /* .ad-Sidebar ::-webkit-scrollbar {
     width: 4px;
   }
   .ad-Sidebar ::-webkit-scrollbar-thumb {
     background: color(var(--ad-Color-prim) l(+8%));
-  }
+  } */
 
 .ad-SidebarTabs {
   flex: 1;
@@ -19,6 +20,7 @@
 }
   .ad-SidebarTabs .ad-TabList {
     background: color(var(--ad-Color-prim) l(+4%));
+    border-right: 2px solid color(var(--ad-Color-prim) l(-6%));
   }
   .ad-SidebarTabs .ad-TabPanel {
     flex: 1;

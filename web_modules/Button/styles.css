@@ -39,11 +39,11 @@
   background: color(var(--ad-Color-sec) l(-8%));
 }
 .ad-Button.expand {
-  background: none;
+  background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-Button.expand:focus,
 .ad-Button.expand:hover {
-  background: color(var(--ad-Color-prim) l(-6%));
+  background: color(var(--ad-Color-prim) l(+6%));
 }
 .ad-Button.expand.active {
   background: var(--ad-Color-sec);

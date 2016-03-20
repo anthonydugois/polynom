@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: color(var(--ad-Color-prim) l(-8%));
+  background: color(var(--ad-Color-prim) l(-4%));
 }
   .ad-Overview-svg {
     display: block;
