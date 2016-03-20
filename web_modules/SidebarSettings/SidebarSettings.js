@@ -2,8 +2,6 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import Text from "Text"
-// import { ButtonCircle } from "Button"
-// import Icon from "Icon"
 
 class SidebarSettings extends Component {
   handleNameChange = (e) => {

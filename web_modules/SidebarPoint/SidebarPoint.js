@@ -9,6 +9,7 @@ import SidebarPointQ from "./SidebarPointQ"
 import SidebarPointC from "./SidebarPointC"
 import SidebarPointS from "./SidebarPointS"
 import SidebarPointA from "./SidebarPointA"
+import { MdTune } from "react-icons/lib/md"
 
 class SidebarPoint extends Component {
   handleRemoveClick = () => {
@@ -87,7 +88,7 @@ class SidebarPoint extends Component {
         ) : (
           <SidebarModule>
             <Hint
-              icon="point"
+              icon={ <MdTune size="1.8rem" /> }
               title="No selected point">
               Select one or several points to edit their parameters.
             </Hint>

@@ -2,7 +2,6 @@ import "./styles"
 
 import React, { PropTypes } from "react"
 import cx from "classnames"
-import Icon from "Icon"
 
 const Hint = ({
   icon,
@@ -16,7 +15,7 @@ const Hint = ({
   }) }>
     { icon && (
       <div className="ad-Hint-icon">
-        <Icon name={ icon } />
+        { icon }
       </div>
     ) }
     <div className="ad-Hint-content">

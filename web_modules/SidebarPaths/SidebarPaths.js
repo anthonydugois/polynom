@@ -4,11 +4,15 @@ import React, { Component, PropTypes } from "react"
 import { DragDropContext } from "react-dnd"
 import HTML5Backend from "react-dnd-html5-backend"
 import { SidebarActions, SidebarPanel, SidebarModule } from "Sidebar"
-import Button from "Button"
+import { ButtonSquare } from "Button"
 import Hint from "Hint"
-import Icon from "Icon"
 import SidebarPath from "SidebarPath"
 import SidebarPathsLayer from "./SidebarPathsLayer"
+import {
+  MdGesture,
+  MdAdd,
+  MdDelete,
+} from "react-icons/lib/md"
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
@@ -57,7 +61,7 @@ class SidebarPaths extends Component {
         ) : (
           <SidebarModule>
             <Hint
-              icon="paths"
+              icon={ <MdGesture size="1.8rem" /> }
               title="No path">
               There is no path in this project. Create the first one!
             </Hint>
@@ -65,18 +69,20 @@ class SidebarPaths extends Component {
         ) }
 
         <SidebarActions>
-          <Button
+          <ButtonSquare
             size="3rem"
+            type="action"
             onClick={ this.handleAddClick }>
-            New
-          </Button>
+            <MdAdd size="1rem" />
+          </ButtonSquare>
 
           { activePaths.length > 0 && (
-            <Button
+            <ButtonSquare
               size="3rem"
+              type="action"
               onClick={ this.handleRemoveClick }>
-              <Icon name="delete" />
-            </Button>
+              <MdDelete size="1rem" />
+            </ButtonSquare>
           ) }
         </SidebarActions>
       </SidebarPanel>

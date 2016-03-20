@@ -31,6 +31,12 @@
 .ad-Button:hover {
   background: color(var(--ad-Color-prim) l(-8%));
 }
+.ad-Button.action {
+  border-radius: 2px;
+}
+.ad-Button.action + .ad-Button.action {
+  margin-left: .5rem;
+}
 .ad-Button.primary {
   background: var(--ad-Color-sec);
 }
