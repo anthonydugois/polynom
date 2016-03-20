@@ -11,7 +11,7 @@
   width: 100%;
   padding: .8rem 1rem;
   resize: none;
-  background: color(var(--ad-Color-prim) l(+6%));
+  background: color(var(--ad-Color-prim) l(-4%));
   line-height: 1.6;
 }
 .ad-Text,
@@ -26,5 +26,5 @@
 .ad-Text:focus,
 .ad-Textarea:focus {
   outline: 0;
-  background: color(var(--ad-Color-prim) l(+8%));
+  background: color(var(--ad-Color-prim) l(-6%));
 }

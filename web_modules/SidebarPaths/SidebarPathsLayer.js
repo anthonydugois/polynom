@@ -15,6 +15,7 @@ function getStyles(props) {
 
   return {
     width: boundingRect.width,
+    opacity: .6,
     transform,
     WebkitTransform: transform,
   }

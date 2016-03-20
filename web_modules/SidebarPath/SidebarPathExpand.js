@@ -15,13 +15,13 @@ const SidebarPathExpand = ({
     className="ad-SidebarPathExpand"
     { ...props }>
     <ButtonSquare
-      size="1.2rem"
+      size="1rem"
       type="expand"
       onClick={ _onExpandClick }>
       { _isOpened ? (
-        <MdKeyboardArrowDown size="1.2rem" />
+        <MdKeyboardArrowDown size="1rem" />
       ) : (
-        <MdKeyboardArrowRight size="1.2rem" />
+        <MdKeyboardArrowRight size="1rem" />
       ) }
     </ButtonSquare>
 

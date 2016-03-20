@@ -6,7 +6,6 @@ const ExpandPanel = ({
   ...props,
 }) => (
   <div
-    className="ad-ExpandPanel"
     style={{ display: !_isOpened && "none" }}
     { ...props }>
     { children }

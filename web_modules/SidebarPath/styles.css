@@ -1,12 +1,29 @@
 @import url(App/config.css);
 
 .ad-SidebarPath {
+  flex-shrink: 0;
   user-select: none;
-  border-bottom: 2px solid var(--ad-Color-prim);
 }
-.ad-SidebarPath.is-hidden {
-  opacity: .2;
-}
+  .ad-SidebarPath-divider {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    transition: height .2s;
+    background: var(--ad-Color-prim);
+  }
+    .ad-SidebarPath-divider::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+    }
+
+  .ad-SidebarPath-divider.is-hovered {
+    height: 6px;
+    background: var(--ad-Color-sec);
+  }
 
 .ad-SidebarPathExpand {
   height: 3rem;
@@ -28,7 +45,7 @@
       padding: 0 .5rem;
       font-weight: 300;
       font-family: "Fira Sans", sans-serif;
-      font-size: .85rem;
+      font-size: .7rem;
       color: #fff;
     }
       .ad-SidebarPath-input {
@@ -40,13 +57,13 @@
         font: inherit;
         color: currentColor;
       }
-      .ad-SidebarPath-input:focus,
-      .ad-SidebarPath-input:hover {
-        color: color(var(--ad-Color-prim) l(+60%));
-      }
 
     .ad-SidebarPath-reorder {
       cursor: grab;
       font-size: 1.25rem;
       color: color(var(--ad-Color-prim) l(+40%));
     }
+
+  .ad-SidebarPathExpand-panel {
+    padding: .5rem 0;
+  }

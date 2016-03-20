@@ -111,11 +111,10 @@ class SidebarPath extends Component {
       isOver,
     } = this.props
 
-    return connectDropTarget(
+    return (
       <div className={ cx("ad-SidebarPath", {
         "is-active": path.isActive,
         "is-hidden": isDragging,
-        "is-hovered": isOver,
       }) }>
         <Expand>
           <SidebarPathExpand
@@ -130,13 +129,13 @@ class SidebarPath extends Component {
             <div className="ad-SidebarPath-actions">
               { project.paths.length > 1 && connectDragSource(
                 <div className="ad-SidebarPath-reorder">
-                  <MdDragHandle size="1.2rem" />
+                  <MdDragHandle size="1rem" />
                 </div>
               ) }
             </div>
           </SidebarPathExpand>
 
-          <ExpandPanel>
+          <ExpandPanel className="ad-SidebarPathExpand-panel">
             <Settings>
               <Setting>
                 <Textarea
@@ -170,6 +169,12 @@ class SidebarPath extends Component {
             </Settings>
           </ExpandPanel>
         </Expand>
+
+        { connectDropTarget(
+          <div className={ cx("ad-SidebarPath-divider", {
+            "is-hovered": isOver,
+          }) } />
+        ) }
       </div>
     )
   }
