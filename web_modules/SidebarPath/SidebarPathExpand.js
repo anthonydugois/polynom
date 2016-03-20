@@ -1,6 +1,9 @@
 import React from "react"
 import { ButtonSquare } from "Button"
-import Icon from "Icon"
+import {
+  MdKeyboardArrowDown,
+  MdKeyboardArrowRight,
+} from "react-icons/lib/md"
 
 const SidebarPathExpand = ({
   _onExpandClick,
@@ -12,9 +15,14 @@ const SidebarPathExpand = ({
     className="ad-SidebarPathExpand"
     { ...props }>
     <ButtonSquare
-      size="1.5rem"
+      size="1.2rem"
+      type="expand"
       onClick={ _onExpandClick }>
-      <Icon name={ _isOpened ? "down" : "right" } />
+      { _isOpened ? (
+        <MdKeyboardArrowDown size="1.2rem" />
+      ) : (
+        <MdKeyboardArrowRight size="1.2rem" />
+      ) }
     </ButtonSquare>
 
     <div className="ad-SidebarPathExpand-caption">

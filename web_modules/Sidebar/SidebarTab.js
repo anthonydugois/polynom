@@ -9,7 +9,7 @@ const SidebarTab = ({
   <ButtonSquare
     size="3rem"
     type={{
-      "expand": true,
+      "tab": true,
       "active": _isActive,
     }}
     style={{ fontSize: ".75rem" }}

@@ -1,11 +1,16 @@
 import "./styles"
 
 import React, { PropTypes } from "react"
-import Icon from "Icon"
 import Tabs, { TabList, TabPanel } from "Tabs"
 import SidebarPaths from "SidebarPaths"
 import SidebarPoint from "SidebarPoint"
 import SidebarTab from "./SidebarTab"
+import {
+  MdGesture,
+  MdTune,
+  MdHistory,
+  MdSettings,
+} from "react-icons/lib/md"
 
 const Sidebar = (props) => (
   <div className="ad-Sidebar">
@@ -14,16 +19,16 @@ const Sidebar = (props) => (
       selected={ 0 }>
       <TabList>
         <SidebarTab isTabHandler>
-          <Icon name="paths" />
+          <MdGesture size="1.2rem" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <Icon name="point" />
+          <MdTune size="1.2rem" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <Icon name="history" />
+          <MdHistory size="1.2rem" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <Icon name="settings" />
+          <MdSettings size="1.2rem" />
         </SidebarTab>
       </TabList>
 
@@ -45,4 +50,5 @@ Sidebar.propTypes = {
 export SidebarActions from "./SidebarActions"
 export SidebarModule from "./SidebarModule"
 export SidebarPanel from "./SidebarPanel"
+
 export default Sidebar

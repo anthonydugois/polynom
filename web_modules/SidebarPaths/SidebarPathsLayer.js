@@ -11,7 +11,7 @@ function getStyles(props) {
 
   const { y } = currentOffset
   const { boundingRect } = item
-  const transform = `translate(${ boundingRect.left - 20 }px, ${ y }px)`
+  const transform = `translate(${ boundingRect.left }px, ${ y }px)`
 
   return {
     width: boundingRect.width,

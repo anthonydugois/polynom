@@ -2,19 +2,21 @@
 
 .ad-SidebarPath {
   user-select: none;
+  border-bottom: 2px solid var(--ad-Color-prim);
 }
 .ad-SidebarPath.is-hidden {
   opacity: .2;
 }
 
 .ad-SidebarPathExpand {
+  height: 3rem;
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background: color(var(--ad-Color-prim) l(-4%));
+  padding: 0 1rem;
+  background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-SidebarPath.is-active .ad-SidebarPathExpand {
-  background: color(var(--ad-Color-prim) l(-6%));
+  background: color(var(--ad-Color-prim) l(+8%));
 }
   .ad-SidebarPathExpand-caption {
     flex: 1;
@@ -24,7 +26,9 @@
     .ad-SidebarPath-name {
       flex: 1;
       padding: 0 .5rem;
-      font-size: .8rem;
+      font-weight: 300;
+      font-family: "Fira Sans", sans-serif;
+      font-size: .85rem;
       color: #fff;
     }
       .ad-SidebarPath-input {
@@ -33,9 +37,7 @@
         border: none;
         background: none;
         transition: color .2s;
-        font-weight: 300;
-        font-family: inherit;
-        font-size: 1em;
+        font: inherit;
         color: currentColor;
       }
       .ad-SidebarPath-input:focus,
@@ -46,5 +48,5 @@
     .ad-SidebarPath-reorder {
       cursor: grab;
       font-size: 1.25rem;
-      color: color(var(--ad-Color-prim) l(+12%));
+      color: color(var(--ad-Color-prim) l(+40%));
     }

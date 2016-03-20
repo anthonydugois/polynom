@@ -9,7 +9,7 @@ import Expand, { ExpandPanel } from "Expand"
 import Settings, { Setting } from "Settings"
 import Text, { Textarea } from "Text"
 import Checkbox from "Checkbox"
-import Icon from "Icon"
+import { MdDragHandle } from "react-icons/lib/md"
 import SidebarPathExpand from "./SidebarPathExpand"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
 import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
@@ -130,7 +130,7 @@ class SidebarPath extends Component {
             <div className="ad-SidebarPath-actions">
               { project.paths.length > 1 && connectDragSource(
                 <div className="ad-SidebarPath-reorder">
-                  <Icon name="reorder" />
+                  <MdDragHandle size="1.2rem" />
                 </div>
               ) }
             </div>

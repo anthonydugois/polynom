@@ -38,25 +38,26 @@
 .ad-Button.primary:hover {
   background: color(var(--ad-Color-sec) l(-8%));
 }
-.ad-Button.expand {
-  background: color(var(--ad-Color-prim) l(+4%));
+.ad-Button.tab {
+  background: none;
 }
-.ad-Button.expand:focus,
-.ad-Button.expand:hover {
+.ad-Button.tab:focus,
+.ad-Button.tab:hover {
   background: color(var(--ad-Color-prim) l(+6%));
 }
-.ad-Button.expand.active {
+.ad-Button.tab.active {
   background: var(--ad-Color-sec);
+}
+.ad-Button.expand {
+  background: none;
+  color: color(var(--ad-Color-prim) l(+40%));
 }
   .ad-Button-content {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-    .ad-Button-content > .ad-Icon {
-      font-size: 1.5em;
-    }
-    .ad-Button-content > .ad-Icon + * {
+    .ad-Button-content > svg + * {
       margin-left: .25rem;
     }
 
