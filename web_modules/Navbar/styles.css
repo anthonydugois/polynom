@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   background: var(--ad-Color-prim);
-  border-bottom: 2px solid color(var(--ad-Color-prim) l(-6%));
+  border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
 }
   .ad-Navbar-logo {
     text-decoration: none;
