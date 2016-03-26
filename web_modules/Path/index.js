@@ -46,9 +46,17 @@ class Path extends Component {
             height={ height } />
         ) }
 
-        <path
-          d={ d }
-          onMouseDown={ this.handlePathMouseDown } />
+        <g onMouseDown={ this.handlePathMouseDown }>
+          <path
+            className="ad-Path-preview"
+            d={ d } />
+
+          { path.isActive && (
+            <path
+              className="ad-Path-wire"
+              d={ d } />
+          ) }
+        </g>
       </g>
     )
   }

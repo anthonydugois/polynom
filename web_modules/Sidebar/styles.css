@@ -7,13 +7,6 @@
   background: var(--ad-Color-prim);
 }
 
-  /* .ad-Sidebar ::-webkit-scrollbar {
-    width: 4px;
-  }
-  .ad-Sidebar ::-webkit-scrollbar-thumb {
-    background: color(var(--ad-Color-prim) l(+8%));
-  } */
-
 .ad-SidebarTabs {
   flex: 1;
   display: flex;

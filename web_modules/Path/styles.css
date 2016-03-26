@@ -1,16 +1,20 @@
 @import url(App/config.css);
 
-.ad-Path {
+.ad-Path-bbox {
+  fill: none;
+  stroke: var(--ad-Color-sec);
+  stroke-width: 1px;
+}
+.ad-Path-preview {
   fill: none;
   stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 2px;
-  stroke-linecap: round;
+  stroke-width: 5px;
 }
-.ad-Path.is-filled {
+.ad-Path.is-filled .ad-Path-preview {
   fill: color(var(--ad-Color-prim) l(+15%));
 }
-  .ad-Path-bbox {
-    fill: none;
-    stroke: var(--ad-Color-sec);
-    stroke-width: 1px;
-  }
+.ad-Path-wire {
+  fill: none;
+  stroke: var(--ad-Color-sec);
+  stroke-width: 1px;
+}

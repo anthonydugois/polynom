@@ -6,11 +6,6 @@ import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 
-function getStyles(props) {
-  const { width, height } = props.project
-  return { width, height }
-}
-
 class Overview extends Component {
   constructor(props) {
     super(props)
@@ -204,7 +199,9 @@ class Overview extends Component {
           ref={ (svg) => this.svg = svg }
           tabIndex={ 1 }
           className="ad-Overview-svg"
-          style={ getStyles(this.props) }
+          width={ project.width }
+          height={ project.height }
+          viewBox={ `0 0 ${ project.width } ${ project.height }` }
           onMouseDown={ this.handleOverviewMouseDown }
           onKeyDown={ this.handleKeyDown }>
           <Grid project={ project } />
