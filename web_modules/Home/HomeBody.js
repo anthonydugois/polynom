@@ -5,7 +5,11 @@ import HomeActions from "./HomeActions"
 import HomeAction from "./HomeAction"
 import HomeProjects from "./HomeProjects"
 
-const HomeBody = ({ projectsById }) => (
+const HomeBody = ({
+  projectsById,
+  pathsById,
+  pointsById,
+}) => (
   <div className="ad-HomeBody">
     <Container className="ad-HomeBody-container">
       <HomeActions>
@@ -23,7 +27,10 @@ const HomeBody = ({ projectsById }) => (
         </HomeAction>
       </HomeActions>
 
-      <HomeProjects projectsById={ projectsById } />
+      <HomeProjects
+        projectsById={ projectsById }
+        pathsById={ pathsById }
+        pointsById={ pointsById } />
     </Container>
   </div>
 )

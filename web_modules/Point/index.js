@@ -36,7 +36,7 @@ class Point extends Component {
     this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_2)
   };
 
-  renderPoint(point) {
+  renderPoint({ code, x, y }) {
     const [w, h] = [10, 10]
     const { project } = this.props
 
@@ -45,18 +45,18 @@ class Point extends Component {
         { project.pointsCodeShow && (
           <text
             className="ad-MainPoint-code"
-            x={ point.x }
-            y={ point.y }
+            x={ x }
+            y={ y }
             dy={ -h }
             dx={ w }>
-            { `${ point.code } (${ point.x }, ${ point.y })` }
+            { `${ code } (${ +x.toFixed(3) }, ${ +y.toFixed(3) })` }
           </text>
         ) }
 
         <rect
           className="ad-MainPoint-coords"
-          x={ point.x - w / 2 }
-          y={ point.y - h / 2 }
+          x={ x - w / 2 }
+          y={ y - h / 2 }
           width={ w }
           height={ h }
           onMouseDown={ this.handleMainMouseDown } />

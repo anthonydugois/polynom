@@ -8,7 +8,7 @@ const initialState = {
     isClosed: false,
     isRelative: false,
     isFilled: false,
-    points: [0],
+    points: [0, 1],
   },
 }
 
