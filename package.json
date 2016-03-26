@@ -73,7 +73,10 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-general/react",
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "rules": {
+      "no-unused-vars": 0
+    }
   },
   "stylelint": {
     "extends": "stylelint-config-standard",

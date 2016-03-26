@@ -35,7 +35,7 @@ Hint.defaultProps = {
 }
 
 Hint.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.element,
   align: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.oneOfType([

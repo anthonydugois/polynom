@@ -13,11 +13,13 @@ class Overview extends Component {
 
     this.draggedPoint = null
     this.draggedObject = null
+    this.mouseDownCoords = [0, 0]
   }
 
   state = {
     isDragging: false,
     coords: [0, 0],
+    localPoints: this.props.pointsById,
   };
 
   componentDidMount() {
@@ -28,6 +30,10 @@ class Overview extends Component {
   componentWillUnmount() {
     document.removeEventListener("mousemove", this.handleMouseMove)
     document.removeEventListener("mouseup", this.handleMouseUp)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ localPoints: nextProps.pointsById })
   }
 
   getCoords = (e) => {
@@ -43,24 +49,52 @@ class Overview extends Component {
       y = project.gridSize * Math.round(y / project.gridSize)
     }
 
-    x = inRange(x, 0, project.width)
-    y = inRange(y, 0, project.height)
-
     return [x, y]
   };
 
   handleMouseDown = (e, draggedPoint, draggedObject) => {
     this.draggedPoint = draggedPoint
     this.draggedObject = draggedObject
+    this.mouseDownCoords = this.getCoords(e)
 
     this.setState({
-      coords: this.getCoords(e),
+      coords: this.mouseDownCoords,
       isDragging: true,
     })
   };
 
-  handleMouseUp = () => {
+  handleMouseUp = (e) => {
     if (this.state.isDragging) {
+      const coords = this.getCoords(e)
+
+      switch (this.draggedObject) {
+      case ObjectTypes.PATH:
+      case ObjectTypes.POINT:
+        this.props.onXPositionsChange(
+          this.props.activePoints,
+          coords[0] - this.mouseDownCoords[0]
+        )
+        this.props.onYPositionsChange(
+          this.props.activePoints,
+          coords[1] - this.mouseDownCoords[1]
+        )
+        break
+
+      case ObjectTypes.POINT_ANCHOR_1:
+        this.props.onParametersChange(
+          this.draggedPoint,
+          { x1: coords[0], y1: coords[1] },
+        )
+        break
+
+      case ObjectTypes.POINT_ANCHOR_2:
+        this.props.onParametersChange(
+          this.draggedPoint,
+          { x2: coords[0], y2: coords[1] },
+        )
+        break
+      }
+
       this.setState({ isDragging: false })
     }
   };
@@ -71,44 +105,81 @@ class Overview extends Component {
     if (this.state.isDragging) {
       e.preventDefault()
 
-      switch (this.draggedObject) {
-      case ObjectTypes.PATH:
-      case ObjectTypes.POINT:
-        this.movePoints(
-          coords[0] - this.state.coords[0],
-          coords[1] - this.state.coords[1]
-        )
-        break
-
-      case ObjectTypes.POINT_ANCHOR_1:
-        this.moveFirstAnchor(coords)
-        break
-
-      case ObjectTypes.POINT_ANCHOR_2:
-        this.moveSecondAnchor(coords)
-        break
-      }
+      this.setState({
+        coords,
+        localPoints: this.getLocalPoints(coords),
+      })
+    } else {
+      this.setState({ coords })
     }
-
-    this.setState({ coords })
   };
 
-  movePoints(dx, dy) {
-    if (dx !== 0) {
-      this.props.onXPositionsChange(this.props.activePoints, dx)
-    }
+  getLocalPoints(coords) {
+    switch (this.draggedObject) {
+    case ObjectTypes.PATH:
+    case ObjectTypes.POINT:
+      return this.movePoints(
+        coords[0] - this.state.coords[0],
+        coords[1] - this.state.coords[1]
+      )
 
-    if (dy !== 0) {
-      this.props.onYPositionsChange(this.props.activePoints, dy)
+    case ObjectTypes.POINT_ANCHOR_1:
+      return this.moveFirstAnchor(coords)
+
+    case ObjectTypes.POINT_ANCHOR_2:
+      return this.moveSecondAnchor(coords)
+
+    default:
+      return this.state.localPoints
     }
+  }
+
+  movePoints(dx, dy) {
+    return Object.keys(this.state.localPoints).reduce(
+      (acc, key) => {
+        const point = this.state.localPoints[key]
+
+        return {
+          ...acc,
+          [point.id]: !this.props.activePoints.includes(point.id) ? point : {
+            ...point,
+            x: point.x + dx,
+            y: point.y + dy,
+            parameters: {
+              ...point.parameters.x1 && { x1: point.parameters.x1 + dx },
+              ...point.parameters.x2 && { x2: point.parameters.x2 + dx },
+              ...point.parameters.y1 && { y1: point.parameters.y1 + dy },
+              ...point.parameters.y2 && { y2: point.parameters.y2 + dy },
+            },
+          },
+        }
+      },
+      {}
+    )
   }
 
   moveFirstAnchor([x1, y1]) {
-    this.props.onParametersChange(this.draggedPoint, { x1, y1 })
+    const point = this.state.localPoints[this.draggedPoint]
+
+    return {
+      ...this.state.localPoints,
+      [point.id]: {
+        ...point,
+        parameters: { ...point.parameters, x1, y1 },
+      },
+    }
   }
 
   moveSecondAnchor([x2, y2]) {
-    this.props.onParametersChange(this.draggedPoint, { x2, y2 })
+    const point = this.state.localPoints[this.draggedPoint]
+
+    return {
+      ...this.state.localPoints,
+      [point.id]: {
+        ...point,
+        parameters: { ...point.parameters, x2, y2 },
+      },
+    }
   }
 
   handleOverviewMouseDown = (e) => {
@@ -175,7 +246,6 @@ class Overview extends Component {
       keyActions,
       project,
       pathsById,
-      pointsById,
       activePaths,
       activePoints,
     } = this.props
@@ -188,7 +258,8 @@ class Overview extends Component {
         project={ project }
         keyActions={ keyActions }
         path={ pathsById[key] }
-        pointsById={ pointsById }
+        globalPoints={ this.props.pointsById }
+        localPoints={ this.state.localPoints }
         activePaths={ activePaths }
         activePoints={ activePoints }
         onMouseDown={ this.handleMouseDown } />
@@ -197,7 +268,8 @@ class Overview extends Component {
 
   render() {
     const { project } = this.props
-    const [x, y] = this.state.coords
+    const x = inRange(this.state.coords[0], 0, project.width)
+    const y = inRange(this.state.coords[1], 0, project.height)
 
     return (
       <div className="ad-Overview">
@@ -211,7 +283,6 @@ class Overview extends Component {
           onMouseDown={ this.handleOverviewMouseDown }
           onKeyDown={ this.handleKeyDown }>
           <Grid project={ project } />
-
           { project.paths.map(this.renderShape) }
         </svg>
 

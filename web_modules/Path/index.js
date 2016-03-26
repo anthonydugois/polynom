@@ -30,9 +30,10 @@ class Path extends Component {
   };
 
   render() {
-    const { path, pointsById } = this.props
-    const d = pathCode(path, pointsById)
-    const { x, y, width, height } = Snap.path.getBBox(d)
+    const { path, globalPoints, localPoints } = this.props
+    const globalD = pathCode(path, globalPoints)
+    const localD = pathCode(path, localPoints)
+    const { x, y, width, height } = Snap.path.getBBox(globalD)
 
     return (
       <g
@@ -49,13 +50,13 @@ class Path extends Component {
 
         <g onMouseDown={ this.handlePathMouseDown }>
           <path
-            className="ad-Path-preview"
-            d={ d } />
+            className="ad-Path-global"
+            d={ globalD } />
 
           { path.isActive && (
             <path
-              className="ad-Path-wire"
-              d={ d } />
+              className="ad-Path-local"
+              d={ localD } />
           ) }
         </g>
       </g>
@@ -68,7 +69,8 @@ Path.propTypes = {
   onDeactivate: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
-  pointsById: PropTypes.object.isRequired,
+  globalPoints: PropTypes.object.isRequired,
+  localPoints: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,
   onMouseDown: PropTypes.func.isRequired,

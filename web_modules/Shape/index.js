@@ -13,7 +13,7 @@ class Shape extends Component {
       project,
       keyActions,
       path,
-      pointsById,
+      localPoints,
       activePaths,
       activePoints,
       onMouseDown,
@@ -29,8 +29,8 @@ class Shape extends Component {
         activePaths={ activePaths }
         activePoints={ activePoints }
         path={ path }
-        point={ pointsById[key] }
-        previousPoint={ index > 0 ? pointsById[keys[index - 1]] : null }
+        point={ localPoints[key] }
+        previousPoint={ index > 0 ? localPoints[keys[index - 1]] : null }
         onMouseDown={ onMouseDown } />
     )
   };
@@ -41,7 +41,8 @@ class Shape extends Component {
       onDeactivate,
       keyActions,
       path,
-      pointsById,
+      globalPoints,
+      localPoints,
       activePaths,
       activePoints,
       onMouseDown,
@@ -54,7 +55,8 @@ class Shape extends Component {
           onDeactivate={ onDeactivate }
           keyActions={ keyActions }
           path={ path }
-          pointsById={ pointsById }
+          globalPoints={ globalPoints }
+          localPoints={ localPoints }
           activePaths={ activePaths }
           activePoints={ activePoints }
           onMouseDown={ onMouseDown } />
@@ -72,7 +74,8 @@ Shape.propTypes = {
   onDeactivate: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
-  pointsById: PropTypes.object.isRequired,
+  globalPoints: PropTypes.object.isRequired,
+  localPoints: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,
   onMouseDown: PropTypes.func.isRequired,

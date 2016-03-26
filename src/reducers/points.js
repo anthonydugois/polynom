@@ -9,14 +9,6 @@ const initialState = {
     isActive: true,
     parameters: {},
   },
-  1: {
-    id: 1,
-    code: "L",
-    x: 150,
-    y: 150,
-    isActive: false,
-    parameters: {},
-  },
 }
 
 const point = (state, action) => {

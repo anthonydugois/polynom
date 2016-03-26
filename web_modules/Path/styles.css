@@ -5,15 +5,15 @@
   stroke: var(--ad-Color-sec);
   stroke-width: 1px;
 }
-.ad-Path-preview {
+.ad-Path-global {
   fill: none;
   stroke: color(var(--ad-Color-prim) l(+15%));
   stroke-width: 5px;
 }
-.ad-Path.is-filled .ad-Path-preview {
+.ad-Path.is-filled .ad-Path-global {
   fill: color(var(--ad-Color-prim) l(+15%));
 }
-.ad-Path-wire {
+.ad-Path-local {
   fill: none;
   stroke: var(--ad-Color-sec);
   stroke-width: 1px;
