@@ -3,26 +3,26 @@ import Settings, { Setting } from "Settings"
 import Range from "Range"
 import Checkbox from "Checkbox"
 import SidebarPointParameter from "./SidebarPointParameter"
-import inRange from "../../src/utils/inRange"
+import { inRange } from "../../src/utils"
 
 class SidebarPointA extends Component {
   handleRXChange = (e) => {
     const { project, point } = this.props
-    const rx = inRange(parseInt(e.target.value), project.width)
+    const rx = inRange(parseInt(e.target.value), 0, project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, rx })
   };
 
   handleRYChange = (e) => {
     const { project, point } = this.props
-    const ry = inRange(parseInt(e.target.value), project.height)
+    const ry = inRange(parseInt(e.target.value), 0, project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, ry })
   };
 
   handleRotChange = (e) => {
     const { point } = this.props
-    const xAxisRotation = inRange(parseInt(e.target.value), 360)
+    const xAxisRotation = inRange(parseInt(e.target.value), 0, 360)
 
     this.props.onParamsChange(point.id, { ...point.parameters, xAxisRotation })
   };

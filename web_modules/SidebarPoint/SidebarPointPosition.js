@@ -2,19 +2,19 @@ import React, { Component, PropTypes } from "react"
 import Settings, { Setting } from "Settings"
 import Range from "Range"
 import SidebarPointParameter from "./SidebarPointParameter"
-import inRange from "../../src/utils/inRange"
+import { inRange } from "../../src/utils"
 
 class SidebarPointPosition extends Component {
   handleXPositionChange = (e) => {
     const { project, point } = this.props
-    const x = inRange(parseInt(e.target.value), project.width)
+    const x = inRange(parseInt(e.target.value), 0, project.width)
 
     this.props.onXPositionChange(point.id, x)
   };
 
   handleYPositionChange = (e) => {
     const { project, point } = this.props
-    const y = inRange(parseInt(e.target.value), project.height)
+    const y = inRange(parseInt(e.target.value), 0, project.height)
 
     this.props.onYPositionChange(point.id, y)
   };

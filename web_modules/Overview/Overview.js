@@ -5,6 +5,7 @@ import Grid from "Grid"
 import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
+import { inRange } from "../../src/utils"
 
 class Overview extends Component {
   constructor(props) {
@@ -41,6 +42,9 @@ class Overview extends Component {
       x = project.gridSize * Math.round(x / project.gridSize)
       y = project.gridSize * Math.round(y / project.gridSize)
     }
+
+    x = inRange(x, 0, project.width)
+    y = inRange(y, 0, project.height)
 
     return [x, y]
   };
@@ -140,16 +144,7 @@ class Overview extends Component {
         this.props.onOverviewDelete(activePoints)
       }
 
-      if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
-        e.preventDefault()
-        this.movePoints(0, -project.keyboardIncrement)
-      }
-
-      if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
-        e.preventDefault()
-        this.movePoints(0, project.keyboardIncrement)
-      }
-
+      // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
         e.preventDefault()
         this.movePoints(-project.keyboardIncrement, 0)
@@ -158,6 +153,17 @@ class Overview extends Component {
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
         e.preventDefault()
         this.movePoints(project.keyboardIncrement, 0)
+      }
+
+      // y increment
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
+        e.preventDefault()
+        this.movePoints(0, -project.keyboardIncrement)
+      }
+
+      if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
+        e.preventDefault()
+        this.movePoints(0, project.keyboardIncrement)
       }
     }
   };

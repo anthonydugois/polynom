@@ -12,12 +12,13 @@ class Path extends Component {
     e.stopPropagation()
 
     const {
+      keyActions,
       path,
       activePaths,
       activePoints,
     } = this.props
 
-    if (!this.props.keyActions.includes(APP_SHIFT)) {
+    if (!keyActions.includes(APP_SHIFT)) {
       this.props.onDeactivate(activePaths, activePoints)
     }
 

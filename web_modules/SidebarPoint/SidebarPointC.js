@@ -2,33 +2,33 @@ import React, { Component, PropTypes } from "react"
 import Settings, { Setting } from "Settings"
 import Range from "Range"
 import SidebarPointParameter from "./SidebarPointParameter"
-import inRange from "../../src/utils/inRange"
+import { inRange } from "../../src/utils"
 
 class SidebarPointC extends Component {
   handleX1Change = (e) => {
     const { project, point } = this.props
-    const x1 = inRange(parseInt(e.target.value), project.width)
+    const x1 = inRange(parseInt(e.target.value), 0, project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, x1 })
   };
 
   handleY1Change = (e) => {
     const { project, point } = this.props
-    const y1 = inRange(parseInt(e.target.value), project.height)
+    const y1 = inRange(parseInt(e.target.value), 0, project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, y1 })
   };
 
   handleX2Change = (e) => {
     const { project, point } = this.props
-    const x2 = inRange(parseInt(e.target.value), project.width)
+    const x2 = inRange(parseInt(e.target.value), 0, project.width)
 
     this.props.onParamsChange(point.id, { ...point.parameters, x2 })
   };
 
   handleY2Change = (e) => {
     const { project, point } = this.props
-    const y2 = inRange(parseInt(e.target.value), project.height)
+    const y2 = inRange(parseInt(e.target.value), 0, project.height)
 
     this.props.onParamsChange(point.id, { ...point.parameters, y2 })
   };
