@@ -10,12 +10,12 @@ function getStyles(props) {
   }
 
   const { y } = currentOffset
-  const { boundingRect } = item
-  const transform = `translate(${ boundingRect.left }px, ${ y }px)`
+  const { left, width } = item.boundingRect
+  const transform = `translate(${ left }px, ${ y }px)`
 
   return {
-    width: boundingRect.width,
     opacity: .6,
+    width,
     transform,
     WebkitTransform: transform,
   }

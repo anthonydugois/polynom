@@ -58,6 +58,9 @@
   background: none;
   color: color(var(--ad-Color-prim) l(+40%));
 }
+.ad-Button.expand.grab {
+  cursor: grab;
+}
   .ad-Button-content {
     display: flex;
     align-items: center;

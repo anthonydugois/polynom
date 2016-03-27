@@ -9,7 +9,7 @@ const initialState = {
     width: 1000,
     height: 800,
     gridShow: true,
-    gridSnap: false,
+    gridSnap: true,
     gridSize: 50,
     pointsCodeShow: true,
     keyboardIncrement: 1,

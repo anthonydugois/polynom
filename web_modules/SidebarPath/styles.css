@@ -11,6 +11,10 @@
     transition: height .2s;
     background: var(--ad-Color-prim);
   }
+  .ad-SidebarPath-divider.is-hovered {
+    height: 6px;
+    background: var(--ad-Color-sec);
+  }
     .ad-SidebarPath-divider::after {
       content: "";
       position: absolute;
@@ -20,11 +24,6 @@
       right: 0;
     }
 
-  .ad-SidebarPath-divider.is-hovered {
-    height: 6px;
-    background: var(--ad-Color-sec);
-  }
-
 .ad-SidebarPathExpand {
   height: 3rem;
   display: flex;
@@ -33,7 +32,7 @@
   background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-SidebarPath.is-active .ad-SidebarPathExpand {
-  background: color(var(--ad-Color-prim) l(+8%));
+  background: color(var(--ad-Color-prim) l(+10%));
 }
   .ad-SidebarPathExpand-caption {
     flex: 1;
@@ -57,12 +56,6 @@
         font: inherit;
         color: currentColor;
       }
-
-    .ad-SidebarPath-reorder {
-      cursor: grab;
-      font-size: 1.25rem;
-      color: color(var(--ad-Color-prim) l(+40%));
-    }
 
   .ad-SidebarPathExpand-panel {
     padding: .5rem 0;
