@@ -146,6 +146,7 @@ class Overview extends Component {
             x: point.x + dx,
             y: point.y + dy,
             parameters: {
+              ...point.parameters,
               ...point.parameters.x1 && { x1: point.parameters.x1 + dx },
               ...point.parameters.x2 && { x2: point.parameters.x2 + dx },
               ...point.parameters.y1 && { y1: point.parameters.y1 + dy },
