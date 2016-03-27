@@ -49,7 +49,7 @@
 }
 .ad-Button.tab:focus,
 .ad-Button.tab:hover {
-  background: color(var(--ad-Color-prim) l(+8%));
+  background: color(var(--ad-Color-prim) l(+10%));
 }
 .ad-Button.tab.active {
   background: var(--ad-Color-sec);
