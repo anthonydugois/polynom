@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from "react"
 import cx from "classnames"
 import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
+import * as VisibilityTypes from "../../src/constants/VisibilityTypes"
 
 class Point extends Component {
   handleMouseDown = (e) => {
@@ -36,27 +37,38 @@ class Point extends Component {
     this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_2)
   };
 
-  renderPoint({ code, x, y }) {
-    const [w, h] = [6, 6]
+  renderCode(w, h, { code, x, y, isActive }) {
     const { project } = this.props
+
+    if (
+      (project.pointsCodeShow === VisibilityTypes.ALL) ||
+      (project.pointsCodeShow === VisibilityTypes.ACTIVE && isActive)
+    ) {
+      return (
+        <text
+          className="ad-MainPoint-code"
+          x={ x }
+          y={ y }
+          dy={ -h }
+          dx={ w }>
+          { `${ code } (${ +x.toFixed(3) }, ${ +y.toFixed(3) })` }
+        </text>
+      )
+    }
+
+    return null
+  }
+
+  renderPoint(point) {
+    const [w, h] = [6, 6]
 
     return (
       <g className="ad-MainPoint">
-        { project.pointsCodeShow && (
-          <text
-            className="ad-MainPoint-code"
-            x={ x }
-            y={ y }
-            dy={ -h }
-            dx={ w }>
-            { `${ code } (${ +x.toFixed(3) }, ${ +y.toFixed(3) })` }
-          </text>
-        ) }
-
+        { this.renderCode(w, h, point) }
         <rect
           className="ad-MainPoint-coords"
-          x={ x - w / 2 }
-          y={ y - h / 2 }
+          x={ point.x - w / 2 }
+          y={ point.y - h / 2 }
           width={ w }
           height={ h }
           onMouseDown={ this.handleMainMouseDown } />

@@ -1,4 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
+import * as VisibilityTypes from "../constants/VisibilityTypes"
 
 const initialState = {
   0: {
@@ -11,7 +12,7 @@ const initialState = {
     gridShow: true,
     gridSnap: true,
     gridSize: 50,
-    pointsCodeShow: true,
+    pointsCodeShow: VisibilityTypes.ACTIVE,
     keyboardIncrement: 1,
     paths: [0],
   },
