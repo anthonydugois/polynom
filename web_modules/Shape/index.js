@@ -38,6 +38,7 @@ class Shape extends Component {
     const {
       onActivate,
       onDeactivate,
+      project,
       keyActions,
       path,
       globalPoints,
@@ -52,6 +53,7 @@ class Shape extends Component {
         <Path
           onActivate={ onActivate }
           onDeactivate={ onDeactivate }
+          project={ project }
           keyActions={ keyActions }
           path={ path }
           globalPoints={ globalPoints }

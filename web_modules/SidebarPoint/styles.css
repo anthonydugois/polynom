@@ -1,8 +1,8 @@
 @import url(App/config.css);
 
 .ad-SidebarPointParameter:first-of-type {
-  padding-top: .5rem;
+  padding-top: .75rem;
 }
 .ad-SidebarPointParameter:last-of-type {
-  padding-bottom: .5rem;
+  padding-bottom: .75rem;
 }

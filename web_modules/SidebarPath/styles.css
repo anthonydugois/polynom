@@ -28,7 +28,7 @@
   height: 3rem;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
   background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-SidebarPath.is-active .ad-SidebarPathExpand {

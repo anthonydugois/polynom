@@ -1,20 +1,18 @@
 @import url(App/config.css);
 
-.ad-Path-bbox {
+.ad-Path {
   fill: none;
-  stroke: var(--ad-Color-sec);
-  stroke-width: 1px;
+  color: color(var(--ad-Color-prim) l(+16%));
 }
-.ad-Path-global {
-  fill: none;
-  stroke: color(var(--ad-Color-prim) l(+15%));
-  stroke-width: 5px;
-}
-.ad-Path.is-filled .ad-Path-global {
-  fill: color(var(--ad-Color-prim) l(+15%));
-}
-.ad-Path-local {
-  fill: none;
-  stroke: var(--ad-Color-sec);
-  stroke-width: 1px;
-}
+  .ad-Path-bbox {
+    stroke: var(--ad-Color-sec);
+    stroke-width: 1px;
+  }
+  .ad-Path-global {
+    stroke: currentColor;
+    stroke-width: 5px;
+  }
+  .ad-Path-local {
+    stroke: color(var(--ad-Color-sec) l(+10%));
+    stroke-width: 1px;
+  }

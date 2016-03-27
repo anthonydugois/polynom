@@ -41,8 +41,8 @@ class Point extends Component {
     const { project } = this.props
 
     if (
-      (project.pointsCodeShow === VisibilityTypes.ALL) ||
-      (project.pointsCodeShow === VisibilityTypes.ACTIVE && isActive)
+      (project.pointCodeShow === VisibilityTypes.ALL) ||
+      (project.pointCodeShow === VisibilityTypes.ACTIVE && isActive)
     ) {
       return (
         <text
@@ -97,7 +97,7 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x1 }
           cy={ point.parameters.y1 }
-          r={ 4 }
+          r={ 3 }
           onMouseDown={ this.handleFirstAnchorMouseDown } />
       </g>
     )
@@ -129,7 +129,7 @@ class Point extends Component {
             className="ad-Anchor-point"
             cx={ point.parameters.x1 }
             cy={ point.parameters.y1 }
-            r={ 4 }
+            r={ 3 }
             onMouseDown={ this.handleFirstAnchorMouseDown } />
         ) }
 
@@ -137,7 +137,7 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x2 }
           cy={ point.parameters.y2 }
-          r={ 4 }
+          r={ 3 }
           onMouseDown={ this.handleSecondAnchorMouseDown } />
       </g>
     )

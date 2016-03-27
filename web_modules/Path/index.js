@@ -29,7 +29,13 @@ class Path extends Component {
   };
 
   render() {
-    const { path, globalPoints, localPoints } = this.props
+    const {
+      project,
+      path,
+      globalPoints,
+      localPoints,
+    } = this.props
+
     const globalD = pathCode(path, globalPoints)
     const localD = pathCode(path, localPoints)
     const { x, y, width, height } = Snap.path.getBBox(globalD)
@@ -38,7 +44,7 @@ class Path extends Component {
       <g
         className="ad-Path"
         onMouseDown={ this.handleMouseDown }>
-        { path.isActive && (
+        { project.pathBoundingBoxShow && path.isActive && (
           <rect
             className="ad-Path-bbox"
             x={ x }
@@ -50,6 +56,7 @@ class Path extends Component {
         <g onMouseDown={ this.handlePathMouseDown }>
           <path
             className="ad-Path-global"
+            style={{ fill: path.isFilled && "currentColor" }}
             d={ globalD } />
 
           { path.isActive && (
@@ -66,6 +73,7 @@ class Path extends Component {
 Path.propTypes = {
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
   globalPoints: PropTypes.object.isRequired,
