@@ -2,7 +2,7 @@
 
 .ad-MainPoint-code {
   cursor: default;
-  fill: color(var(--ad-Color-prim) l(+40%));
+  fill: color(var(--ad-Color-prim) l(+50%));
   text-anchor: start;
   font-family: "Fira Mono", monospace;
   font-size: .7rem;
@@ -10,7 +10,7 @@
 .ad-MainPoint-coords {
   cursor: pointer;
   fill: #fff;
-  stroke: color(var(--ad-Color-prim) l(+16%));
+  stroke: color(var(--ad-Color-prim) l(+36%));
   stroke-width: 2px;
 }
 .ad-MainPoint-code,

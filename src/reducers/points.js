@@ -50,8 +50,10 @@ const point = (state, action) => {
       x: state.x + action.dx,
       parameters: {
         ...state.parameters,
-        ...state.parameters.x1 && { x1: state.parameters.x1 + action.dx },
-        ...state.parameters.x2 && { x2: state.parameters.x2 + action.dx },
+        ...typeof state.parameters.x1 !== "undefined"
+          && { x1: state.parameters.x1 + action.dx },
+        ...typeof state.parameters.x2 !== "undefined"
+          && { x2: state.parameters.x2 + action.dx },
       },
     }
 
@@ -61,8 +63,10 @@ const point = (state, action) => {
       y: state.y + action.dy,
       parameters: {
         ...state.parameters,
-        ...state.parameters.y1 && { y1: state.parameters.y1 + action.dy },
-        ...state.parameters.y2 && { y2: state.parameters.y2 + action.dy },
+        ...typeof state.parameters.y1 !== "undefined"
+          && { y1: state.parameters.y1 + action.dy },
+        ...typeof state.parameters.y2 !== "undefined"
+          && { y2: state.parameters.y2 + action.dy },
       },
     }
 

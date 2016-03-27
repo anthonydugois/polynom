@@ -147,10 +147,14 @@ class Overview extends Component {
             y: point.y + dy,
             parameters: {
               ...point.parameters,
-              ...point.parameters.x1 && { x1: point.parameters.x1 + dx },
-              ...point.parameters.x2 && { x2: point.parameters.x2 + dx },
-              ...point.parameters.y1 && { y1: point.parameters.y1 + dy },
-              ...point.parameters.y2 && { y2: point.parameters.y2 + dy },
+              ...typeof point.parameters.x1 !== "undefined"
+                && { x1: point.parameters.x1 + dx },
+              ...typeof point.parameters.y1 !== "undefined"
+                && { y1: point.parameters.y1 + dy },
+              ...typeof point.parameters.x2 !== "undefined"
+                && { x2: point.parameters.x2 + dx },
+              ...typeof point.parameters.y2 !== "undefined"
+                && { y2: point.parameters.y2 + dy },
             },
           },
         }
