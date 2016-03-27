@@ -37,7 +37,7 @@ class Point extends Component {
   };
 
   renderPoint({ code, x, y }) {
-    const [w, h] = [10, 10]
+    const [w, h] = [6, 6]
     const { project } = this.props
 
     return (

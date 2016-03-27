@@ -1,7 +1,6 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
-import cx from "classnames"
 import Snap from "snapsvg"
 import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
@@ -37,7 +36,7 @@ class Path extends Component {
 
     return (
       <g
-        className={ cx("ad-Path", { "is-filled": path.isFilled }) }
+        className="ad-Path"
         onMouseDown={ this.handleMouseDown }>
         { path.isActive && (
           <rect

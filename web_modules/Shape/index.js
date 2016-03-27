@@ -1,7 +1,6 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
-import cx from "classnames"
 import Point from "Point"
 import Path from "Path"
 
@@ -61,9 +60,11 @@ class Shape extends Component {
           activePoints={ activePoints }
           onMouseDown={ onMouseDown } />
 
-        <g className={ cx("ad-Shape-points", { "is-shown": path.isActive }) }>
-          { path.points.map(this.renderPoint) }
-        </g>
+        { path.isActive && (
+          <g className="ad-Shape-points">
+            { path.points.map(this.renderPoint) }
+          </g>
+        ) }
       </g>
     )
   }

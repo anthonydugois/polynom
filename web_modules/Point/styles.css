@@ -1,9 +1,5 @@
 @import url(App/config.css);
 
-.ad-MainPoint-code,
-.ad-MainPoint-coords {
-  transition: fill .2s;
-}
 .ad-MainPoint-code {
   cursor: default;
   fill: color(var(--ad-Color-prim) l(+50%));
@@ -13,11 +9,17 @@
 }
 .ad-MainPoint-coords {
   cursor: pointer;
-  fill: color(var(--ad-Color-prim) l(+10%));
+  fill: #fff;
+  stroke: color(var(--ad-Color-prim) l(+15%));
+  stroke-width: 2px;
 }
-.ad-Point.is-active .ad-MainPoint-code,
+.ad-MainPoint-code,
+.ad-MainPoint-coords {
+  transition: fill .2s;
+}
 .ad-Point.is-active .ad-MainPoint-coords {
   fill: var(--ad-Color-sec);
+  stroke: var(--ad-Color-sec);
 }
 
 .ad-Anchor {

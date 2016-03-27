@@ -45,8 +45,8 @@ class Overview extends Component {
 
     // grid snaping
     if (project.gridSnap) {
-      x = project.gridSize * Math.round(x / project.gridSize)
-      y = project.gridSize * Math.round(y / project.gridSize)
+      x -= x % project.gridSize
+      y -= y % project.gridSize
     }
 
     return [x, y]
@@ -219,23 +219,35 @@ class Overview extends Component {
       // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
         e.preventDefault()
-        this.movePoints(-project.keyboardIncrement, 0)
+        this.props.onXPositionsChange(
+          this.props.activePoints,
+          -project.keyboardIncrement
+        )
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
         e.preventDefault()
-        this.movePoints(project.keyboardIncrement, 0)
+        this.props.onXPositionsChange(
+          this.props.activePoints,
+          project.keyboardIncrement
+        )
       }
 
       // y increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
         e.preventDefault()
-        this.movePoints(0, -project.keyboardIncrement)
+        this.props.onYPositionsChange(
+          this.props.activePoints,
+          -project.keyboardIncrement
+        )
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
         e.preventDefault()
-        this.movePoints(0, project.keyboardIncrement)
+        this.props.onYPositionsChange(
+          this.props.activePoints,
+          project.keyboardIncrement
+        )
       }
     }
   };
