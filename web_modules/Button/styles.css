@@ -31,12 +31,14 @@
 .ad-Button:hover {
   background: color(var(--ad-Color-prim) l(-8%));
 }
+
 .ad-Button.action {
   border-radius: 2px;
 }
 .ad-Button.action + .ad-Button.action {
   margin-left: .5rem;
 }
+
 .ad-Button.primary {
   background: var(--ad-Color-sec);
 }
@@ -44,16 +46,36 @@
 .ad-Button.primary:hover {
   background: color(var(--ad-Color-sec) l(-8%));
 }
+
 .ad-Button.tab {
+  position: relative;
+  margin-bottom: 2px;
   background: none;
 }
-.ad-Button.tab:focus,
-.ad-Button.tab:hover {
-  background: color(var(--ad-Color-prim) l(+10%));
-}
-.ad-Button.tab.active {
-  background: var(--ad-Color-sec);
-}
+  .ad-Button.tab > * {
+    position: relative;
+  }
+  .ad-Button.tab::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: transform .2s, background .2s;
+    transform: scale(0);
+    background: none;
+  }
+  .ad-Button.tab:focus::before,
+  .ad-Button.tab:hover::before {
+    transform: scale(1);
+    background: color(var(--ad-Color-prim) l(+10%));
+  }
+  .ad-Button.tab.active::before {
+    transform: scale(1);
+    background: var(--ad-Color-sec);
+  }
+
 .ad-Button.expand {
   background: none;
   color: color(var(--ad-Color-prim) l(+40%));
@@ -61,6 +83,7 @@
 .ad-Button.expand.grab {
   cursor: grab;
 }
+
   .ad-Button-content {
     display: flex;
     align-items: center;
