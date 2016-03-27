@@ -5,7 +5,7 @@ import Grid from "Grid"
 import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
-import { inRange } from "../../src/utils"
+import { clamp } from "../../src/utils"
 
 class Overview extends Component {
   constructor(props) {
@@ -269,8 +269,8 @@ class Overview extends Component {
 
   render() {
     const { project } = this.props
-    const x = inRange(this.state.coords[0], 0, project.width)
-    const y = inRange(this.state.coords[1], 0, project.height)
+    const x = clamp(this.state.coords[0], 0, project.width)
+    const y = clamp(this.state.coords[1], 0, project.height)
 
     return (
       <div className="ad-Overview">
