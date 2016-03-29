@@ -10,7 +10,6 @@ const HomeProject = ({
 }) => (
   <div className="ad-HomeProject">
     <div className="ad-HomeProject-overview">
-      <div className="ad-HomeProject-open">Open</div>
       <SVG
         className="ad-HomeProject-svg"
         project={ project }

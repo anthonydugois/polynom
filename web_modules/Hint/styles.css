@@ -6,7 +6,7 @@
   padding: 1.5rem;
   margin: 1.5rem;
   border-radius: 2px;
-  border: 2px solid color(var(--ad-Color-prim) l(+6%));
+  background: color(var(--ad-Color-prim) l(+6%));
 }
 .ad-Hint--column {
   flex-direction: column;

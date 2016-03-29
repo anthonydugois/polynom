@@ -1,9 +1,17 @@
-import React from "react"
+import React, { Component } from "react"
 
-const HomeActions = ({ children }) => (
-  <ul className="ad-HomeActions">
-    { children }
-  </ul>
-)
+class HomeActions extends Component {
+  render() {
+    const { children, ...props } = this.props
+
+    return (
+      <ul
+        className="ad-HomeActions"
+        { ...props }>
+        { children }
+      </ul>
+    )
+  }
+}
 
 export default HomeActions

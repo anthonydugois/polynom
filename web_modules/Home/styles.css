@@ -31,110 +31,107 @@
           color: color(var(--ad-Color-prim) l(+60%));
         }
 
-  .ad-HomeBody {
-    padding: 4rem 0;
-  }
-    .ad-HomeBody-container {
-      display: flex;
-    }
-
-  .ad-HomeActions {
-    display: flex;
-    flex-direction: column;
+.ad-HomeBody-container {
+  display: flex;
+}
+  .ad-HomeBody-actions {
     width: 12rem;
-    margin: 0;
-    padding: .5rem 0;
-    list-style: none;
   }
-
-  .ad-HomeAction {
-    margin-bottom: .5rem;
-  }
-
-  .ad-HomeProjects {
+  .ad-HomeBody-projects {
     flex: 1;
-    margin-left: 2rem;
-    display: flex;
-    flex-wrap: wrap;
+    padding: 4rem 0 4rem 2rem;
   }
 
-  .ad-HomeProject {
-    position: relative;
-    width: 25%;
-    height: 20rem;
-    padding: .5rem;
+.ad-HomeActions {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 4rem 0;
+  list-style: none;
+}
+
+.ad-HomeAction {
+  padding: .5rem 0;
+}
+
+.ad-HomeProjects {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ad-HomeProject {
+  position: relative;
+  width: 25%;
+  height: 22rem;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+}
+  .ad-HomeProject-overview {
+    overflow: hidden;
+    height: 70%;
+    padding: 1rem;
+    transition: height .2s;
+    background: #fff;
+    border-radius: 2px 2px 0 0;
+  }
+  .ad-HomeProject:hover .ad-HomeProject-overview {
+    height: 65%;
+  }
+    .ad-HomeProject-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      .ad-HomeProject-svg path {
+        fill: none;
+        stroke: var(--ad-Color-prim);
+        stroke-width: 2px;
+      }
+
+  .ad-HomeProject-content {
+    overflow: hidden;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+    background: color(var(--ad-Color-prim) l(+75%));
+    border-radius: 0 0 2px 2px;
   }
-    .ad-HomeProject-overview {
-      position: relative;
-      overflow: hidden;
-      height: 60%;
-      transition: height .2s;
+  .ad-HomeProject:hover .ad-HomeProject-content {
+    background: var(--ad-Color-sec);
+  }
+    .ad-HomeProject-name {
+      transition: color .2s;
+      text-decoration: none;
+      font-family: "Fira Sans", sans-serif;
+      font-size: 1.1rem;
+      color: var(--ad-Color-prim);
     }
-    .ad-HomeProject:hover .ad-HomeProject-overview {
-      height: 70%;
+    .ad-HomeProject:hover .ad-HomeProject-name {
+      color: #fff;
     }
-      .ad-HomeProject-svg {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background: #fff;
-      }
-        .ad-HomeProject-svg path {
-          fill: none;
-          stroke: var(--ad-Color-prim);
-          stroke-width: 2px;
-        }
-
-      .ad-HomeProject-open {
-        z-index: 1;
+      .ad-HomeProject-name::after {
+        content: "";
+        z-index: 100;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: .8rem 1.2rem;
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        background: var(--ad-Color-prim);
-        transition: opacity .2s;
-        text-transform: uppercase;
-        font-family: "Fira Sans", sans-serif;
-        font-size: .7rem;
-        letter-spacing: .15rem;
-        color: #fff;
-      }
-      .ad-HomeProject:hover .ad-HomeProject-open {
-        opacity: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
       }
 
-    .ad-HomeProject-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: color(var(--ad-Color-prim) l(+75%));
+    .ad-HomeProject-datetime {
+      margin-top: .4rem;
+      transition: color .2s;
+      font-family: "Fira Sans", sans-serif;
+      font-size: .9rem;
+      color: color(var(--ad-Color-prim) l(+32%));
     }
-      .ad-HomeProject-name {
-        text-decoration: none;
-        font-family: "Fira Sans", sans-serif;
-        font-size: 1.1rem;
-        color: var(--ad-Color-prim);
-      }
-        .ad-HomeProject-name::after {
-          content: "";
-          z-index: 100;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-        }
-
-      .ad-HomeProject-datetime {
-        margin-top: .4rem;
-        font-family: "Fira Sans", sans-serif;
-        font-size: .9rem;
-        color: color(var(--ad-Color-prim) l(+40%));
-      }
+    .ad-HomeProject:hover .ad-HomeProject-datetime {
+      color: #fff;
+    }

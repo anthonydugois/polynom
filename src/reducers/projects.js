@@ -25,11 +25,16 @@ const project = (state, action) => {
     return {
       id: action.projectId,
       name: action.name,
+      createdAt: new Date(),
+      updatedAt: null,
       width: action.width,
       height: action.height,
       gridShow: true,
       gridSnap: false,
       gridSize: 50,
+      pointCodeShow: VisibilityTypes.ACTIVE,
+      pathBoundingBoxShow: true,
+      keyboardIncrement: 1,
       paths: [],
     }
 
@@ -100,16 +105,10 @@ export default (state = initialState, action) => {
 
   case ActionTypes.REMOVE_PROJECT:
     return Object.keys(state).reduce(
-      (acc, key) => {
-        if (action.projectId === state[key].id) {
-          return acc
-        }
-
-        return {
-          ...acc,
-          [key]: state[key],
-        }
-      },
+      (acc, key) => (action.projectId === state[key].id ? acc : {
+        ...acc,
+        [key]: state[key],
+      }),
       {}
     )
 

@@ -1,5 +1,19 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
+let newProjectId = 0
+
+export function addProject(name, width, height) {
+  const projectId = ++newProjectId
+
+  return {
+    type: ActionTypes.ADD_PROJECT,
+    projectId,
+    name,
+    width,
+    height,
+  }
+}
+
 export function setName(projectId, name) {
   return {
     type: ActionTypes.SET_PROJECT_NAME,
