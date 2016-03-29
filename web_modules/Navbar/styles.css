@@ -8,11 +8,6 @@
   background: var(--ad-Color-prim);
   border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
 }
-  .ad-Navbar-logo {
-    text-decoration: none;
-    font-size: 2rem;
-    color: #fff;
-  }
 
 .ad-NavbarList {
   margin: 0;

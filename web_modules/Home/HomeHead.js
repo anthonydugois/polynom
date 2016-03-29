@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router"
 import Container from "Container"
-import Icon from "Icon"
+import Logo from "Logo"
 
 const HomeHead = () => (
   <div className="ad-HomeHead">
@@ -9,7 +9,7 @@ const HomeHead = () => (
       <Link
         to="/"
         className="ad-HomeHead-logo">
-        <Icon name="polynom" />
+        <Logo size="3rem" />
       </Link>
 
       <div className="ad-HomeHead-brand">
