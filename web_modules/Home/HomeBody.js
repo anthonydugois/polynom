@@ -68,6 +68,7 @@ class HomeBody extends Component {
 
           <div className="ad-HomeBody-projects">
             <HomeProjects
+              onRemoveProject={ this.props.onRemoveProject }
               projectsById={ projectsById }
               pathsById={ pathsById }
               pointsById={ pointsById } />
@@ -80,6 +81,7 @@ class HomeBody extends Component {
 
 HomeBody.propTypes = {
   onCreateProject: PropTypes.func.isRequired,
+  onRemoveProject: PropTypes.func.isRequired,
   projectsById: PropTypes.object.isRequired,
 }
 

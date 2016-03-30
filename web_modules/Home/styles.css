@@ -63,7 +63,7 @@
 
 .ad-HomeProject {
   position: relative;
-  width: 25%;
+  width: 33.333%;
   height: 22rem;
   padding: .5rem;
   display: flex;
@@ -117,7 +117,7 @@
     }
       .ad-HomeProject-name::after {
         content: "";
-        z-index: 100;
+        z-index: 10;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -134,4 +134,13 @@
     }
     .ad-HomeProject:hover .ad-HomeProject-datetime {
       color: #fff;
+    }
+    .ad-HomeProject-actions {
+      z-index: 100;
+      position: absolute;
+      top: .5rem;
+      left: .5rem;
+      right: .5rem;
+      padding: 1rem;
+      opacity: 0;
     }

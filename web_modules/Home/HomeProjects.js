@@ -1,18 +1,13 @@
 import React from "react"
 import HomeProject from "./HomeProject"
 
-const HomeProjects = ({
-  projectsById,
-  pathsById,
-  pointsById,
-}) => (
+const HomeProjects = ({ projectsById, ...props }) => (
   <div className="ad-HomeProjects">
     { Object.keys(projectsById).map((key) => (
       <HomeProject
         key={ key }
         project={ projectsById[key] }
-        pathsById={ pathsById }
-        pointsById={ pointsById } />
+        { ...props } />
     )) }
   </div>
 )

@@ -8,6 +8,9 @@ const mapDispatchToProps = (dispatch) => ({
   onCreateProject(name, width, height) {
     dispatch(projectsActions.addProject(name, width, height))
   },
+  onRemoveProject(id) {
+    dispatch(projectsActions.removeProject(id))
+  },
 })
 
 export default connect(

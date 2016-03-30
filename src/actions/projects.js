@@ -14,6 +14,13 @@ export function addProject(name, width, height) {
   }
 }
 
+export function removeProject(projectId) {
+  return {
+    type: ActionTypes.REMOVE_PROJECT,
+    projectId,
+  }
+}
+
 export function setName(projectId, name) {
   return {
     type: ActionTypes.SET_PROJECT_NAME,
