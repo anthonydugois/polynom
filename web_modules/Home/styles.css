@@ -78,7 +78,7 @@
     border-radius: 2px 2px 0 0;
   }
   .ad-HomeProject:hover .ad-HomeProject-overview {
-    height: 65%;
+    height: 50%;
   }
     .ad-HomeProject-svg {
       width: 100%;
@@ -92,28 +92,23 @@
       }
 
   .ad-HomeProject-content {
-    overflow: hidden;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    padding-top: 1.8rem;
     transition: background .2s;
-    background: color(var(--ad-Color-prim) l(+75%));
+    background: #fff;
+    border-top: 2px solid color(var(--ad-Color-prim) l(+75%));
     border-radius: 0 0 2px 2px;
   }
-  .ad-HomeProject:hover .ad-HomeProject-content {
-    background: var(--ad-Color-sec);
-  }
     .ad-HomeProject-name {
+      display: block;
       transition: color .2s;
+      text-align: center;
       text-decoration: none;
       font-family: "Fira Sans", sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-weight: 300;
       color: var(--ad-Color-prim);
-    }
-    .ad-HomeProject:hover .ad-HomeProject-name {
-      color: #fff;
     }
       .ad-HomeProject-name::after {
         content: "";
@@ -128,19 +123,20 @@
     .ad-HomeProject-datetime {
       margin-top: .4rem;
       transition: color .2s;
+      text-align: center;
       font-family: "Fira Sans", sans-serif;
-      font-size: .9rem;
+      font-size: .8rem;
+      font-weight: 300;
       color: color(var(--ad-Color-prim) l(+32%));
     }
-    .ad-HomeProject:hover .ad-HomeProject-datetime {
-      color: #fff;
-    }
+      .ad-HomeProject-datetime time {
+        font-weight: normal;
+      }
+
     .ad-HomeProject-actions {
       z-index: 100;
       position: absolute;
       top: .5rem;
-      left: .5rem;
       right: .5rem;
       padding: 1rem;
-      opacity: 0;
     }
