@@ -22,12 +22,8 @@ class Project extends Component {
           <Navbar />
         </div>
         <div className="ad-Project-layout">
-          <div className="ad-Project-overview">
-            <Overview { ...this.props } />
-          </div>
-          <div className="ad-Project-sidebar">
-            <Sidebar { ...this.props } />
-          </div>
+          <Overview { ...this.props } />
+          <Sidebar { ...this.props } />
         </div>
       </div>
     )

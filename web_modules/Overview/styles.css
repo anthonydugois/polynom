@@ -3,27 +3,33 @@
 .ad-Overview {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: min-content;
-  min-width: min-content;
+  overflow: auto;
   position: relative;
+  background: color(var(--ad-Color-prim) l(-4%));
 }
-  .ad-Overview-svg {
-    display: block;
-    background: #fff;
-    outline: 0;
-    user-select: none;
+  .ad-Overview-rendering {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: min-content;
+    min-width: min-content;
   }
-  .ad-Overview-infos {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 1rem 2rem;
-    padding: 0;
-    list-style: none;
-  }
-    .ad-Overview-info {
-      font-size: .8rem;
-      color: #fff;
+    .ad-Overview-svg {
+      display: block;
+      background: #fff;
+      outline: 0;
+      user-select: none;
     }
+    .ad-Overview-infos {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 1rem 2rem;
+      padding: 0;
+      list-style: none;
+    }
+      .ad-Overview-info {
+        font-size: .8rem;
+        color: #fff;
+      }

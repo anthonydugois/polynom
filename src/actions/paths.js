@@ -85,3 +85,11 @@ export function setFilledPath(pathId, isFilled) {
     isFilled,
   }
 }
+
+export function setStrokedPath(pathId, isStroked) {
+  return {
+    type: ActionTypes.SET_STROKED_PATH,
+    pathId,
+    isStroked,
+  }
+}

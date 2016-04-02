@@ -101,6 +101,10 @@ class SidebarPath extends Component {
     this.props.onFilledChange(e.target.checked)
   };
 
+  handleStrokedChange = (e) => {
+    this.props.onStrokedChange(e.target.checked)
+  };
+
   render() {
     const {
       project,
@@ -170,6 +174,12 @@ class SidebarPath extends Component {
                 <Checkbox
                   checked={ path.isFilled }
                   onChange={ this.handleFilledChange } />
+              </Setting>
+
+              <Setting label="Stroked">
+                <Checkbox
+                  checked={ path.isStroked }
+                  onChange={ this.handleStrokedChange } />
               </Setting>
             </Settings>
           </ExpandPanel>

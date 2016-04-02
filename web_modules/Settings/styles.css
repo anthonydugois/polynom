@@ -2,12 +2,12 @@
 
 .ad-Settings {
   display: flex;
-  padding: .5rem 0;
+  padding: .5rem;
 }
 
 .ad-Setting {
   flex: 1;
-  padding: 0 1.25rem;
+  padding: 0 .75rem;
 }
   .ad-Setting-label {
     display: block;

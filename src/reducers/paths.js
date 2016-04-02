@@ -56,6 +56,12 @@ const path = (state, action) => {
       isFilled: action.isFilled,
     }
 
+  case ActionTypes.SET_STROKED_PATH:
+    return {
+      ...state,
+      isStroked: action.isStroked,
+    }
+
   case ActionTypes.INSERT_POINT:
     return {
       ...state,
@@ -103,6 +109,7 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:
   case ActionTypes.SET_FILLED_PATH:
+  case ActionTypes.SET_STROKED_PATH:
   case ActionTypes.INSERT_POINT:
     return {
       ...state,

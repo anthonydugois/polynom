@@ -59,11 +59,9 @@ class Path extends Component {
         <g onMouseDown={ this.handlePathMouseDown }>
           <path
             className="ad-Path-global"
-            style={{
-              fill: path.isFilled && "currentColor",
-              stroke: path.isStroked && "currentColor",
-              strokeWidth: path.isStroked && 5,
-            }}
+            fill={ path.isFilled && "currentColor" }
+            stroke={ path.isStroked && "currentColor" }
+            strokeWidth={ path.isStroked && 5 }
             d={ globalD } />
 
           { path.isActive && (

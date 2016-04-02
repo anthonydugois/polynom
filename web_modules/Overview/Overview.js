@@ -321,27 +321,29 @@ class Overview extends Component {
 
     return (
       <div className="ad-Overview">
-        <svg
-          ref={ (svg) => this.svg = svg }
-          tabIndex={ 1 }
-          className="ad-Overview-svg"
-          width={ project.width * zoom }
-          height={ project.height * zoom }
-          viewBox={ `0 0 ${ project.width } ${ project.height }` }
-          onMouseDown={ this.handleOverviewMouseDown }
-          onKeyDown={ this.handleKeyDown }>
-          <Grid
-            zoom={ zoom }
-            project={ project } />
+        <div className="ad-Overview-rendering">
+          <svg
+            ref={ (svg) => this.svg = svg }
+            tabIndex={ 1 }
+            className="ad-Overview-svg"
+            width={ project.width * zoom }
+            height={ project.height * zoom }
+            viewBox={ `0 0 ${ project.width } ${ project.height }` }
+            onMouseDown={ this.handleOverviewMouseDown }
+            onKeyDown={ this.handleKeyDown }>
+            <Grid
+              zoom={ zoom }
+              project={ project } />
 
-          { project.paths.map(this.renderShape) }
-        </svg>
+            { project.paths.map(this.renderShape) }
+          </svg>
 
-        <ul className="ad-Overview-infos">
-          <li className="ad-Overview-info">
-            { `x: ${ x }, y: ${ y }` }
-          </li>
-        </ul>
+          <ul className="ad-Overview-infos">
+            <li className="ad-Overview-info">
+              { `x: ${ x }, y: ${ y }` }
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }
