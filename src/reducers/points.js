@@ -47,26 +47,26 @@ const point = (state, action) => {
   case ActionTypes.SET_POINTS_X:
     return {
       ...state,
-      x: state.x + action.dx,
+      x: action.format(state.x) + action.dx,
       parameters: {
         ...state.parameters,
         ...typeof state.parameters.x1 !== "undefined"
-          && { x1: state.parameters.x1 + action.dx },
+          && { x1: action.format(state.parameters.x1) + action.dx },
         ...typeof state.parameters.x2 !== "undefined"
-          && { x2: state.parameters.x2 + action.dx },
+          && { x2: action.format(state.parameters.x2) + action.dx },
       },
     }
 
   case ActionTypes.SET_POINTS_Y:
     return {
       ...state,
-      y: state.y + action.dy,
+      y: action.format(state.y) + action.dy,
       parameters: {
         ...state.parameters,
         ...typeof state.parameters.y1 !== "undefined"
-          && { y1: state.parameters.y1 + action.dy },
+          && { y1: action.format(state.parameters.y1) + action.dy },
         ...typeof state.parameters.y2 !== "undefined"
-          && { y2: state.parameters.y2 + action.dy },
+          && { y2: action.format(state.parameters.y2) + action.dy },
       },
     }
 

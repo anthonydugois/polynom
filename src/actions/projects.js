@@ -75,3 +75,27 @@ export function setGridSize(projectId, gridSize) {
     gridSize,
   }
 }
+
+export function setPointCodeShow(projectId, pointCodeShow) {
+  return {
+    type: ActionTypes.SET_POINT_CODE_SHOW,
+    projectId,
+    pointCodeShow,
+  }
+}
+
+export function setPathBboxShow(projectId, pathBoundingBoxShow) {
+  return {
+    type: ActionTypes.SET_PATH_BBOX_SHOW,
+    projectId,
+    pathBoundingBoxShow,
+  }
+}
+
+export function setKeyboardIncrement(projectId, keyboardIncrement) {
+  return {
+    type: ActionTypes.SET_KEYBOARD_INCREMENT,
+    projectId,
+    keyboardIncrement,
+  }
+}

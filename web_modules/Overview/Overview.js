@@ -6,7 +6,7 @@ import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import ZOOM_SCALE from "../../src/constants/ZoomScale"
-import { clamp } from "../../src/utils"
+import { clamp, snap } from "../../src/utils"
 
 class Overview extends Component {
   constructor(props) {
@@ -38,19 +38,14 @@ class Overview extends Component {
     this.setState({ localPoints: nextProps.pointsById })
   }
 
+  snapping = (n) => snap(this.props.project)(n);
+
   getCoords = (e) => {
-    const { project } = this.props
     const { zoom } = this.state
     const { left, top } = this.svg.getBoundingClientRect()
 
-    let x = Math.round(e.clientX - left) / zoom
-    let y = Math.round(e.clientY - top) / zoom
-
-    // grid snaping
-    if (project.gridSnap) {
-      x = project.gridSize * Math.round(x / project.gridSize)
-      y = project.gridSize * Math.round(y / project.gridSize)
-    }
+    const x = this.snapping(Math.round(e.clientX - left) / zoom)
+    const y = this.snapping(Math.round(e.clientY - top) / zoom)
 
     return [+x.toFixed(0), +y.toFixed(0)]
   };
@@ -75,11 +70,13 @@ class Overview extends Component {
       case ObjectTypes.POINT:
         this.props.onXPositionsChange(
           this.props.activePoints,
-          coords[0] - this.mouseDownCoords[0]
+          coords[0] - this.mouseDownCoords[0],
+          this.snapping
         )
         this.props.onYPositionsChange(
           this.props.activePoints,
-          coords[1] - this.mouseDownCoords[1]
+          coords[1] - this.mouseDownCoords[1],
+          this.snapping
         )
         break
 
@@ -146,8 +143,8 @@ class Overview extends Component {
           ...acc,
           [point.id]: !this.props.activePoints.includes(point.id) ? point : {
             ...point,
-            x: point.x + dx,
-            y: point.y + dy,
+            x: this.snapping(point.x) + dx,
+            y: this.snapping(point.y) + dy,
             parameters: {
               ...point.parameters,
               ...typeof point.parameters.x1 !== "undefined"

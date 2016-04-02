@@ -1,4 +1,5 @@
 export clamp from "./clamp"
+export snap from "./snap"
 export pathCode from "./pathCode"
 export getDefaultParameters from "./getDefaultParameters"
 export parsePathCode from "./parsePathCode"

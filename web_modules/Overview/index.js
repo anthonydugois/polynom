@@ -31,12 +31,12 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pointsActions.deletePoints(pointIds))
     dispatch(projectsActions.update(props.project.id))
   },
-  onXPositionsChange(pointIds, dx) {
-    dispatch(pointsActions.setPointsX(pointIds, dx))
+  onXPositionsChange(pointIds, dx, format) {
+    dispatch(pointsActions.setPointsX(pointIds, dx, format))
     dispatch(projectsActions.update(props.project.id))
   },
-  onYPositionsChange(pointIds, dy) {
-    dispatch(pointsActions.setPointsY(pointIds, dy))
+  onYPositionsChange(pointIds, dy, format) {
+    dispatch(pointsActions.setPointsY(pointIds, dy, format))
     dispatch(projectsActions.update(props.project.id))
   },
   onParametersChange(pointId, parameters) {

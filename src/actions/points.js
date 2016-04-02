@@ -129,19 +129,21 @@ export function setPointY(pointId, y) {
   }
 }
 
-export function setPointsX(pointIds, dx) {
+export function setPointsX(pointIds, dx, format = (n) => n) {
   return {
     type: ActionTypes.SET_POINTS_X,
     pointIds,
     dx,
+    format,
   }
 }
 
-export function setPointsY(pointIds, dy) {
+export function setPointsY(pointIds, dy, format = (n) => n) {
   return {
     type: ActionTypes.SET_POINTS_Y,
     pointIds,
     dy,
+    format,
   }
 }
 

@@ -80,6 +80,24 @@ const project = (state, action) => {
       gridSize: action.gridSize,
     }
 
+  case ActionTypes.SET_POINT_CODE_SHOW:
+    return {
+      ...state,
+      pointCodeShow: action.pointCodeShow,
+    }
+
+  case ActionTypes.SET_PATH_BBOX_SHOW:
+    return {
+      ...state,
+      pathBoundingBoxShow: action.pathBoundingBoxShow,
+    }
+
+  case ActionTypes.SET_KEYBOARD_INCREMENT:
+    return {
+      ...state,
+      keyboardIncrement: action.keyboardIncrement,
+    }
+
   case ActionTypes.INSERT_PATH:
     return {
       ...state,
@@ -122,6 +140,12 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:
+  case ActionTypes.SET_GRID_SHOW:
+  case ActionTypes.SET_GRID_SNAP:
+  case ActionTypes.SET_GRID_SIZE:
+  case ActionTypes.SET_POINT_CODE_SHOW:
+  case ActionTypes.SET_PATH_BBOX_SHOW:
+  case ActionTypes.SET_KEYBOARD_INCREMENT:
   case ActionTypes.INSERT_PATH:
     return {
       ...state,
