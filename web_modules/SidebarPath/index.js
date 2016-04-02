@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { pathsActions, pointsActions } from "../../src/actions"
+import { projectsActions, pathsActions, pointsActions } from "../../src/actions"
 import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
@@ -20,9 +20,11 @@ const mapDispatchToProps = (dispatch, props) => ({
   onPathMove(projectId, insertAt, pathId) {
     dispatch(pathsActions.removePaths([pathId]))
     dispatch(pathsActions.insertPath(projectId, insertAt, pathId))
+    dispatch(projectsActions.update(props.project.id))
   },
   onNameChange(name) {
     dispatch(pathsActions.setPathName(props.path.id, name))
+    dispatch(projectsActions.update(props.project.id))
   },
   onPathCodeChange(d) {
     const { isClosed, isRelative, points } = parsePathCode(d)
@@ -33,15 +35,20 @@ const mapDispatchToProps = (dispatch, props) => ({
 
     points.forEach((point) =>
       dispatch(pointsActions.createPoint(props.path.id, ...point)))
+
+    dispatch(projectsActions.update(props.project.id))
   },
   onRelativeChange(isRelative) {
     dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
+    dispatch(projectsActions.update(props.project.id))
   },
   onClosedChange(isClosed) {
     dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
+    dispatch(projectsActions.update(props.project.id))
   },
   onFilledChange(isFilled) {
     dispatch(pathsActions.setFilledPath(props.path.id, isFilled))
+    dispatch(projectsActions.update(props.project.id))
   },
 })
 

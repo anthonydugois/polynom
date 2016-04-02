@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { pathsActions } from "../../src/actions"
+import { projectsActions, pathsActions } from "../../src/actions"
 import * as selectors from "../../src/selectors"
 import SidebarPaths from "./SidebarPaths"
 
@@ -12,9 +12,11 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, props) => ({
   onAddClick(x, y) {
     dispatch(pathsActions.createPath(props.project.id, x, y))
+    dispatch(projectsActions.update(props.project.id))
   },
   onRemoveClick(pathIds) {
     dispatch(pathsActions.removePaths(pathIds))
+    dispatch(projectsActions.update(props.project.id))
   },
 })
 

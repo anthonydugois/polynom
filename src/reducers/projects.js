@@ -13,7 +13,7 @@ const initialState = {
     gridSnap: true,
     gridSize: 50,
     pointCodeShow: VisibilityTypes.ACTIVE,
-    pathBoundingBoxShow: true,
+    pathBoundingBoxShow: false,
     keyboardIncrement: 1,
     paths: [0],
   },
@@ -36,6 +36,12 @@ const project = (state, action) => {
       pathBoundingBoxShow: true,
       keyboardIncrement: 1,
       paths: [],
+    }
+
+  case ActionTypes.UPDATE_PROJECT:
+    return {
+      ...state,
+      updatedAt: new Date(),
     }
 
   case ActionTypes.SET_PROJECT_NAME:
@@ -112,6 +118,7 @@ export default (state = initialState, action) => {
       {}
     )
 
+  case ActionTypes.UPDATE_PROJECT:
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:

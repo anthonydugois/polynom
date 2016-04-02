@@ -21,6 +21,13 @@ export function removeProject(projectId) {
   }
 }
 
+export function update(projectId) {
+  return {
+    type: ActionTypes.UPDATE_PROJECT,
+    projectId,
+  }
+}
+
 export function setName(projectId, name) {
   return {
     type: ActionTypes.SET_PROJECT_NAME,
