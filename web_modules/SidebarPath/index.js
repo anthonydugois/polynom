@@ -50,8 +50,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pathsActions.setFilledPath(props.path.id, isFilled))
     dispatch(projectsActions.update(props.project.id))
   },
-  onStrokedChange(isStroked) {
-    dispatch(pathsActions.setStrokedPath(props.path.id, isStroked))
+  onBorderedChange(isBordered) {
+    dispatch(pathsActions.setBorderedPath(props.path.id, isBordered))
     dispatch(projectsActions.update(props.project.id))
   },
 })

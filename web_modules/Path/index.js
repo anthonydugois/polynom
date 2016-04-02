@@ -1,6 +1,7 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
+import cx from "classnames"
 import Snap from "snapsvg"
 import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
@@ -44,7 +45,7 @@ class Path extends Component {
 
     return (
       <g
-        className="ad-Path"
+        className={ cx("ad-Path", { "is-active": path.isActive }) }
         onMouseDown={ this.handleMouseDown }>
         { project.pathBoundingBoxShow && path.isActive && (
           <rect
@@ -60,16 +61,13 @@ class Path extends Component {
           <path
             className="ad-Path-global"
             fill={ path.isFilled && "currentColor" }
-            stroke={ path.isStroked && "currentColor" }
-            strokeWidth={ path.isStroked && 5 }
+            stroke={ path.isBordered && "currentColor" }
+            strokeWidth={ path.isBordered && 5 }
             d={ globalD } />
-
-          { path.isActive && (
-            <path
-              className="ad-Path-local"
-              strokeWidth={ strokeWidth }
-              d={ localD } />
-          ) }
+          <path
+            className="ad-Path-local"
+            strokeWidth={ strokeWidth }
+            d={ localD } />
         </g>
       </g>
     )

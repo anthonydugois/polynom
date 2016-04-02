@@ -219,31 +219,27 @@ class Overview extends Component {
 
     const currentZoom = ZOOM_SCALE.indexOf(this.state.zoom)
 
-    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)) {
-      e.preventDefault()
-
-      if (currentZoom < ZOOM_SCALE.length - 1) {
-        this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] })
-      }
+    if (
+      keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)
+      && currentZoom < ZOOM_SCALE.length - 1
+    ) {
+      this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] })
     }
 
-    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)) {
-      e.preventDefault()
-
-      if (currentZoom > 0) {
-        this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] })
-      }
+    if (
+      keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)
+      && currentZoom > 0
+    ) {
+      this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] })
     }
 
     if (activePoints.length > 0) {
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DEL)) {
-        e.preventDefault()
         this.props.onOverviewDelete(activePoints)
       }
 
       // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
-        e.preventDefault()
         this.props.onXPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -253,7 +249,6 @@ class Overview extends Component {
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
-        e.preventDefault()
         this.props.onXPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -264,7 +259,6 @@ class Overview extends Component {
 
       // y increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
-        e.preventDefault()
         this.props.onYPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -274,7 +268,6 @@ class Overview extends Component {
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
-        e.preventDefault()
         this.props.onYPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -313,36 +306,38 @@ class Overview extends Component {
     )
   };
 
+  handleWheel = (e) => {
+    if (this.props.keyActions.includes(KeyActionTypes.APP_CTRL)) {
+      e.preventDefault()
+      this.overview.scrollLeft += e.deltaY
+    }
+  };
+
   render() {
     const { project } = this.props
     const { zoom } = this.state
-    const x = clamp(this.state.coords[0], 0, project.width)
-    const y = clamp(this.state.coords[1], 0, project.height)
 
     return (
-      <div className="ad-Overview">
+      <div
+        ref={ (overview) => this.overview = overview }
+        className="ad-Overview"
+        tabIndex={ 1 }
+        onWheel={ this.handleWheel }
+        onKeyDown={ this.handleKeyDown }>
         <div className="ad-Overview-rendering">
           <svg
             ref={ (svg) => this.svg = svg }
-            tabIndex={ 1 }
             className="ad-Overview-svg"
             width={ project.width * zoom }
             height={ project.height * zoom }
             viewBox={ `0 0 ${ project.width } ${ project.height }` }
-            onMouseDown={ this.handleOverviewMouseDown }
-            onKeyDown={ this.handleKeyDown }>
+            onMouseDown={ this.handleOverviewMouseDown }>
             <Grid
               zoom={ zoom }
               project={ project } />
 
             { project.paths.map(this.renderShape) }
           </svg>
-
-          <ul className="ad-Overview-infos">
-            <li className="ad-Overview-info">
-              { `x: ${ x }, y: ${ y }` }
-            </li>
-          </ul>
         </div>
       </div>
     )

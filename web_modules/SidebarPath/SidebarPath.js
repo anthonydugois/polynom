@@ -101,8 +101,8 @@ class SidebarPath extends Component {
     this.props.onFilledChange(e.target.checked)
   };
 
-  handleStrokedChange = (e) => {
-    this.props.onStrokedChange(e.target.checked)
+  handleBorderedChange = (e) => {
+    this.props.onBorderedChange(e.target.checked)
   };
 
   render() {
@@ -176,10 +176,10 @@ class SidebarPath extends Component {
                   onChange={ this.handleFilledChange } />
               </Setting>
 
-              <Setting label="Stroked">
+              <Setting label="Bordered">
                 <Checkbox
-                  checked={ path.isStroked }
-                  onChange={ this.handleStrokedChange } />
+                  checked={ path.isBordered }
+                  onChange={ this.handleBorderedChange } />
               </Setting>
             </Settings>
           </ExpandPanel>

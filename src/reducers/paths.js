@@ -8,7 +8,7 @@ const initialState = {
     isClosed: false,
     isRelative: false,
     isFilled: true,
-    isStroked: false,
+    isBordered: false,
     points: [0],
   },
 }
@@ -56,10 +56,10 @@ const path = (state, action) => {
       isFilled: action.isFilled,
     }
 
-  case ActionTypes.SET_STROKED_PATH:
+  case ActionTypes.SET_BORDERED_PATH:
     return {
       ...state,
-      isStroked: action.isStroked,
+      isBordered: action.isBordered,
     }
 
   case ActionTypes.INSERT_POINT:
@@ -109,7 +109,7 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_RELATIVE_PATH:
   case ActionTypes.SET_CLOSED_PATH:
   case ActionTypes.SET_FILLED_PATH:
-  case ActionTypes.SET_STROKED_PATH:
+  case ActionTypes.SET_BORDERED_PATH:
   case ActionTypes.INSERT_POINT:
     return {
       ...state,

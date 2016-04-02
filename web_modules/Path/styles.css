@@ -8,5 +8,10 @@
     stroke: var(--ad-Color-sec);
   }
   .ad-Path-local {
+    opacity: 0;
     stroke: color(var(--ad-Color-sec) l(+10%));
+  }
+  .ad-Path.is-active .ad-Path-local,
+  .ad-Path:hover .ad-Path-local {
+    opacity: 1;
   }

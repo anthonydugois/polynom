@@ -86,10 +86,10 @@ export function setFilledPath(pathId, isFilled) {
   }
 }
 
-export function setStrokedPath(pathId, isStroked) {
+export function setBorderedPath(pathId, isBordered) {
   return {
-    type: ActionTypes.SET_STROKED_PATH,
+    type: ActionTypes.SET_BORDERED_PATH,
     pathId,
-    isStroked,
+    isBordered,
   }
 }

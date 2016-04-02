@@ -9,7 +9,12 @@
 .ad-MainPoint-coords {
   cursor: pointer;
   fill: #fff;
-  stroke: color(var(--ad-Color-prim) l(+36%));
+  stroke: var(--ad-Color-sec);
+  transform-origin: center;
+  transform: scale(1);
+}
+.ad-MainPoint:hover .ad-MainPoint-coords {
+  transform: scale(1.4);
 }
 .ad-MainPoint-code,
 .ad-MainPoint-coords {
@@ -17,7 +22,6 @@
 }
 .ad-Point.is-active .ad-MainPoint-coords {
   fill: var(--ad-Color-sec);
-  stroke: var(--ad-Color-sec);
 }
 
 .ad-Anchor {
