@@ -5,8 +5,11 @@ import { projectsActions } from "../../src/actions"
 const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch, props) => ({
-  onNameChange(name) {
-    dispatch(projectsActions.setName(props.project.id, name))
+  onWidthChange(width) {
+    dispatch(projectsActions.setWidth(props.project.id, width))
+  },
+  onHeightChange(height) {
+    dispatch(projectsActions.setHeight(props.project.id, height))
   },
 })
 

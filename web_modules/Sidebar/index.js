@@ -4,6 +4,7 @@ import React, { PropTypes } from "react"
 import Tabs, { TabList, TabPanel } from "Tabs"
 import SidebarPaths from "SidebarPaths"
 import SidebarPoint from "SidebarPoint"
+import SidebarSettings from "SidebarSettings"
 import SidebarTab from "./SidebarTab"
 import {
   MdGesture,
@@ -37,6 +38,10 @@ const Sidebar = (props) => (
       </TabPanel>
       <TabPanel>
         <SidebarPoint { ...props } />
+      </TabPanel>
+      <TabPanel></TabPanel>
+      <TabPanel>
+        <SidebarSettings { ...props } />
       </TabPanel>
     </Tabs>
   </div>
