@@ -33,9 +33,9 @@ class HomeProject extends Component {
             { project.name }
           </Link>
           <div className="ad-HomeProject-datetime">
-            { project.updatedAt ? "Updated " : "Created " }
+            { project.updatedAt > project.createdAt ? "Updated " : "Created " }
             <DateTime
-              datetime={ project.updatedAt ?
+              datetime={ project.updatedAt > project.createdAt ?
                 project.updatedAt :
                 project.createdAt }
               format="en-US"
@@ -47,8 +47,8 @@ class HomeProject extends Component {
           </div>
           <div className="ad-HomeProject-actions">
             <ButtonSquare
-              size="2rem"
-              type="action"
+              size="2.5rem"
+              type={ ["action", "light"] }
               onClick={ this.handleRemoveClick }>
               <MdDelete size="1rem" />
             </ButtonSquare>

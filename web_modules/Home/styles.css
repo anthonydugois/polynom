@@ -73,12 +73,12 @@
     overflow: hidden;
     height: 70%;
     padding: 1rem;
-    transition: height .2s;
+    transition: height .4s;
     background: #fff;
     border-radius: 2px 2px 0 0;
   }
   .ad-HomeProject:hover .ad-HomeProject-overview {
-    height: 50%;
+    height: 55%;
   }
     .ad-HomeProject-svg {
       width: 100%;
@@ -97,7 +97,7 @@
     padding-top: 1.8rem;
     transition: background .2s;
     background: #fff;
-    border-top: 2px solid color(var(--ad-Color-prim) l(+75%));
+    border-top: 1px solid color(var(--ad-Color-prim) l(+70%));
     border-radius: 0 0 2px 2px;
   }
     .ad-HomeProject-name {
@@ -136,7 +136,15 @@
     .ad-HomeProject-actions {
       z-index: 100;
       position: absolute;
-      top: .5rem;
+      bottom: .5rem;
+      left: .5rem;
       right: .5rem;
       padding: 1rem;
+      transition: transform .4s, opacity .4s;
+      transform: translateY(-1rem);
+      opacity: 0;
+    }
+    .ad-HomeProject:hover .ad-HomeProject-actions {
+      transform: translateY(0);
+      opacity: 1;
     }

@@ -19,7 +19,7 @@
 .ad-Button {
   width: 100%;
   background: color(var(--ad-Color-prim) l(-6%));
-  transition: background .2s;
+  transition: background .2s, border .2s, color .2s;
   text-transform: uppercase;
   line-height: 1.4;
   font-family: "Fira Sans", sans-serif;
@@ -45,6 +45,18 @@
 .ad-Button.primary:focus,
 .ad-Button.primary:hover {
   background: color(var(--ad-Color-sec) l(-8%));
+}
+
+.ad-Button.light {
+  background: #fff;
+  border: 2px solid color(var(--ad-Color-prim) l(+70%));
+  color: var(--ad-Color-prim);
+}
+.ad-Button.light:focus,
+.ad-Button.light:hover {
+  background: var(--ad-Color-prim);
+  border-color: var(--ad-Color-prim);
+  color: #fff;
 }
 
 .ad-Button.tab {
