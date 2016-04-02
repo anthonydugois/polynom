@@ -5,13 +5,11 @@
   fill: color(var(--ad-Color-prim) l(+50%));
   text-anchor: start;
   font-family: "Fira Mono", monospace;
-  font-size: .7rem;
 }
 .ad-MainPoint-coords {
   cursor: pointer;
   fill: #fff;
   stroke: color(var(--ad-Color-prim) l(+36%));
-  stroke-width: 2px;
 }
 .ad-MainPoint-code,
 .ad-MainPoint-coords {
@@ -34,6 +32,4 @@
   }
   .ad-Anchor-line {
     stroke: var(--ad-Color-sec);
-    stroke-width: 1px;
-    stroke-dasharray: 8 8;
   }

@@ -20,6 +20,7 @@ class Overview extends Component {
     isDragging: false,
     coords: [0, 0],
     localPoints: this.props.pointsById,
+    zoom: 1,
   };
 
   componentDidMount() {
@@ -38,6 +39,7 @@ class Overview extends Component {
 
   getCoords = (e) => {
     const { project } = this.props
+    const { zoom } = this.state
     const { left, top } = this.svg.getBoundingClientRect()
 
     let x = Math.round(e.clientX - left)
@@ -48,6 +50,9 @@ class Overview extends Component {
       x = project.gridSize * Math.round(x / project.gridSize)
       y = project.gridSize * Math.round(y / project.gridSize)
     }
+
+    x = +(x / zoom).toFixed(0)
+    y = +(y / zoom).toFixed(0)
 
     return [x, y]
   };
@@ -278,6 +283,7 @@ class Overview extends Component {
     return (
       <Shape
         key={ key }
+        zoom={ this.state.zoom }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
         project={ project }
@@ -291,8 +297,13 @@ class Overview extends Component {
     )
   };
 
+  handleDoubleClick = (e) => {
+    this.setState({ zoom: this.state.zoom === 1 ? 3 : 1 })
+  };
+
   render() {
     const { project } = this.props
+    const { zoom } = this.state
     const x = clamp(this.state.coords[0], 0, project.width)
     const y = clamp(this.state.coords[1], 0, project.height)
 
@@ -304,10 +315,14 @@ class Overview extends Component {
           className="ad-Overview-svg"
           width={ project.width }
           height={ project.height }
-          viewBox={ `0 0 ${ project.width } ${ project.height }` }
+          viewBox={ `0 0 ${ project.width / zoom } ${ project.height / zoom }` }
+          onDoubleClick={ this.handleDoubleClick }
           onMouseDown={ this.handleOverviewMouseDown }
           onKeyDown={ this.handleKeyDown }>
-          <Grid project={ project } />
+          <Grid
+            zoom={ zoom }
+            project={ project } />
+
           { project.paths.map(this.renderShape) }
         </svg>
 

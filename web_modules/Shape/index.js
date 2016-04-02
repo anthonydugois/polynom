@@ -23,6 +23,7 @@ class Shape extends Component {
         key={ key }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
+        zoom={ this.props.zoom }
         project={ project }
         keyActions={ keyActions }
         activePaths={ activePaths }
@@ -53,6 +54,7 @@ class Shape extends Component {
         <Path
           onActivate={ onActivate }
           onDeactivate={ onDeactivate }
+          zoom={ this.props.zoom }
           project={ project }
           keyActions={ keyActions }
           path={ path }

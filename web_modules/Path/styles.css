@@ -6,7 +6,6 @@
 }
   .ad-Path-bbox {
     stroke: var(--ad-Color-sec);
-    stroke-width: 1px;
   }
   .ad-Path-global {
     stroke: currentColor;
@@ -14,5 +13,4 @@
   }
   .ad-Path-local {
     stroke: color(var(--ad-Color-sec) l(+10%));
-    stroke-width: 1px;
   }

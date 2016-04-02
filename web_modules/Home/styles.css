@@ -97,7 +97,7 @@
     padding-top: 1.8rem;
     transition: background .2s;
     background: #fff;
-    border-top: 1px solid color(var(--ad-Color-prim) l(+70%));
+    border-top: 2px solid color(var(--ad-Color-prim) l(+75%));
     border-radius: 0 0 2px 2px;
   }
     .ad-HomeProject-name {

@@ -48,14 +48,12 @@
 }
 
 .ad-Button.light {
-  background: #fff;
-  border: 2px solid color(var(--ad-Color-prim) l(+70%));
+  background: color(var(--ad-Color-prim) l(+75%));
   color: var(--ad-Color-prim);
 }
 .ad-Button.light:focus,
 .ad-Button.light:hover {
   background: var(--ad-Color-prim);
-  border-color: var(--ad-Color-prim);
   color: #fff;
 }
 

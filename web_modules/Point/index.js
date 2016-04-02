@@ -38,7 +38,8 @@ class Point extends Component {
   };
 
   renderCode(w, h, { code, x, y, isActive }) {
-    const { project } = this.props
+    const { zoom, project } = this.props
+    const fz = .7 / zoom
 
     if (
       (project.pointCodeShow === VisibilityTypes.ALL) ||
@@ -50,7 +51,8 @@ class Point extends Component {
           x={ x }
           y={ y }
           dy={ -h }
-          dx={ w }>
+          dx={ w }
+          fontSize={ `${ fz }rem` }>
           { `${ code } (${ +x.toFixed(3) }, ${ +y.toFixed(3) })` }
         </text>
       )
@@ -60,13 +62,15 @@ class Point extends Component {
   }
 
   renderPoint(point) {
-    const [w, h] = [6, 6]
+    const { zoom } = this.props
+    const [w, h] = [6 / zoom, 6 / zoom]
 
     return (
       <g className="ad-MainPoint">
         { this.renderCode(w, h, point) }
         <rect
           className="ad-MainPoint-coords"
+          strokeWidth={ 2 / zoom }
           x={ point.x - w / 2 }
           y={ point.y - h / 2 }
           width={ w }
@@ -77,10 +81,17 @@ class Point extends Component {
   }
 
   renderQuadraticAnchors(point, previousPoint) {
+    const { zoom } = this.props
+    const r = 3 / zoom
+    const strokeWidth = 1 / zoom
+    const strokeDasharray = `${ 8 / zoom } ${ 8 / zoom }`
+
     return (
       <g className="ad-Anchor">
         <line
           className="ad-Anchor-line"
+          strokeWidth={ strokeWidth }
+          strokeDasharray={ strokeDasharray }
           x1={ previousPoint.x }
           y1={ previousPoint.y }
           x2={ point.parameters.x1 }
@@ -88,6 +99,8 @@ class Point extends Component {
 
         <line
           className="ad-Anchor-line"
+          strokeWidth={ strokeWidth }
+          strokeDasharray={ strokeDasharray }
           x1={ point.parameters.x1 }
           y1={ point.parameters.y1 }
           x2={ point.x }
@@ -97,20 +110,26 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x1 }
           cy={ point.parameters.y1 }
-          r={ 3 }
+          r={ r }
           onMouseDown={ this.handleFirstAnchorMouseDown } />
       </g>
     )
   }
 
   renderCubicAnchors(point, previousPoint) {
+    const { zoom } = this.props
     const code = point.code.toLowerCase()
+    const r = 3 / zoom
+    const strokeWidth = 1 / zoom
+    const strokeDasharray = `${ 8 / zoom } ${ 8 / zoom }`
 
     return (
       <g className="ad-Anchor">
         { code === "c" && (
           <line
             className="ad-Anchor-line"
+            strokeWidth={ strokeWidth }
+            strokeDasharray={ strokeDasharray }
             x1={ previousPoint.x }
             y1={ previousPoint.y }
             x2={ point.parameters.x1 }
@@ -119,6 +138,8 @@ class Point extends Component {
 
         <line
           className="ad-Anchor-line"
+          strokeWidth={ strokeWidth }
+          strokeDasharray={ strokeDasharray }
           x1={ point.x }
           y1={ point.y }
           x2={ point.parameters.x2 }
@@ -129,7 +150,7 @@ class Point extends Component {
             className="ad-Anchor-point"
             cx={ point.parameters.x1 }
             cy={ point.parameters.y1 }
-            r={ 3 }
+            r={ r }
             onMouseDown={ this.handleFirstAnchorMouseDown } />
         ) }
 
@@ -137,7 +158,7 @@ class Point extends Component {
           className="ad-Anchor-point"
           cx={ point.parameters.x2 }
           cy={ point.parameters.y2 }
-          r={ 3 }
+          r={ r }
           onMouseDown={ this.handleSecondAnchorMouseDown } />
       </g>
     )
@@ -164,6 +185,7 @@ class Point extends Component {
 }
 
 Point.propTypes = {
+  zoom: PropTypes.number.isRequired,
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,

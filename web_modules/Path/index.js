@@ -30,6 +30,7 @@ class Path extends Component {
 
   render() {
     const {
+      zoom,
       project,
       path,
       globalPoints,
@@ -39,6 +40,7 @@ class Path extends Component {
     const globalD = pathCode(path, globalPoints)
     const localD = pathCode(path, localPoints)
     const { x, y, width, height } = Snap.path.getBBox(globalD)
+    const strokeWidth = 1 / zoom
 
     return (
       <g
@@ -47,6 +49,7 @@ class Path extends Component {
         { project.pathBoundingBoxShow && path.isActive && (
           <rect
             className="ad-Path-bbox"
+            strokeWidth={ strokeWidth }
             x={ x }
             y={ y }
             width={ width }
@@ -62,6 +65,7 @@ class Path extends Component {
           { path.isActive && (
             <path
               className="ad-Path-local"
+              strokeWidth={ strokeWidth }
               d={ localD } />
           ) }
         </g>
