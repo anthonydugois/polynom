@@ -7,8 +7,8 @@ const initialState = {
     isActive: true,
     isClosed: false,
     isRelative: false,
-    isFilled: true,
-    isBordered: false,
+    isFilled: false,
+    isBordered: true,
     points: [0],
   },
 }
@@ -23,6 +23,7 @@ const path = (state, action) => {
       isClosed: false,
       isRelative: false,
       isFilled: false,
+      isBordered: true,
       points: [],
     }
 

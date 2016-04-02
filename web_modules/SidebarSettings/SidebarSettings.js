@@ -21,7 +21,7 @@ class SidebarSettings extends Component {
 
     return (
       <SidebarPanel>
-        <SidebarModule>
+        <SidebarModule style={{ padding: ".75rem 0" }}>
           <Settings>
             <Setting label="Width">
               <Range

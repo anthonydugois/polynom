@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import Settings, { Setting } from "Settings"
 import Choices, { Choice } from "Choices"
-import SidebarPointParameter from "./SidebarPointParameter"
 import { getDefaultParameters } from "../../src/utils"
 
 class SidebarPointCode extends Component {
@@ -20,7 +19,7 @@ class SidebarPointCode extends Component {
     const prevCode = previousPoint && previousPoint.code.toLowerCase()
 
     return (
-      <SidebarPointParameter>
+      <div>
         <Settings>
           <Setting>
             <Choices>
@@ -79,7 +78,7 @@ class SidebarPointCode extends Component {
             </Choices>
           </Setting>
         </Settings>
-      </SidebarPointParameter>
+      </div>
     )
   }
 }

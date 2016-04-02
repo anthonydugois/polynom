@@ -31,7 +31,7 @@ class SidebarPoint extends Component {
     return (
       <SidebarPanel>
         { activePoints.length === 1 ? (
-          <SidebarModule>
+          <SidebarModule style={{ padding: ".75rem 0" }}>
             { /* Point code */ }
             { prevCode && (
               <SidebarPointCode

@@ -1,7 +1,9 @@
 import React, { PropTypes } from "react"
 
-const SidebarModule = ({ children }) => (
-  <div className="ad-SidebarModule">
+const SidebarModule = ({ children, ...props }) => (
+  <div
+    className="ad-SidebarModule"
+    { ...props }>
     { children }
   </div>
 )
