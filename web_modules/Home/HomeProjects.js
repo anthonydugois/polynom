@@ -13,7 +13,7 @@ function getKeysOrderedBy(obj, field, order = "asc") {
 
 const HomeProjects = ({ projectsById, ...props }) => (
   <div className="ad-HomeProjects">
-    { getKeysOrderedBy(projectsById, "createdAt", "desc").map((key) => (
+    { getKeysOrderedBy(projectsById, "updatedAt", "desc").map((key) => (
       <HomeProject
         key={ key }
         project={ projectsById[key] }
