@@ -22,8 +22,12 @@ class Project extends Component {
           <Navbar />
         </div>
         <div className="ad-Project-layout">
-          <Overview { ...this.props } />
-          <Sidebar { ...this.props } />
+          <div className="ad-Project-overview">
+            <Overview { ...this.props } />
+          </div>
+          <div className="ad-Project-sidebar">
+            <Sidebar { ...this.props } />
+          </div>
         </div>
       </div>
     )
@@ -44,4 +48,6 @@ export default mapActionsToKeys({
   [KeyActionTypes.OVERVIEW_DOWN]: "down",
   [KeyActionTypes.OVERVIEW_LEFT]: "left",
   [KeyActionTypes.OVERVIEW_RIGHT]: "right",
+  [KeyActionTypes.OVERVIEW_ZOOM_PLUS]: ["ctrl", 107],
+  [KeyActionTypes.OVERVIEW_ZOOM_MINUS]: ["ctrl", 109],
 })(Project)

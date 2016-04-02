@@ -6,12 +6,13 @@ import cx from "classnames"
 const Grid = ({ zoom, project }) => {
   const verticalLines = []
   const horizontalLines = []
+  const strokeWidth = 1 / zoom
 
   for (let i = 1 ; i < project.width / project.gridSize ; i++) {
     verticalLines.push(
       <line
         key={ i }
-        strokeWidth={ 1 / zoom }
+        strokeWidth={ strokeWidth }
         x1={ i * project.gridSize }
         y1={ 0 }
         x2={ i * project.gridSize }
@@ -23,7 +24,7 @@ const Grid = ({ zoom, project }) => {
     horizontalLines.push(
       <line
         key={ i }
-        strokeWidth={ 1 / zoom }
+        strokeWidth={ strokeWidth }
         x1={ 0 }
         y1={ i * project.gridSize }
         x2={ project.width }

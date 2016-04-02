@@ -5,8 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: min-content;
+  min-width: min-content;
   position: relative;
-  background: color(var(--ad-Color-prim) l(-4%));
 }
   .ad-Overview-svg {
     display: block;

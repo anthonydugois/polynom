@@ -7,7 +7,8 @@ const initialState = {
     isActive: true,
     isClosed: false,
     isRelative: false,
-    isFilled: false,
+    isFilled: true,
+    isStroked: false,
     points: [0],
   },
 }

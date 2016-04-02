@@ -1,9 +1,9 @@
 @import url(App/config.css);
 
 .ad-Sidebar {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 23rem;
   background: var(--ad-Color-prim);
 }
 

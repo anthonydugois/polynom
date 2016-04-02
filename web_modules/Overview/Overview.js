@@ -5,6 +5,7 @@ import Grid from "Grid"
 import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
+import ZOOM_SCALE from "../../src/constants/ZoomScale"
 import { clamp } from "../../src/utils"
 
 class Overview extends Component {
@@ -42,8 +43,8 @@ class Overview extends Component {
     const { zoom } = this.state
     const { left, top } = this.svg.getBoundingClientRect()
 
-    let x = Math.round(e.clientX - left)
-    let y = Math.round(e.clientY - top)
+    let x = Math.round(e.clientX - left) / zoom
+    let y = Math.round(e.clientY - top) / zoom
 
     // grid snaping
     if (project.gridSnap) {
@@ -51,10 +52,7 @@ class Overview extends Component {
       y = project.gridSize * Math.round(y / project.gridSize)
     }
 
-    x = +(x / zoom).toFixed(0)
-    y = +(y / zoom).toFixed(0)
-
-    return [x, y]
+    return [+x.toFixed(0), +y.toFixed(0)]
   };
 
   handleMouseDown = (e, draggedPoint, draggedObject) => {
@@ -219,6 +217,24 @@ class Overview extends Component {
       activePoints,
     } = this.props
 
+    const currentZoom = ZOOM_SCALE.indexOf(this.state.zoom)
+
+    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)) {
+      e.preventDefault()
+
+      if (currentZoom < ZOOM_SCALE.length - 1) {
+        this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] })
+      }
+    }
+
+    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)) {
+      e.preventDefault()
+
+      if (currentZoom > 0) {
+        this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] })
+      }
+    }
+
     if (activePoints.length > 0) {
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DEL)) {
         e.preventDefault()
@@ -297,10 +313,6 @@ class Overview extends Component {
     )
   };
 
-  handleDoubleClick = (e) => {
-    this.setState({ zoom: this.state.zoom === 1 ? 3 : 1 })
-  };
-
   render() {
     const { project } = this.props
     const { zoom } = this.state
@@ -313,10 +325,9 @@ class Overview extends Component {
           ref={ (svg) => this.svg = svg }
           tabIndex={ 1 }
           className="ad-Overview-svg"
-          width={ project.width }
-          height={ project.height }
-          viewBox={ `0 0 ${ project.width / zoom } ${ project.height / zoom }` }
-          onDoubleClick={ this.handleDoubleClick }
+          width={ project.width * zoom }
+          height={ project.height * zoom }
+          viewBox={ `0 0 ${ project.width } ${ project.height }` }
           onMouseDown={ this.handleOverviewMouseDown }
           onKeyDown={ this.handleKeyDown }>
           <Grid

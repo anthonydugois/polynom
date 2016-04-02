@@ -10,3 +10,14 @@
     flex: 1;
     display: flex;
   }
+    .ad-Project-overview {
+      flex: 1;
+      display: flex;
+      overflow: auto;
+      background: color(var(--ad-Color-prim) l(-4%));
+    }
+    .ad-Project-sidebar {
+      display: flex;
+      flex-direction: column;
+      width: 23rem;
+    }
