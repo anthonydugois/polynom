@@ -21,6 +21,10 @@
   font-size: .65rem;
   color: #fff;
 }
+.ad-Text--range {
+  width: 2rem;
+  background: none;
+}
 .ad-Text:focus,
 .ad-Textarea:focus {
   outline: 0;

@@ -16,7 +16,7 @@ const Range = ({
       onChange={ onChange }
       { ...props } />
     <Text
-      style={{ width: "2rem" }}
+      className="ad-Text  ad-Text--range"
       value={ value }
       onChange={ onChange } />
   </div>
