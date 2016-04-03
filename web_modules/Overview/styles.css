@@ -9,15 +9,16 @@
   outline: 0;
 }
 .ad-Overview::-webkit-scrollbar {
-  width: .6rem;
-  height: .6rem;
+  width: .85rem;
+  height: .85rem;
 }
 .ad-Overview::-webkit-scrollbar-track {
   background: none;
 }
 .ad-Overview::-webkit-scrollbar-thumb {
-  background: color(var(--ad-Color-prim) l(+50%));
-  border: 2px solid #fff;
+  background: color(var(--ad-Color-prim) l(+40%) a(.6));
+  background-clip: padding-box;
+  border: 4px solid transparent;
   border-radius: 1rem;
 }
   .ad-Overview-rendering {

@@ -194,6 +194,8 @@ class Overview extends Component {
       activePoints,
     } = this.props
 
+    // if CTRL is pressed, add a point to the active path or create a path
+    // else deactivate all objects in the overview
     if (keyActions.includes(KeyActionTypes.APP_CTRL)) {
       const [x, y] = this.getCoords(e)
 
@@ -207,6 +209,23 @@ class Overview extends Component {
     }
   };
 
+  // scroll horizontally if CTRL is pressed
+  handleWheel = (e) => {
+    if (this.props.keyActions.includes(KeyActionTypes.APP_CTRL)) {
+      e.preventDefault()
+      this.overview.scrollLeft += e.deltaY
+    }
+  };
+
+  // automatically put the scroll in the right place
+  centerScroll() {
+    const inner = this.svg.getBoundingClientRect()
+    const outer = this.overview.getBoundingClientRect()
+
+    this.overview.scrollTop = (inner.height - outer.height) / 2
+    this.overview.scrollLeft = (inner.width - outer.width) / 2
+  }
+
   handleKeyDown = (e) => {
     const {
       keyActions,
@@ -214,23 +233,25 @@ class Overview extends Component {
       activePoints,
     } = this.props
 
+    // zoom feature
     const currentZoom = ZOOM_SCALE.indexOf(this.state.zoom)
 
     if (
       keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)
       && currentZoom < ZOOM_SCALE.length - 1
     ) {
-      this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] })
+      this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] }, this.centerScroll)
     }
 
     if (
       keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)
       && currentZoom > 0
     ) {
-      this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] })
+      this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] }, this.centerScroll)
     }
 
     if (activePoints.length > 0) {
+      // delete points
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DEL)) {
         this.props.onOverviewDelete(activePoints)
       }
@@ -301,13 +322,6 @@ class Overview extends Component {
         activePoints={ activePoints }
         onMouseDown={ this.handleMouseDown } />
     )
-  };
-
-  handleWheel = (e) => {
-    if (this.props.keyActions.includes(KeyActionTypes.APP_CTRL)) {
-      e.preventDefault()
-      this.overview.scrollLeft += e.deltaY
-    }
   };
 
   render() {
