@@ -8,6 +8,18 @@
   background: color(var(--ad-Color-prim) l(-4%));
   outline: 0;
 }
+.ad-Overview::-webkit-scrollbar {
+  width: .6rem;
+  height: .6rem;
+}
+.ad-Overview::-webkit-scrollbar-track {
+  background: none;
+}
+.ad-Overview::-webkit-scrollbar-thumb {
+  background: color(var(--ad-Color-prim) l(+50%));
+  border: 2px solid #fff;
+  border-radius: 1rem;
+}
   .ad-Overview-rendering {
     flex: 1;
     display: flex;
