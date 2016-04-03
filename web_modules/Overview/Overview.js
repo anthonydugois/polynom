@@ -197,6 +197,8 @@ class Overview extends Component {
     // if CTRL is pressed, add a point to the active path or create a path
     // else deactivate all objects in the overview
     if (keyActions.includes(KeyActionTypes.APP_CTRL)) {
+      e.preventDefault()
+
       const [x, y] = this.getCoords(e)
 
       if (activePaths.length === 1) {
@@ -236,28 +238,32 @@ class Overview extends Component {
     // zoom feature
     const currentZoom = ZOOM_SCALE.indexOf(this.state.zoom)
 
-    if (
-      keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)
-      && currentZoom < ZOOM_SCALE.length - 1
-    ) {
-      this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] }, this.centerScroll)
+    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_PLUS)) {
+      e.preventDefault()
+
+      if (currentZoom < ZOOM_SCALE.length - 1) {
+        this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] }, this.centerScroll)
+      }
     }
 
-    if (
-      keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)
-      && currentZoom > 0
-    ) {
-      this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] }, this.centerScroll)
+    if (keyActions.includes(KeyActionTypes.OVERVIEW_ZOOM_MINUS)) {
+      e.preventDefault()
+
+      if (currentZoom > 0) {
+        this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] }, this.centerScroll)
+      }
     }
 
     if (activePoints.length > 0) {
       // delete points
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DEL)) {
+        e.preventDefault()
         this.props.onOverviewDelete(activePoints)
       }
 
       // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
+        e.preventDefault()
         this.props.onXPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -267,6 +273,7 @@ class Overview extends Component {
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
+        e.preventDefault()
         this.props.onXPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -277,6 +284,7 @@ class Overview extends Component {
 
       // y increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
+        e.preventDefault()
         this.props.onYPositionsChange(
           this.props.activePoints,
           project.gridSnap ?
@@ -286,6 +294,7 @@ class Overview extends Component {
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
+        e.preventDefault()
         this.props.onYPositionsChange(
           this.props.activePoints,
           project.gridSnap ?

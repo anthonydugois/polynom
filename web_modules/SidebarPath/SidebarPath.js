@@ -61,7 +61,7 @@ class SidebarPath extends Component {
   };
 
   handleNameChange = (e) => {
-    const value = e.target.value
+    const { value } = e.target
 
     if (value.trim() !== "") {
       this.props.onNameChange(value)

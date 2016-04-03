@@ -6,14 +6,18 @@
   overflow: auto;
   position: relative;
   background: color(var(--ad-Color-prim) l(-4%));
-  outline: 0;
+}
+.ad-Overview:focus {
+  outline: 2px solid var(--ad-Color-sec);
+  outline-offset: -2px;
 }
 .ad-Overview::-webkit-scrollbar {
   width: .85rem;
   height: .85rem;
 }
-.ad-Overview::-webkit-scrollbar-track {
-  background: none;
+.ad-Overview::-webkit-scrollbar-track,
+.ad-Overview::-webkit-scrollbar-corner {
+  background: transparent;
 }
 .ad-Overview::-webkit-scrollbar-thumb {
   background: color(var(--ad-Color-prim) l(+40%) a(.6));

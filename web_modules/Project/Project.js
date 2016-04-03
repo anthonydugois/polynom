@@ -12,21 +12,14 @@ class Project extends Component {
     this.project.focus()
   }
 
-  handleKeyDown = (e) => {
-    if (this.props.keyActions.length > 0) {
-      e.preventDefault()
-    }
-  };
-
   render() {
     return (
       <div
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
-        className="ad-Project"
-        onKeyDown={ this.handleKeyDown }>
+        className="ad-Project">
         <div className="ad-Project-navbar">
-          <Navbar />
+          <Navbar { ...this.props } />
         </div>
         <div className="ad-Project-layout">
           <Overview { ...this.props } />

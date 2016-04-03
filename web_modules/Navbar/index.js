@@ -1,17 +1,17 @@
-import "./styles"
+import { connect } from "react-redux"
+import Navbar from "./Navbar"
+import { projectsActions } from "../../src/actions"
 
-import React from "react"
-import { Link } from "react-router"
-import Logo from "Logo"
+const mapStateToProps = (state) => state
 
-const Navbar = () => (
-  <nav className="ad-Navbar">
-    <Link
-      className="ad-Navbar-logo"
-      to="/">
-      <Logo size="2rem" />
-    </Link>
-  </nav>
-)
+const mapDispatchToProps = (dispatch, props) => ({
+  onProjectNameChange(name) {
+    dispatch(projectsActions.setName(props.project.id, name))
+    dispatch(projectsActions.update(props.project.id))
+  },
+})
 
-export default Navbar
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar)
