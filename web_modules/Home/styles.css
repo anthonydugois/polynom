@@ -52,7 +52,7 @@
 }
 
 .ad-HomeAction {
-  padding: .5rem 0;
+  padding-top: .5rem;
 }
 
 .ad-HomeProjects {
@@ -94,7 +94,7 @@
   .ad-HomeProject-content {
     flex: 1;
     overflow: hidden;
-    padding-top: 1.8rem;
+    padding: 1.8rem 2rem;
     transition: background .2s;
     background: #fff;
     border-top: 2px solid color(var(--ad-Color-prim) l(+75%));
@@ -102,7 +102,11 @@
   }
     .ad-HomeProject-name {
       display: block;
+      width: 100%;
+      overflow: hidden;
       transition: color .2s;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       text-align: center;
       text-decoration: none;
       font-family: "Fira Sans", sans-serif;
