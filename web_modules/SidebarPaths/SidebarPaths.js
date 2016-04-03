@@ -59,9 +59,9 @@ class SidebarPaths extends Component {
             <SidebarPathsLayer />
           </SidebarModule>
         ) : (
-          <SidebarModule>
+          <SidebarModule style={{ padding: "1.25rem" }}>
             <Hint
-              icon={ <MdGesture size="1.8rem" /> }
+              icon={ <MdGesture size="2rem" /> }
               title="No path">
               There is no path yet in this project. Create the first one!
             </Hint>

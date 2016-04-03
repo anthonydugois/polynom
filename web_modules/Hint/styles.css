@@ -1,23 +1,23 @@
 @import url(App/config.css);
 
 .ad-Hint {
+  width: 100%;
   display: flex;
-  align-items: center;
-  padding: 1.5rem;
-  margin: 1.5rem;
+  padding: 2rem;
   border-radius: 2px;
-  background: color(var(--ad-Color-prim) l(+6%));
+  background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-Hint--column {
   flex-direction: column;
+  align-items: center;
 }
   .ad-Hint-icon {
-    padding-right: 1rem;
+    padding-right: .75rem;
     color: #fff;
   }
   .ad-Hint--column .ad-Hint-icon {
     padding: 0;
-    padding-bottom: .5rem;
+    padding-bottom: .75rem;
   }
   .ad-Hint-content {
     flex: 1;
@@ -26,13 +26,15 @@
     text-align: center;
   }
     .ad-Hint-title {
-      line-height: 1.6;
+      margin-bottom: .2rem;
+      line-height: 1.4;
+      font-family: "Fira Sans", sans-serif;
       font-size: 1rem;
-      font-weight: bold;
       color: #fff;
     }
     .ad-Hint-message {
       line-height: 1.6;
+      font-family: "Fira Sans", sans-serif;
       font-size: .8rem;
       color: color(var(--ad-Color-prim) l(+60%));
     }

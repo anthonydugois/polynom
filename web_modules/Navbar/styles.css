@@ -5,23 +5,25 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  background: color(var(--ad-Color-prim) l(-0%));
+  background: var(--ad-Color-prim);
   border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
 }
   .ad-Navbar-projectName {
     height: 2rem;
-    width: 10rem;
+    width: 15rem;
     margin-left: 1rem;
     padding-left: 1rem;
     border: none;
     border-left: 1px solid color(var(--ad-Color-prim) l(+10%));
     background: none;
-    transition: border .2s, width .2s;
+    transition: color .2s;
     font-family: "Fira Sans", sans-serif;
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #fff;
   }
+  .ad-Navbar-projectName:hover,
   .ad-Navbar-projectName:focus {
     outline: 0;
+    color: color(var(--ad-Color-prim) l(+60%));
   }

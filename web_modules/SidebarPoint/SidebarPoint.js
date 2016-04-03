@@ -86,9 +86,9 @@ class SidebarPoint extends Component {
             ) }
           </SidebarModule>
         ) : (
-          <SidebarModule>
+          <SidebarModule style={{ padding: "1.25rem" }}>
             <Hint
-              icon={ <MdTune size="1.8rem" /> }
+              icon={ <MdTune size="2rem" /> }
               title="No selected point">
               Select a point to edit manually its parameters.
             </Hint>

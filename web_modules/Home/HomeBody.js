@@ -2,9 +2,11 @@ import React, { Component, PropTypes } from "react"
 import { findDOMNode } from "react-dom"
 import Container from "Container"
 import { ButtonRounded } from "Button"
+import Hint from "Hint"
 import HomeActions from "./HomeActions"
 import HomeAction from "./HomeAction"
 import HomeProjects from "./HomeProjects"
+import { MdDashboard } from "react-icons/lib/md"
 
 class HomeBody extends Component {
   state = { actionsFixed: false };
@@ -67,11 +69,22 @@ class HomeBody extends Component {
           </div>
 
           <div className="ad-HomeBody-projects">
-            <HomeProjects
-              onRemoveProject={ this.props.onRemoveProject }
-              projectsById={ projectsById }
-              pathsById={ pathsById }
-              pointsById={ pointsById } />
+            { Object.keys(projectsById).length > 0 ? (
+              <HomeProjects
+                onRemoveProject={ this.props.onRemoveProject }
+                projectsById={ projectsById }
+                pathsById={ pathsById }
+                pointsById={ pointsById } />
+            ) : (
+              <div style={{ padding: ".5rem" }}>
+                <Hint
+                  align="column"
+                  icon={ <MdDashboard size="2rem" /> }
+                  title="No project">
+                  You don't have any project yet. Create the first one!
+                </Hint>
+              </div>
+            ) }
           </div>
         </Container>
       </div>
