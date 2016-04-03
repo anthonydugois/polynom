@@ -15,8 +15,8 @@ const Range = ({
       value={ value }
       onChange={ onChange }
       { ...props } />
-
     <Text
+      style={{ width: "2rem" }}
       value={ value }
       onChange={ onChange } />
   </div>

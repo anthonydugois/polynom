@@ -3,9 +3,9 @@ import "./styles"
 import React, { Component, PropTypes } from "react"
 import { SidebarPanel, SidebarModule } from "Sidebar"
 import Settings, { Setting } from "Settings"
-import Range from "Range"
 import Checkbox from "Checkbox"
 import Choices, { Choice } from "Choices"
+import Text from "Text"
 import { clamp } from "../../src/utils"
 import * as VisibilityTypes from "../../src/constants/VisibilityTypes"
 
@@ -41,6 +41,13 @@ class SidebarSettings extends Component {
     this.props.onPathBboxShowChange(e.target.checked)
   };
 
+  handleKeyboardIncrementChange = (e) => {
+    const min = 1
+    const max = Math.min(this.props.project.width, this.props.project.height)
+
+    this.props.onKeyboardIncrementChange(clamp(e.target.value, min, max))
+  };
+
   render() {
     const { project } = this.props
 
@@ -48,45 +55,17 @@ class SidebarSettings extends Component {
       <SidebarPanel>
         <SidebarModule style={{ padding: ".75rem 0" }}>
           <Settings>
-            <Setting label="Width">
-              <Range
-                min={ 0 }
-                max={ 10000 }
+            <Setting label="Document width">
+              <Text
+                style={{ width: "4rem" }}
                 value={ project.width }
                 onChange={ this.handleWidthChange } />
             </Setting>
-          </Settings>
-
-          <Settings>
-            <Setting label="Height">
-              <Range
-                min={ 0 }
-                max={ 10000 }
+            <Setting label="Document height">
+              <Text
+                style={{ width: "4rem" }}
                 value={ project.height }
                 onChange={ this.handleHeightChange } />
-            </Setting>
-          </Settings>
-
-          <Settings>
-            <Setting label="Grid size">
-              <Range
-                min={ 1 }
-                max={ Math.min(project.width, project.height) }
-                value={ project.gridSize }
-                onChange={ this.handleGridSizeChange } />
-            </Setting>
-          </Settings>
-
-          <Settings>
-            <Setting label="Show grid">
-              <Checkbox
-                checked={ project.gridShow }
-                onChange={ this.handleGridShowChange } />
-            </Setting>
-            <Setting label="Snap to grid">
-              <Checkbox
-                checked={ project.gridSnap }
-                onChange={ this.handleGridSnapChange } />
             </Setting>
           </Settings>
 
@@ -114,6 +93,45 @@ class SidebarSettings extends Component {
                   None
                 </Choice>
               </Choices>
+            </Setting>
+          </Settings>
+
+          <Settings>
+            <Setting label="Show grid">
+              <Checkbox
+                checked={ project.gridShow }
+                onChange={ this.handleGridShowChange } />
+            </Setting>
+            <Setting label="Snap to grid">
+              <Checkbox
+                checked={ project.gridSnap }
+                onChange={ this.handleGridSnapChange } />
+            </Setting>
+          </Settings>
+
+          <Settings>
+            <Setting label="Grid size">
+              <Text
+                style={{ width: "4rem" }}
+                value={ project.gridSize }
+                onChange={ this.handleGridSizeChange } />
+            </Setting>
+          </Settings>
+
+          <Settings>
+            <Setting label="Show bounding box">
+              <Checkbox
+                checked={ project.pathBoundingBoxShow }
+                onChange={ this.handlePathBboxShowChange } />
+            </Setting>
+          </Settings>
+
+          <Settings>
+            <Setting label="Keyboard increment">
+              <Text
+                style={{ width: "4rem" }}
+                value={ project.keyboardIncrement }
+                onChange={ this.handleKeyboardIncrementChange } />
             </Setting>
           </Settings>
         </SidebarModule>

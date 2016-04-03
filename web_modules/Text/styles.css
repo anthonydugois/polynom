@@ -2,20 +2,18 @@
 
 .ad-Text {
   height: 1.25rem;
-  width: 2rem;
-  background: none;
   text-align: center;
 }
 .ad-Textarea {
   height: 5rem;
-  width: 100%;
   padding: .8rem 1rem;
   resize: none;
-  background: color(var(--ad-Color-prim) l(-4%));
   line-height: 1.6;
 }
 .ad-Text,
 .ad-Textarea {
+  width: 100%;
+  background: color(var(--ad-Color-prim) l(-4%));
   border: none;
   border-radius: 2px;
   transition: background .2s;

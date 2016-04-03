@@ -1,7 +1,6 @@
 import "./styles"
 
 import React, { PropTypes } from "react"
-import cx from "classnames"
 
 const Grid = ({ zoom, project }) => {
   const verticalLines = []
@@ -32,8 +31,8 @@ const Grid = ({ zoom, project }) => {
     )
   }
 
-  return (
-    <g className={ cx("ad-Grid", { "is-shown": project.gridShow }) }>
+  return project.gridShow && (
+    <g className="ad-Grid">
       { verticalLines }
       { horizontalLines }
     </g>

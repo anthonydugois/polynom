@@ -163,19 +163,19 @@ class SidebarPath extends Component {
                   checked={ path.isRelative }
                   onChange={ this.handleRelativeChange } />
               </Setting>
-
               <Setting label="Closed">
                 <Checkbox
                   checked={ path.isClosed }
                   onChange={ this.handleClosedChange } />
               </Setting>
+            </Settings>
 
+            <Settings>
               <Setting label="Filled">
                 <Checkbox
                   checked={ path.isFilled }
                   onChange={ this.handleFilledChange } />
               </Setting>
-
               <Setting label="Bordered">
                 <Checkbox
                   checked={ path.isBordered }
