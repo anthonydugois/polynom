@@ -119,19 +119,19 @@ class SidebarSettings extends Component {
           </Settings>
 
           <Settings>
-            <Setting label="Show bounding box">
-              <Checkbox
-                checked={ project.pathBoundingBoxShow }
-                onChange={ this.handlePathBboxShowChange } />
-            </Setting>
-          </Settings>
-
-          <Settings>
             <Setting label="Keyboard increment">
               <Text
                 style={{ width: "4rem" }}
                 value={ project.keyboardIncrement }
                 onChange={ this.handleKeyboardIncrementChange } />
+            </Setting>
+          </Settings>
+
+          <Settings>
+            <Setting label="Show bounding box">
+              <Checkbox
+                checked={ project.pathBoundingBoxShow }
+                onChange={ this.handlePathBboxShowChange } />
             </Setting>
           </Settings>
         </SidebarModule>

@@ -138,13 +138,14 @@
       }
 
     .ad-HomeProject-actions {
+      display: flex;
       z-index: 100;
       position: absolute;
       bottom: .5rem;
       left: .5rem;
       right: .5rem;
       padding: 1rem;
-      transition: transform .4s, opacity .4s;
+      transition: transform .4s, opacity .2s;
       transform: translateY(-1rem);
       opacity: 0;
     }

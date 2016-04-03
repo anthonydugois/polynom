@@ -76,14 +76,12 @@ class HomeBody extends Component {
                 pathsById={ pathsById }
                 pointsById={ pointsById } />
             ) : (
-              <div style={{ padding: ".5rem" }}>
-                <Hint
-                  align="column"
-                  icon={ <MdDashboard size="2rem" /> }
-                  title="No project">
-                  You don't have any project yet. Create the first one!
-                </Hint>
-              </div>
+              <Hint
+                align="column"
+                icon={ <MdDashboard size="2rem" /> }
+                title="No project">
+                You don't have any project yet. Create the first one!
+              </Hint>
             ) }
           </div>
         </Container>

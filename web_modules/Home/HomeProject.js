@@ -3,7 +3,10 @@ import { Link } from "react-router"
 import DateTime from "DateTime"
 import SVG from "SVG"
 import { ButtonSquare } from "Button"
-import { MdDelete } from "react-icons/lib/md"
+import {
+  MdFileDownload,
+  MdDelete,
+} from "react-icons/lib/md"
 
 class HomeProject extends Component {
   handleRemoveClick = (e) => {
@@ -49,6 +52,12 @@ class HomeProject extends Component {
           <div className="ad-HomeProject-actions">
             <ButtonSquare
               size="2.5rem"
+              type={ ["action", "light"] }>
+              <MdFileDownload size="1rem" />
+            </ButtonSquare>
+            <ButtonSquare
+              size="2.5rem"
+              style={{ marginLeft: "auto" }}
               type={ ["action", "light"] }
               onClick={ this.handleRemoveClick }>
               <MdDelete size="1rem" />

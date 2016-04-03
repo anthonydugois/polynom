@@ -8,6 +8,7 @@ import routes from "./routes"
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 const store = savedState ? createStore(savedState) : createStore()
 
+// save the state in localStorage
 store.subscribe(() => {
   localStorage.setItem("savedState", JSON.stringify(store.getState()))
 })

@@ -3,9 +3,8 @@
 .ad-Hint {
   width: 100%;
   display: flex;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 2px;
-  background: color(var(--ad-Color-prim) l(+4%));
 }
 .ad-Hint--column {
   flex-direction: column;
