@@ -17,6 +17,9 @@ class HomeProject extends Component {
       pointsById,
     } = this.props
 
+    const createdAt = new Date(project.createdAt)
+    const updatedAt = new Date(project.updatedAt)
+
     return (
       <div className="ad-HomeProject">
         <div className="ad-HomeProject-overview">
@@ -33,11 +36,9 @@ class HomeProject extends Component {
             { project.name }
           </Link>
           <div className="ad-HomeProject-datetime">
-            { project.updatedAt > project.createdAt ? "Updated " : "Created " }
+            { updatedAt > createdAt ? "Updated " : "Created " }
             <DateTime
-              datetime={ project.updatedAt > project.createdAt ?
-                project.updatedAt :
-                project.createdAt }
+              datetime={ updatedAt > createdAt ? updatedAt : createdAt }
               format="en-US"
               formatOptions={{
                 year: "numeric",

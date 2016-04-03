@@ -1,15 +1,14 @@
 import React from "react"
 import HomeProject from "./HomeProject"
 
-function getKeysOrderedBy(obj, field, order = "asc") {
-  return Object.keys(obj).sort((a, b) => order === "desc" ?
-    obj[b][field] - obj[a][field] :
-    obj[a][field] - obj[b][field])
+function orderProjects(obj) {
+  return Object.keys(obj).sort((a, b) =>
+    (new Date(obj[b].updatedAt)) - (new Date(obj[a].updatedAt)))
 }
 
 const HomeProjects = ({ projectsById, ...props }) => (
   <div className="ad-HomeProjects">
-    { getKeysOrderedBy(projectsById, "updatedAt", "desc").map((key) => (
+    { orderProjects(projectsById).map((key) => (
       <HomeProject
         key={ key }
         project={ projectsById[key] }

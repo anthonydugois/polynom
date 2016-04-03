@@ -16,10 +16,6 @@
 .ad-MainPoint:hover .ad-MainPoint-coords {
   transform: scale(1.4);
 }
-.ad-MainPoint-code,
-.ad-MainPoint-coords {
-  transition: fill .2s;
-}
 .ad-Point.is-active .ad-MainPoint-coords {
   fill: var(--ad-Color-sec);
 }
