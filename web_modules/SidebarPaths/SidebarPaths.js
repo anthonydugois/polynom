@@ -63,7 +63,7 @@ class SidebarPaths extends Component {
             <Hint
               icon={ <MdGesture size="1.8rem" /> }
               title="No path">
-              There is no path in this project. Create the first one!
+              There is no path yet in this project. Create the first one!
             </Hint>
           </SidebarModule>
         ) }

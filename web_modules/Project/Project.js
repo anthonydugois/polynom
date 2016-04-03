@@ -18,10 +18,8 @@ class Project extends Component {
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
         className="ad-Project">
-        <div className="ad-Project-navbar">
-          <Navbar { ...this.props } />
-        </div>
-        <div className="ad-Project-layout">
+        <Navbar { ...this.props } />
+        <div className="ad-Project-content">
           <Overview { ...this.props } />
           <Sidebar { ...this.props } />
         </div>

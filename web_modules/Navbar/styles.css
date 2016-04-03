@@ -1,36 +1,27 @@
 @import url(App/config.css);
 
 .ad-Navbar {
-  padding: 0 2rem;
-  height: 4rem;
+  padding: 1.25rem 2rem;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
-  background: var(--ad-Color-prim);
+  background: color(var(--ad-Color-prim) l(-0%));
   border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
 }
-
-.ad-NavbarList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ad-Navbar > .ad-NavbarList {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.ad-NavbarLink {
-  cursor: pointer;
-  text-decoration: none;
-  color: red;
-}
-
-.ad-NavbarItem {
-  position: relative;
-}
-  .ad-NavbarItem .ad-ExpandPanel {
-    position: absolute;
-    top: 100%;
-    left: 0;
+  .ad-Navbar-projectName {
+    height: 2rem;
+    width: 10rem;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border: none;
+    border-left: 1px solid color(var(--ad-Color-prim) l(+10%));
+    background: none;
+    transition: border .2s, width .2s;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: #fff;
+  }
+  .ad-Navbar-projectName:focus {
+    outline: 0;
   }

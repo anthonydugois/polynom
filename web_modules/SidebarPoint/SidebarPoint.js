@@ -90,7 +90,7 @@ class SidebarPoint extends Component {
             <Hint
               icon={ <MdTune size="1.8rem" /> }
               title="No selected point">
-              Select one or several points to edit their parameters.
+              Select a point to edit manually its parameters.
             </Hint>
           </SidebarModule>
         ) }
