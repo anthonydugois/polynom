@@ -92,6 +92,15 @@ export default (state = initialState, action) => {
       [action.pathId]: path(undefined, action),
     }
 
+  case ActionTypes.REMOVE_PATHS:
+    return Object.keys(state).reduce(
+      (acc, key) => (action.pathIds.includes(state[key].id) ? acc : {
+        ...acc,
+        [key]: state[key],
+      }),
+      {}
+    )
+
   case ActionTypes.SET_ACTIVE_PATHS:
     return Object.keys(state).reduce((acc, key) => ({
       ...acc,

@@ -98,6 +98,15 @@ export default (state = initialState, action) => {
       [action.pointId]: point(undefined, action),
     }
 
+  case ActionTypes.REMOVE_POINTS:
+    return Object.keys(state).reduce(
+      (acc, key) => (action.pointIds.includes(state[key].id) ? acc : {
+        ...acc,
+        [key]: state[key],
+      }),
+      {}
+    )
+
   case ActionTypes.SET_ACTIVE_POINTS:
   case ActionTypes.SET_POINTS_X:
   case ActionTypes.SET_POINTS_Y:
