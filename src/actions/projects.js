@@ -1,13 +1,16 @@
 import * as ActionTypes from "../constants/ActionTypes"
 
+const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newProjectId = 0
 
-export function addProject(name, width, height) {
-  const projectId = ++newProjectId
+if (savedState && Object.keys(savedState.projectsById).length > 0) {
+  newProjectId = Math.max(Object.keys(savedState.projectsById))
+}
 
+export function addProject(name, width, height) {
   return {
     type: ActionTypes.ADD_PROJECT,
-    projectId,
+    projectId: ++newProjectId,
     name,
     width,
     height,

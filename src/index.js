@@ -10,7 +10,7 @@ const store = savedState ? createStore(savedState) : createStore()
 
 // save the state in localStorage
 store.subscribe(() => {
-  localStorage.setItem("savedState", JSON.stringify(store.getState()))
+  localStorage.setItem("savedState", JSON.stringify(store.getState().present))
 })
 
 render(

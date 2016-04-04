@@ -1,22 +1,25 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { removePaths } from "./paths"
 
+const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPointId = 0
+
+if (savedState && Object.keys(savedState.pointsById).length > 0) {
+  newPointId = Math.max(Object.keys(savedState.pointsById))
+}
 
 function addPoint(pathId, insertAt, code, x, y, parameters) {
   return (dispatch) => {
-    const pointId = ++newPointId
-
     dispatch({
       type: ActionTypes.ADD_POINT,
-      pointId,
+      pointId: ++newPointId,
       code,
       x,
       y,
       parameters,
     })
 
-    dispatch(insertPoint(pathId, insertAt, pointId))
+    dispatch(insertPoint(pathId, insertAt, newPointId))
   }
 }
 
@@ -31,7 +34,7 @@ export function insertPoint(pathId, insertAt, pointId) {
 
 export function createPoint(pathId, code, x, y, parameters) {
   return (dispatch, getState) => {
-    const { pathsById, pointsById } = getState()
+    const { pathsById, pointsById } = getState().present
     const path = pathsById[pathId]
 
     const activePoints = path.points.filter((key) => pointsById[key].isActive)
@@ -40,7 +43,7 @@ export function createPoint(pathId, code, x, y, parameters) {
     dispatch(setActivePoints(activePoints, false))
     dispatch(addPoint(
       pathId,
-      insertAt > -1 ? insertAt + 1 : 0,
+      insertAt > -1 ? insertAt + 1 : path.points.length + 1,
       code,
       x,
       y,
@@ -58,7 +61,7 @@ export function deletePoints(pointIds) {
 
 function ensurePathsIntegrity(pointIds) {
   return (dispatch, getState) => {
-    const { pathsById, pointsById } = getState()
+    const { pathsById, pointsById } = getState().present
 
     Object.keys(pathsById).forEach((pathId) => {
       const path = pathsById[pathId]
@@ -129,19 +132,11 @@ export function setPointY(pointId, y) {
   }
 }
 
-export function setPointsX(pointIds, dx, format = (n) => n) {
+export function setPointsPosition(pointIds, dx, dy, format = (n) => n) {
   return {
-    type: ActionTypes.SET_POINTS_X,
+    type: ActionTypes.SET_POINTS_POSITION,
     pointIds,
     dx,
-    format,
-  }
-}
-
-export function setPointsY(pointIds, dy, format = (n) => n) {
-  return {
-    type: ActionTypes.SET_POINTS_Y,
-    pointIds,
     dy,
     format,
   }

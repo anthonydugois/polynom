@@ -1,8 +1,8 @@
 import { createSelector } from "reselect"
 import { activePathsSelector } from "./activePaths"
 
-const pathsByIdSelector = (state) => state.pathsById
-const pointsByIdSelector = (state) => state.pointsById
+const pathsByIdSelector = (state) => state.present.pathsById
+const pointsByIdSelector = (state) => state.present.pointsById
 
 export const activePointsSelector = createSelector(
   pathsByIdSelector,

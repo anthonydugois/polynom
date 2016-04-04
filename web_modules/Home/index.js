@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import { projectsActions } from "../../src/actions"
 import Home from "./Home"
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => state.present
 
 const mapDispatchToProps = (dispatch) => ({
   onCreateProject(name, width, height) {

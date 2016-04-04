@@ -12,12 +12,27 @@ class Project extends Component {
     this.project.focus()
   }
 
+  handleKeyDown = (e) => {
+    const { keyActions } = this.props
+
+    if (keyActions.includes(KeyActionTypes.APP_UNDO)) {
+      e.preventDefault()
+      this.props.undo()
+    }
+
+    if (keyActions.includes(KeyActionTypes.APP_REDO)) {
+      e.preventDefault()
+      this.props.redo()
+    }
+  };
+
   render() {
     return (
       <div
         ref={ (project) => this.project = project }
         tabIndex={ 0 }
-        className="ad-Project">
+        className="ad-Project"
+        onKeyDown={ this.handleKeyDown }>
         <Navbar { ...this.props } />
         <div className="ad-Project-content">
           <Overview { ...this.props } />
@@ -36,6 +51,8 @@ Project.propTypes = {
 export default mapActionsToKeys({
   [KeyActionTypes.APP_CTRL]: "ctrl",
   [KeyActionTypes.APP_SHIFT]: "shift",
+  [KeyActionTypes.APP_UNDO]: "ctrl+z",
+  [KeyActionTypes.APP_REDO]: "ctrl+y",
   [KeyActionTypes.SIDEBAR_DEL]: "delete",
   [KeyActionTypes.OVERVIEW_DEL]: "delete",
   [KeyActionTypes.OVERVIEW_UP]: "up",

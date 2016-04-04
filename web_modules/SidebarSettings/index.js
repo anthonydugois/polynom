@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import SidebarSettings from "./SidebarSettings"
 import { projectsActions } from "../../src/actions"
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => state.present
 
 const mapDispatchToProps = (dispatch, { project }) => ({
   onWidthChange(width) {

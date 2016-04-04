@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import Navbar from "./Navbar"
 import { projectsActions } from "../../src/actions"
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => state.present
 
 const mapDispatchToProps = (dispatch, props) => ({
   onProjectNameChange(name) {

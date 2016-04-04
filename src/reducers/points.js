@@ -44,25 +44,17 @@ const point = (state, action) => {
 
   // set position of multiple points
   // update anchors at the same time
-  case ActionTypes.SET_POINTS_X:
+  case ActionTypes.SET_POINTS_POSITION:
     return {
       ...state,
       x: action.format(state.x) + action.dx,
+      y: action.format(state.y) + action.dy,
       parameters: {
         ...state.parameters,
         ...typeof state.parameters.x1 !== "undefined"
           && { x1: action.format(state.parameters.x1) + action.dx },
         ...typeof state.parameters.x2 !== "undefined"
           && { x2: action.format(state.parameters.x2) + action.dx },
-      },
-    }
-
-  case ActionTypes.SET_POINTS_Y:
-    return {
-      ...state,
-      y: action.format(state.y) + action.dy,
-      parameters: {
-        ...state.parameters,
         ...typeof state.parameters.y1 !== "undefined"
           && { y1: action.format(state.parameters.y1) + action.dy },
         ...typeof state.parameters.y2 !== "undefined"
@@ -108,8 +100,7 @@ export default (state = initialState, action) => {
     )
 
   case ActionTypes.SET_ACTIVE_POINTS:
-  case ActionTypes.SET_POINTS_X:
-  case ActionTypes.SET_POINTS_Y:
+  case ActionTypes.SET_POINTS_POSITION:
     return Object.keys(state).reduce((acc, key) => ({
       ...acc,
       [key]: action.pointIds.includes(state[key].id) ?

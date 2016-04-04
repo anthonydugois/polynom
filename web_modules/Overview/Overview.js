@@ -68,13 +68,9 @@ class Overview extends Component {
       switch (this.draggedObject) {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
-        this.props.onXPositionsChange(
+        this.props.onPointsPositionChange(
           this.props.activePoints,
           coords[0] - this.mouseDownCoords[0],
-          this.snapping
-        )
-        this.props.onYPositionsChange(
-          this.props.activePoints,
           coords[1] - this.mouseDownCoords[1],
           this.snapping
         )
@@ -264,43 +260,31 @@ class Overview extends Component {
       // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
         e.preventDefault()
-        this.props.onXPositionsChange(
-          this.props.activePoints,
-          project.gridSnap ?
-            -project.gridSize :
-            -project.keyboardIncrement
-        )
+        const dx = -(project.gridSnap ?
+          project.gridSize : project.keyboardIncrement)
+        this.props.onPointsPositionChange(this.props.activePoints, dx, 0)
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
         e.preventDefault()
-        this.props.onXPositionsChange(
-          this.props.activePoints,
-          project.gridSnap ?
-            project.gridSize :
-            project.keyboardIncrement
-        )
+        const dx = project.gridSnap ?
+          project.gridSize : project.keyboardIncrement
+        this.props.onPointsPositionChange(this.props.activePoints, dx, 0)
       }
 
       // y increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
         e.preventDefault()
-        this.props.onYPositionsChange(
-          this.props.activePoints,
-          project.gridSnap ?
-            -project.gridSize :
-            -project.keyboardIncrement
-        )
+        const dy = -(project.gridSnap ?
+          project.gridSize : project.keyboardIncrement)
+        this.props.onPointsPositionChange(this.props.activePoints, 0, dy)
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
         e.preventDefault()
-        this.props.onYPositionsChange(
-          this.props.activePoints,
-          project.gridSnap ?
-            project.gridSize :
-            project.keyboardIncrement
-        )
+        const dy = project.gridSnap ?
+          project.gridSize : project.keyboardIncrement
+        this.props.onPointsPositionChange(this.props.activePoints, 0, dy)
       }
     }
   };
@@ -370,8 +354,7 @@ Overview.propTypes = {
   onOverviewCreatePath: PropTypes.func.isRequired,
   onOverviewCreatePoint: PropTypes.func.isRequired,
   onOverviewDelete: PropTypes.func.isRequired,
-  onXPositionsChange: PropTypes.func.isRequired,
-  onYPositionsChange: PropTypes.func.isRequired,
+  onPointsPositionChange: PropTypes.func.isRequired,
   onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,

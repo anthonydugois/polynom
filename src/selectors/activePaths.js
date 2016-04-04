@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
 import { projectSelector } from "./project"
 
-const pathsByIdSelector = (state) => state.pathsById
+const pathsByIdSelector = (state) => state.present.pathsById
 
 export const activePathsSelector = createSelector(
   projectSelector,

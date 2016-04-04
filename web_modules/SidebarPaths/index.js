@@ -4,7 +4,7 @@ import * as selectors from "../../src/selectors"
 import SidebarPaths from "./SidebarPaths"
 
 const mapStateToProps = (state, props) => ({
-  pathsById: state.pathsById,
+  pathsById: state.present.pathsById,
   activePaths: selectors.activePathsSelector(state, props),
   activePoints: selectors.activePointsSelector(state, props),
 })

@@ -14,7 +14,7 @@ if (__DEV__) {
   middlewares.push(logger)
 }
 
-export default (initialState) => createStore(
+export default (initialState = {}) => createStore(
   reducers,
   initialState,
   applyMiddleware(...middlewares)

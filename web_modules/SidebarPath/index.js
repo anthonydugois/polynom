@@ -4,8 +4,8 @@ import { parsePathCode } from "../../src/utils"
 import SidebarPath from "./SidebarPath"
 
 const mapStateToProps = (state) => ({
-  pathsById: state.pathsById,
-  pointsById: state.pointsById,
+  pathsById: state.present.pathsById,
+  pointsById: state.present.pointsById,
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

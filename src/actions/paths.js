@@ -1,18 +1,21 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import { createPoint } from "./points"
 
+const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPathId = 0
+
+if (savedState && Object.keys(savedState.pathsById).length > 0) {
+  newPathId = Math.max(Object.keys(savedState.pathsById))
+}
 
 function addPath(projectId, insertAt) {
   return (dispatch) => {
-    const pathId = ++newPathId
-
     dispatch({
       type: ActionTypes.ADD_PATH,
-      pathId,
+      pathId: ++newPathId,
     })
 
-    dispatch(insertPath(projectId, insertAt, pathId))
+    dispatch(insertPath(projectId, insertAt, newPathId))
   }
 }
 
@@ -27,14 +30,17 @@ export function insertPath(projectId, insertAt, pathId) {
 
 export function createPath(projectId, x, y) {
   return (dispatch, getState) => {
-    const { projectsById, pathsById } = getState()
+    const { projectsById, pathsById } = getState().present
     const project = projectsById[projectId]
 
     const activePaths = project.paths.filter((key) => pathsById[key].isActive)
     const insertAt = project.paths.indexOf(activePaths[activePaths.length - 1])
 
     dispatch(setActivePaths(activePaths, false))
-    dispatch(addPath(projectId, insertAt > -1 ? insertAt + 1 : 0))
+    dispatch(addPath(
+      projectId,
+      insertAt > -1 ? insertAt + 1 : project.paths.length + 1
+    ))
     dispatch(createPoint(newPathId, "M", x, y, {}))
   }
 }

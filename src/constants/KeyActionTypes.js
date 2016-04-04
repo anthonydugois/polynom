@@ -1,5 +1,7 @@
 export const APP_CTRL = "APP_CTRL"
 export const APP_SHIFT = "APP_SHIFT"
+export const APP_UNDO = "APP_UNDO"
+export const APP_REDO = "APP_REDO"
 export const SIDEBAR_DEL = "SIDEBAR_DEL"
 export const OVERVIEW_DEL = "OVERVIEW_DEL"
 export const OVERVIEW_UP = "OVERVIEW_UP"

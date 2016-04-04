@@ -4,8 +4,8 @@ import * as selectors from "../../src/selectors"
 import Overview from "./Overview"
 
 const mapStateToProps = (state, props) => ({
-  pathsById: state.pathsById,
-  pointsById: state.pointsById,
+  pathsById: state.present.pathsById,
+  pointsById: state.present.pointsById,
   activePaths: selectors.activePathsSelector(state, props),
   activePoints: selectors.activePointsSelector(state, props),
 })
@@ -31,12 +31,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pointsActions.deletePoints(pointIds))
     dispatch(projectsActions.update(props.project.id))
   },
-  onXPositionsChange(pointIds, dx, format) {
-    dispatch(pointsActions.setPointsX(pointIds, dx, format))
-    dispatch(projectsActions.update(props.project.id))
-  },
-  onYPositionsChange(pointIds, dy, format) {
-    dispatch(pointsActions.setPointsY(pointIds, dy, format))
+  onPointsPositionChange(pointIds, dx, dy, format) {
+    dispatch(pointsActions.setPointsPosition(pointIds, dx, dy, format))
     dispatch(projectsActions.update(props.project.id))
   },
   onParametersChange(pointId, parameters) {
