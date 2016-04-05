@@ -11,9 +11,10 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-  onCodeChange(pointId, code) {
+  onCodeChange(pointId, code, parameters) {
     dispatch(projectsActions.update(props.project.id))
     dispatch(pointsActions.setPointCode(pointId, code))
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
   },
   onXPositionChange(pointId, x) {
     dispatch(projectsActions.update(props.project.id))

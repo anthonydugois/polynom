@@ -9,8 +9,7 @@ class SidebarPointCode extends Component {
     const code = e.target.value
     const parameters = getDefaultParameters(code, point, previousPoint)
 
-    this.props.onCodeChange(point.id, code)
-    this.props.onParamsChange(point.id, parameters)
+    this.props.onCodeChange(point.id, code, parameters)
   };
 
   render() {
@@ -85,7 +84,6 @@ class SidebarPointCode extends Component {
 
 SidebarPointCode.propTypes = {
   onCodeChange: PropTypes.func.isRequired,
-  onParamsChange: PropTypes.func.isRequired,
   point: PropTypes.object.isRequired,
   previousPoint: PropTypes.object.isRequired,
 }

@@ -37,8 +37,7 @@ class SidebarPoint extends Component {
               <SidebarPointCode
                 point={ point }
                 previousPoint={ previousPoint }
-                onCodeChange={ this.props.onCodeChange }
-                onParamsChange={ this.props.onParamsChange } />
+                onCodeChange={ this.props.onCodeChange } />
             ) }
 
             { /* Point position */ }
