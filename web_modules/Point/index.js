@@ -38,12 +38,12 @@ class Point extends Component {
   };
 
   renderCode(w, h, { code, x, y, isActive }) {
-    const { zoom, project } = this.props
+    const { zoom, settings } = this.props
     const fz = .7 / zoom
 
     if (
-      (project.pointCodeShow === VisibilityTypes.ALL) ||
-      (project.pointCodeShow === VisibilityTypes.ACTIVE && isActive)
+      (settings.pointCodeShow === VisibilityTypes.ALL) ||
+      (settings.pointCodeShow === VisibilityTypes.ACTIVE && isActive)
     ) {
       return (
         <text
@@ -188,7 +188,7 @@ Point.propTypes = {
   zoom: PropTypes.number.isRequired,
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
-  project: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   keyActions: PropTypes.array.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,

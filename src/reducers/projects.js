@@ -1,5 +1,4 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import * as VisibilityTypes from "../constants/VisibilityTypes"
 
 const initialState = {
   0: {
@@ -9,12 +8,6 @@ const initialState = {
     updatedAt: new Date(),
     width: 1000,
     height: 800,
-    gridShow: true,
-    gridSnap: false,
-    gridSize: 50,
-    pointCodeShow: VisibilityTypes.ACTIVE,
-    pathBoundingBoxShow: true,
-    keyboardIncrement: 1,
     paths: [0],
   },
 }
@@ -29,12 +22,6 @@ const project = (state, action) => {
       updatedAt: new Date(),
       width: action.width,
       height: action.height,
-      gridShow: true,
-      gridSnap: false,
-      gridSize: 50,
-      pointCodeShow: VisibilityTypes.ACTIVE,
-      pathBoundingBoxShow: true,
-      keyboardIncrement: 1,
       paths: [],
     }
 
@@ -60,42 +47,6 @@ const project = (state, action) => {
     return {
       ...state,
       height: action.height,
-    }
-
-  case ActionTypes.SET_GRID_SHOW:
-    return {
-      ...state,
-      gridShow: action.gridShow,
-    }
-
-  case ActionTypes.SET_GRID_SNAP:
-    return {
-      ...state,
-      gridSnap: action.gridSnap,
-    }
-
-  case ActionTypes.SET_GRID_SIZE:
-    return {
-      ...state,
-      gridSize: action.gridSize,
-    }
-
-  case ActionTypes.SET_POINT_CODE_SHOW:
-    return {
-      ...state,
-      pointCodeShow: action.pointCodeShow,
-    }
-
-  case ActionTypes.SET_PATH_BBOX_SHOW:
-    return {
-      ...state,
-      pathBoundingBoxShow: action.pathBoundingBoxShow,
-    }
-
-  case ActionTypes.SET_KEYBOARD_INCREMENT:
-    return {
-      ...state,
-      keyboardIncrement: action.keyboardIncrement,
     }
 
   case ActionTypes.INSERT_PATH:
@@ -140,12 +91,6 @@ export default (state = initialState, action) => {
   case ActionTypes.SET_PROJECT_NAME:
   case ActionTypes.SET_PROJECT_WIDTH:
   case ActionTypes.SET_PROJECT_HEIGHT:
-  case ActionTypes.SET_GRID_SHOW:
-  case ActionTypes.SET_GRID_SNAP:
-  case ActionTypes.SET_GRID_SIZE:
-  case ActionTypes.SET_POINT_CODE_SHOW:
-  case ActionTypes.SET_PATH_BBOX_SHOW:
-  case ActionTypes.SET_KEYBOARD_INCREMENT:
   case ActionTypes.INSERT_PATH:
     return {
       ...state,

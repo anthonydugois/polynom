@@ -38,7 +38,7 @@ class Overview extends Component {
     this.setState({ localPoints: nextProps.pointsById })
   }
 
-  snapping = (n) => snap(this.props.project)(n);
+  snapping = (n) => snap(this.props.settings)(n);
 
   getCoords = (e) => {
     const { zoom } = this.state
@@ -215,7 +215,7 @@ class Overview extends Component {
     }
   };
 
-  // automatically put the scroll in the right place
+  // automatically put the scroll at the center
   centerScroll() {
     const inner = this.svg.getBoundingClientRect()
     const outer = this.overview.getBoundingClientRect()
@@ -227,7 +227,7 @@ class Overview extends Component {
   handleKeyDown = (e) => {
     const {
       keyActions,
-      project,
+      settings,
       activePoints,
     } = this.props
 
@@ -260,31 +260,31 @@ class Overview extends Component {
       // x increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_LEFT)) {
         e.preventDefault()
-        const dx = -(project.gridSnap ?
-          project.gridSize : project.keyboardIncrement)
-        this.props.onPointsPositionChange(this.props.activePoints, dx, 0)
+        const dx = -(settings.gridSnap ?
+          settings.gridSize : settings.keyboardIncrement)
+        this.props.onPointsPositionChange(activePoints, dx, 0)
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_RIGHT)) {
         e.preventDefault()
-        const dx = project.gridSnap ?
-          project.gridSize : project.keyboardIncrement
-        this.props.onPointsPositionChange(this.props.activePoints, dx, 0)
+        const dx = settings.gridSnap ?
+          settings.gridSize : settings.keyboardIncrement
+        this.props.onPointsPositionChange(activePoints, dx, 0)
       }
 
       // y increment
       if (keyActions.includes(KeyActionTypes.OVERVIEW_UP)) {
         e.preventDefault()
-        const dy = -(project.gridSnap ?
-          project.gridSize : project.keyboardIncrement)
-        this.props.onPointsPositionChange(this.props.activePoints, 0, dy)
+        const dy = -(settings.gridSnap ?
+          settings.gridSize : settings.keyboardIncrement)
+        this.props.onPointsPositionChange(activePoints, 0, dy)
       }
 
       if (keyActions.includes(KeyActionTypes.OVERVIEW_DOWN)) {
         e.preventDefault()
-        const dy = project.gridSnap ?
-          project.gridSize : project.keyboardIncrement
-        this.props.onPointsPositionChange(this.props.activePoints, 0, dy)
+        const dy = settings.gridSnap ?
+          settings.gridSize : settings.keyboardIncrement
+        this.props.onPointsPositionChange(activePoints, 0, dy)
       }
     }
   };
@@ -294,8 +294,9 @@ class Overview extends Component {
       onActivate,
       onDeactivate,
       keyActions,
-      project,
+      settings,
       pathsById,
+      pointsById,
       activePaths,
       activePoints,
     } = this.props
@@ -306,10 +307,10 @@ class Overview extends Component {
         zoom={ this.state.zoom }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
-        project={ project }
         keyActions={ keyActions }
         path={ pathsById[key] }
-        globalPoints={ this.props.pointsById }
+        settings={ settings }
+        globalPoints={ pointsById }
         localPoints={ this.state.localPoints }
         activePaths={ activePaths }
         activePoints={ activePoints }
@@ -318,7 +319,7 @@ class Overview extends Component {
   };
 
   render() {
-    const { project } = this.props
+    const { project, settings } = this.props
     const { zoom } = this.state
 
     return (
@@ -336,9 +337,12 @@ class Overview extends Component {
             height={ project.height * zoom }
             viewBox={ `0 0 ${ project.width } ${ project.height }` }
             onMouseDown={ this.handleOverviewMouseDown }>
-            <Grid
-              zoom={ zoom }
-              project={ project } />
+            { settings.gridShow && (
+              <Grid
+                zoom={ zoom }
+                project={ project }
+                settings={ settings } />
+            ) }
 
             { project.paths.map(this.renderShape) }
           </svg>
@@ -358,6 +362,7 @@ Overview.propTypes = {
   onParametersChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,

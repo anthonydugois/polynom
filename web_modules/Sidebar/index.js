@@ -9,7 +9,6 @@ import SidebarTab from "./SidebarTab"
 import {
   MdGesture,
   MdTune,
-  MdHistory,
   MdSettings,
 } from "react-icons/lib/md"
 
@@ -26,9 +25,6 @@ const Sidebar = (props) => (
           <MdTune size="1.2rem" />
         </SidebarTab>
         <SidebarTab isTabHandler>
-          <MdHistory size="1.2rem" />
-        </SidebarTab>
-        <SidebarTab isTabHandler>
           <MdSettings size="1.2rem" />
         </SidebarTab>
       </TabList>
@@ -39,7 +35,6 @@ const Sidebar = (props) => (
       <TabPanel>
         <SidebarPoint { ...props } />
       </TabPanel>
-      <TabPanel></TabPanel>
       <TabPanel>
         <SidebarSettings { ...props } />
       </TabPanel>

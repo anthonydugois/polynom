@@ -4,6 +4,7 @@ import * as selectors from "../../src/selectors"
 import Overview from "./Overview"
 
 const mapStateToProps = (state, props) => ({
+  settings: state.present.settings,
   pathsById: state.present.pathsById,
   pointsById: state.present.pointsById,
   activePaths: selectors.activePathsSelector(state, props),

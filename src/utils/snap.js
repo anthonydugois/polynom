@@ -1,2 +1,2 @@
-export default (project) => (n) => project.gridSnap ?
-  project.gridSize * Math.round(n / project.gridSize) : n
+export default ({ gridSnap, gridSize }) => (n) =>
+  gridSnap ? gridSize * Math.round(n / gridSize) : n

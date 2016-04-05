@@ -1,4 +1,14 @@
 /**
+ * Settings
+ */
+export const SET_GRID_SHOW = "SET_GRID_SHOW"
+export const SET_GRID_SNAP = "SET_GRID_SNAP"
+export const SET_GRID_SIZE = "SET_GRID_SIZE"
+export const SET_POINT_CODE_SHOW = "SET_POINT_CODE_SHOW"
+export const SET_PATH_BBOX_SHOW = "SET_PATH_BBOX_SHOW"
+export const SET_KEYBOARD_INCREMENT = "SET_KEYBOARD_INCREMENT"
+
+/**
  * Projects
  */
 export const ADD_PROJECT = "ADD_PROJECT"
@@ -7,12 +17,6 @@ export const UPDATE_PROJECT = "UPDATE_PROJECT"
 export const SET_PROJECT_NAME = "SET_PROJECT_NAME"
 export const SET_PROJECT_WIDTH = "SET_PROJECT_WIDTH"
 export const SET_PROJECT_HEIGHT = "SET_PROJECT_HEIGHT"
-export const SET_GRID_SHOW = "SET_GRID_SHOW"
-export const SET_GRID_SNAP = "SET_GRID_SNAP"
-export const SET_GRID_SIZE = "SET_GRID_SIZE"
-export const SET_POINT_CODE_SHOW = "SET_POINT_CODE_SHOW"
-export const SET_PATH_BBOX_SHOW = "SET_PATH_BBOX_SHOW"
-export const SET_KEYBOARD_INCREMENT = "SET_KEYBOARD_INCREMENT"
 
 /**
  * Paths

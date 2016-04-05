@@ -32,7 +32,7 @@ class Path extends Component {
   render() {
     const {
       zoom,
-      project,
+      settings,
       path,
       globalPoints,
       localPoints,
@@ -47,7 +47,7 @@ class Path extends Component {
       <g
         className={ cx("ad-Path", { "is-active": path.isActive }) }
         onMouseDown={ this.handleMouseDown }>
-        { project.pathBoundingBoxShow && path.isActive && (
+        { settings.pathBoundingBoxShow && path.isActive && (
           <rect
             className="ad-Path-bbox"
             strokeWidth={ strokeWidth }
@@ -77,9 +77,9 @@ class Path extends Component {
 Path.propTypes = {
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
-  project: PropTypes.object.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   globalPoints: PropTypes.object.isRequired,
   localPoints: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,

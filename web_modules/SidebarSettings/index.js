@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import SidebarSettings from "./SidebarSettings"
-import { projectsActions } from "../../src/actions"
+import { settingsActions, projectsActions } from "../../src/actions"
 
 const mapStateToProps = (state) => state.present
 
@@ -12,31 +12,22 @@ const mapDispatchToProps = (dispatch, { project }) => ({
     dispatch(projectsActions.setHeight(project.id, height))
   },
   onGridShowChange(gridShow) {
-    dispatch(projectsActions.setGridShow(project.id, gridShow))
+    dispatch(settingsActions.setGridShow(gridShow))
   },
   onGridSnapChange(gridSnap) {
-    dispatch(projectsActions.setGridSnap(project.id, gridSnap))
+    dispatch(settingsActions.setGridSnap(gridSnap))
   },
   onGridSizeChange(gridSize) {
-    dispatch(projectsActions.setGridSize(project.id, gridSize))
+    dispatch(settingsActions.setGridSize(gridSize))
   },
   onPointCodeShowChange(pointCodeShow) {
-    dispatch(projectsActions.setPointCodeShow(
-      project.id,
-      pointCodeShow
-    ))
+    dispatch(settingsActions.setPointCodeShow(pointCodeShow))
   },
   onPathBboxShowChange(pathBoundingBoxShow) {
-    dispatch(projectsActions.setPathBboxShow(
-      project.id,
-      pathBoundingBoxShow
-    ))
+    dispatch(settingsActions.setPathBboxShow(pathBoundingBoxShow))
   },
   onKeyboardIncrementChange(keyboardIncrement) {
-    dispatch(projectsActions.setKeyboardIncrement(
-      project.id,
-      keyboardIncrement
-    ))
+    dispatch(settingsActions.setKeyboardIncrement(keyboardIncrement))
   },
 })
 

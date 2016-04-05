@@ -9,9 +9,10 @@ class Shape extends Component {
     const {
       onActivate,
       onDeactivate,
-      project,
+      zoom,
       keyActions,
       path,
+      settings,
       localPoints,
       activePaths,
       activePoints,
@@ -23,12 +24,12 @@ class Shape extends Component {
         key={ key }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
-        zoom={ this.props.zoom }
-        project={ project }
+        zoom={ zoom }
         keyActions={ keyActions }
         activePaths={ activePaths }
         activePoints={ activePoints }
         path={ path }
+        settings={ settings }
         point={ localPoints[key] }
         previousPoint={ index > 0 ? localPoints[keys[index - 1]] : null }
         onMouseDown={ onMouseDown } />
@@ -39,9 +40,10 @@ class Shape extends Component {
     const {
       onActivate,
       onDeactivate,
-      project,
+      zoom,
       keyActions,
       path,
+      settings,
       globalPoints,
       localPoints,
       activePaths,
@@ -54,10 +56,10 @@ class Shape extends Component {
         <Path
           onActivate={ onActivate }
           onDeactivate={ onDeactivate }
-          zoom={ this.props.zoom }
-          project={ project }
+          zoom={ zoom }
           keyActions={ keyActions }
           path={ path }
+          settings={ settings }
           globalPoints={ globalPoints }
           localPoints={ localPoints }
           activePaths={ activePaths }
@@ -79,6 +81,7 @@ Shape.propTypes = {
   onDeactivate: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   path: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   globalPoints: PropTypes.object.isRequired,
   localPoints: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
