@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   onOverviewDelete(pointIds) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pointsActions.deletePoints(pointIds))
+    dispatch(pointsActions.carefullyDeletePoints(pointIds))
   },
   onPointsPositionChange(pointIds, dx, dy, format) {
     dispatch(projectsActions.update(props.project.id))

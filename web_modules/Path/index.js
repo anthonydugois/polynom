@@ -2,7 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
-import Snap from "snapsvg"
+import { path as snapPath } from "snapsvg"
 import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
@@ -40,7 +40,7 @@ class Path extends Component {
 
     const globalD = pathCode(path, globalPoints)
     const localD = pathCode(path, localPoints)
-    const { x, y, width, height } = Snap.path.getBBox(globalD)
+    const { x, y, width, height } = snapPath.getBBox(globalD)
     const strokeWidth = 1 / zoom
 
     return (

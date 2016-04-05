@@ -1,4 +1,4 @@
-import Snap from "snapsvg"
+import { parsePathString } from "snapsvg"
 
 function isRelative(segment) {
   return segment[0] === segment[0].toLowerCase()
@@ -123,7 +123,7 @@ function A(segment, point) {
 function getPoints(d) {
   const points = []
 
-  Snap.parsePathString(d).forEach((segment) => {
+  parsePathString(d).forEach((segment) => {
     const point = points.length > 0 && points[points.length - 1]
 
     switch (segment[0].toLowerCase()) {

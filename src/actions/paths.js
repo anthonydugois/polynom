@@ -1,5 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { createPoint } from "./points"
+import { createPoint, deletePoints } from "./points"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPathId = 0
@@ -57,6 +57,20 @@ export function removePaths(pathIds) {
   return {
     type: ActionTypes.REMOVE_PATHS,
     pathIds,
+  }
+}
+
+export function deletePaths(pathIds) {
+  return (dispatch, getState) => {
+    const { pathsById } = getState().present
+
+    pathIds.forEach((key) => dispatch(deletePoints(pathsById[key].points)))
+
+    dispatch(removePaths(pathIds))
+    dispatch({
+      type: ActionTypes.DELETE_PATHS,
+      pathIds,
+    })
   }
 }
 

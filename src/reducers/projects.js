@@ -127,7 +127,7 @@ export default (state = initialState, action) => {
       [action.projectId]: project(undefined, action),
     }
 
-  case ActionTypes.REMOVE_PROJECT:
+  case ActionTypes.DELETE_PROJECT:
     return Object.keys(state).reduce(
       (acc, key) => (action.projectId === state[key].id ? acc : {
         ...acc,
@@ -153,13 +153,10 @@ export default (state = initialState, action) => {
     }
 
   case ActionTypes.REMOVE_PATHS:
-    return Object.keys(state).reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: project(state[key], action),
-      }),
-      {}
-    )
+    return Object.keys(state).reduce((acc, key) => ({
+      ...acc,
+      [key]: project(state[key], action),
+    }), {})
 
   default:
     return state

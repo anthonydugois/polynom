@@ -1,5 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { removePaths } from "./paths"
+import { deletePaths } from "./paths"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPointId = 0
@@ -52,14 +52,24 @@ export function createPoint(pathId, code, x, y, parameters) {
   }
 }
 
-export function deletePoints(pointIds) {
-  return (dispatch) => {
-    dispatch(ensurePathsIntegrity(pointIds))
-    dispatch(removePoints(pointIds))
+export function removePoints(pointIds) {
+  return {
+    type: ActionTypes.REMOVE_POINTS,
+    pointIds,
   }
 }
 
-function ensurePathsIntegrity(pointIds) {
+export function deletePoints(pointIds) {
+  return (dispatch) => {
+    dispatch(removePoints(pointIds))
+    dispatch({
+      type: ActionTypes.DELETE_POINTS,
+      pointIds,
+    })
+  }
+}
+
+export function carefullyDeletePoints(pointIds) {
   return (dispatch, getState) => {
     const { pathsById, pointsById } = getState().present
 
@@ -87,16 +97,11 @@ function ensurePathsIntegrity(pointIds) {
           }
         })
       } else {
-        dispatch(removePaths([path.id]))
+        dispatch(deletePaths([path.id]))
       }
     })
-  }
-}
 
-export function removePoints(pointIds) {
-  return {
-    type: ActionTypes.REMOVE_POINTS,
-    pointIds,
+    dispatch(deletePoints(pointIds))
   }
 }
 

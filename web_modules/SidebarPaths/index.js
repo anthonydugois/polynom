@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   onRemoveClick(pathIds) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pathsActions.removePaths(pathIds))
+    dispatch(pathsActions.deletePaths(pathIds))
   },
 })
 

@@ -1,4 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
+import { deletePaths } from "./paths"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newProjectId = 0
@@ -17,10 +18,15 @@ export function addProject(name, width, height) {
   }
 }
 
-export function removeProject(projectId) {
-  return {
-    type: ActionTypes.REMOVE_PROJECT,
-    projectId,
+export function deleteProject(projectId) {
+  return (dispatch, getState) => {
+    const { paths } = getState().present.projectsById[projectId]
+
+    dispatch(deletePaths(paths))
+    dispatch({
+      type: ActionTypes.DELETE_PROJECT,
+      projectId,
+    })
   }
 }
 

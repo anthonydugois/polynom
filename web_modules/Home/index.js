@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(projectsActions.addProject(name, width, height))
   },
   onRemoveProject(id) {
-    dispatch(projectsActions.removeProject(id))
+    dispatch(projectsActions.deleteProject(id))
   },
 })
 
