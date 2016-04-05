@@ -5,7 +5,7 @@ const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPointId = 0
 
 if (savedState && Object.keys(savedState.pointsById).length > 0) {
-  newPointId = Math.max(Object.keys(savedState.pointsById))
+  newPointId = Math.max(...Object.keys(savedState.pointsById))
 }
 
 function addPoint(pathId, insertAt, code, x, y, parameters) {

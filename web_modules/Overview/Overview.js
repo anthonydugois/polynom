@@ -63,31 +63,31 @@ class Overview extends Component {
 
   handleMouseUp = (e) => {
     if (this.state.isDragging) {
+      const { activePoints } = this.props
       const coords = this.getCoords(e)
+      const dx = coords[0] - this.mouseDownCoords[0]
+      const dy = coords[1] - this.mouseDownCoords[1]
 
       switch (this.draggedObject) {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
-        this.props.onPointsPositionChange(
-          this.props.activePoints,
-          coords[0] - this.mouseDownCoords[0],
-          coords[1] - this.mouseDownCoords[1],
-          this.snapping
-        )
+        if (dx !== 0 || dy !== 0) {
+          this.props.onPointsPositionChange(activePoints, dx, dy, this.snapping)
+        }
         break
 
       case ObjectTypes.POINT_ANCHOR_1:
-        this.props.onParametersChange(
-          this.draggedPoint,
-          { x1: coords[0], y1: coords[1] },
-        )
+        this.props.onParametersChange(this.draggedPoint, {
+          x1: coords[0],
+          y1: coords[1],
+        })
         break
 
       case ObjectTypes.POINT_ANCHOR_2:
-        this.props.onParametersChange(
-          this.draggedPoint,
-          { x2: coords[0], y2: coords[1] },
-        )
+        this.props.onParametersChange(this.draggedPoint, {
+          x2: coords[0],
+          y2: coords[1],
+        })
         break
       }
 

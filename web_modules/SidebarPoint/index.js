@@ -12,20 +12,20 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   onCodeChange(pointId, code) {
-    dispatch(pointsActions.setPointCode(pointId, code))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointCode(pointId, code))
   },
   onXPositionChange(pointId, x) {
-    dispatch(pointsActions.setPointX(pointId, x))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointX(pointId, x))
   },
   onYPositionChange(pointId, y) {
-    dispatch(pointsActions.setPointY(pointId, y))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointY(pointId, y))
   },
   onParamsChange(pointId, parameters) {
-    dispatch(pointsActions.setPointParameters(pointId, parameters))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
   },
 })
 

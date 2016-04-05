@@ -7,11 +7,9 @@ const mapStateToProps = (state) => state.present
 const mapDispatchToProps = (dispatch, { project }) => ({
   onWidthChange(width) {
     dispatch(projectsActions.setWidth(project.id, width))
-    dispatch(projectsActions.update(project.id))
   },
   onHeightChange(height) {
     dispatch(projectsActions.setHeight(project.id, height))
-    dispatch(projectsActions.update(project.id))
   },
   onGridShowChange(gridShow) {
     dispatch(projectsActions.setGridShow(project.id, gridShow))

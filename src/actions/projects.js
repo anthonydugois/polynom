@@ -4,7 +4,7 @@ const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newProjectId = 0
 
 if (savedState && Object.keys(savedState.projectsById).length > 0) {
-  newProjectId = Math.max(Object.keys(savedState.projectsById))
+  newProjectId = Math.max(...Object.keys(savedState.projectsById))
 }
 
 export function addProject(name, width, height) {

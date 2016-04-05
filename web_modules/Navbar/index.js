@@ -7,7 +7,6 @@ const mapStateToProps = (state) => state.present
 const mapDispatchToProps = (dispatch, props) => ({
   onProjectNameChange(name) {
     dispatch(projectsActions.setName(props.project.id, name))
-    dispatch(projectsActions.update(props.project.id))
   },
 })
 

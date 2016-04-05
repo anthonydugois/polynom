@@ -20,24 +20,24 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pointsActions.setActivePoints(pointIds, false))
   },
   onOverviewCreatePath(x, y) {
-    dispatch(pathsActions.createPath(props.project.id, x, y))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pathsActions.createPath(props.project.id, x, y))
   },
   onOverviewCreatePoint(pathId, code, x, y, parameters) {
-    dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.createPoint(pathId, code, x, y, parameters))
   },
   onOverviewDelete(pointIds) {
-    dispatch(pointsActions.deletePoints(pointIds))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.deletePoints(pointIds))
   },
   onPointsPositionChange(pointIds, dx, dy, format) {
-    dispatch(pointsActions.setPointsPosition(pointIds, dx, dy, format))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointsPosition(pointIds, dx, dy, format))
   },
   onParametersChange(pointId, parameters) {
-    dispatch(pointsActions.setPointParameters(pointId, parameters))
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.setPointParameters(pointId, parameters))
   },
 })
 

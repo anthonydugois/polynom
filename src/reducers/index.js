@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 import undoable, { includeAction } from "redux-undo"
-import { HISTORY_TYPES } from "../constants/ActionTypes"
+import { UPDATE_PROJECT } from "../constants/ActionTypes"
 import projectsById from "./projects"
 import pathsById from "./paths"
 import pointsById from "./points"
@@ -13,5 +13,5 @@ const rootReducer = combineReducers({
 
 export default undoable(rootReducer, {
   limit: 50,
-  filter: includeAction(HISTORY_TYPES),
+  filter: includeAction(UPDATE_PROJECT),
 })

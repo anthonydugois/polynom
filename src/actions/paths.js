@@ -5,7 +5,7 @@ const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newPathId = 0
 
 if (savedState && Object.keys(savedState.pathsById).length > 0) {
-  newPathId = Math.max(Object.keys(savedState.pathsById))
+  newPathId = Math.max(...Object.keys(savedState.pathsById))
 }
 
 function addPath(projectId, insertAt) {
