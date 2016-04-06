@@ -29,13 +29,15 @@ const mapDispatchToProps = (dispatch, props) => ({
     const { isClosed, isRelative, points } = parsePathCode(d)
 
     dispatch(projectsActions.update(props.project.id))
+    dispatch(pointsActions.deletePoints(props.path.points))
+
+    points.forEach((point) => dispatch(pointsActions.createPoint(
+      props.path.id,
+      ...point
+    )))
 
     dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
     dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
-    dispatch(pointsActions.deletePoints(props.path.points))
-
-    points.forEach((point) =>
-      dispatch(pointsActions.createPoint(props.path.id, ...point)))
   },
   onRelativeChange(isRelative) {
     dispatch(projectsActions.update(props.project.id))

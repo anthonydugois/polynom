@@ -1,5 +1,7 @@
 import * as ActionTypes from "../constants/ActionTypes"
-import { deletePaths } from "./paths"
+import Snap from "snapsvg"
+import { parsePathCode } from "../utils"
+import { importPath, deletePaths } from "./paths"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 let newProjectId = 0
@@ -15,6 +17,39 @@ export function addProject(name, width, height) {
     name,
     width,
     height,
+  }
+}
+
+export function importProject(file) {
+  return (dispatch, getState) => {
+    const fileName = file.name.split(".")
+    const ext = fileName.pop().toLowerCase().trim()
+    const name = fileName.join(".")
+
+    if (ext === "svg") {
+      const reader = new FileReader()
+
+      reader.onload = (f) => {
+        let svg = Snap(Snap.parse(f.target.result).node)
+
+        if (svg.type !== "svg") {
+          svg = svg.select("svg")
+        }
+
+        const { width, height } = svg.attr("viewBox")
+        const paths = svg.selectAll("path")
+
+        dispatch(addProject(name, width, height))
+
+        paths.forEach((path, index) => dispatch(importPath(
+          newProjectId,
+          index,
+          parsePathCode(path.attr("d"))
+        )))
+      }
+
+      reader.readAsBinaryString(file)
+    }
   }
 }
 

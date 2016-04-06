@@ -3,6 +3,7 @@ import { findDOMNode } from "react-dom"
 import Container from "Container"
 import { ButtonRounded } from "Button"
 import Hint from "Hint"
+import Import from "Import"
 import HomeActions from "./HomeActions"
 import HomeAction from "./HomeAction"
 import HomeProjects from "./HomeProjects"
@@ -34,6 +35,10 @@ class HomeBody extends Component {
     this.props.onCreateProject("Untitled", 1200, 800)
   };
 
+  handleImport = (e) => {
+    this.props.onImportProjects(e.target.files)
+  };
+
   render() {
     const {
       projectsById,
@@ -61,9 +66,13 @@ class HomeBody extends Component {
                 </ButtonRounded>
               </HomeAction>
               <HomeAction>
-                <ButtonRounded size="3rem">
-                  Import...
-                </ButtonRounded>
+                <Import
+                  multiple={ true }
+                  onChange={ this.handleImport }>
+                  <ButtonRounded size="3rem">
+                    Import...
+                  </ButtonRounded>
+                </Import>
               </HomeAction>
             </HomeActions>
           </div>
@@ -93,6 +102,7 @@ class HomeBody extends Component {
 HomeBody.propTypes = {
   onCreateProject: PropTypes.func.isRequired,
   onRemoveProject: PropTypes.func.isRequired,
+  onImportProjects: PropTypes.func.isRequired,
   projectsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,

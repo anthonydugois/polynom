@@ -11,6 +11,10 @@ const mapDispatchToProps = (dispatch) => ({
   onRemoveProject(id) {
     dispatch(projectsActions.deleteProject(id))
   },
+  onImportProjects(files) {
+    [].forEach.call(files, (file) =>
+      dispatch(projectsActions.importProject(file)))
+  },
 })
 
 export default connect(

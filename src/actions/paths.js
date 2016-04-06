@@ -34,14 +34,24 @@ export function createPath(projectId, x, y) {
     const project = projectsById[projectId]
 
     const activePaths = project.paths.filter((key) => pathsById[key].isActive)
-    const insertAt = project.paths.indexOf(activePaths[activePaths.length - 1])
+    const index = project.paths.indexOf(activePaths[activePaths.length - 1])
+    const insertAt = index > -1 ? index + 1 : project.paths.length + 1
 
     dispatch(setActivePaths(activePaths, false))
-    dispatch(addPath(
-      projectId,
-      insertAt > -1 ? insertAt + 1 : project.paths.length + 1
-    ))
+    dispatch(addPath(projectId, insertAt))
+    dispatch(setActivePaths([newPathId], true))
     dispatch(createPoint(newPathId, "M", x, y, {}))
+  }
+}
+
+export function importPath(projectId, insertAt, parsedCode) {
+  return (dispatch) => {
+    const { isClosed, isRelative, points } = parsedCode
+
+    dispatch(addPath(projectId, insertAt))
+    points.forEach((point) => dispatch(createPoint(newPathId, ...point)))
+    dispatch(setClosedPath(newPathId, isClosed))
+    dispatch(setRelativePath(newPathId, isRelative))
   }
 }
 
