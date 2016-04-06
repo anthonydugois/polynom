@@ -5,6 +5,8 @@ import { Provider } from "react-redux"
 import createStore from "./store"
 import routes from "./routes"
 
+localStorage.clear()
+
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 const store = savedState ? createStore(savedState) : createStore()
 

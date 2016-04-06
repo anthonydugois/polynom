@@ -94,6 +94,8 @@ HomeBody.propTypes = {
   onCreateProject: PropTypes.func.isRequired,
   onRemoveProject: PropTypes.func.isRequired,
   projectsById: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
 }
 
 export default HomeBody

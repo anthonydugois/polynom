@@ -215,15 +215,6 @@ class Overview extends Component {
     }
   };
 
-  // automatically put the scroll at the center
-  centerScroll() {
-    const inner = this.svg.getBoundingClientRect()
-    const outer = this.overview.getBoundingClientRect()
-
-    this.overview.scrollTop = (inner.height - outer.height) / 2
-    this.overview.scrollLeft = (inner.width - outer.width) / 2
-  }
-
   handleKeyDown = (e) => {
     const {
       keyActions,
@@ -238,7 +229,7 @@ class Overview extends Component {
       e.preventDefault()
 
       if (currentZoom < ZOOM_SCALE.length - 1) {
-        this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] }, this.centerScroll)
+        this.setState({ zoom: ZOOM_SCALE[currentZoom + 1] })
       }
     }
 
@@ -246,7 +237,7 @@ class Overview extends Component {
       e.preventDefault()
 
       if (currentZoom > 0) {
-        this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] }, this.centerScroll)
+        this.setState({ zoom: ZOOM_SCALE[currentZoom - 1] })
       }
     }
 

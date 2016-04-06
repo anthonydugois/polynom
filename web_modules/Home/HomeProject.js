@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
 import { Link } from "react-router"
 import DateTime from "DateTime"
 import SVG from "SVG"
 import { ButtonSquare } from "Button"
-import {
-  MdFileDownload,
-  MdDelete,
-} from "react-icons/lib/md"
+import { MdFileDownload, MdDelete } from "react-icons/lib/md"
+import { pathCode, slug } from "../../src/utils"
 
 class HomeProject extends Component {
   handleRemoveClick = (e) => {
@@ -22,6 +21,13 @@ class HomeProject extends Component {
 
     const createdAt = new Date(project.createdAt)
     const updatedAt = new Date(project.updatedAt)
+
+    const file = encodeURIComponent(renderToStaticMarkup(
+      <SVG
+        project={ project }
+        pathsById={ pathsById }
+        pointsById={ pointsById } />
+    ))
 
     return (
       <div className="ad-HomeProject">
@@ -52,7 +58,9 @@ class HomeProject extends Component {
           <div className="ad-HomeProject-actions">
             <ButtonSquare
               size="2.5rem"
-              type={ ["action", "light"] }>
+              type={ ["action", "light"] }
+              href={ `data:image/svg+xml;charset=utf-8,${ file }` }
+              download={ `${ slug(project.name) }.svg` }>
               <MdFileDownload size="1rem" />
             </ButtonSquare>
             <ButtonSquare
@@ -72,6 +80,8 @@ class HomeProject extends Component {
 HomeProject.propTypes = {
   onRemoveProject: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
 }
 
 export default HomeProject
