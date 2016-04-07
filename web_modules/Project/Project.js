@@ -9,6 +9,7 @@ import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 
 class Project extends Component {
   componentDidMount() {
+    this.props.clearHistory()
     this.project.focus()
   }
 
@@ -44,6 +45,9 @@ class Project extends Component {
 }
 
 Project.propTypes = {
+  undo: PropTypes.func.isRequired,
+  redo: PropTypes.func.isRequired,
+  clearHistory: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
 }

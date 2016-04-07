@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
   redo() {
     dispatch(undoActions.redo())
   },
+  clearHistory() {
+    dispatch(undoActions.clearHistory())
+  },
 })
 
 export default connect(
