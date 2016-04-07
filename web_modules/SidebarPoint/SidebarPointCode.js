@@ -28,46 +28,36 @@ class SidebarPointCode extends Component {
                 onChange={ this.handleCodeChange }>
                 M
               </Choice>
-
               <Choice
                 value="L"
                 checked={ code === "l" }
                 onChange={ this.handleCodeChange }>
                 L
               </Choice>
-
               <Choice
                 value="Q"
                 checked={ code === "q" }
                 onChange={ this.handleCodeChange }>
                 Q
               </Choice>
-
-              { (prevCode === "q" || prevCode === "t") && (
-                <Choice
-                  value="T"
-                  checked={ code === "t" }
-                  onChange={ this.handleCodeChange }>
-                  T
-                </Choice>
-              ) }
-
+              <Choice
+                value="T"
+                checked={ code === "t" }
+                onChange={ this.handleCodeChange }>
+                T
+              </Choice>
               <Choice
                 value="C"
                 checked={ code === "c" }
                 onChange={ this.handleCodeChange }>
                 C
               </Choice>
-
-              { (prevCode === "c" || prevCode === "s") && (
-                <Choice
-                  value="S"
-                  checked={ code === "s" }
-                  onChange={ this.handleCodeChange }>
-                  S
-                </Choice>
-              ) }
-
+              <Choice
+                value="S"
+                checked={ code === "s" }
+                onChange={ this.handleCodeChange }>
+                S
+              </Choice>
               <Choice
                 value="A"
                 checked={ code === "a" }

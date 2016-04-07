@@ -74,28 +74,17 @@ export function carefullyDeletePoints(pointIds) {
     const { pathsById, pointsById } = getState().present
 
     Object.keys(pathsById).forEach((pathId) => {
-      const path = pathsById[pathId]
       // get remaining points
+      const path = pathsById[pathId]
       const points = path.points.filter((key) => !pointIds.includes(key))
 
-      if (points.length !== 0) {
-        points.forEach((key, index, keys) => {
-          const point = pointsById[key]
-          const code = point.code.toLowerCase()
-          const previous = index > 0 && pointsById[keys[index - 1]]
-          const previousCode = index > 0 && previous.code.toLowerCase()
+      if (points.length > 0) {
+        const firstPoint = pointsById[points[0]]
 
-          if (index === 0 && code !== "m") {
-            dispatch(setPointCode(point.id, "M"))
-            dispatch(setPointParameters(point.id, {}))
-          } else if (
-            (code === "t" && !["q", "t"].includes(previousCode))
-            || (code === "s" && !["c", "s"].includes(previousCode))
-          ) {
-            dispatch(setPointCode(point.id, "L"))
-            dispatch(setPointParameters(point.id, {}))
-          }
-        })
+        if (firstPoint.code.toLowerCase() !== "m") {
+          dispatch(setPointCode(firstPoint.id, "M"))
+          dispatch(setPointParameters(firstPoint.id, {}))
+        }
       } else {
         dispatch(deletePaths([path.id]))
       }
