@@ -22,12 +22,15 @@ class HomeProject extends Component {
     const createdAt = new Date(project.createdAt)
     const updatedAt = new Date(project.updatedAt)
 
-    const file = encodeURIComponent(renderToStaticMarkup(
+    // React ignore `xmlns` attribute, which is necessary to open SVG as image
+    // if you have a better solution, please replace this ugly code
+    const markup = renderToStaticMarkup(
       <SVG
         project={ project }
         pathsById={ pathsById }
         pointsById={ pointsById } />
-    ))
+    ).replace(/^<svg/g, `<svg xmlns="http://www.w3.org/2000/svg"`)
+    const file = encodeURIComponent(markup)
 
     return (
       <div className="ad-HomeProject">
@@ -59,7 +62,7 @@ class HomeProject extends Component {
             <ButtonSquare
               size="2.5rem"
               type={ ["action", "light"] }
-              href={ `data:image/svg+xml;charset=utf-8,${ file }` }
+              href={ `data:image/svg+xml,${ file }` }
               download={ `${ slug(project.name) }.svg` }>
               <MdFileDownload size="1rem" />
             </ButtonSquare>

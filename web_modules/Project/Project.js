@@ -9,8 +9,11 @@ import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 
 class Project extends Component {
   componentDidMount() {
-    this.props.clearHistory()
     this.project.focus()
+  }
+
+  componentWillUnmount() {
+    this.props.clearHistory()
   }
 
   handleKeyDown = (e) => {

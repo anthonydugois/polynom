@@ -8,6 +8,7 @@ const SVG = ({
   ...props,
 }) => (
   <svg
+    xmlns="http://www.w3.org/2000/svg"
     width={ project.width }
     height={ project.height }
     viewBox={ `0 0 ${ project.width } ${ project.height }` }
