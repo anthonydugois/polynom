@@ -5,28 +5,29 @@
   background: color(var(--ad-Color-prim) l(-4%));
 }
   .ad-HomeHead {
-    padding: 6rem 0;
+    padding: 4rem 0;
     background: var(--ad-Color-prim);
   }
     .ad-HomeHead-container {
       display: flex;
-      align-items: flex-start;
     }
       .ad-HomeHead-brand {
         margin-left: 1rem;
+        padding-left: 1rem;
+        border-left: 1px solid color(var(--ad-Color-prim) l(+10%));
         color: #fff;
       }
         .ad-HomeHead-title {
           padding: 0;
           margin: 0;
           font-family: "Fira Sans", sans-serif;
-          font-size: 2.2rem;
+          font-size: 2rem;
           font-weight: 300;
         }
         .ad-HomeHead-lead {
           margin-top: .5rem;
           font-family: "Fira Sans", sans-serif;
-          font-size: 1.6rem;
+          font-size: 1.2rem;
           font-weight: 300;
           color: color(var(--ad-Color-prim) l(+60%));
         }

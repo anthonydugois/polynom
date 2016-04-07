@@ -25,6 +25,8 @@ class Overview extends Component {
   };
 
   componentDidMount() {
+    this.overview.focus()
+
     document.addEventListener("mousemove", this.handleMouseMove)
     document.addEventListener("mouseup", this.handleMouseUp)
   }
@@ -292,19 +294,26 @@ class Overview extends Component {
       activePoints,
     } = this.props
 
+    const {
+      isDragging,
+      localPoints,
+      zoom,
+    } = this.state
+
     return (
       <Shape
         key={ key }
-        zoom={ this.state.zoom }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
         keyActions={ keyActions }
         path={ pathsById[key] }
         settings={ settings }
         globalPoints={ pointsById }
-        localPoints={ this.state.localPoints }
         activePaths={ activePaths }
         activePoints={ activePoints }
+        isDragging={ isDragging }
+        localPoints={ localPoints }
+        zoom={ zoom }
         onMouseDown={ this.handleMouseDown } />
     )
   };

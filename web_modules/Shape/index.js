@@ -9,6 +9,7 @@ class Shape extends Component {
     const {
       onActivate,
       onDeactivate,
+      isDragging,
       zoom,
       keyActions,
       path,
@@ -24,6 +25,7 @@ class Shape extends Component {
         key={ key }
         onActivate={ onActivate }
         onDeactivate={ onDeactivate }
+        isDragging={ isDragging }
         zoom={ zoom }
         keyActions={ keyActions }
         activePaths={ activePaths }

@@ -63,14 +63,14 @@ class Point extends Component {
 
   renderPoint(point) {
     const { zoom } = this.props
-    const [w, h] = [6 / zoom, 6 / zoom]
+    const [w, h] = [5 / zoom, 5 / zoom]
 
     return (
       <g className="ad-MainPoint">
         { this.renderCode(w, h, point) }
         <rect
           className="ad-MainPoint-coords"
-          strokeWidth={ 2 / zoom }
+          strokeWidth={ 1 / zoom }
           x={ point.x - w / 2 }
           y={ point.y - h / 2 }
           width={ w }
@@ -165,12 +165,15 @@ class Point extends Component {
   }
 
   render() {
-    const { point, previousPoint } = this.props
+    const { point, previousPoint, isDragging } = this.props
     const code = point.code.toLowerCase()
 
     return (
       <g
-        className={ cx("ad-Point", { "is-active": point.isActive }) }
+        className={ cx("ad-Point", {
+          "is-active": point.isActive,
+          "is-dragging": isDragging,
+        }) }
         onMouseDown={ this.handleMouseDown }>
         { this.renderPoint(point) }
 

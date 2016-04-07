@@ -6,9 +6,7 @@ import Logo from "Logo"
 const HomeHead = () => (
   <div className="ad-HomeHead">
     <Container className="ad-HomeHead-container">
-      <Link
-        to="/"
-        className="ad-HomeHead-logo">
+      <Link to="/">
         <Logo size="3rem" />
       </Link>
 
@@ -17,7 +15,7 @@ const HomeHead = () => (
           Polynom
         </h1>
         <div className="ad-HomeHead-lead">
-          Create and edit SVG paths easily directly in your browser.
+          Edit SVG paths easily directly in your browser.
         </div>
       </div>
     </Container>
