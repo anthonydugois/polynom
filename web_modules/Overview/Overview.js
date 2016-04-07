@@ -40,22 +40,32 @@ class Overview extends Component {
     this.setState({ localPoints: nextProps.pointsById })
   }
 
-  snapping = (n) => snap(this.props.settings)(n);
+  snapping = (n) => this.props.activePoints.length === 1 ?
+    snap(this.props.settings)(n) : n;
 
   getCoords = (e) => {
     const { zoom } = this.state
     const { left, top } = this.svg.getBoundingClientRect()
 
-    const x = this.snapping(Math.round(e.clientX - left) / zoom)
-    const y = this.snapping(Math.round(e.clientY - top) / zoom)
+    const x = Math.round(e.clientX - left) / zoom
+    const y = Math.round(e.clientY - top) / zoom
 
     return [+x.toFixed(0), +y.toFixed(0)]
+  };
+
+  getComputedCoords = (e) => {
+    const coords = this.getCoords(e)
+
+    return [
+      this.snapping(coords[0]),
+      this.snapping(coords[1]),
+    ]
   };
 
   handleMouseDown = (e, draggedPoint, draggedObject) => {
     this.draggedPoint = draggedPoint
     this.draggedObject = draggedObject
-    this.mouseDownCoords = this.getCoords(e)
+    this.mouseDownCoords = this.getComputedCoords(e)
 
     this.setState({
       coords: this.mouseDownCoords,
@@ -66,7 +76,7 @@ class Overview extends Component {
   handleMouseUp = (e) => {
     if (this.state.isDragging) {
       const { activePoints } = this.props
-      const coords = this.getCoords(e)
+      const coords = this.getComputedCoords(e)
       const dx = coords[0] - this.mouseDownCoords[0]
       const dy = coords[1] - this.mouseDownCoords[1]
 
@@ -98,7 +108,7 @@ class Overview extends Component {
   };
 
   handleMouseMove = (e) => {
-    const coords = this.getCoords(e)
+    const coords = this.getComputedCoords(e)
 
     if (this.state.isDragging) {
       e.preventDefault()
@@ -133,32 +143,36 @@ class Overview extends Component {
   }
 
   movePoints(dx, dy) {
-    return Object.keys(this.state.localPoints).reduce(
-      (acc, key) => {
-        const point = this.state.localPoints[key]
+    if (dx !== 0 || dy !== 0) {
+      return Object.keys(this.state.localPoints).reduce(
+        (acc, key) => {
+          const point = this.state.localPoints[key]
 
-        return {
-          ...acc,
-          [point.id]: !this.props.activePoints.includes(point.id) ? point : {
-            ...point,
-            x: this.snapping(point.x) + dx,
-            y: this.snapping(point.y) + dy,
-            parameters: {
-              ...point.parameters,
-              ...typeof point.parameters.x1 !== "undefined"
-                && { x1: point.parameters.x1 + dx },
-              ...typeof point.parameters.y1 !== "undefined"
-                && { y1: point.parameters.y1 + dy },
-              ...typeof point.parameters.x2 !== "undefined"
-                && { x2: point.parameters.x2 + dx },
-              ...typeof point.parameters.y2 !== "undefined"
-                && { y2: point.parameters.y2 + dy },
+          return {
+            ...acc,
+            [point.id]: !this.props.activePoints.includes(point.id) ? point : {
+              ...point,
+              x: this.snapping(point.x) + dx,
+              y: this.snapping(point.y) + dy,
+              parameters: {
+                ...point.parameters,
+                ...typeof point.parameters.x1 !== "undefined"
+                  && { x1: point.parameters.x1 + dx },
+                ...typeof point.parameters.y1 !== "undefined"
+                  && { y1: point.parameters.y1 + dy },
+                ...typeof point.parameters.x2 !== "undefined"
+                  && { x2: point.parameters.x2 + dx },
+                ...typeof point.parameters.y2 !== "undefined"
+                  && { y2: point.parameters.y2 + dy },
+              },
             },
-          },
-        }
-      },
-      {}
-    )
+          }
+        },
+        {}
+      )
+    }
+
+    return this.state.localPoints
   }
 
   moveFirstAnchor([x1, y1]) {
@@ -197,7 +211,7 @@ class Overview extends Component {
     if (keyActions.includes(KeyActionTypes.APP_CTRL)) {
       e.preventDefault()
 
-      const [x, y] = this.getCoords(e)
+      const [x, y] = this.getComputedCoords(e)
 
       if (activePaths.length === 1) {
         this.props.onOverviewCreatePoint(activePaths[0], "L", x, y, {})
