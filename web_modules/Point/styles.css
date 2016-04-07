@@ -20,16 +20,10 @@
   fill: var(--ad-Color-sec);
 }
 
-.ad-Anchor {
-  opacity: .6;
+.ad-Anchor-point {
+  cursor: pointer;
+  fill: var(--ad-Color-sec);
 }
-.ad-Point.is-active .ad-Anchor {
-  opacity: 1;
+.ad-Anchor-line {
+  stroke: var(--ad-Color-sec);
 }
-  .ad-Anchor-point {
-    cursor: pointer;
-    fill: var(--ad-Color-sec);
-  }
-  .ad-Anchor-line {
-    stroke: var(--ad-Color-sec);
-  }

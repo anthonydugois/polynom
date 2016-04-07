@@ -174,10 +174,10 @@ class Point extends Component {
         onMouseDown={ this.handleMouseDown }>
         { this.renderPoint(point) }
 
-        { /* If there is a Bezier curve, render anchors */ }
-        { (code === "q") &&
+        { point.isActive && code === "q" &&
             this.renderQuadraticAnchors(point, previousPoint) }
-        { (code === "c" || code === "s") &&
+
+        { point.isActive && (code === "c" || code === "s") &&
             this.renderCubicAnchors(point, previousPoint) }
       </g>
     )

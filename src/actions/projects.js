@@ -1,6 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
 import Snap from "snapsvg"
-import { parsePathCode } from "../utils"
 import { importPath, deletePaths } from "./paths"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
@@ -44,7 +43,7 @@ export function importProject(file) {
         paths.forEach((path, index) => dispatch(importPath(
           newProjectId,
           index,
-          parsePathCode(path.attr("d"))
+          path.attr("d")
         )))
       }
 

@@ -1,4 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes"
+import { parsePathCode } from "../utils"
 import { createPoint, deletePoints } from "./points"
 
 const savedState = JSON.parse(localStorage.getItem("savedState"))
@@ -44,9 +45,9 @@ export function createPath(projectId, x, y) {
   }
 }
 
-export function importPath(projectId, insertAt, parsedCode) {
+export function importPath(projectId, insertAt, d) {
   return (dispatch) => {
-    const { isClosed, isRelative, points } = parsedCode
+    const { isClosed, isRelative, points } = parsePathCode(d)
 
     dispatch(addPath(projectId, insertAt))
     points.forEach((point) => dispatch(createPoint(newPathId, ...point)))
