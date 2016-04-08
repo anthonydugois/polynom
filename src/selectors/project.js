@@ -8,8 +8,3 @@ export const projectSelector = createSelector(
   projectIdSelector,
   (projectsById, projectId) => projectsById[projectId]
 )
-
-export const projectGridStepSelector = createSelector(
-  projectSelector,
-  (project) => project.gridSnap ? project.gridSize : 1
-)

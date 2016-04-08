@@ -1,6 +1,7 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
+import mapActionsToKeys from "react-keybindings"
 import Grid from "Grid"
 import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
@@ -383,4 +384,13 @@ Overview.propTypes = {
   activePoints: PropTypes.array.isRequired,
 }
 
-export default Overview
+export default mapActionsToKeys({
+  [KeyActionTypes.APP_CTRL]: "ctrl",
+  [KeyActionTypes.OVERVIEW_DEL]: "delete",
+  [KeyActionTypes.OVERVIEW_UP]: "up",
+  [KeyActionTypes.OVERVIEW_DOWN]: "down",
+  [KeyActionTypes.OVERVIEW_LEFT]: "left",
+  [KeyActionTypes.OVERVIEW_RIGHT]: "right",
+  [KeyActionTypes.OVERVIEW_ZOOM_PLUS]: ["ctrl", 107],
+  [KeyActionTypes.OVERVIEW_ZOOM_MINUS]: ["ctrl", 109],
+})(Overview)

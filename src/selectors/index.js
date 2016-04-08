@@ -12,3 +12,7 @@ export {
   pointSelector,
   previousPointSelector,
 } from "./activePoints"
+
+export {
+  gridStepSelector,
+} from "./gridStep"

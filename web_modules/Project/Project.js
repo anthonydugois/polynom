@@ -27,15 +27,26 @@ class Project extends Component {
   };
 
   render() {
+    const {
+      params,
+      project,
+    } = this.props
+
     return (
       <div
         tabIndex={ 0 }
         className="ad-Project"
         onKeyDown={ this.handleKeyDown }>
-        <Navbar { ...this.props } />
+        <Navbar
+          project={ project }
+          params={ params } />
         <div className="ad-Project-content">
-          <Overview { ...this.props } />
-          <Sidebar { ...this.props } />
+          <Overview
+            project={ project }
+            params={ params } />
+          <Sidebar
+            project={ project }
+            params={ params } />
         </div>
       </div>
     )
@@ -51,16 +62,6 @@ Project.propTypes = {
 }
 
 export default mapActionsToKeys({
-  [KeyActionTypes.APP_CTRL]: "ctrl",
-  [KeyActionTypes.APP_SHIFT]: "shift",
   [KeyActionTypes.APP_UNDO]: "ctrl+z",
   [KeyActionTypes.APP_REDO]: "ctrl+y",
-  [KeyActionTypes.SIDEBAR_DEL]: "delete",
-  [KeyActionTypes.OVERVIEW_DEL]: "delete",
-  [KeyActionTypes.OVERVIEW_UP]: "up",
-  [KeyActionTypes.OVERVIEW_DOWN]: "down",
-  [KeyActionTypes.OVERVIEW_LEFT]: "left",
-  [KeyActionTypes.OVERVIEW_RIGHT]: "right",
-  [KeyActionTypes.OVERVIEW_ZOOM_PLUS]: ["ctrl", 107],
-  [KeyActionTypes.OVERVIEW_ZOOM_MINUS]: ["ctrl", 109],
 })(Project)

@@ -4,7 +4,7 @@ import * as selectors from "../../src/selectors"
 import SidebarPoint from "./SidebarPoint"
 
 const mapStateToProps = (state, props) => ({
-  gridStep: selectors.projectGridStepSelector(state, props),
+  gridStep: selectors.gridStepSelector(state, props),
   activePoints: selectors.activePointsSelector(state, props),
   point: selectors.pointSelector(state, props),
   previousPoint: selectors.previousPointSelector(state, props),

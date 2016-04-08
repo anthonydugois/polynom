@@ -1,6 +1,7 @@
 import "./styles"
 
-import React, { PropTypes } from "react"
+import React, { Component, PropTypes } from "react"
+import mapActionsToKeys from "react-keybindings"
 import Tabs, { TabList, TabPanel } from "Tabs"
 import SidebarPaths from "SidebarPaths"
 import SidebarPoint from "SidebarPoint"
@@ -11,36 +12,43 @@ import {
   MdTune,
   MdSettings,
 } from "react-icons/lib/md"
+import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 
-const Sidebar = (props) => (
-  <div className="ad-Sidebar">
-    <Tabs
-      className="ad-SidebarTabs"
-      selected={ 0 }>
-      <TabList>
-        <SidebarTab isTabHandler>
-          <MdGesture size="1.2rem" />
-        </SidebarTab>
-        <SidebarTab isTabHandler>
-          <MdTune size="1.2rem" />
-        </SidebarTab>
-        <SidebarTab isTabHandler>
-          <MdSettings size="1.2rem" />
-        </SidebarTab>
-      </TabList>
+class Sidebar extends Component {
+  render() {
+    return (
+      <div
+        tabIndex={ 2 }
+        className="ad-Sidebar">
+        <Tabs
+          className="ad-SidebarTabs"
+          selected={ 0 }>
+          <TabList>
+            <SidebarTab isTabHandler>
+              <MdGesture size="1.2rem" />
+            </SidebarTab>
+            <SidebarTab isTabHandler>
+              <MdTune size="1.2rem" />
+            </SidebarTab>
+            <SidebarTab isTabHandler>
+              <MdSettings size="1.2rem" />
+            </SidebarTab>
+          </TabList>
 
-      <TabPanel>
-        <SidebarPaths { ...props } />
-      </TabPanel>
-      <TabPanel>
-        <SidebarPoint { ...props } />
-      </TabPanel>
-      <TabPanel>
-        <SidebarSettings { ...props } />
-      </TabPanel>
-    </Tabs>
-  </div>
-)
+          <TabPanel>
+            <SidebarPaths { ...this.props } />
+          </TabPanel>
+          <TabPanel>
+            <SidebarPoint { ...this.props } />
+          </TabPanel>
+          <TabPanel>
+            <SidebarSettings { ...this.props } />
+          </TabPanel>
+        </Tabs>
+      </div>
+    )
+  }
+}
 
 Sidebar.propTypes = {
   keyActions: PropTypes.array.isRequired,
@@ -51,4 +59,7 @@ export SidebarActions from "./SidebarActions"
 export SidebarModule from "./SidebarModule"
 export SidebarPanel from "./SidebarPanel"
 
-export default Sidebar
+export default mapActionsToKeys({
+  [KeyActionTypes.APP_CTRL]: "ctrl",
+  [KeyActionTypes.APP_SHIFT]: "shift",
+})(Sidebar)
