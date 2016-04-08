@@ -7,9 +7,9 @@ import Text from "Text"
 
 class Navbar extends Component {
   handleProjectNameChange = (e) => {
-    const { value } = e.target
+    const value = e.target.value.trim()
 
-    if (value.trim() !== "") {
+    if (value !== "") {
       this.props.onProjectNameChange(value)
     }
   };
