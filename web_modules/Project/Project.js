@@ -15,12 +15,12 @@ class Project extends Component {
   handleKeyDown = (e) => {
     const { keyActions } = this.props
 
-    if (keyActions.includes(KeyActionTypes.APP_UNDO)) {
+    if (keyActions.includes(KeyActionTypes.PROJECT_UNDO)) {
       e.preventDefault()
       this.props.undo()
     }
 
-    if (keyActions.includes(KeyActionTypes.APP_REDO)) {
+    if (keyActions.includes(KeyActionTypes.PROJECT_REDO)) {
       e.preventDefault()
       this.props.redo()
     }
@@ -62,6 +62,6 @@ Project.propTypes = {
 }
 
 export default mapActionsToKeys({
-  [KeyActionTypes.APP_UNDO]: "ctrl+z",
-  [KeyActionTypes.APP_REDO]: "ctrl+y",
+  [KeyActionTypes.PROJECT_UNDO]: "ctrl+z",
+  [KeyActionTypes.PROJECT_REDO]: "ctrl+y",
 })(Project)

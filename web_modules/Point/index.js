@@ -2,7 +2,7 @@ import "./styles"
 
 import React, { Component, PropTypes } from "react"
 import cx from "classnames"
-import { APP_SHIFT } from "../../src/constants/KeyActionTypes"
+import { SHIFT } from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import * as VisibilityTypes from "../../src/constants/VisibilityTypes"
 
@@ -18,7 +18,7 @@ class Point extends Component {
       point,
     } = this.props
 
-    if (!keyActions.includes(APP_SHIFT)) {
+    if (!keyActions.includes(SHIFT)) {
       this.props.onDeactivate(activePaths, activePoints)
     }
 

@@ -60,6 +60,6 @@ export SidebarModule from "./SidebarModule"
 export SidebarPanel from "./SidebarPanel"
 
 export default mapActionsToKeys({
-  [KeyActionTypes.APP_CTRL]: "ctrl",
-  [KeyActionTypes.APP_SHIFT]: "shift",
+  [KeyActionTypes.CTRL]: "ctrl",
+  [KeyActionTypes.SHIFT]: "shift",
 })(Sidebar)

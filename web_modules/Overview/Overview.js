@@ -209,7 +209,7 @@ class Overview extends Component {
 
     // if CTRL is pressed, add a point to the active path or create a path
     // else deactivate all objects in the overview
-    if (keyActions.includes(KeyActionTypes.APP_CTRL)) {
+    if (keyActions.includes(KeyActionTypes.CTRL)) {
       e.preventDefault()
 
       const [x, y] = this.getComputedCoords(e)
@@ -226,7 +226,7 @@ class Overview extends Component {
 
   // scroll horizontally if CTRL is pressed
   handleWheel = (e) => {
-    if (this.props.keyActions.includes(KeyActionTypes.APP_CTRL)) {
+    if (this.props.keyActions.includes(KeyActionTypes.CTRL)) {
       e.preventDefault()
       this.overview.scrollLeft += e.deltaY
     }
@@ -385,7 +385,7 @@ Overview.propTypes = {
 }
 
 export default mapActionsToKeys({
-  [KeyActionTypes.APP_CTRL]: "ctrl",
+  [KeyActionTypes.CTRL]: "ctrl",
   [KeyActionTypes.OVERVIEW_DEL]: "delete",
   [KeyActionTypes.OVERVIEW_UP]: "up",
   [KeyActionTypes.OVERVIEW_DOWN]: "down",

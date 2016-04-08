@@ -13,7 +13,7 @@ import { ButtonSquare } from "Button"
 import { MdDragHandle } from "react-icons/lib/md"
 import SidebarPathExpand from "./SidebarPathExpand"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
-import { APP_CTRL, APP_SHIFT } from "../../src/constants/KeyActionTypes"
+import { CTRL, SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
 
 class SidebarPath extends Component {
@@ -38,11 +38,11 @@ class SidebarPath extends Component {
       pathsById,
     } = this.props
 
-    if (!keyActions.includes(APP_CTRL)) {
+    if (!keyActions.includes(CTRL)) {
       this.props.onDeactivate(activePaths, activePoints)
     }
 
-    if (keyActions.includes(APP_SHIFT)) {
+    if (keyActions.includes(SHIFT)) {
       const pathIndex = project.paths.indexOf(path.id)
       const activePathIndex = project.paths.indexOf(activePaths[0])
       const pathIds = pathIndex < activePathIndex ?
