@@ -112,15 +112,13 @@ class SidebarPath extends Component {
       pointsById,
       connectDragSource,
       connectDropTarget,
-      isDragging,
       isOver,
     } = this.props
 
+    console.log("render", path.id)
+
     return (
-      <div className={ cx("ad-SidebarPath", {
-        "is-active": path.isActive,
-        "is-hidden": isDragging,
-      }) }>
+      <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
         <Expand>
           <SidebarPathExpand
             onClick={ this.handlePathClick }
@@ -263,6 +261,5 @@ export default DropTarget(
   (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
   }),
 )(SidebarPath))

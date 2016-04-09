@@ -8,6 +8,8 @@ class Expand extends Component {
   handleClick(_isOpened) {
     return (e) => {
       e.preventDefault()
+      e.stopPropagation()
+
       this.setState({ _isOpened })
     }
   }

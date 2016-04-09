@@ -66,9 +66,7 @@ class HomeBody extends Component {
                 </ButtonRounded>
               </HomeAction>
               <HomeAction>
-                <Import
-                  multiple={ true }
-                  onChange={ this.handleImport }>
+                <Import onChange={ this.handleImport }>
                   <ButtonRounded size="3rem">
                     Import...
                   </ButtonRounded>
