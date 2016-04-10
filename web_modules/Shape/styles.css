@@ -1,1 +1,9 @@
 @import url(App/config.css);
+
+.ad-Shape-points {
+  opacity: 0;
+}
+.ad-Shape:hover .ad-Shape-points,
+.ad-Shape.is-active .ad-Shape-points {
+  opacity: 1;
+}

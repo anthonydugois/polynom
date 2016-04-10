@@ -386,6 +386,7 @@ Overview.propTypes = {
 
 export default mapActionsToKeys({
   [KeyActionTypes.CTRL]: "ctrl",
+  [KeyActionTypes.SHIFT]: "shift",
   [KeyActionTypes.OVERVIEW_DEL]: "delete",
   [KeyActionTypes.OVERVIEW_UP]: "up",
   [KeyActionTypes.OVERVIEW_DOWN]: "down",

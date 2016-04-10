@@ -5,6 +5,10 @@
   width: 23rem;
   background: var(--ad-Color-prim);
 }
+.ad-Sidebar:focus {
+  outline: 2px solid var(--ad-Color-sec);
+  outline-offset: -2px;
+}
 
 .ad-SidebarTabs {
   flex: 1;

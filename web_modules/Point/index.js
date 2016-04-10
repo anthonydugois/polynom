@@ -25,17 +25,23 @@ class Point extends Component {
     this.props.onActivate([path.id], [point.id])
   };
 
-  handleMainMouseDown = (e) => {
-    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT)
-  };
+  handleMainMouseDown = (e) => this.props.onMouseDown(
+    e,
+    this.props.point.id,
+    ObjectTypes.POINT
+  );
 
-  handleFirstAnchorMouseDown = (e) => {
-    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_1)
-  };
+  handleFirstAnchorMouseDown = (e) => this.props.onMouseDown(
+    e,
+    this.props.point.id,
+    ObjectTypes.POINT_ANCHOR_1
+  );
 
-  handleSecondAnchorMouseDown = (e) => {
-    this.props.onMouseDown(e, this.props.point.id, ObjectTypes.POINT_ANCHOR_2)
-  };
+  handleSecondAnchorMouseDown = (e) => this.props.onMouseDown(
+    e,
+    this.props.point.id,
+    ObjectTypes.POINT_ANCHOR_2
+  );
 
   renderCode(w, h, { code, x, y, isActive }) {
     const { zoom, settings } = this.props

@@ -13,9 +13,9 @@ class Path extends Component {
 
     const {
       keyActions,
-      path,
       activePaths,
       activePoints,
+      path,
     } = this.props
 
     if (!keyActions.includes(SHIFT)) {
@@ -25,9 +25,11 @@ class Path extends Component {
     this.props.onActivate([path.id], path.points)
   };
 
-  handlePathMouseDown = (e) => {
-    this.props.onMouseDown(e, this.props.path.points[0], ObjectTypes.PATH)
-  };
+  handlePathMouseDown = (e) => this.props.onMouseDown(
+    e,
+    this.props.path.points[0],
+    ObjectTypes.PATH
+  );
 
   render() {
     const {

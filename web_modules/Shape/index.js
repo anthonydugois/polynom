@@ -1,6 +1,7 @@
 import "./styles"
 
 import React, { Component, PropTypes } from "react"
+import cx from "classnames"
 import Point from "Point"
 import Path from "Path"
 
@@ -54,7 +55,7 @@ class Shape extends Component {
     } = this.props
 
     return (
-      <g className="ad-Shape">
+      <g className={ cx("ad-Shape", { "is-active": path.isActive }) }>
         <Path
           onActivate={ onActivate }
           onDeactivate={ onDeactivate }
@@ -68,11 +69,9 @@ class Shape extends Component {
           activePoints={ activePoints }
           onMouseDown={ onMouseDown } />
 
-        { path.isActive && (
-          <g className="ad-Shape-points">
-            { path.points.map(this.renderPoint) }
-          </g>
-        ) }
+        <g className="ad-Shape-points">
+          { path.points.map(this.renderPoint) }
+        </g>
       </g>
     )
   }
