@@ -65,6 +65,12 @@ class SidebarPaths extends Component {
       project,
     } = this.props
 
+    const path = pathsById[key]
+    const reducedPointsById = path.points.reduce((acc, key) => ({
+      ...acc,
+      [pointsById[key].id]: pointsById[key],
+    }), {})
+
     return (
       <SidebarPath
         key={ key }
@@ -77,10 +83,9 @@ class SidebarPaths extends Component {
         onClosedChange={ this.props.onClosedChange }
         onFilledChange={ this.props.onFilledChange }
         onPathClick={ this.onPathClick }
-        path={ pathsById[key] }
-        pathsById={ pathsById }
-        pointsById={ pointsById }
-        project={ project } />
+        path={ path }
+        project={ project }
+        pointsById={ reducedPointsById } />
     )
   };
 

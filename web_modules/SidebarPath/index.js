@@ -5,6 +5,7 @@ import { findDOMNode } from "react-dom"
 import { DragSource, DropTarget } from "react-dnd"
 import { getEmptyImage } from "react-dnd-html5-backend"
 import cx from "classnames"
+import { isEqual } from "lodash"
 import Expand, { ExpandPanel } from "Expand"
 import Settings, { Setting } from "Settings"
 import Text, { Textarea } from "Text"
@@ -14,35 +15,6 @@ import { MdDragHandle } from "react-icons/lib/md"
 import SidebarPathExpand from "./SidebarPathExpand"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
 import { pathCode } from "../../src/utils"
-
-function isEqual(a, b) {
-  let p, t
-  for (p in a) {
-    if (typeof b[p] === 'undefined') {
-      return false
-    }
-    if (b[p] && !a[p]) {
-      return false
-    }
-    t = typeof a[p]
-    if (t === 'object' && !isEqual(a[p], b[p])) {
-      return false
-    }
-    if (t === 'function' && (typeof b[p] === 'undefined' ||
-      a[p].toString() !== b[p].toString())) {
-      return false
-    }
-    if (a[p] !== b[p]) {
-      return false
-    }
-  }
-  for (p in b) {
-    if (typeof a[p] === 'undefined') {
-      return false
-    }
-  }
-  return true
-}
 
 class SidebarPath extends Component {
   state = {
@@ -56,9 +28,11 @@ class SidebarPath extends Component {
     })
   }
 
+  // fix perf issue
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.state, nextState) ||
       !isEqual(this.props.path, nextProps.path) ||
+      !isEqual(this.props.pointsById, nextProps.pointsById) ||
       this.props.isOver !== nextProps.isOver
   }
 
@@ -70,7 +44,7 @@ class SidebarPath extends Component {
     const { value } = e.target
 
     if (value.trim() !== "") {
-      this.props.onNameChange(value)
+      this.props.onNameChange(this.props.path, value)
     }
   };
 
@@ -91,14 +65,29 @@ class SidebarPath extends Component {
     this.setState({ isFocused: false })
 
     if (this.d !== e.target.value) {
-      this.props.onPathCodeChange(e.target.value)
+      this.props.onPathCodeChange(this.props.path, e.target.value)
     }
   };
 
-  handleRelativeChange = (e) => this.props.onRelativeChange(e.target.checked);
-  handleClosedChange = (e) => this.props.onClosedChange(e.target.checked);
-  handleFilledChange = (e) => this.props.onFilledChange(e.target.checked);
-  handleBorderedChange = (e) => this.props.onBorderedChange(e.target.checked);
+  handleRelativeChange = (e) => this.props.onRelativeChange(
+    this.props.path,
+    e.target.checked
+  );
+
+  handleClosedChange = (e) => this.props.onClosedChange(
+    this.props.path,
+    e.target.checked
+  );
+
+  handleFilledChange = (e) => this.props.onFilledChange(
+    this.props.path,
+    e.target.checked
+  );
+
+  handleBorderedChange = (e) => this.props.onBorderedChange(
+    this.props.path,
+    e.target.checked
+  );
 
   render() {
     const {
@@ -198,7 +187,6 @@ SidebarPath.propTypes = {
   onPathClick: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
   path: PropTypes.object.isRequired,
-  pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
 }
 

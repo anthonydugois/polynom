@@ -32,43 +32,43 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(pathsActions.setActivePaths(pathIds, false))
     dispatch(pointsActions.setActivePoints(pointIds, false))
   },
-  onNameChange(name) {
-    dispatch(pathsActions.setPathName(props.path.id, name))
-  },
   onPathMove(projectId, insertAt, pathId) {
     dispatch(projectsActions.update(props.project.id))
     dispatch(pathsActions.removePaths([pathId]))
     dispatch(pathsActions.insertPath(projectId, insertAt, pathId))
   },
-  onPathCodeChange(d) {
+  onNameChange(path, name) {
+    dispatch(pathsActions.setPathName(path.id, name))
+  },
+  onPathCodeChange(path, d) {
     const { isClosed, isRelative, points } = parsePathCode(d)
 
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pointsActions.deletePoints(props.path.points))
+    dispatch(pointsActions.deletePoints(path.points))
 
     points.forEach((point) => dispatch(pointsActions.createPoint(
-      props.path.id,
+      path.id,
       ...point
     )))
 
-    dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
-    dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
+    dispatch(pathsActions.setClosedPath(path.id, isClosed))
+    dispatch(pathsActions.setRelativePath(path.id, isRelative))
   },
-  onRelativeChange(isRelative) {
+  onRelativeChange(path, isRelative) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pathsActions.setRelativePath(props.path.id, isRelative))
+    dispatch(pathsActions.setRelativePath(path.id, isRelative))
   },
-  onClosedChange(isClosed) {
+  onClosedChange(path, isClosed) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pathsActions.setClosedPath(props.path.id, isClosed))
+    dispatch(pathsActions.setClosedPath(path.id, isClosed))
   },
-  onFilledChange(isFilled) {
+  onFilledChange(path, isFilled) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pathsActions.setFilledPath(props.path.id, isFilled))
+    dispatch(pathsActions.setFilledPath(path.id, isFilled))
   },
-  onBorderedChange(isBordered) {
+  onBorderedChange(path, isBordered) {
     dispatch(projectsActions.update(props.project.id))
-    dispatch(pathsActions.setBorderedPath(props.path.id, isBordered))
+    dispatch(pathsActions.setBorderedPath(path.id, isBordered))
   },
 })
 
