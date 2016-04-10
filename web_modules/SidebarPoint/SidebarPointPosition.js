@@ -23,8 +23,8 @@ class SidebarPointPosition extends Component {
 
     return (
       <div>
-        <Settings>
-          <Setting label="Point X position">
+        <Settings title="Point position">
+          <Setting label="X">
             <Range
               min={ 0 }
               max={ project.width }
@@ -32,10 +32,7 @@ class SidebarPointPosition extends Component {
               value={ point.x }
               onChange={ this.handleXPositionChange } />
           </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="Point Y position">
+          <Setting label="Y">
             <Range
               min={ 0 }
               max={ project.height }

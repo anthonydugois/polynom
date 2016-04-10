@@ -82,6 +82,7 @@ class SidebarPaths extends Component {
         onRelativeChange={ this.props.onRelativeChange }
         onClosedChange={ this.props.onClosedChange }
         onFilledChange={ this.props.onFilledChange }
+        onBorderedChange={ this.props.onBorderedChange }
         onPathClick={ this.onPathClick }
         path={ path }
         project={ project }
@@ -145,6 +146,7 @@ SidebarPaths.propTypes = {
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
+  onBorderedChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,

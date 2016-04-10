@@ -54,14 +54,14 @@ class SidebarSettings extends Component {
     return (
       <SidebarPanel>
         <SidebarModule style={{ padding: ".75rem 0" }}>
-          <Settings>
-            <Setting label="Document width">
+          <Settings title="Document size">
+            <Setting label="Width">
               <Text
                 style={{ width: "4rem" }}
                 value={ project.width }
                 onChange={ this.handleWidthChange } />
             </Setting>
-            <Setting label="Document height">
+            <Setting label="Height">
               <Text
                 style={{ width: "4rem" }}
                 value={ project.height }
@@ -69,34 +69,13 @@ class SidebarSettings extends Component {
             </Setting>
           </Settings>
 
-          <Settings>
-            <Setting label="Show point codes">
-              <Choices>
-                <Choice
-                  value={ VisibilityTypes.ALL }
-                  checked={ settings.pointCodeShow === VisibilityTypes.ALL }
-                  onChange={ this.handlePointCodeShowChange }>
-                  All
-                </Choice>
-
-                <Choice
-                  value={ VisibilityTypes.ACTIVE }
-                  checked={ settings.pointCodeShow === VisibilityTypes.ACTIVE }
-                  onChange={ this.handlePointCodeShowChange }>
-                  Active
-                </Choice>
-
-                <Choice
-                  value={ VisibilityTypes.NONE }
-                  checked={ settings.pointCodeShow === VisibilityTypes.NONE }
-                  onChange={ this.handlePointCodeShowChange }>
-                  None
-                </Choice>
-              </Choices>
+          <Settings title="Grid options">
+            <Setting label="Grid size">
+              <Text
+                style={{ width: "4rem" }}
+                value={ settings.gridSize }
+                onChange={ this.handleGridSizeChange } />
             </Setting>
-          </Settings>
-
-          <Settings>
             <Setting label="Show grid">
               <Checkbox
                 checked={ settings.gridShow }
@@ -109,17 +88,8 @@ class SidebarSettings extends Component {
             </Setting>
           </Settings>
 
-          <Settings>
-            <Setting label="Grid size">
-              <Text
-                style={{ width: "4rem" }}
-                value={ settings.gridSize }
-                onChange={ this.handleGridSizeChange } />
-            </Setting>
-          </Settings>
-
-          <Settings>
-            <Setting label="Keyboard increment">
+          <Settings title="Keyboard">
+            <Setting label="Increment">
               <Text
                 style={{ width: "4rem" }}
                 value={ settings.keyboardIncrement }
@@ -127,11 +97,33 @@ class SidebarSettings extends Component {
             </Setting>
           </Settings>
 
-          <Settings>
-            <Setting label="Show bounding box">
+          <Settings title="Helpers">
+            <Setting label="Show box">
               <Checkbox
                 checked={ settings.pathBoundingBoxShow }
                 onChange={ this.handlePathBboxShowChange } />
+            </Setting>
+            <Setting label="Point codes">
+              <Choices>
+                <Choice
+                  value={ VisibilityTypes.ALL }
+                  checked={ settings.pointCodeShow === VisibilityTypes.ALL }
+                  onChange={ this.handlePointCodeShowChange }>
+                  All
+                </Choice>
+                <Choice
+                  value={ VisibilityTypes.ACTIVE }
+                  checked={ settings.pointCodeShow === VisibilityTypes.ACTIVE }
+                  onChange={ this.handlePointCodeShowChange }>
+                  Active
+                </Choice>
+                <Choice
+                  value={ VisibilityTypes.NONE }
+                  checked={ settings.pointCodeShow === VisibilityTypes.NONE }
+                  onChange={ this.handlePointCodeShowChange }>
+                  None
+                </Choice>
+              </Choices>
             </Setting>
           </Settings>
         </SidebarModule>

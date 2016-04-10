@@ -134,7 +134,7 @@ class SidebarPath extends Component {
               </Setting>
             </Settings>
 
-            <Settings>
+            <Settings title="Path options">
               <Setting label="Relative">
                 <Checkbox
                   checked={ path.isRelative }
@@ -145,9 +145,6 @@ class SidebarPath extends Component {
                   checked={ path.isClosed }
                   onChange={ this.handleClosedChange } />
               </Setting>
-            </Settings>
-
-            <Settings>
               <Setting label="Filled">
                 <Checkbox
                   checked={ path.isFilled }
@@ -181,6 +178,7 @@ SidebarPath.propTypes = {
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
+  onBorderedChange: PropTypes.func.isRequired,
   onPathClick: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
   path: PropTypes.object.isRequired,

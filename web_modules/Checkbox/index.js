@@ -8,7 +8,6 @@ const Checkbox = (props) => (
       className="ad-Checkbox-input"
       type="checkbox"
       { ...props } />
-
     <div className="ad-Checkbox-fake" />
   </label>
 )

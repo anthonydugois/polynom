@@ -22,29 +22,24 @@ class SidebarPointS extends Component {
     const { project, gridStep, point } = this.props
 
     return (
-      <div>
-        <Settings>
-          <Setting label="Second anchor X position">
-            <Range
-              min={ 0 }
-              max={ project.width }
-              step={ gridStep }
-              value={ point.parameters.x2 }
-              onChange={ this.handleX2Change } />
-          </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="Second anchor Y position">
-            <Range
-              min={ 0 }
-              max={ project.height }
-              step={ gridStep }
-              value={ point.parameters.y2 }
-              onChange={ this.handleY2Change } />
-          </Setting>
-        </Settings>
-      </div>
+      <Settings title="Anchor position">
+        <Setting label="X2">
+          <Range
+            min={ 0 }
+            max={ project.width }
+            step={ gridStep }
+            value={ point.parameters.x2 }
+            onChange={ this.handleX2Change } />
+        </Setting>
+        <Setting label="Y2">
+          <Range
+            min={ 0 }
+            max={ project.height }
+            step={ gridStep }
+            value={ point.parameters.y2 }
+            onChange={ this.handleY2Change } />
+        </Setting>
+      </Settings>
     )
   }
 }

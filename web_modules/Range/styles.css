@@ -10,6 +10,7 @@ input[type=range]::-moz-focus-outer {
 .ad-Range {
   display: flex;
   align-items: center;
+  width: 100%;
 }
   .ad-Range-input {
     width: 100%;

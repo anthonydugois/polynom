@@ -36,51 +36,40 @@ class SidebarPointC extends Component {
     const { project, gridStep, point } = this.props
 
     return (
-      <div>
-        <Settings>
-          <Setting label="First anchor X position">
-            <Range
-              min={ 0 }
-              max={ project.width }
-              step={ gridStep }
-              value={ point.parameters.x1 }
-              onChange={ this.handleX1Change } />
-          </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="First anchor Y position">
-            <Range
-              min={ 0 }
-              max={ project.height }
-              step={ gridStep }
-              value={ point.parameters.y1 }
-              onChange={ this.handleY1Change } />
-          </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="Second anchor X position">
-            <Range
-              min={ 0 }
-              max={ project.width }
-              step={ gridStep }
-              value={ point.parameters.x2 }
-              onChange={ this.handleX2Change } />
-          </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="Second anchor Y position">
-            <Range
-              min={ 0 }
-              max={ project.height }
-              step={ gridStep }
-              value={ point.parameters.y2 }
-              onChange={ this.handleY2Change } />
-          </Setting>
-        </Settings>
-      </div>
+      <Settings title="Anchors position">
+        <Setting label="X1">
+          <Range
+            min={ 0 }
+            max={ project.width }
+            step={ gridStep }
+            value={ point.parameters.x1 }
+            onChange={ this.handleX1Change } />
+        </Setting>
+        <Setting label="Y1">
+          <Range
+            min={ 0 }
+            max={ project.height }
+            step={ gridStep }
+            value={ point.parameters.y1 }
+            onChange={ this.handleY1Change } />
+        </Setting>
+        <Setting label="X2">
+          <Range
+            min={ 0 }
+            max={ project.width }
+            step={ gridStep }
+            value={ point.parameters.x2 }
+            onChange={ this.handleX2Change } />
+        </Setting>
+        <Setting label="Y2">
+          <Range
+            min={ 0 }
+            max={ project.height }
+            step={ gridStep }
+            value={ point.parameters.y2 }
+            onChange={ this.handleY2Change } />
+        </Setting>
+      </Settings>
     )
   }
 }

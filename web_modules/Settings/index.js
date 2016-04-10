@@ -2,8 +2,13 @@ import "./styles"
 
 import React, { PropTypes } from "react"
 
-const Settings = ({ children }) => (
+const Settings = ({ title, children }) => (
   <div className="ad-Settings">
+    { title && (
+      <h4 className="ad-Settings-title">
+        { title }
+      </h4>
+    ) }
     { children }
   </div>
 )

@@ -45,8 +45,8 @@ class SidebarPointA extends Component {
 
     return (
       <div>
-        <Settings>
-          <Setting label="X Radius">
+        <Settings title="Radius">
+          <Setting label="X">
             <Range
               min={ 0 }
               max={ project.width }
@@ -54,10 +54,7 @@ class SidebarPointA extends Component {
               value={ point.parameters.rx }
               onChange={ this.handleRXChange } />
           </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="Y Radius">
+          <Setting label="Y">
             <Range
               min={ 0 }
               max={ project.height }
@@ -65,10 +62,7 @@ class SidebarPointA extends Component {
               value={ point.parameters.ry }
               onChange={ this.handleRYChange } />
           </Setting>
-        </Settings>
-
-        <Settings>
-          <Setting label="X Axis Rotation">
+          <Setting label="Rotation">
             <Range
               min={ 0 }
               max={ 360 }
@@ -78,13 +72,12 @@ class SidebarPointA extends Component {
           </Setting>
         </Settings>
 
-        <Settings>
+        <Settings title="Arc parameters">
           <Setting label="Large arc">
             <Checkbox
               checked={ point.parameters.largeArc }
               onChange={ this.handleLargeChange } />
           </Setting>
-
           <Setting label="Sweep">
             <Checkbox
               checked={ point.parameters.sweep }

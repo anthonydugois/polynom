@@ -73,13 +73,13 @@
     left: 0;
     right: 0;
     transition: transform .2s, background .2s;
-    transform: scale(0);
+    transform: scale(.5);
     background: none;
   }
   .ad-Button.tab:focus::before,
   .ad-Button.tab:hover::before {
     transform: scale(1);
-    background: color(var(--ad-Color-prim) l(+10%));
+    background: color(var(--ad-Color-prim) l(+8%));
   }
   .ad-Button.tab.active::before {
     transform: scale(1);
