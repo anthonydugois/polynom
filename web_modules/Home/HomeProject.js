@@ -60,18 +60,17 @@ class HomeProject extends Component {
           </div>
           <div className="ad-HomeProject-actions">
             <ButtonSquare
-              size="2.5rem"
+              size="2rem"
               type={ ["action", "light"] }
               href={ `data:image/svg+xml,${ file }` }
               download={ `${ slug(project.name) }.svg` }>
-              <MdFileDownload size="1rem" />
+              <MdFileDownload size=".8rem" />
             </ButtonSquare>
             <ButtonSquare
-              size="2.5rem"
-              style={{ marginLeft: "auto" }}
+              size="2rem"
               type={ ["action", "light"] }
               onClick={ this.handleRemoveClick }>
-              <MdDelete size="1rem" />
+              <MdDelete size=".8rem" />
             </ButtonSquare>
           </div>
         </div>
