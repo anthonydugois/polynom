@@ -13,6 +13,7 @@ import {
   MdAdd,
   MdDelete,
 } from "react-icons/lib/md"
+import { CTRL, SHIFT } from "../../src/constants/KeyActionTypes"
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
@@ -26,25 +27,43 @@ class SidebarPaths extends Component {
     this.props.onRemoveClick(this.props.activePaths)
   };
 
-  renderSidebarPath = (key) => {
+  onPathClick = (path) => {
     const {
       keyActions,
-      pathsById,
-      pointsById,
       project,
       activePaths,
       activePoints,
+      pathsById,
     } = this.props
 
-    const points = pathsById[key].points.reduce((acc, key) => ({
-      ...acc,
-      [pointsById[key].id]: pointsById[key],
-    }), {})
+    if (!keyActions.includes(CTRL)) {
+      this.props.onDeactivate(activePaths, activePoints)
+    }
 
-    const paths = project.paths.reduce((acc, key) => ({
-      ...acc,
-      [pathsById[key].id]: pathsById[key],
-    }), {})
+    if (keyActions.includes(SHIFT)) {
+      const pathIndex = project.paths.indexOf(path.id)
+      const activePathIndex = project.paths.indexOf(activePaths[0])
+      const pathIds = pathIndex < activePathIndex ?
+        project.paths.slice(pathIndex, activePathIndex + 1) :
+        project.paths.slice(activePathIndex, pathIndex + 1)
+
+      const pointIds = pathIds.reduce((acc, key) => [
+        ...acc,
+        ...pathsById[key].points,
+      ], [])
+
+      this.props.onActivate(pathIds, pointIds)
+    } else {
+      this.props.onActivate([path.id], path.points)
+    }
+  };
+
+  renderSidebarPath = (key) => {
+    const {
+      pathsById,
+      pointsById,
+      project,
+    } = this.props
 
     return (
       <SidebarPath
@@ -57,12 +76,11 @@ class SidebarPaths extends Component {
         onRelativeChange={ this.props.onRelativeChange }
         onClosedChange={ this.props.onClosedChange }
         onFilledChange={ this.props.onFilledChange }
-        keyActions={ keyActions }
-        projectId={ project.id }
-        projectPaths={ project.paths }
+        onPathClick={ this.onPathClick }
         path={ pathsById[key] }
-        pathsById={ paths }
-        pointsById={ points } />
+        pathsById={ pathsById }
+        pointsById={ pointsById }
+        project={ project } />
     )
   };
 

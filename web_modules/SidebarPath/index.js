@@ -13,7 +13,6 @@ import { ButtonSquare } from "Button"
 import { MdDragHandle } from "react-icons/lib/md"
 import SidebarPathExpand from "./SidebarPathExpand"
 import { SIDEBAR_PATH } from "../../src/constants/ObjectTypes"
-import { CTRL, SHIFT } from "../../src/constants/KeyActionTypes"
 import { pathCode } from "../../src/utils"
 
 function isEqual(a, b) {
@@ -57,37 +56,14 @@ class SidebarPath extends Component {
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.state, nextState) ||
+      !isEqual(this.props.path, nextProps.path) ||
+      this.props.isOver !== nextProps.isOver
+  }
+
   handlePathClick = () => {
-    const {
-      keyActions,
-      projectId,
-      projectPaths,
-      path,
-      activePaths,
-      activePoints,
-      pathsById,
-    } = this.props
-
-    if (!keyActions.includes(CTRL)) {
-      this.props.onDeactivate(activePaths, activePoints)
-    }
-
-    if (keyActions.includes(SHIFT)) {
-      const pathIndex = projectPaths.indexOf(path.id)
-      const activePathIndex = projectPaths.indexOf(activePaths[0])
-      const pathIds = pathIndex < activePathIndex ?
-        projectPaths.slice(pathIndex, activePathIndex + 1) :
-        projectPaths.slice(activePathIndex, pathIndex + 1)
-
-      const pointIds = pathIds.reduce((acc, key) => [
-        ...acc,
-        ...pathsById[key].points,
-      ], [])
-
-      this.props.onActivate(pathIds, pointIds)
-    } else {
-      this.props.onActivate([path.id], path.points)
-    }
+    this.props.onPathClick(this.props.path)
   };
 
   handleNameChange = (e) => {
@@ -119,40 +95,20 @@ class SidebarPath extends Component {
     }
   };
 
-  handleRelativeChange = (e) => {
-    this.props.onRelativeChange(e.target.checked)
-  };
-
-  handleClosedChange = (e) => {
-    this.props.onClosedChange(e.target.checked)
-  };
-
-  handleFilledChange = (e) => {
-    this.props.onFilledChange(e.target.checked)
-  };
-
-  handleBorderedChange = (e) => {
-    this.props.onBorderedChange(e.target.checked)
-  };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.state, nextState) ||
-      !isEqual(this.props.path, nextProps.path) ||
-      this.props.isOver !== nextProps.isOver
-  }
+  handleRelativeChange = (e) => this.props.onRelativeChange(e.target.checked);
+  handleClosedChange = (e) => this.props.onClosedChange(e.target.checked);
+  handleFilledChange = (e) => this.props.onFilledChange(e.target.checked);
+  handleBorderedChange = (e) => this.props.onBorderedChange(e.target.checked);
 
   render() {
     const {
-      projectId,
-      projectPaths,
+      project,
       path,
       pointsById,
       connectDragSource,
       connectDropTarget,
       isOver,
     } = this.props
-
-    console.log("rendered", path.id)
 
     return (
       <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
@@ -167,7 +123,7 @@ class SidebarPath extends Component {
                 onChange={ this.handleNameChange } />
             </div>
             <div className="ad-SidebarPath-actions">
-              { projectPaths.length > 1 && connectDragSource(
+              { project.paths.length > 1 && connectDragSource(
                 <div>
                   <ButtonSquare
                     size="1rem"
@@ -230,13 +186,6 @@ class SidebarPath extends Component {
   }
 }
 
-SidebarPath.defaultProps = {
-  pathsById: {},
-  pointsById: {},
-  activePaths: [],
-  activePoints: [],
-}
-
 SidebarPath.propTypes = {
   onActivate: PropTypes.func.isRequired,
   onDeactivate: PropTypes.func.isRequired,
@@ -246,21 +195,18 @@ SidebarPath.propTypes = {
   onRelativeChange: PropTypes.func.isRequired,
   onClosedChange: PropTypes.func.isRequired,
   onFilledChange: PropTypes.func.isRequired,
-  keyActions: PropTypes.array.isRequired,
-  projectId: PropTypes.number.isRequired,
-  projectPaths: PropTypes.array.isRequired,
+  onPathClick: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired,
   path: PropTypes.object.isRequired,
-  activePaths: PropTypes.array.isRequired,
-  activePoints: PropTypes.array.isRequired,
   pathsById: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
 }
 
 const sidebarPathTarget = {
   drop(props, monitor, component) {
-    const { projectId, projectPaths, path } = monitor.getItem()
-    const index = projectPaths.indexOf(path.id)
-    const hoveredIndex = props.projectPaths.indexOf(props.path.id)
+    const { project, path } = monitor.getItem()
+    const index = project.paths.indexOf(path.id)
+    const hoveredIndex = props.project.paths.indexOf(props.path.id)
 
     if (index === hoveredIndex) {
       return
@@ -272,22 +218,21 @@ const sidebarPathTarget = {
     const position = y - top
 
     if (index < hoveredIndex && position < middle) {
-      return props.onPathMove(projectId, hoveredIndex - 1, path.id)
+      return props.onPathMove(project.id, hoveredIndex - 1, path.id)
     }
 
     if (index > hoveredIndex && position > middle) {
-      return props.onPathMove(projectId, hoveredIndex + 1, path.id)
+      return props.onPathMove(project.id, hoveredIndex + 1, path.id)
     }
 
-    return props.onPathMove(projectId, hoveredIndex, path.id)
+    return props.onPathMove(project.id, hoveredIndex, path.id)
   },
 }
 
 const sidebarPathSource = {
   beginDrag(props, monitor, component) {
     return {
-      projectId: props.projectId,
-      projectPaths: props.projectPaths,
+      project: props.project,
       path: props.path,
       boundingRect: findDOMNode(component).getBoundingClientRect(),
     }
