@@ -48,13 +48,10 @@ class SidebarPath extends Component {
     }
   };
 
-  handleChange = (e) => {
-    this.setState({ d: e.target.value })
-  };
+  handleChange = (e) => this.setState({ d: e.target.value });
 
   handleFocus = (e) => {
     this.d = e.target.value
-
     this.setState({
       isFocused: true,
       d: this.d,
