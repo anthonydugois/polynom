@@ -115,8 +115,6 @@ class SidebarPath extends Component {
       isOver,
     } = this.props
 
-    console.log("render", path.id)
-
     return (
       <div className={ cx("ad-SidebarPath", { "is-active": path.isActive }) }>
         <Expand>

@@ -16,9 +16,10 @@ import {
 
 class SidebarPaths extends Component {
   handleAddClick = () => {
-    const { width, height } = this.props.project
-
-    this.props.onAddClick(width / 2, height / 2)
+    this.props.onAddClick(
+      this.props.project.width / 2,
+      this.props.project.height / 2
+    )
   };
 
   handleRemoveClick = () => {
@@ -29,19 +30,39 @@ class SidebarPaths extends Component {
     const {
       keyActions,
       pathsById,
+      pointsById,
       project,
       activePaths,
       activePoints,
     } = this.props
 
+    const points = pathsById[key].points.reduce((acc, key) => ({
+      ...acc,
+      [pointsById[key].id]: pointsById[key],
+    }), {})
+
+    const paths = project.paths.reduce((acc, key) => ({
+      ...acc,
+      [pathsById[key].id]: pathsById[key],
+    }), {})
+
     return (
       <SidebarPath
         key={ key }
+        onActivate={ this.props.onActivate }
+        onDeactivate={ this.props.onDeactivate }
+        onPathMove={ this.props.onPathMove }
+        onNameChange={ this.props.onNameChange }
+        onPathCodeChange={ this.props.onPathCodeChange }
+        onRelativeChange={ this.props.onRelativeChange }
+        onClosedChange={ this.props.onClosedChange }
+        onFilledChange={ this.props.onFilledChange }
         keyActions={ keyActions }
-        project={ project }
+        projectId={ project.id }
+        projectPaths={ project.paths }
         path={ pathsById[key] }
-        activePaths={ activePaths }
-        activePoints={ activePoints } />
+        pathsById={ paths }
+        pointsById={ points } />
     )
   };
 
@@ -93,9 +114,18 @@ class SidebarPaths extends Component {
 SidebarPaths.propTypes = {
   onAddClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
+  onActivate: PropTypes.func.isRequired,
+  onDeactivate: PropTypes.func.isRequired,
+  onPathMove: PropTypes.func.isRequired,
+  onNameChange: PropTypes.func.isRequired,
+  onPathCodeChange: PropTypes.func.isRequired,
+  onRelativeChange: PropTypes.func.isRequired,
+  onClosedChange: PropTypes.func.isRequired,
+  onFilledChange: PropTypes.func.isRequired,
   keyActions: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,
 }
