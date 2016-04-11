@@ -1,3 +1,1 @@
-export default (n, min, max) => {
-  return Math.min(Math.max(isNaN(n) ? min : n, min), max)
-}
+export default (n, min, max) => Math.min(Math.max(isNaN(n) ? min : n, min), max)

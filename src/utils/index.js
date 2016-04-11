@@ -1,5 +1,4 @@
 export clamp from "./clamp"
-export snap from "./snap"
 export slug from "./slug"
 export pathCode from "./pathCode"
 export getDefaultParameters from "./getDefaultParameters"

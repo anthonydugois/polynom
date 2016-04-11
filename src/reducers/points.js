@@ -4,8 +4,8 @@ const initialState = {
   0: {
     id: 0,
     code: "M",
-    x: 50,
-    y: 50,
+    x: 75,
+    y: 75,
     isActive: true,
     parameters: {},
   },
@@ -47,8 +47,8 @@ const point = (state, action) => {
   case ActionTypes.SET_POINTS_POSITION:
     return {
       ...state,
-      x: action.format(state.x) + action.dx,
-      y: action.format(state.y) + action.dy,
+      x: action.format(state.x + action.dx),
+      y: action.format(state.y + action.dy),
       parameters: {
         ...state.parameters,
         ...typeof state.parameters.x1 !== "undefined"

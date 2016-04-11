@@ -7,7 +7,7 @@ import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import ZOOM_SCALE from "../../src/constants/ZoomScale"
-import { clamp, snap } from "../../src/utils"
+import { clamp } from "../../src/utils"
 
 class Overview extends Component {
   constructor(props) {
@@ -41,8 +41,8 @@ class Overview extends Component {
     this.setState({ localPoints: nextProps.pointsById })
   }
 
-  snapping = (n) => this.props.activePoints.length === 1 ?
-    snap(this.props.settings)(n) : n;
+  snap = (n) => this.props.activePoints.length === 1 ?
+    this.props.gridStep * Math.round(n / this.props.gridStep) : n;
 
   getCoords = (e) => {
     const { zoom } = this.state
@@ -54,24 +54,14 @@ class Overview extends Component {
     return [+x.toFixed(0), +y.toFixed(0)]
   };
 
-  getComputedCoords = (e) => {
-    const coords = this.getCoords(e)
-
-    return [
-      this.snapping(coords[0]),
-      this.snapping(coords[1]),
-    ]
-  };
+  getComputedCoords = (e) => this.getCoords(e).map(this.snap);
 
   handleMouseDown = (e, draggedPoint, draggedObject) => {
     this.draggedPoint = draggedPoint
     this.draggedObject = draggedObject
-    this.mouseDownCoords = this.getComputedCoords(e)
+    this.mouseDownCoords = this.getCoords(e)
 
-    this.setState({
-      coords: this.mouseDownCoords,
-      isDragging: true,
-    })
+    this.setLocalPoints(this.mouseDownCoords)
   };
 
   handleMouseUp = (e) => {
@@ -85,7 +75,7 @@ class Overview extends Component {
       case ObjectTypes.PATH:
       case ObjectTypes.POINT:
         if (dx !== 0 || dy !== 0) {
-          this.props.onPointsPositionChange(activePoints, dx, dy, this.snapping)
+          this.props.onPointsPositionChange(activePoints, dx, dy, this.snap)
         }
         break
 
@@ -113,15 +103,19 @@ class Overview extends Component {
 
     if (this.state.isDragging) {
       e.preventDefault()
-
-      this.setState({
-        coords,
-        localPoints: this.getLocalPoints(coords),
-      })
+      this.setLocalPoints(coords)
     } else {
       this.setState({ coords })
     }
   };
+
+  setLocalPoints(coords) {
+    this.setState({
+      coords,
+      localPoints: this.getLocalPoints(coords),
+      isDragging: true,
+    })
+  }
 
   getLocalPoints(coords) {
     switch (this.draggedObject) {
@@ -153,8 +147,8 @@ class Overview extends Component {
             ...acc,
             [point.id]: !this.props.activePoints.includes(point.id) ? point : {
               ...point,
-              x: this.snapping(point.x) + dx,
-              y: this.snapping(point.y) + dy,
+              x: this.snap(point.x + dx),
+              y: this.snap(point.y + dy),
               parameters: {
                 ...point.parameters,
                 ...typeof point.parameters.x1 !== "undefined"
@@ -380,6 +374,7 @@ Overview.propTypes = {
   settings: PropTypes.object.isRequired,
   pointsById: PropTypes.object.isRequired,
   pathsById: PropTypes.object.isRequired,
+  gridStep: PropTypes.number.isRequired,
   activePaths: PropTypes.array.isRequired,
   activePoints: PropTypes.array.isRequired,
 }

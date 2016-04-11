@@ -7,6 +7,7 @@ const mapStateToProps = (state, props) => ({
   settings: state.present.settings,
   pathsById: state.present.pathsById,
   pointsById: state.present.pointsById,
+  gridStep: selectors.gridStepSelector(state, props),
   activePaths: selectors.activePathsSelector(state, props),
   activePoints: selectors.activePointsSelector(state, props),
 })

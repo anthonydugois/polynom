@@ -3,7 +3,7 @@ import * as VisibilityTypes from "../constants/VisibilityTypes"
 
 const initialState = {
   gridShow: true,
-  gridSnap: false,
+  gridSnap: true,
   gridSize: 50,
   pointCodeShow: VisibilityTypes.ACTIVE,
   pathBoundingBoxShow: true,
