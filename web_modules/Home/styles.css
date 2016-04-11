@@ -5,14 +5,18 @@
   background: color(var(--ad-Color-prim) l(-4%));
 }
   .ad-HomeHead {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     background: var(--ad-Color-prim);
   }
     .ad-HomeHead-container {
       display: flex;
     }
+      .ad-HomeHead-logo {
+        padding: 1rem 1.25rem 1rem 0;
+      }
       .ad-HomeHead-brand {
-        margin-left: 1.25rem;
+        padding: 1rem 1.25rem;
+        border-left: 2px solid color(var(--ad-Color-prim) l(+8%));
         color: #fff;
       }
         .ad-HomeHead-title {
@@ -20,14 +24,14 @@
           margin: 0;
           font-family: "Fira Sans", sans-serif;
           font-size: 2rem;
-          font-weight: 300;
+          font-weight: normal;
         }
         .ad-HomeHead-lead {
           margin-top: .5rem;
           font-family: "Fira Sans", sans-serif;
           font-size: 1.2rem;
           font-weight: 300;
-          color: color(var(--ad-Color-prim) l(+60%));
+          color: color(var(--ad-Color-prim) l(+70%));
         }
 
 .ad-HomeBody-container {

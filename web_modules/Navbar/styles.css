@@ -8,17 +8,18 @@
   background: var(--ad-Color-prim);
   border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
 }
+  .ad-Navbar-logo {
+    padding-right: 1.25rem;
+    margin-right: 1.25rem;
+    border-right: 2px solid color(var(--ad-Color-prim) l(+8%));
+  }
   .ad-Navbar-projectName {
     height: 2rem;
     width: 15rem;
-    margin-left: 1rem;
-    padding-left: 1rem;
     border: none;
-    border-left: 1px solid color(var(--ad-Color-prim) l(+10%));
     background: none;
     transition: color .2s;
     font-family: "Fira Sans", sans-serif;
-    font-weight: 300;
     font-size: 1.1rem;
     color: #fff;
   }

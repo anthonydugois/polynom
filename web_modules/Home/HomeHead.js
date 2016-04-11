@@ -6,8 +6,10 @@ import Logo from "Logo"
 const HomeHead = () => (
   <div className="ad-HomeHead">
     <Container className="ad-HomeHead-container">
-      <Link to="/">
-        <Logo size="3.3rem" />
+      <Link
+        to="/"
+        className="ad-HomeHead-logo">
+        <Logo size="3rem" />
       </Link>
 
       <div className="ad-HomeHead-brand">

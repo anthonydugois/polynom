@@ -22,7 +22,7 @@ class Navbar extends Component {
         <Link
           className="ad-Navbar-logo"
           to="/">
-          <Logo size="1.9rem" />
+          <Logo size="2rem" />
         </Link>
         <Text
           className="ad-Navbar-projectName"
