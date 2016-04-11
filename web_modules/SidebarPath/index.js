@@ -145,6 +145,9 @@ class SidebarPath extends Component {
                   checked={ path.isClosed }
                   onChange={ this.handleClosedChange } />
               </Setting>
+            </Settings>
+
+            <Settings title="Path style">
               <Setting label="Filled">
                 <Checkbox
                   checked={ path.isFilled }
