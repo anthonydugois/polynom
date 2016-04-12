@@ -1,6 +1,7 @@
 import React from "react"
 import { render } from "react-dom"
-import { Router, browserHistory } from "react-router"
+import { Router, useRouterHistory } from "react-router"
+import { createHistory } from "history"
 import { Provider } from "react-redux"
 import createStore from "./store"
 import routes from "./routes"
@@ -13,10 +14,14 @@ store.subscribe(() => {
   localStorage.setItem("savedState", JSON.stringify(store.getState().present))
 })
 
+const history = useRouterHistory(createHistory)({
+  basename: __PROD__ ? "/polynom" : "/",
+})
+
 render(
   <Provider store={ store }>
     <Router
-      history={ browserHistory }
+      history={ history }
       routes={ routes } />
   </Provider>,
   document.querySelector("#root")

@@ -5,7 +5,7 @@ import Home from "Home"
 import Project from "Project"
 
 const routes = (
-  <Route path="/polynom/" component={ App }>
+  <Route path="/" component={ App }>
     <IndexRoute component={ Home } />
     <Route path="projects/:projectId" component={ Project } />
   </Route>
