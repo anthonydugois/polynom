@@ -41,7 +41,7 @@ class Overview extends Component {
     this.setState({ localPoints: nextProps.pointsById })
   }
 
-  snap = (n) => this.props.activePoints.length === 1 ?
+  snap = (n) => this.props.activePoints.length <= 1 ?
     this.props.gridStep * Math.round(n / this.props.gridStep) : n;
 
   getCoords = (e) => {
