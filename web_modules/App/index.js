@@ -1,17 +1,22 @@
-import React, { Component } from "react"
-
-import Builder from "Builder"
-
 import "./styles"
 
+import React, { Component, PropTypes } from "react"
+
 class App extends Component {
-    render() {
-        return (
-            <div className="ad-App">
-                <Builder />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="ad-App">
+        { this.props.children }
+      </div>
+    )
+  }
+}
+
+App.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]),
 }
 
 export default App

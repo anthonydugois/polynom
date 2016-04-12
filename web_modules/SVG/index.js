@@ -1,65 +1,30 @@
-import React, { Component } from "react"
-import cx from "classnames"
+import React, { PropTypes } from "react"
+import { pathCode } from "../../src/utils"
 
-import Grid from "./Grid"
-import Shape from "./Shape"
+const SVG = ({
+  project,
+  pathsById,
+  pointsById,
+  ...props,
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={ project.width }
+    height={ project.height }
+    viewBox={ `0 0 ${ project.width } ${ project.height }` }
+    { ...props }>
+    { project.paths.map((key) => (
+      <path
+        key={ key }
+        d={ pathCode(pathsById[key], pointsById) } />
+    )) }
+  </svg>
+)
 
-import "./styles"
-
-class SVG extends Component {
-    static propTypes = {
-        w: React.PropTypes.number.isRequired,
-        h: React.PropTypes.number.isRequired,
-        grid: React.PropTypes.object.isRequired,
-        activePath: React.PropTypes.number.isRequired,
-        paths: React.PropTypes.array.isRequired,
-        addPoint: React.PropTypes.func.isRequired,
-        handleMouseMove: React.PropTypes.func.isRequired,
-        setActivePath: React.PropTypes.func.isRequired,
-        drag: React.PropTypes.func.isRequired,
-    }
-
-    render() {
-        const {
-            w,
-            h,
-            grid,
-            activePath,
-            paths,
-            addPoint,
-            handleMouseMove,
-            ...props,
-        } = this.props
-
-        const shapes = paths.map((path, index) => {
-            return (
-                <Shape
-                    key={ index }
-                    shape={ index }
-                    activePath={ activePath }
-                    path={ path }
-                    { ...props } />
-            )
-        })
-
-        return (
-            <svg
-                className="ad-SVG"
-                width={ w }
-                height={ h }
-                onClick={ addPoint }
-                onMouseMove={ handleMouseMove }>
-                <Grid
-                    w={ w }
-                    h={ h }
-                    grid={ grid } />
-
-                <g className="ad-Shapes">
-                    { shapes }
-                </g>
-            </svg>
-        )
-    }
+SVG.propTypes = {
+  project: PropTypes.object.isRequired,
+  pathsById: PropTypes.object.isRequired,
+  pointsById: PropTypes.object.isRequired,
 }
 
 export default SVG

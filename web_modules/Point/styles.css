@@ -1,0 +1,29 @@
+@import url(App/config.css);
+
+.ad-MainPoint-code {
+  cursor: default;
+  fill: color(var(--ad-Color-prim) l(+50%));
+  text-anchor: start;
+  font-family: "Fira Mono", monospace;
+}
+.ad-MainPoint-coords {
+  cursor: pointer;
+  fill: #fff;
+  stroke: var(--ad-Color-sec);
+  transform-origin: center;
+  transform: scale(1);
+}
+.ad-Point:not(.is-dragging) .ad-MainPoint:hover .ad-MainPoint-coords {
+  transform: scale(2);
+}
+.ad-Point.is-active .ad-MainPoint-coords {
+  fill: var(--ad-Color-sec);
+}
+
+.ad-Anchor-point {
+  cursor: pointer;
+  fill: var(--ad-Color-sec);
+}
+.ad-Anchor-line {
+  stroke: var(--ad-Color-sec);
+}

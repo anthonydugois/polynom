@@ -1,0 +1,30 @@
+@import url(App/config.css);
+
+.ad-Navbar {
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  background: var(--ad-Color-prim);
+  border-bottom: 2px solid color(var(--ad-Color-prim) l(-4%));
+}
+  .ad-Navbar-logo {
+    padding-right: 1.25rem;
+    margin-right: 1.25rem;
+    border-right: 2px solid color(var(--ad-Color-prim) l(+8%));
+  }
+  .ad-Navbar-projectName {
+    height: 2rem;
+    width: 15rem;
+    border: none;
+    background: none;
+    transition: color .2s;
+    font-family: "Fira Sans", sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  .ad-Navbar-projectName:hover,
+  .ad-Navbar-projectName:focus {
+    outline: 0;
+    color: color(var(--ad-Color-prim) l(+60%));
+  }

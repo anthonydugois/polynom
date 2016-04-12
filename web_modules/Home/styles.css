@@ -1,0 +1,159 @@
+@import url(App/config.css);
+
+.ad-Home {
+  min-height: 100vh;
+  background: color(var(--ad-Color-prim) l(-4%));
+}
+  .ad-HomeHead {
+    padding: 2.5rem 0;
+    background: var(--ad-Color-prim);
+  }
+    .ad-HomeHead-container {
+      display: flex;
+    }
+      .ad-HomeHead-logo {
+        padding: 1rem 1.25rem 1rem 0;
+      }
+      .ad-HomeHead-brand {
+        padding: 1rem 1.25rem;
+        border-left: 2px solid color(var(--ad-Color-prim) l(+8%));
+        color: #fff;
+      }
+        .ad-HomeHead-title {
+          padding: 0;
+          margin: 0;
+          font-family: "Fira Sans", sans-serif;
+          font-size: 2rem;
+          font-weight: normal;
+        }
+        .ad-HomeHead-lead {
+          margin-top: .5rem;
+          font-family: "Fira Sans", sans-serif;
+          font-size: 1.2rem;
+          font-weight: 300;
+          color: color(var(--ad-Color-prim) l(+70%));
+        }
+
+.ad-HomeBody-container {
+  display: flex;
+}
+  .ad-HomeBody-actions {
+    width: 12rem;
+  }
+  .ad-HomeBody-projects {
+    flex: 1;
+    padding: 4rem 0 4rem 2rem;
+  }
+
+.ad-HomeActions {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 4rem 0;
+  list-style: none;
+}
+
+.ad-HomeAction {
+  padding-top: .5rem;
+}
+
+.ad-HomeProjects {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ad-HomeProject {
+  position: relative;
+  width: 33.333%;
+  height: 22rem;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+}
+  .ad-HomeProject-overview {
+    overflow: hidden;
+    height: 70%;
+    padding: 1rem;
+    transition: height .4s;
+    background: #fff;
+    border-radius: 2px 2px 0 0;
+  }
+  .ad-HomeProject:hover .ad-HomeProject-overview {
+    height: 60%;
+  }
+    .ad-HomeProject-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      .ad-HomeProject-svg path {
+        fill: none;
+        stroke: var(--ad-Color-prim);
+        stroke-width: 2px;
+      }
+
+  .ad-HomeProject-content {
+    flex: 1;
+    overflow: hidden;
+    padding: 1.8rem 2rem;
+    transition: background .2s;
+    background: #fff;
+    border-top: 2px solid color(var(--ad-Color-prim) l(+75%));
+    border-radius: 0 0 2px 2px;
+  }
+    .ad-HomeProject-name {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      transition: color .2s;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-align: center;
+      text-decoration: none;
+      font-family: "Fira Sans", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--ad-Color-prim);
+    }
+      .ad-HomeProject-name::after {
+        content: "";
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+    .ad-HomeProject-datetime {
+      margin-top: .4rem;
+      transition: color .2s;
+      text-align: center;
+      font-family: "Fira Sans", sans-serif;
+      font-size: .8rem;
+      font-weight: 300;
+      color: color(var(--ad-Color-prim) l(+32%));
+    }
+      .ad-HomeProject-datetime time {
+        font-weight: normal;
+      }
+
+    .ad-HomeProject-actions {
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      position: absolute;
+      bottom: .5rem;
+      left: .5rem;
+      right: .5rem;
+      padding: 1rem;
+      transition: transform .4s, opacity .2s;
+      transform: translateY(-.5rem);
+      opacity: 0;
+    }
+    .ad-HomeProject:hover .ad-HomeProject-actions {
+      transform: translateY(0);
+      opacity: 1;
+    }

@@ -1,65 +1,52 @@
 @import url(App/config.css);
 
-.ad-Tabs {
-    height: 100%;
-    display: flex;
+/* .ad-Tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-    .ad-Tabs-nav {
-        margin: 0;
-        padding: 0;
-        width: 5rem;
-        display: flex;
-        flex-direction: column;
-        list-style: none;
-        background: color(var(--ad-Color-prim) l(-5%));
-    }
-        .ad-Tabs-item {
-            height: 5rem;
-        }
 
-    .ad-Tabs-tabs {
-        height: 100%;
-        flex: 1;
-    }
-
-.ad-TabsButton {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: background .1s;
-    font-size: 1.8rem;
-    color: #fff;
+.ad-TabList {
+  height: 3.5rem;
+  flex-shrink: 0;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.ad-TabsButton:focus,
-.ad-TabsButton:hover {
-    outline: 0;
-    background: color(var(--ad-Color-prim) l(+5%));
-}
-.ad-TabsButton.is-active {
-    background: var(--ad-Color-sec);
-}
-    .ad-TabsButton-text {
-        padding-top: .5rem;
-        opacity: .9;
-        font-size: .7rem;
-        color: color(var(--ad-Color-prim) l(+75%));
-    }
-    .ad-TabsButton.is-active .ad-TabsButton-text {
-        color: #fff;
-    }
 
 .ad-Tab {
-    height: 100%;
-    display: none;
+  flex: 1;
+  height: 100%;
+  position: relative;
+  transition: color .2s;
+  border-bottom: 2px solid color(var(--ad-Color-prim) l(+6%));
+  color: color(var(--ad-Color-prim) l(+60%));
 }
+.ad-Tab:hover,
 .ad-Tab.is-active {
-    display: block;
+  color: #fff;
 }
+  .ad-Tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform .2s;
+    background: var(--ad-Color-sec);
+  }
+  .ad-Tab.is-active::after {
+    transform: scaleX(1);
+  }
+
+.ad-TabPanel {
+  flex: 1;
+  display: none;
+}
+.ad-TabPanel.is-active {
+  display: flex;
+  flex-direction: column;
+} */

@@ -1,164 +1,65 @@
-import React from "react"
-
-import Tabs from "Tabs"
-
-import General from "./General"
-import Path from "./Path"
-import Point from "./Point"
-import Button from "Button"
-
-import About from "App/About"
-import Help from "App/Help"
-
 import "./styles"
 
-function Sidebar(props) {
-    const {
-        w,
-        h,
-        grid,
-        activePath,
-        paths,
-        setWidth,
-        setHeight,
-        setGridSize,
-        setGridSnap,
-        setGridShow,
-        addPath,
-        removePath,
-        setPath,
-        setActivePath,
-        setRelative,
-        setClosed,
-        setFilled,
-        setPointType,
-        setPointPosition,
-        setQuadraticPosition,
-        setQuadraticT,
-        setCubicPosition,
-        setCubicS,
-        setArcParam,
-        removePoint,
-        importSVG,
-        exportSVG,
-    } = props
+import React, { Component, PropTypes } from "react"
+import mapActionsToKeys from "react-keybindings"
+import Tabs, { TabList, TabPanel } from "Tabs"
+import SidebarPaths from "SidebarPaths"
+import SidebarPoint from "SidebarPoint"
+import SidebarSettings from "SidebarSettings"
+import SidebarTab from "./SidebarTab"
+import {
+  MdGesture,
+  MdTune,
+  MdSettings,
+} from "react-icons/lib/md"
+import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 
-    const shapes = paths.map((path, index, _paths) => {
-        return (
-            <Path
-                key={ index }
-                index={ index }
-                initialExpanded={ index === 0 }
-                nbPaths={ _paths.length }
-                path={ path }
-                activePath={ activePath }
-                setActivePath={ setActivePath }
-                setPath={ setPath }
-                removePath={ removePath }
-                setRelative={ setRelative }
-                setClosed={ setClosed }
-                setFilled={ setFilled } />
-        )
-    })
-
-    const tabs = [
-        {
-            icon: "paths",
-            title: "Paths",
-        },
-        {
-            icon: "point",
-            title: "Point",
-        },
-        {
-            icon: "settings",
-            title: "Settings",
-        },
-        {
-            icon: "help",
-            title: "Help",
-        },
-        {
-            icon: "about",
-            title: "About",
-        },
-    ]
-
+class Sidebar extends Component {
+  render() {
     return (
-        <div className="ad-Sidebar">
-            <Tabs
-                tabs={ tabs }
-                initialActive={ 0 }>
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        { shapes }
-                    </div>
+      <div
+        tabIndex={ 2 }
+        className="ad-Sidebar">
+        <Tabs
+          className="ad-SidebarTabs"
+          selected={ 0 }>
+          <TabList>
+            <SidebarTab isTabHandler>
+              <MdGesture size="1.2rem" />
+            </SidebarTab>
+            <SidebarTab isTabHandler>
+              <MdTune size="1.2rem" />
+            </SidebarTab>
+            <SidebarTab isTabHandler>
+              <MdSettings size="1.2rem" />
+            </SidebarTab>
+          </TabList>
 
-                    <div className="ad-Sidebar-actions">
-                        <Button
-                            icon="add"
-                            value="New path"
-                            onClick={ addPath } />
-                    </div>
-                </div>
-
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        <Point
-                            w={ w }
-                            h={ h }
-                            grid={ grid }
-                            activePath={ activePath }
-                            paths={ paths }
-                            setPointType={ setPointType }
-                            setPointPosition={ setPointPosition }
-                            setQuadraticPosition={ setQuadraticPosition }
-                            setQuadraticT={ setQuadraticT }
-                            setCubicPosition={ setCubicPosition }
-                            setCubicS={ setCubicS }
-                            setArcParam={ setArcParam } />
-                    </div>
-
-                    { paths[activePath].activePoint !== 0 && (
-                        <div className="ad-Sidebar-actions">
-                            <Button
-                                action="delete"
-                                value="Remove"
-                                onClick={ (e) => removePoint(e, activePath, paths[activePath].activePoint) } />
-                        </div>
-                    ) }
-                </div>
-
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        <General
-                            w={ w }
-                            h={ h }
-                            grid={ grid }
-                            paths={ paths }
-                            setWidth={ setWidth }
-                            setHeight={ setHeight }
-                            setGridSize={ setGridSize }
-                            setGridSnap={ setGridSnap }
-                            setGridShow={ setGridShow }
-                            importSVG={ importSVG } />
-                    </div>
-                </div>
-
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        <Help />
-                    </div>
-                </div>
-
-                <div className="ad-Sidebar-tab">
-                    <div className="ad-Sidebar-settings">
-                        <About />
-                    </div>
-                </div>
-            </Tabs>
-        </div>
+          <TabPanel>
+            <SidebarPaths { ...this.props } />
+          </TabPanel>
+          <TabPanel>
+            <SidebarPoint { ...this.props } />
+          </TabPanel>
+          <TabPanel>
+            <SidebarSettings { ...this.props } />
+          </TabPanel>
+        </Tabs>
+      </div>
     )
+  }
 }
 
-export default Sidebar
+Sidebar.propTypes = {
+  keyActions: PropTypes.array.isRequired,
+  project: PropTypes.object.isRequired,
+}
+
+export SidebarActions from "./SidebarActions"
+export SidebarModule from "./SidebarModule"
+export SidebarPanel from "./SidebarPanel"
+
+export default mapActionsToKeys({
+  [KeyActionTypes.CTRL]: "ctrl",
+  [KeyActionTypes.SHIFT]: "shift",
+})(Sidebar)

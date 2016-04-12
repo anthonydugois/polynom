@@ -1,0 +1,17 @@
+@import url(App/config.css);
+
+.ad-Path {
+  fill: none;
+  color: color(var(--ad-Color-prim) l(+16%));
+}
+  .ad-Path-bbox {
+    stroke: var(--ad-Color-sec);
+  }
+  .ad-Path-local {
+    opacity: 0;
+    stroke: color(var(--ad-Color-sec) l(+10%));
+  }
+  .ad-Path.is-active .ad-Path-local,
+  .ad-Path:hover .ad-Path-local {
+    opacity: 1;
+  }
