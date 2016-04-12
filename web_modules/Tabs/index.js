@@ -24,14 +24,12 @@ class Tabs extends Component {
           const _isActive = tab === this.state.selected
           const _onTabClick = this.handleClick(tab)
 
-          console.log("tablist", tab, _isActive)
-
           tab++
 
           return React.cloneElement(childTab, {
+            ...childTab.props,
             _isActive,
             _onTabClick,
-            ...childTab.props,
           })
         }
 
@@ -43,8 +41,6 @@ class Tabs extends Component {
   renderChildren(children) {
     let panel = 0
 
-    console.log(children)
-
     return React.Children.map(children, (child) => {
       if (child.type.name === "TabList") {
         return this.renderTabList(child)
@@ -53,13 +49,11 @@ class Tabs extends Component {
       if (child.type.name === "TabPanel") {
         const _isActive = panel === this.state.selected
 
-        console.log("tabpanel", panel, _isActive)
-
         panel++
 
         return React.cloneElement(child, {
-          _isActive,
           ...child.props,
+          _isActive,
         })
       }
 
@@ -68,9 +62,14 @@ class Tabs extends Component {
   }
 
   render() {
+    const {
+      children,
+      ...props,
+    } = this.props
+
     return (
-      <div { ...this.props }>
-        { this.renderChildren(this.props.children) }
+      <div { ...props }>
+        { this.renderChildren(children) }
       </div>
     )
   }
