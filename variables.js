@@ -12,7 +12,7 @@ const __SERVER_HOST__ = "localhost"
 const __SERVER_PORT__ = "3000"
 
 const variables = {
-  "process.env": { "NODE_ENV": JSON.stringify(process.env.NODE_ENV) },
+  // "process.env": { "NODE_ENV": JSON.stringify(process.env.NODE_ENV) },
   __PROD__,
   __DEV__,
   __OUTPUT_DIR__,
