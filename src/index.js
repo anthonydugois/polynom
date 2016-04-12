@@ -6,6 +6,10 @@ import { Provider } from "react-redux"
 import createStore from "./store"
 import routes from "./routes"
 
+if (__PROD__ && window.location.hostname !== "polynom.co") {
+  window.location = "http://polynom.co"
+}
+
 const savedState = JSON.parse(localStorage.getItem("savedState"))
 const store = savedState ? createStore(savedState) : createStore()
 
