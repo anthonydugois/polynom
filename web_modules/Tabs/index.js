@@ -24,6 +24,8 @@ class Tabs extends Component {
           const _isActive = tab === this.state.selected
           const _onTabClick = this.handleClick(tab)
 
+          console.log("tablist", tab, _isActive)
+
           tab++
 
           return React.cloneElement(childTab, {
@@ -48,6 +50,8 @@ class Tabs extends Component {
 
       if (child.type.name === "TabPanel") {
         const _isActive = panel === this.state.selected
+
+        console.log("tabpanel", panel, _isActive)
 
         panel++
 

@@ -15,7 +15,7 @@ store.subscribe(() => {
 })
 
 const history = useRouterHistory(createHistory)({
-  basename: __PROD__ ? "/polynom" : "/",
+  basename: "/",
 })
 
 render(
