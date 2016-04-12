@@ -1,7 +1,7 @@
 import React from "react"
 import { render } from "react-dom"
 import { Router, useRouterHistory } from "react-router"
-import { createHistory } from "history"
+import createHistory from "history/lib/createHashHistory"
 import { Provider } from "react-redux"
 import createStore from "./store"
 import routes from "./routes"
