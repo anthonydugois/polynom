@@ -13,9 +13,8 @@ class SidebarPointCode extends Component {
   };
 
   render() {
-    const { point, previousPoint } = this.props
+    const { point } = this.props
     const code = point && point.code.toLowerCase()
-    const prevCode = previousPoint && previousPoint.code.toLowerCase()
 
     return (
       <Settings>

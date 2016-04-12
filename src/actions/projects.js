@@ -20,7 +20,7 @@ export function addProject(name, width, height) {
 }
 
 export function importProject(file) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const fileName = file.name.split(".")
     const ext = fileName.pop().toLowerCase().trim()
     const name = fileName.join(".")

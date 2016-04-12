@@ -5,10 +5,10 @@ import DateTime from "DateTime"
 import SVG from "SVG"
 import { ButtonSquare } from "Button"
 import { MdFileDownload, MdDelete } from "react-icons/lib/md"
-import { pathCode, slug } from "../../src/utils"
+import { slug } from "../../src/utils"
 
 class HomeProject extends Component {
-  handleRemoveClick = (e) => {
+  handleRemoveClick = () => {
     this.props.onRemoveProject(this.props.project.id)
   };
 

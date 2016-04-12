@@ -7,7 +7,6 @@ import Shape from "Shape"
 import * as KeyActionTypes from "../../src/constants/KeyActionTypes"
 import * as ObjectTypes from "../../src/constants/ObjectTypes"
 import ZOOM_SCALE from "../../src/constants/ZoomScale"
-import { clamp } from "../../src/utils"
 
 class Overview extends Component {
   constructor(props) {

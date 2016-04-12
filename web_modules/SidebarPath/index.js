@@ -235,7 +235,7 @@ export default DropTarget(
 )(DragSource(
   SIDEBAR_PATH,
   sidebarPathSource,
-  (connect, monitor) => ({
+  (connect) => ({
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
   }),
