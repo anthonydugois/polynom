@@ -17,7 +17,7 @@ const HomeHead = () => (
           Polynom
         </h1>
         <div className="ad-HomeHead-lead">
-          Edit SVG paths easily directly in your browser.
+          Generate SVG paths easily directly in your browser.
         </div>
       </div>
     </Container>
