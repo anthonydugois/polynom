@@ -1,6 +1,6 @@
 {
   "name": "polynom",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "description": "Build SVG paths easily using an intuitive interface.",
   "author": "Anthony Dugois <dev.anthonydugois@gmail.com>",
   "license": "MIT",
