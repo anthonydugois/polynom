@@ -17,7 +17,7 @@ export default {
 
   output: {
     path: path.join(__dirname, __OUTPUT_DIR__),
-    publicPath: `${ __SERVER_URL__ }/${ __OUTPUT_DIR__ }/`,
+    publicPath: `${ __DEV__ ? __SERVER_URL__ : "" }/${ __OUTPUT_DIR__ }/`,
     filename: "bundle.js",
   },
 
