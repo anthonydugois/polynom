@@ -12,6 +12,8 @@ const ExpandPanel = ({
   </div>
 )
 
+ExpandPanel.displayName = "ExpandPanel"
+
 ExpandPanel.propTypes = {
   _isOpened: PropTypes.bool,
   children: PropTypes.oneOfType([

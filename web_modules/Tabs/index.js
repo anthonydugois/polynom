@@ -42,11 +42,11 @@ class Tabs extends Component {
     let panel = 0
 
     return React.Children.map(children, (child) => {
-      if (child.type.name === "TabList") {
+      if (child.type.displayName === "TabList") {
         return this.renderTabList(child)
       }
 
-      if (child.type.name === "TabPanel") {
+      if (child.type.displayName === "TabPanel") {
         const _isActive = panel === this.state.selected
 
         panel++
@@ -62,10 +62,7 @@ class Tabs extends Component {
   }
 
   render() {
-    const {
-      children,
-      ...props,
-    } = this.props
+    const { children, ...props } = this.props
 
     return (
       <div { ...props }>

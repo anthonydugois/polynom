@@ -8,6 +8,8 @@ const TabList = ({ children, ...props }) => (
   </div>
 )
 
+TabList.displayName = "TabList"
+
 TabList.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.array,

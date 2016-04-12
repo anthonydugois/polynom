@@ -13,6 +13,8 @@ const TabPanel = ({
   </div>
 )
 
+TabPanel.displayName = "TabPanel"
+
 TabPanel.propTypes = {
   _isActive: PropTypes.bool,
   children: PropTypes.oneOfType([

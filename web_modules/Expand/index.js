@@ -22,14 +22,17 @@ class Expand extends Component {
         const _onExpandClick = this.handleClick(!_isOpened)
 
         return React.cloneElement(child, {
+          ...child.props,
           _onExpandClick,
           _isOpened,
-          ...child.props,
         })
       }
 
-      if (child.type.name === "ExpandPanel") {
-        return React.cloneElement(child, { _isOpened })
+      if (child.type.displayName === "ExpandPanel") {
+        return React.cloneElement(child, {
+          ...child.props,
+          _isOpened,
+        })
       }
 
       return child
