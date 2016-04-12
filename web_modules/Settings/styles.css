@@ -11,7 +11,7 @@
     font-size: .65rem;
     font-weight: 500;
     letter-spacing: .05rem;
-    color: color(var(--ad-Color-prim) l(+65%));
+    color: color(var(--ad-Color-prim) l(+60%));
   }
 
 .ad-Setting {
