@@ -43,6 +43,8 @@ class Tabs extends Component {
   renderChildren(children) {
     let panel = 0
 
+    console.log(children)
+
     return React.Children.map(children, (child) => {
       if (child.type.name === "TabList") {
         return this.renderTabList(child)
