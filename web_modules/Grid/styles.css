@@ -1,6 +1,0 @@
-@import url(App/config.css);
-
-.ad-Grid {
-  fill: none;
-  stroke: color(var(--ad-Color-prim) l(+70%));
-}
